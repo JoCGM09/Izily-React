@@ -1,0 +1,15 @@
+Frontend: 
+- Agregar el header (3)
+- Cambiar el logo del campo de búsqueda (no cambiar el input porque afecta el código) (1)
+- Arreglar las dimensiones del componente profesor (2-3)
+- Agregar al componente profesor un botón para agendar reunión (2)
+- Cambiar los colores (1)
+- Agregar al componente profesor íconos de estrellas (2) 
+- Agregar un modelo de página de búsqueda para cualquier persona (3)
+
+Backend: 
+- Conseguir que no se muestre el ID de las clases, sino el nombre (1)
+- Conseguir filtrar al presionar las etiquetas (2)
+- Conseguir colocar más etiquetas (1)
+- Conseguir agendar una reunión (3)
+- Gestionar una nueva ruta para la búsqueda (1)

@@ -46,9 +46,11 @@ export default function Profesor({ profesor }) {
                     <Typography gutterBottom variant="h5" component="h2">
                         {profesor.nombre}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {profesor.especialidades}
-                    </Typography>
+                    {profesor.cursos.map((cursos) => (
+                        <Typography variant="body2" component="p">
+                            {cursos.nombre}
+                        </Typography>    
+                    ))}
                 </CardContent>
             </CardActionArea>
         </Card>

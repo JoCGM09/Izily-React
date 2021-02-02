@@ -1,5 +1,4 @@
-
-/////// COMPONENTE PROFESORES: Genera todos los componentes independientes (cartas) 
+/////// COMPONENTE PROFESORES: Genera todos los componentes independientes (cartas)
 
 // Se debe importar tanto react como los hooks useEffect y useState
 // También componentes de Material UI
@@ -23,7 +22,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
-
 
 // Constantes y estilos de Material UI
 
@@ -52,20 +50,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 // Componente Profesores
 
 export default function Profesores() {
-
-    // Cargar los estilos de Material UI como clase
+  // Cargar los estilos de Material UI como clase
 
   const classes = useStyles();
 
-    // se definen los estados con el hook useState
-    // useState sirve para hacer que un componente cambie a lo largo del tiempo
+  // se definen los estados con el hook useState
+  // useState sirve para hacer que un componente cambie a lo largo del tiempo
 
-    // se define el estado de toda la información de los profesores en un arreglo
-    //profesores indica el estado, guardarProfesores indica el cambio de estado
+  // se define el estado de toda la información de los profesores en un arreglo
+  //profesores indica el estado, guardarProfesores indica el cambio de estado
 
   const [profesores, guardarProfesores] = useState([]);
 
@@ -75,9 +71,10 @@ export default function Profesores() {
 
   // Función para obtener los datos de la db
 
-  const getData = () => {
+  const [especialidades, guardarEspecialidades] = useState([]);
 
-    //se define una constante usuariosref que almacena los datos de la db 
+  const getData = () => {
+    //se define una constante usuariosref que almacena los datos de la db
     const usuariosRef = db.collection("usuarios");
 
     //En la db de la colección "usuarios" existe un booleano que indica si son profesores o no, primero se usa el método where para filtrar si esProfesor está activado como true, si es así pide los datos (get()), LUEGO hace una función a la que le pasa un parámetro llamado querySnapshot que es como una "foto" de los datos de la db (cosas de Firebase), la función genera un arreglo vacío llamado docs y con un bucle almacena los datos completos solo de los que pasaron el filtro y les suma su id (por defecto Firebase no trae el id pero es necesario por eso los incluímos), luego ejecuta la función de guardarProfesores guardando el arreglo docs
@@ -95,16 +92,25 @@ export default function Profesores() {
         guardarProfesores(docs);
       })
 
-      // al trabajar con promesas (then) es buena práctica colocar un .catch que te muestra un error si es que lo hubiera, se coloca de esta forma: 
+      // al trabajar con promesas (then) es buena práctica colocar un .catch que te muestra un error si es que lo hubiera, se coloca de esta forma:
 
       .catch((error) => {
         console.error(error);
       });
   };
 
+  const todasEspecialidades = db.collection("especialidades");
+  todasEspecialidades.get().then((querySnapshot) => {
+    const especialidades = [];
+    querySnapshot.forEach((doc) => {
+      especialidades.push({ ...doc.data(), id: doc.id });
+    });
+    guardarEspecialidades(especialidades);
+  });
+
   //useEffect es otro hook de React igual que useState, pero este sirve para hacer algo cuando algo sucede, en este caso usamos el hook para que ocurra la función getData() cada vez que se actualice la página, eso permite que al agregar más usuarios a la db, se puedan ver al actualizar
 
-    //el devolver ese arreglo vacío [] indica que el suceso esperado es la carga de la Página
+  //el devolver ese arreglo vacío [] indica que el suceso esperado es la carga de la Página
 
   useEffect(() => {
     getData();
@@ -119,33 +125,45 @@ export default function Profesores() {
   //Se define filtrarProfesores como función de envento (recibe una "e" de evento). Esta función devento ocurre cuando el input (búsqueda), vaya cambiando. lo que hace esta función es que genera una constante llamada terminoDeBusqueda que toma el valor del evento que sería el llenado de datos (e.currentTarget.value significa que está tomando el valor de lo que se va escribiendo en el input) y lo convierte a minúsculas, por si escribes algún nombre en mayúsculas (JS puro y duro). Luego genera un arreglo nuevo arreglo nuevosProfesoresFiltrados que toma una copia del ESTADO de PROFESORES (recordar que el estado ya cambió y tiene toda la data) y los filtra con el método filter, el cual recibe una función que convierte todos los NOMBRES de los profesores también a minúscula, devolviendo solo los que contengan terminoDeBusqueda que sería lo que están escribiendo en el input. Finalmente cambia el estado de profesores colocando solo los nuevos profesores filtrados
 
   const filtrarProfesores = (e) => {
-    const terminoDeBusqueda = e.currentTarget.value.toLowerCase();  
+    const terminoDeBusqueda = e.currentTarget.value.toLowerCase();
     const nuevosProfesoresFiltrados = profesores.filter((profesor) => {
-        const nombreProfesor = profesor.nombre.toLowerCase();    
+      const nombreProfesor = profesor.nombre.toLowerCase();
       return nombreProfesor.includes(terminoDeBusqueda);
     });
     guardarProfesoresFiltrados(nuevosProfesoresFiltrados);
   };
 
+  // const filtrarEtiquetas = (e) => {
+  //   const cursoBoton = e.currentTarget.value;
+  //   const nombresDeCursos = [];
+  //   const cursosDelProfesor = profesores.cursos.forEach((curso) => {
+  //       nombresDeCursos.push(curso.nombre)});
+  //   console.log(cursoBoton); //espero el nombre del curso que sale en la etiqueta
+  //   console.log(cursosDelProfesor); //espero arreglo con los cursos del profesor
+
+    // const filtradosPorEtiquetas = cursosDelProfesor.includes(cursoBoton);
+    // guardarProfesoresFiltrados(filtradosPorEtiquetas);
+  // }
+
   //Se definen las materias solo para colocar a la izquierda, aún no son las existentes
-  const materias = [
-    {
-      id: "MAT-125",
-      nombre: "Aritmetica",
-    },
-    {
-      id: "MAT-126",
-      nombre: "Algebra",
-    },
-    {
-      id: "MAT-126",
-      nombre: "Geometria",
-    },
-  ];
+
+  // const materias = [
+  //   {
+  //     id: "MAT-125",
+  //     nombre: "Aritmetica",
+  //   },
+  //   {
+  //     id: "MAT-126",
+  //     nombre: "Algebra",
+  //   },
+  //   {
+  //     id: "MAT-126",
+  //     nombre: "Geometria",
+  //   },
+  // ];
 
   //Finalmente se muestra el JSX que devuelve nuestro componente Profesores
   //Devuelve el header, las etiquetas y las cards de los profesores, que a su vez son componentes (Profesor.js)
-
 
   return (
     //Header con cosas raras de MaterialUI
@@ -172,7 +190,7 @@ export default function Profesores() {
                 className={clsx(classes.margin, classes.textField)}
                 variant="outlined"
               >
-              {/* El input donde el evento onChange llamará a la función de evento filtrarProfesores */}
+                {/* El input donde el evento onChange llamará a la función de evento filtrarProfesores */}
                 <InputLabel htmlFor="outlined-adornment-password">
                   Buscar profesores
                 </InputLabel>
@@ -197,16 +215,16 @@ export default function Profesores() {
               </FormControl>
             </ListItem>
             {/* Se coloca un bucle que devuelve los elementos de la lista izquierda y va generando uno por uno */}
-            {materias.map((materia, index) => (
-              <ListItem tItem button key={materia.id}>
-                <ListItemText primary={materia.nombre} />
+            {especialidades.map((especialidad, index) => (
+              <ListItem tItem button onClick={()=>{}} key={especialidad.id}>
+                <ListItemText primary={especialidad.nombre} />
               </ListItem>
             ))}
           </List>
         </div>
         <main className={classes.main}>
           <Grid container spacing={3}>
-          {/* Se coloca un bucle que regresa el componente Profesor todas las veces que diga nuestro ESTADO profesor, recordar que ya pasó por el filtro */}
+            {/* Se coloca un bucle que regresa el componente Profesor todas las veces que diga nuestro ESTADO profesor, recordar que ya pasó por el filtro */}
             {profesoresFiltrados.map((profesor) => (
               <Grid item xs={12} md={4} lg={3}>
                 <Profesor profesor={profesor} />

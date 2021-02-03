@@ -91,12 +91,10 @@ export default function Profesores() {
         });
         guardarProfesores(docs);
       })
-
-      // al trabajar con promesas (then) es buena práctica colocar un .catch que te muestra un error si es que lo hubiera, se coloca de esta forma:
-
       .catch((error) => {
         console.error(error);
-      });
+      })
+      // al trabajar con promesas (then) es buena práctica colocar un .catch que te muestra un error si es que lo hubiera, se coloca de esta forma:
   };
 
   const todasEspecialidades = db.collection("especialidades");
@@ -133,17 +131,23 @@ export default function Profesores() {
     guardarProfesoresFiltrados(nuevosProfesoresFiltrados);
   };
 
-  // const filtrarEtiquetas = (e) => {
-  //   const cursoBoton = e.currentTarget.value;
-  //   const nombresDeCursos = [];
-  //   const cursosDelProfesor = profesores.cursos.forEach((curso) => {
-  //       nombresDeCursos.push(curso.nombre)});
-  //   console.log(cursoBoton); //espero el nombre del curso que sale en la etiqueta
-  //   console.log(cursosDelProfesor); //espero arreglo con los cursos del profesor
+  //Filtrado por etiquetas
+
+  const filtrarEtiquetas = (e) => {
+    const cursosDelProfesor = profesores.map((profesor) => {
+      if (profesor.cursos.map((curso) => {
+        return curso.nombre;
+      }).includes('matemática')){return profesor.nombre};
+    });
+    console.log(cursosDelProfesor)
+    // if (cursosDelProfesor.some(e => e.nombre === cursoBoton)){
+    //   console.log(cursoBoton); //espero el nombre del curso que sale en la etiqueta
+    //   console.log('existe'); //espero arreglo con los cursos del profesor
+    // }
 
     // const filtradosPorEtiquetas = cursosDelProfesor.includes(cursoBoton);
     // guardarProfesoresFiltrados(filtradosPorEtiquetas);
-  // }
+  }
 
   //Se definen las materias solo para colocar a la izquierda, aún no son las existentes
 
@@ -164,6 +168,27 @@ export default function Profesores() {
 
   //Finalmente se muestra el JSX que devuelve nuestro componente Profesores
   //Devuelve el header, las etiquetas y las cards de los profesores, que a su vez son componentes (Profesor.js)
+  
+  // profesores = [
+  //   {
+  //     nombre: "Juan",
+  //     descripción: "Soy Juan",
+  //     disponible: True,
+  //     email: "soyjuan@gmail.com",
+  //     cursos: [
+  //       {
+  //         nombre:'matemática',
+  //         id:'CUR_001',
+  //         slug:'mat'
+  //       },
+  //       {
+  //         nombre:'física',
+  //         id:'CUR_002',
+  //         slug:'fis'
+  //       }
+  //     ]
+  //   }
+  // ]
 
   return (
     //Header con cosas raras de MaterialUI
@@ -216,7 +241,7 @@ export default function Profesores() {
             </ListItem>
             {/* Se coloca un bucle que devuelve los elementos de la lista izquierda y va generando uno por uno */}
             {especialidades.map((especialidad, index) => (
-              <ListItem tItem button onClick={()=>{}} key={especialidad.id}>
+              <ListItem tItem button onClick={filtrarEtiquetas} key={especialidad.id}>
                 <ListItemText primary={especialidad.nombre} />
               </ListItem>
             ))}

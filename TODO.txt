@@ -8,8 +8,8 @@ Frontend:
 - Agregar un modelo de página de búsqueda para cualquier persona (3)
 
 Backend: 
-- Conseguir que no se muestre el ID de las clases, sino el nombre (1)
+$ Conseguir que no se muestre el ID de las clases, sino el nombre (1)
 - Conseguir filtrar al presionar las etiquetas (2)
-- Conseguir colocar más etiquetas (1)
+$ Conseguir colocar más etiquetas (1)
 - Conseguir agendar una reunión (3)
 - Gestionar una nueva ruta para la búsqueda (1)

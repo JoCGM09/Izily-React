@@ -16,20 +16,22 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
     root: {
         maxWidth: 345,
+        borderRadius: 3,
+        boxShadow: '5px 4px 10px 0 rgba(0, 0, 0, .5)',
     },
     avatar: {
-        height: 80,
-        width: 80,
+        height: 150,
+        width: 150,
         borderRadius: '50%',
-        border: '2px solid #2e2e2e',
+        AlignItems: 'center',
+        marginBottom: 5,
     },
     avatarContainer: {
-        textAlign: 'center',
+        border: 5,
         marginBottom: 15,
+        textAlign: 'center',
     }
 });
-
-//Devuelve el componente Profesor al cual se le entregarán datos (props) que en este caso sería el estado de PROFESOR
 
 export default function Profesor({ profesor }) {
     const classes = useStyles();
@@ -41,16 +43,18 @@ export default function Profesor({ profesor }) {
                 <CardContent>
                     <div className={classes.avatarContainer}>
                         <img className={classes.avatar} src={defaultAvatar} />
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {profesor.nombre}
+                        </Typography>
+                        {profesor.cursos.map((cursos) => (
+                            <Typography paragraph variant="body2" component="p">
+                                {cursos.nombre}
+                            </Typography>    
+                        ))}
+                        <Typography gutterBottom variant="body2" component="p">
+                            {profesor.descripcion}
+                        </Typography>
                     </div>
-                    {/* se muestran datos de ese estado PROFESOR que se le pasó al componente, en este caso name y especialidades que contiene los ID según la db */}
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {profesor.nombre}
-                    </Typography>
-                    {profesor.cursos.map((cursos) => (
-                        <Typography variant="body2" component="p">
-                            {cursos.nombre}
-                        </Typography>    
-                    ))}
                 </CardContent>
             </CardActionArea>
         </Card>

@@ -1,27 +1,21 @@
 import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Cards from "./components/Cards";
 import Profesores from "./containers/Profesores";
-
-
-//Página general donde se carga el componente "profesores"
+import Perfil from './containers/Perfil';
+import Navbar from "./components/Navbar";
 
 function App() {
-
-  // Esto no sirve //
-
-  // return (
-  //   <div>
-  //     <div className="tittle">Profesores</div>
-  //     <div className="container">
-  //       <Cards />
-  //     </div>
-  //   </div>
-  // );
-
     return (
-        <Profesores />
-    )
+      <Router>
+        <Navbar/>
+        <Switch>
+          <Route exact path="/" component={Profesores}/>
+          <Route exact path="/perfil" component={Perfil}/>
+        </Switch>
+      </Router> 
+      // <Profesores /> 
+    );
 }
 
 export default App;

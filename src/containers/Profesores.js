@@ -218,7 +218,7 @@ export default function Profesores() {
         </div>
         <main className={classes.main}>
           <Grid container spacing={3}>
-            {profesoresFiltrados.map((profesor) => (
+            {profesoresFiltadosPorEtiquetas.map((profesor) => (
               <Grid item xs={12} md={4}>
                 <Profesor profesor={profesor} />
               </Grid>

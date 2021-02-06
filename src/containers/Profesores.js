@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -42,22 +42,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Profesores() {
+export default function Profesores(callback, deps) {
   const classes = useStyles();
 
   const [profesores, guardarProfesores] = useState([]);
-
-  const [profesoresFiltradosNombre, guardarProfesoresFiltradosNombre] = useState([]);
-
   const [especialidades, guardarEspecialidades] = useState([]);
-
   const [etiquetas, guardarEtiquetas] = useState([0]);
-
-  const [profesoresFiltadosPorEtiquetas, guardarProfesoresFiltradosPorEtiquetas] = useState([]);
-
   const [profesoresFiltrados, guardarProfesoresFiltrados] = useState([]);
 
-  const TraerProfesores = () => {
+  const traerProfesores = () => {
     const usuariosRef = db.collection("usuarios");
     usuariosRef
       .where("esProfesor", "==", true)
@@ -74,16 +67,7 @@ export default function Profesores() {
       });
   };
 
-  const todasEspecialidades = db.collection("especialidades");
-  todasEspecialidades.get().then((querySnapshot) => {
-    const especialidades = [];
-    querySnapshot.forEach((doc) => {
-      especialidades.push({ ...doc.data(), id: doc.id });
-    });
-    guardarEspecialidades(especialidades);
-  });
-
-  const SeleccionarEtiquetas = (EspecialidadId) => () => {
+  const seleccionarEtiquetas = (EspecialidadId) => () => {
     const currentIndex = etiquetas.indexOf(EspecialidadId);
     const etiquetasSeleccionadas = [...etiquetas];
     if (currentIndex === -1) {
@@ -92,78 +76,56 @@ export default function Profesores() {
       etiquetasSeleccionadas.splice(currentIndex, 1);
     }
     guardarEtiquetas(etiquetasSeleccionadas);
-    const profesoresFiltradosEtiquetas = [];
-    profesores.forEach((profesor) => {
-      const cursosPorProfesor = profesor.cursos.map((curso) => {
-        return curso.id;
-      });
-      cursosPorProfesor.forEach((e) => {
-        const estaSeleccionado = etiquetasSeleccionadas.includes(e);
-        if (estaSeleccionado && (profesoresFiltradosEtiquetas.indexOf(profesor) === -1)) {
-          profesoresFiltradosEtiquetas.push(profesor);
-        }
-      }); 
-    });
-    guardarProfesoresFiltradosPorEtiquetas(profesoresFiltradosEtiquetas);
-    console.log(profesoresFiltadosPorEtiquetas);
   };
 
-  const filtrarProfesoresNombre = (e) => {
-    const terminoDeBusqueda = e.currentTarget.value.toLowerCase();
+  const filtrarProfesores = (terminoDeBusqueda) => {
+    let etiquetasSeleccionadas = [...etiquetas];
+    etiquetasSeleccionadas = etiquetasSeleccionadas.splice(1, etiquetas.length);
     const nuevosProfesoresFiltrados = profesores.filter((profesor) => {
+      // Verificar Nombre
       const nombreProfesor = profesor.nombre.toLowerCase();
-      return nombreProfesor.includes(terminoDeBusqueda);
-    });
-    guardarProfesoresFiltradosNombre(nuevosProfesoresFiltrados);
-  };
+      const tieneNombreValido = nombreProfesor.includes(terminoDeBusqueda)
 
-  const TodosLosProfesoresFiltrados = (e) => {
-    const todosProfesoresFiltrados = [];
-    if (profesoresFiltadosPorEtiquetas.length === 0){
-      todosProfesoresFiltrados = profesoresFiltradosNombre;
-    } else {
-      todosProfesoresFiltrados = [...new Set([...profesoresFiltradosNombre ,...profesoresFiltadosPorEtiquetas])]
-    };
-    guardarProfesoresFiltrados(todosProfesoresFiltrados);
+      // Verificar Materia
+      const idsDeCursos = profesor.cursos.map((curso) => curso.id);
+      let tieneCursoValido = false;
+      idsDeCursos.forEach((idCurso) => {
+        tieneCursoValido = tieneCursoValido || etiquetasSeleccionadas.includes(idCurso);
+      });
+
+      if(etiquetasSeleccionadas.length > 0)
+        return tieneNombreValido && tieneCursoValido;
+      return tieneNombreValido
+    });
+    guardarProfesoresFiltrados(nuevosProfesoresFiltrados);
+  };
+  const filtrarProfesoresInput = (e) => {
+    const terminoDeBusqueda = e.currentTarget.value.toLowerCase();
+    filtrarProfesores(terminoDeBusqueda);
   };
 
   useEffect(() => {
-    TraerProfesores();
+    traerProfesores();
   }, []);
 
   useEffect(() => {
-    guardarProfesoresFiltradosNombre(profesores);
-  }, [profesores]);
-
-  useEffect(() => {
-    guardarProfesoresFiltradosPorEtiquetas(profesores);
-  }, [profesores]);
+    const especialidadesRef = db.collection('especialidades');
+    const todasLasEspecialidades = [];
+    especialidadesRef.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        todasLasEspecialidades.push({ ...doc.data(), id: doc.id });
+      });
+    });
+    guardarEspecialidades(todasLasEspecialidades);
+  }, []);
 
   useEffect(() => {
     guardarProfesoresFiltrados(profesores);
   }, [profesores]);
-  
 
-  // profesores = [
-  //   {
-  //     nombre: "Juan",
-  //     descripción: "Soy Juan",
-  //     disponible: True,
-  //     email: "soyjuan@gmail.com",
-  //     cursos: [
-  //       {
-  //         nombre:'matemática',
-  //         id:'CUR_001',
-  //         slug:'mat'
-  //       },
-  //       {
-  //         nombre:'física',
-  //         id:'CUR_002',
-  //         slug:'fis'
-  //       }
-  //     ]
-  //   }
-  // ]
+  useEffect(() => {
+    filtrarProfesores('');
+  }, [etiquetas]);
 
   return (
     <div className={classes.root}>
@@ -181,19 +143,7 @@ export default function Profesores() {
                 <OutlinedInput
                   id="outlined-adornment-password"
                   type="text"
-                  onChange={filtrarProfesoresNombre}
-                  // endAdornment={
-                  //   <InputAdornment position="end">
-                  //     <IconButton
-                  //       aria-label="toggle password visibility"
-                  //       onClick={() => {}}
-                  //       onMouseDown={() => {}}
-                  //       edge="end"
-                  //     >
-                  //       <Visibility />
-                  //     </IconButton>
-                  //   </InputAdornment>
-                  // }
+                  onChange={filtrarProfesoresInput}
                   labelWidth={50}
                 />
               </FormControl>
@@ -202,7 +152,7 @@ export default function Profesores() {
               <ListItem
                 button
                 key={especialidad.id}
-                onClick={SeleccionarEtiquetas(especialidad.id)}
+                onClick={seleccionarEtiquetas(especialidad.id)}
               >
                 <Checkbox
                   edge="start"

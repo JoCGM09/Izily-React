@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     root: {
         maxWidth: 345,
         borderRadius: 3,
-        boxShadow: '5px 4px 10px 0 rgba(0, 0, 0, .5)',
+        boxShadow: '5px 2px 10px 0 rgba(0, 0, 0, .5)',
     },
     avatar: {
         height: 150,

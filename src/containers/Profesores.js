@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -22,11 +22,11 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   content: {
-    paddingTop: 64,
+    paddingTop: 110,
     display: "flex",
     position: "absolute",
     height: "100%",
-    width: "100%",
+    width: "95%",
     flexDirection: "row",
   },
   drawer: {
@@ -38,8 +38,12 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     width: "100%",
     flexGrow: 1,
-    padding: 10,
+    padding: "15px, 0, 10px, 15px",
   },
+  gridContainer: {
+    whidth: "100%",
+    paddingTop: 15,
+  }
 }));
 
 export default function Profesores(callback, deps) {
@@ -167,8 +171,8 @@ export default function Profesores(callback, deps) {
           </List>
         </div>
         <main className={classes.main}>
-          <Grid container spacing={3}>
-            {profesoresFiltadosPorEtiquetas.map((profesor) => (
+          <Grid container clasName={classes.gridContainer} spacing={3}>
+            {profesoresFiltrados.map((profesor) => (
               <Grid item xs={12} md={4}>
                 <Profesor profesor={profesor} />
               </Grid>

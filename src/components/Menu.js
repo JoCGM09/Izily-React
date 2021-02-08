@@ -8,7 +8,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import DraftsIcon from "@material-ui/icons/Drafts";
 import SendIcon from "@material-ui/icons/Send";
 import { IconButton } from "@material-ui/core";
-import DetailsIcon from "@material-ui/icons/Details";
+import ListIcon from "@material-ui/icons/List";
 
 const StyledMenu = withStyles({
   paper: {
@@ -61,7 +61,7 @@ export default function CustomizedMenus() {
         color="primary"
         onClick={handleClick}
       >
-        <DetailsIcon fontSize="small" />
+        <ListIcon fontSize="medium" />
       </IconButton>
       <StyledMenu
         id="customized-menu"

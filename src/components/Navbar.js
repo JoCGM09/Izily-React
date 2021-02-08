@@ -1,14 +1,15 @@
 import React from "react";
-import logo from "../images/LOGO.png"
+import logo from "../images/LOGO.svg";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import {
   makeStyles,
   Grid,
-  InputBase,
   Button,
   IconButton,
   Badge,
+  TextField,
+  InputAdornment,
 } from "@material-ui/core";
 
 import SearchIcon from "@material-ui/icons/Search";
@@ -16,6 +17,7 @@ import MessageIcon from "@material-ui/icons/Message";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Menu from "../components/Menu";
 import PersonIcon from "@material-ui/icons/Person";
+import { Link } from "react-router-dom";
 
 //estilos de la barra de navegacion
 const useStyles = makeStyles({
@@ -24,22 +26,21 @@ const useStyles = makeStyles({
   },
 
   searchImput: {
-    opacity: "0.6",
+    opacity: "0.9",
     padding: "0px 5px",
-    margin: "0px 80px",
+    margin: "0px 40px",
     fontSize: "0.8rem",
-    "&:hover": {
-      backgroundColor: "#f2f2f2",
-    },
-    "& .MuiSvgIcon-root": {
-      marginRight: "50px",
-    },
   },
 
   logo: {
     width: 90,
     height: 50,
-  }
+  },
+
+  botones: {
+    margin: "0px 5px",
+    color: "#AADB55",
+  },
 });
 
 //componente
@@ -51,19 +52,41 @@ function Navbar() {
       <Toolbar>
         <Grid container alignItems="center">
           <Grid item>
-            <Button>
-              <img src={logo} className={classes.logo}/>
+            <Button disabled>
+              <img src={logo} className={classes.logo} />
             </Button>
-            <InputBase
-              placeholder="Buscar"
-              className={classes.searchInput}
-              startAdornment={<SearchIcon fontSize="small" />}
-            />
           </Grid>
+          <TextField
+            variant="outlined"
+            className={classes.searchImput}
+            item
+            id="buscador"
+            placeholder="Buscar"
+            size="small"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon fontSize="small" />
+                </InputAdornment>
+              ),
+            }}
+          />
+          {/* <InputBase>
+              placeholder="Buscar" className={classes.searchInput}
+              startAdornment={<SearchIcon fontSize="small" />}
+            </InputBase> */}
+
           <Grid item sm></Grid>
           <Grid item>
-            <Button>Inicio</Button>
-            <Button>Encontrar un maestro</Button>
+            <Button className={classes.botones} variant="outlined">
+              Inicio
+            </Button>
+            <Button className={classes.botones} variant="outlined">
+              Encontrar un maestro
+            </Button>
+            <Button className={classes.botones} disabled>
+              NOMBRE
+            </Button>
 
             <IconButton>
               <Badge badgeContent={4}>
@@ -76,9 +99,11 @@ function Navbar() {
               </Badge>
             </IconButton>
             <IconButton>
-              <Badge>
-                <PersonIcon fontSize="small" />
-              </Badge>
+              <Link to="/perfil">
+                <Badge badgeContent={4}>
+                  <PersonIcon fontSize="small" />
+                </Badge>
+              </Link>
             </IconButton>
           </Grid>
           <Menu item />

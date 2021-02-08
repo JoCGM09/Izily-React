@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   gridContainer: {
     whidth: "100%",
     paddingTop: 15,
-  }
+  },
 }));
 
 export default function Profesores(callback, deps) {
@@ -88,18 +88,19 @@ export default function Profesores(callback, deps) {
     const nuevosProfesoresFiltrados = profesores.filter((profesor) => {
       // Verificar Nombre
       const nombreProfesor = profesor.nombre.toLowerCase();
-      const tieneNombreValido = nombreProfesor.includes(terminoDeBusqueda)
+      const tieneNombreValido = nombreProfesor.includes(terminoDeBusqueda);
 
       // Verificar Materia
       const idsDeCursos = profesor.cursos.map((curso) => curso.id);
       let tieneCursoValido = false;
       idsDeCursos.forEach((idCurso) => {
-        tieneCursoValido = tieneCursoValido || etiquetasSeleccionadas.includes(idCurso);
+        tieneCursoValido =
+          tieneCursoValido || etiquetasSeleccionadas.includes(idCurso);
       });
 
-      if(etiquetasSeleccionadas.length > 0)
+      if (etiquetasSeleccionadas.length > 0)
         return tieneNombreValido && tieneCursoValido;
-      return tieneNombreValido
+      return tieneNombreValido;
     });
     guardarProfesoresFiltrados(nuevosProfesoresFiltrados);
   };
@@ -113,7 +114,7 @@ export default function Profesores(callback, deps) {
   }, []);
 
   useEffect(() => {
-    const especialidadesRef = db.collection('especialidades');
+    const especialidadesRef = db.collection("especialidades");
     const todasLasEspecialidades = [];
     especialidadesRef.get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -128,7 +129,7 @@ export default function Profesores(callback, deps) {
   }, [profesores]);
 
   useEffect(() => {
-    filtrarProfesores('');
+    filtrarProfesores("");
   }, [etiquetas]);
 
   return (

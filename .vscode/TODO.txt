@@ -1,0 +1,18 @@
+Frontend: 
+$ Agregar el header con todos sus componentes (3)
+$ Cambiar el logo del campo de búsqueda (no cambiar el input porque afecta el código)
+$ Arreglar las dimensiones del componente profesor (2-3)
+$ Cambiar los colores (1)
+$ Agregar al componente profesor íconos de estrellas (2) 
+- Agregar un modelo de página de perfil (3)
+- Colocar disposición para mostrar los datos del perfil (2)
+
+Blacked: 
+$ Conseguir que no se muestre el ID de las clases, sino el nombre (1)
+$ Conseguir filtrar al presionar las etiquetas (2)
+$ Conseguir colocar más etiquetas (1)
+- Conseguir agendar una reunión (3)
+$ Gestionar una nueva ruta para la búsqueda (1)
+$ Conseguir que ambos filtros funcinonen por igual (3)
+$ Generar una ruta (2)
+- Mostrar información del perfil (2)

@@ -33,13 +33,14 @@ const useStyles = makeStyles({
   },
 
   logo: {
-    width: 90,
+    width: 80,
     height: 50,
   },
 
   botones: {
     margin: "0px 5px",
-    color: "#AADB55",
+    color: "#3493C2",
+    fontWeight: "bold",
   },
 });
 

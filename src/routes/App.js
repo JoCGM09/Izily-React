@@ -5,15 +5,17 @@ import Perfil from "../containers/Perfil";
 import NotFound from "../containers/NotFound";
 import Layout from "../containers/Layout";
 
+
 const App = () => (
   <BrowserRouter>
     <Layout>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/profesores/" component={Perfil} />
-        <Route component={NotFound} />
+        <Route path="/profesores/:id" component={Perfil}/>
+        <Route component={NotFound}/>
       </Switch>
     </Layout>
   </BrowserRouter>
 );
 export default App;
+ 

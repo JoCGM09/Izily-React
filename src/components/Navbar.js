@@ -82,7 +82,7 @@ function Navbar() {
             <Button className={classes.botones} variant="outlined">
               Inicio
             </Button>
-            <Button className={classes.botones} variant="outlined">
+            <Button component={Link} to={"/"} className={classes.botones} variant="outlined">
               Encontrar un maestro
             </Button>
             <Button className={classes.botones} disabled>
@@ -100,11 +100,11 @@ function Navbar() {
               </Badge>
             </IconButton>
             <IconButton>
-              <Link to="/perfil">
+              {/*<Link to="/perfil">*/}
                 <Badge badgeContent={4}>
                   <PersonIcon fontSize="small" />
                 </Badge>
-              </Link>
+              {/*<Link />*/}
             </IconButton>
           </Grid>
           <Menu item />

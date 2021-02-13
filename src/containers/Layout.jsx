@@ -2,10 +2,12 @@ import React from "react";
 import NavBar from "../components/Navbar"
 
 
-const Layout = ({ children}) => (
+const Layout = ({ children }) => (
     <div className="App">
         <NavBar/>
-        {children}
+        <div className="contenedor" style={{marginTop:"70px"}}>
+            {children}  
+        </div>
     </div>
 )
 

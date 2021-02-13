@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   content: {
-    paddingTop: 110,
     display: "flex",
     position: "absolute",
     height: "100%",

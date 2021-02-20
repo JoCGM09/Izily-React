@@ -19,9 +19,15 @@ $ Mostrar información del perfil (2)
 
 
 
+<<<<<<< HEAD
 
 "hice un cambio en el texto"
 
 
 
 " manuel es un puto "
+=======
+"hice un cambio en el texto"
+
+"hice otro cambio para footer"
+>>>>>>> footer

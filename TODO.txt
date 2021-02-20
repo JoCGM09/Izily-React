@@ -21,3 +21,5 @@ $ Mostrar información del perfil (2)
 
 
 "hice un cambio en el texto"
+
+"hice otro cambio para footer"

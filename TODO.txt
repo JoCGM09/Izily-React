@@ -17,7 +17,11 @@ $ Generar una ruta (2)
 $ Mostrar información del perfil (2)
 - Conseguir agendar una reunión (3)
 
-- BUG LAS ETIQUETAS DESAPARECEN LUEGO DE VOLVER AL INICIO
+
 
 
 "hice un cambio en el texto"
+
+
+
+" manuel es un puto "

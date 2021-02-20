@@ -18,8 +18,8 @@ $ Mostrar información del perfil (2)
 - Conseguir agendar una reunión (3)
 
 
-
 <<<<<<< HEAD
+
 
 "hice un cambio en el texto"
 

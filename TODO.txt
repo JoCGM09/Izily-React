@@ -18,7 +18,7 @@ $ Mostrar información del perfil (2)
 - Conseguir agendar una reunión (3)
 
 
-<<<<<<< HEAD
+
 
 
 "hice un cambio en el texto"
@@ -26,8 +26,8 @@ $ Mostrar información del perfil (2)
 
 
 " manuel es un puto "
-=======
+
 "hice un cambio en el texto"
 
 "hice otro cambio para footer"
->>>>>>> footer
+

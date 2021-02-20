@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     whidth: "100%",
     paddingTop: 15,
   },
+  
 }));
 
 export default function Profesores(callback, deps) {
@@ -173,7 +174,7 @@ export default function Profesores(callback, deps) {
         <main className={classes.main}>
           <Grid container clasName={classes.gridContainer} spacing={3}>
             {profesoresFiltrados.map((profesor) => (
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={6} lg={4}>
                 <Profesor profesor={profesor} />
               </Grid>
             ))}

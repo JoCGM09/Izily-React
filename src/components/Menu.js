@@ -13,6 +13,7 @@ import ListIcon from "@material-ui/icons/List";
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
+    
   },
 })((props) => (
   <Menu
@@ -55,6 +56,7 @@ export default function CustomizedMenus() {
   return (
     <div>
       <IconButton
+        padding= "0px"
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"

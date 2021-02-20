@@ -9,6 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import StarIcon from '@material-ui/icons/Star';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
@@ -25,11 +26,13 @@ const StyledRating = withStyles({
 
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
     borderRadius: 3,
-    boxShadow: "5px 2px 10px 0 rgba(0, 0, 0, .5)",
+  },
+  cardContent: {
+    margin: "0px",
   },
   avatar: {
     height: 150,
@@ -40,7 +43,8 @@ const useStyles = makeStyles({
   },
   avatarContainer: {
     border: 5,
-    marginBottom: 15,
+    marginBottom: 3,
+    marginTop: 2,
     textAlign: "center",
   },
   numero: {
@@ -53,9 +57,11 @@ const useStyles = makeStyles({
     
     flexDirection: "row",
     textAlign: "center",
+    
   },
   datos: {
     fontWeight: "bold",
+    margin: "0px",
   },
   descripcion: {
     padding: 0,
@@ -65,7 +71,17 @@ const useStyles = makeStyles({
     padding: 0,
     margin: 0,
   },
-});
+  paperPresentacion: {
+    height: "85px",
+    
+    overflow: "auto",
+    textAlign: "justify",
+    padding: "3px 8px 8px 0px",
+    marginLeft: "10px",
+    marginTop: "5px",
+    marginBottom: "15px",
+  },
+}));
 
 export default function Profesor({ profesor }) {
   const classes = useStyles();
@@ -76,7 +92,7 @@ export default function Profesor({ profesor }) {
   return (
     <Card className={classes.root}>
       <CardActionArea component={Link} to={`/profesores/${profesor.id}`}>
-        <CardContent>
+        <CardContent >
           <div className={classes.avatarContainer}>
             <img className={classes.avatar} src={defaultAvatar} />
             <div>
@@ -100,10 +116,12 @@ export default function Profesor({ profesor }) {
                     {cursos.nombre}
                 </Typography>
                 ))}
-             */},
-            <Typography className={classes.descripcion} gutterBottom variant="body2" component="p">
-              {profesor.descripcion}
-            </Typography>
+             */}
+            <Paper className={classes.paperPresentacion}
+                  overflow= "scroll"
+                  elevation={0}
+                  children={profesor.descripcion}
+                />
             <Typography className={classes.datos} gutterBottom variant="body2" component="p">
               {profesor.calificaciones} calificaciones | {profesor.horas} horas dictadas
             </Typography>            

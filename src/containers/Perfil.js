@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 import Profesor from "../components/Profesor";
+import Publicacion from "../components/Publicacion";
 import CategoryCurses from "../components/CategoryCurses";
 import Grid from "@material-ui/core/Grid";
 import Link from "react-router-dom/Link"
@@ -28,9 +29,20 @@ import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 const useStyles = makeStyles((theme) => ({
 
 
+seccion1: {
+  margin: 0,
+  padding: 0,
+  display: "flex",
+  alignContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
+},
 
 gridcontainer: {
   width: "100%",
+  
+  borderBottom: "1px solid #C4C4C4",
+  
 },
 
 gridprofesor: {
@@ -38,6 +50,7 @@ gridprofesor: {
 },
 griddatos: {
   minWidth: "390px",
+  justifyContent: "center",
 },
 
 titlePresentacion: {
@@ -55,13 +68,13 @@ titlePresentacion_text: {
 },
 
 paperPresentacion: {
-  margin: theme.spacing(2),
+  
   width: "360px",
   height: "90px",
   overflow: "auto",
   borderRadius: "10px",
   padding: "3px 8px 8px 8px",
-  marginLeft: "0px",
+  margin: "15px 0px 10px 0px",
 },
 
 etiquetasContainer: {
@@ -70,10 +83,12 @@ etiquetasContainer: {
   width: "380px",
   height: "120px",
   paddingBottom: "0px",
-  //height: theme.spacing(15),
+  
   overflow: "auto",
   marginLeft: "-25px",
   marginTop: "-10px",
+  
+  borderRadius: "10px",
   backgroundColor: "rgba(0, 0, 0, 0.0)",
   
 },
@@ -144,6 +159,19 @@ idioms: {
   display: "flex",
   alignItems: "center",
   marginTop: "10px",
+},
+
+idiomsContainer: {
+  width:"380px",
+  
+},
+
+seccion2: {
+  marginTop: "40px",
+  display: "flex",
+  alignContent: "center",
+  alignItems: "center",
+  flexDirection: "column",
 },
 
 }));
@@ -220,6 +248,10 @@ function Perfil() {
     <>
       
       {profesor && (
+
+        
+        
+        
         <div className={classes.seccion1}>
           
             <Grid container
@@ -241,7 +273,9 @@ function Perfil() {
               </Grid>
               
               <Grid item xs={12} md={3} 
-                    alignItems="start"
+                    //alignItems="start"
+                    align="center"
+                    alignContent="center"
                     justify="center"
                     className={classes.griddatos}
                     >
@@ -267,6 +301,7 @@ function Perfil() {
                 
                 <Paper className={classes.paperPresentacion}
                   overflow= "scroll"
+                  align="start"
                   variant="outlined" square
                   children={profesor.presentacion}
                 />
@@ -283,7 +318,7 @@ function Perfil() {
                   <TabPanel className={classes.TabPanel} value={value} index={0}>
                   <Paper className={classes.etiquetasContainer}
                     overflow="scroll"
-                    elevation={0}
+                    variant="outlined" square
                     children= 
                     {profesor.cursos.map((cursos) => (
                       <Chip className={classes.etiqueta0}
@@ -295,7 +330,7 @@ function Perfil() {
                   <TabPanel className={classes.TabPanel} value={value} index={1}>
                   <Paper className={classes.etiquetasContainer}
                     overflow="scroll"
-                    elevation={0}
+                    variant="outlined" square
                     children= 
                     {profesor.cursos.map((cursos) => (
                       <Chip className={classes.etiqueta1}
@@ -307,7 +342,7 @@ function Perfil() {
                   <TabPanel className={classes.TabPanel} value={value} index={2}>
                     <Paper className={classes.etiquetasContainer}
                     overflow="scroll"
-                    elevation={0}
+                    variant="outlined" square
                     children= 
                     {profesor.cursos.map((cursos) => (
                       <Chip className={classes.etiqueta2}
@@ -354,27 +389,24 @@ function Perfil() {
                 </Button>
                 </div>
 
-                <Typography className={classes.idioms} variant="caption" display="block" >
-                <LanguageIcon fontSize="small" />  Español, Portugués.
-                </Typography>
-              
-
-
-                {/* <Paper className={classes.etiquetasContainer}
-                  overflow="scroll"
-                  elevation={0}
-                  children= 
-                  {profesor.cursos.map((cursos) => (
-                    <Chip className={classes.etiqueta}
-                        label={cursos.nombre}
-                    />
-                  ))}
-                />*/}
+                <div className={classes.idiomsContainer} >
+                  <Typography className={classes.idioms} variant="caption" display="block" >
+                    <LanguageIcon fontSize="small" />  Español, Portugués.
+                  </Typography>
+                </div>
                 
               </Grid>
             </Grid>
-          
-        </div>
+            
+            <div className={classes.seccion2}>
+            <Publicacion />
+
+            </div>
+            
+          </div>
+        
+
+       
         
         
 

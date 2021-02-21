@@ -22,28 +22,35 @@ import Menu from "../components/Menu";
 import PersonIcon from "@material-ui/icons/Person";
 import { Link } from "react-router-dom";
 
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
+
+
+//const matches = useMediaQuery('(min-width:600px)');
+
 const useStyles = makeStyles({
   root: {
     backgroundColor: "#FFFFFF",
     boxShadow: "0px 0px 4px 0 rgba(0, 0, 0, 0.2)",
-    height: 40,
+    
+    // display: "flex",
+    // alignItems: "center",
+    // flexDirection: "row",
+    // width: "100%",
   },
 
   
   gridPadre: {
-    // display: "flex",
-    // alignItems: "start",
-    height: "10px",
-    //background: "red",
-    // @media (minWidth: "600px"){
-    //   minWidth: "40px";
-    // }
-   
+    display: "flex",
     
+    alignItems: "center",
+    //height: "small",
   },
 
+  
+
   gridHijo: {
-    height: "40px",
+    height: "50px",
     display: "flex",
     alignItems: "center",
     //background: "green",
@@ -59,8 +66,8 @@ const useStyles = makeStyles({
   },
 
   logo: {
-    width: 32,
-    height: 20,
+    width: 48,
+    height: 30,
   },
 
   botones: {
@@ -121,7 +128,6 @@ export default function ElevateAppBar(props) {
         <Toolbar>
           <Grid className={classes.gridPadre} 
                 container 
-
                 alignItems="center">
             <Grid className={classes.gridHijo} item>
               <Button disabled>

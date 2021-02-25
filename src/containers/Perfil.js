@@ -22,12 +22,17 @@ import PeopleIcon from '@material-ui/icons/People';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import LanguageIcon from '@material-ui/icons/Language';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 
 
 const useStyles = makeStyles((theme) => ({
-
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
 
 seccion1: {
   margin: 0,
@@ -69,7 +74,7 @@ titlePresentacion_text: {
 
 paperPresentacion: {
   
-  width: "360px",
+  width: "377px",
   height: "90px",
   overflow: "auto",
   borderRadius: "10px",
@@ -233,7 +238,13 @@ function Perfil() {
     }
   };
 
-  
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
   
   
 
@@ -367,6 +378,7 @@ function Perfil() {
                 </Button>
                 
                 <Button 
+                  disabled
                   variant="contained"
                   color="inherit"
                   size="small"
@@ -378,6 +390,7 @@ function Perfil() {
                 </Button>
 
                 <Button 
+                  disabled
                   variant="contained"
                   size="small"
                   color="inherit"
@@ -414,9 +427,12 @@ function Perfil() {
         
       )}
       {!profesor && (
-        <div>
-          <h1>Cargando...</h1>
-        </div>
+        // <div>
+        //   <h1>Cargando...</h1>
+        // </div>
+        <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
       )}
     </>
   );

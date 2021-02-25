@@ -21,7 +21,7 @@ import {useState } from "react";
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
-    marginLeft:"-40px",
+    marginLeft:"-10px",
   },
 
 })((props) => (

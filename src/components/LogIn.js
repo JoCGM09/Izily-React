@@ -15,14 +15,15 @@ import Alert from '@material-ui/lab/Alert';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../contexts/AuthContext';
+import loginimage from "../assets/images/loginimage.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: '50vh',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage: 'url(../assets/images/loginimage)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -45,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  link: {
+    style:"none",
   },
 }));
 
@@ -128,12 +132,12 @@ export default function LogIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link to="/forgot-password" variant="body2">
+                <Link className={classes.link} to="/forgot-password" variant="body2">
                   Olvidé mi contraseña
                 </Link>
               </Grid>
               <Grid item>
-                <Link to="/signup" variant="body2">
+                <Link className={classes.link} to="/signup" variant="body2">
                   ¿Aún no tienes una cuenta? Regístrate
                 </Link>
               </Grid>

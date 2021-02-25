@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         color: "#3493C2",
         fontWeight: "bold",
         height: "40px",
-        fontSize: "13px",
+        fontSize: "12px",
       },
 
       searchInput: {
@@ -25,21 +25,14 @@ const useStyles = makeStyles((theme) => ({
         padding: "0px 5px",
         margin: "0px",
         fontSize: "11px",
+        width:"200px",
       },
 
       gridArriba:{
+        display:"flex",
         alignContent:"center",
+        flexDirection:"row",
         width:"100%",
-      },
-
-      containerArriba:{
-        //flexDirection:"row",
-        //width: "800px",
-        //display:"flex",
-        width:"90%",
-        //alignItems:"center",
-        //alignContent:"space-between",
-        justifyItems:"space-between",
       },
 
       publicacionesContainer:{
@@ -59,7 +52,11 @@ return (
 
     <Grid align="center" className={classes.gridArriba}
     >
-        <div className={classes.containerArriba}>
+        
+        <Grid xs></Grid>
+        <Grid xs></Grid>
+        <Grid xs></Grid>
+        <Grid>
         <TextField
             className={classes.searchInput}
             variant="outlined"
@@ -71,20 +68,31 @@ return (
                 startAdornment: (
                 <InputAdornment position="start">
                     <SearchIcon fontSize="small" />
-                    
                 </InputAdornment>
                 ),
             }}
         />
+        </Grid>
+        
 
-        {/* <Grid></Grid> */}
+        <Grid xs></Grid>
 
-        <Button component={Link} to={"/encontrar-un-maestro"} className={classes.botones} variant="outlined">
+        <Grid>
+        <Button component={Link} 
+                to={"/encontrar-un-maestro"} 
+                className={classes.botones} 
+                variant="outlined"
+                size="small"
+                >
             Encontrar un maestro
         </Button>
-
-        </div>
+        </Grid>
         
+
+        
+        <Grid xs></Grid>
+        <Grid xs></Grid>
+        <Grid xs></Grid>
 
     </Grid>
     

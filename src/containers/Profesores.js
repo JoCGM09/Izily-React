@@ -18,23 +18,50 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import Button from '@material-ui/core/Button';
 
-const drawerWidth = 300;
+
+
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+
+
+import NavBar from "../components/Navbar"
+
+
+const drawerWidth = 240;
+
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    margin: 0,
-    padding: 0,
-  },
-  content: {
-    display: "flex",
-    position: "absolute",
-    height: "100%",
-    width: "95%",
-    flexDirection: "row",
-  },
+
   drawer: {
     width: drawerWidth,
+    flexShrink: 0,
   },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerContainer: {
+    overflow: 'auto',
+  },
+  // necessary for content to be below app bar
+  
+
+  root: {
+    display: "flex",
+  },
+
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    justifyContent:"center",
+  },
+ 
+  
   main: {
     background: "white",
     overflow: "auto",
@@ -44,35 +71,19 @@ const useStyles = makeStyles((theme) => ({
     padding: "15px, 0, 10px, 15px",
   },
   gridContainer: {
-    whidth: "100%",
     paddingTop: 15,
   },
+  divSeparador:{
+    width:"100%",
+    height:"105px",
+  },
+  
   
 }));
 
 
-
-
-
-
-
-
-
-
-
-
 export default function Profesores(callback, deps) {
 
-
-    
-    
-  
-  
-    
-  
-   
-        
-     
 
   const classes = useStyles();
   const [error, setError] = useState("");
@@ -174,25 +185,33 @@ export default function Profesores(callback, deps) {
     filtrarProfesores("");
   }, [etiquetas]);
 
+
   return (
-  <>
-  {error && <Alert variant="filled" severity="error">{error}</Alert>}
-<div>
-          <Button variant="link" onClick={handleLogOut}> Cerrar sesión </Button>
-          <Button variant="link" href="/editar-perfil"> Editar perfil </Button>
-          <div>{usuarioActual.email}</div>
-        </div>
+
 
     <div className={classes.root}>
-      <div className={classes.content}>
-        <div className={classes.drawer}>
-          <List>
+
+    
+      <CssBaseline />
+      
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        
+      >
+        <div className={classes.divSeparador}></div>
+        <div className={classes.drawerContainer}>
+        <List>
             <ListItem>
               <FormControl
+                size="small"
                 className={clsx(classes.margin, classes.textField)}
                 variant="outlined"
               >
-                <InputLabel htmlFor="outlined-adornment-password">
+                <InputLabel  htmlFor="outlined-adornment-password">
                   Buscar
                 </InputLabel>
                 <OutlinedInput
@@ -220,18 +239,25 @@ export default function Profesores(callback, deps) {
               </ListItem>
             ))}
           </List>
-        </div>
-        <main className={classes.main}>
-          <Grid container clasName={classes.gridContainer} spacing={3}>
+          </div>
+
+
+
+      </Drawer>
+      <main className={classes.content}>
+        
+      <Grid container clasName={classes.gridContainer} spacing={3}>
             {profesoresFiltrados.map((profesor) => (
-              <Grid item xs={12} md={6} lg={4}>
+              <Grid item align="center" xs={12} md={6} lg={4}>
                 <Profesor profesor={profesor} />
               </Grid>
             ))}
-          </Grid>
-        </main>
-      </div>
+      </Grid>
+
+
+      </main>
     </div>
-  </>
+    
   );
+
 }

@@ -61,55 +61,38 @@ const useStyles = makeStyles ((theme) => ({
   root: {
     backgroundColor: "#FFFFFF",
     boxShadow: "0px 0px 4px 0 rgba(0, 0, 0, 0.2)",
-    
-    // display: "flex",
-    // alignItems: "center",
-    // flexDirection: "row",
-    // width: "100%",
+    zIndex: theme.zIndex.drawer + 1,
   },
 
-  
-  // gridPadre: {
-  //   display: "flex",
-    
-  //   alignItems: "center",
-    
-
-  // },
   gridPadre: {
         display: "flex",
         alignItems: "center",
-        // [theme.breackpoints.up('md')]:{
-        //   minHeight: "56px",
     },
-  
 
   gridHijo: {
     height: "50px",
     display: "flex",
     alignItems: "center",
-    //background: "green",
   },
-
 
   searchInput: {
     opacity: "0.9",
     padding: "0px 5px",
     margin: "0px 40px",
     fontSize: "11px",
-    //height: "25px",
   },
 
   logo: {
-    width: 48,
-    height: 30,
+    width: 64,
+    height: 40,
+    marginLeft: 15,
   },
 
   botones: {
     margin: "0px 5px",
     color: "#3493C2",
     fontWeight: "bold",
-    height: "25px",
+    height: "30px",
     fontSize: "11px",
   },
 
@@ -121,8 +104,8 @@ const useStyles = makeStyles ((theme) => ({
     padding: "10px",
   },
 
-nombreContainer:{
-  width: "120px",
+nombrecontainer:{
+  maxWidth: "120px",
   whiteSpace: "nowrap",
   textOverflow: "ellipsis",
   overflow: "hidden",
@@ -216,7 +199,7 @@ export default function ElevateAppBar(props) {
       
       <ElevationScroll {...props}>
         <AppBar  className={classes.root}>
-        <Toolbar>
+        {/* <Toolbar> */}
           <Grid className={classes.gridPadre} 
                 container 
                 alignItems="center">
@@ -227,7 +210,7 @@ export default function ElevateAppBar(props) {
             </Grid>
             
 
-            <Grid className={classes.gridHijo} item sm></Grid> 
+            <Grid className={classes.gridHijo} item xs></Grid> 
 
 
 
@@ -261,15 +244,16 @@ export default function ElevateAppBar(props) {
                 {/*<Link />*/}
               </IconButton>
             </Grid>
-            <div className={classes.nombreContainer}>
+            <Grid className={classes.nombrecontainer} xs>
+              Manuel Baella
               {/* {usuarioActual.email} */}
-            </div>
+            </Grid>
             <Grid className={classes.gridHijo} item>
               <MenuNavbar/>
 
             </Grid>
           </Grid>
-        </Toolbar>
+          {/* </Toolbar> */}
       </AppBar>
     </ElevationScroll> 
     </React.Fragment>

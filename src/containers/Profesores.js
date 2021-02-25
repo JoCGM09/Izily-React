@@ -179,7 +179,7 @@ export default function Profesores(callback, deps) {
   {error && <Alert variant="filled" severity="error">{error}</Alert>}
 <div>
           <Button variant="link" onClick={handleLogOut}> Cerrar sesión </Button>
-          <Button variant="link" href="/edit-profile"> Editar perfil </Button>
+          <Button variant="link" href="/editar-perfil"> Editar perfil </Button>
           <div>{usuarioActual.email}</div>
         </div>
 

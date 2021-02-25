@@ -16,14 +16,26 @@ import {
   InputAdornment,
 } from "@material-ui/core";
 import { useTheme } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 import SearchIcon from "@material-ui/icons/Search";
 import MessageIcon from "@material-ui/icons/Message";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import Menu from "../components/Menu";
+import MenuNavbar from "./MenuNavbar";
 import PersonIcon from "@material-ui/icons/Person";
 import { Link } from "react-router-dom";
 import { useAuth } from '../contexts/AuthContext';
+
+
+import SettingsIcon from '@material-ui/icons/Settings';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
+import { useHistory } from 'react-router-dom';
+import {useState } from "react";
 
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -106,12 +118,54 @@ const useStyles = makeStyles ((theme) => ({
   },
 
   icon:{
-    padding: "0px 5px 0px 5px",
+    padding: "10px",
   },
 
-
+nombreContainer:{
+  width: "120px",
+  whiteSpace: "nowrap",
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  color: "black",
+  paddingLeft: "10px",
+},
 
 }));
+
+
+const StyledMenu = withStyles({
+  paper: {
+    border: "1px solid #d3d4d5",
+    marginLeft:"-40px",
+  },
+
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "center",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "center",
+    }}
+    {...props}
+  />
+));
+
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    //marginLeft:"40px",
+    "&:focus": {
+      backgroundColor: theme.palette.primary.main,
+      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+        color: theme.palette.common.white,
+      },
+    },
+  },
+}))(MenuItem);
 
 function ElevationScroll(props) {
 
@@ -144,6 +198,19 @@ ElevationScroll.propTypes = {
 export default function ElevateAppBar(props) {
   const classes = useStyles();
   const {usuarioActual} = useAuth()
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
+
   return (
     <React.Fragment>
       
@@ -158,27 +225,7 @@ export default function ElevateAppBar(props) {
                 <img src={logo} className={classes.logo} />
               </Button>
             </Grid>
-            {/* <TextField
-              variant="outlined"
-              className={classes.searchInput}
-              item
-              id="buscador"
-              placeholder="Buscar"
-              size="small"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon fontSize="small" />
-                  </InputAdornment>
-                ),
-              }}
-            /> */}
-
-
-            {/* <InputBase>
-                placeholder="Buscar" className={classes.searchInput}
-                startAdornment={<SearchIcon fontSize="small" />}
-              </InputBase> */}
+            
 
             <Grid className={classes.gridHijo} item sm></Grid> 
 
@@ -194,9 +241,7 @@ export default function ElevateAppBar(props) {
               {/* <Button component={Link} to={"/encontrar-un-maestro"} className={classes.botones} variant="outlined">
                 Encontrar un maestro
               </Button> */}
-              <Button className={classes.botones} disabled>
-              {usuarioActual.email}
-              </Button>
+              
 
               <IconButton className={classes.icon}>
                 <Badge badgeContent={4}>
@@ -216,8 +261,12 @@ export default function ElevateAppBar(props) {
                 {/*<Link />*/}
               </IconButton>
             </Grid>
+            <div className={classes.nombreContainer}>
+              {/* {usuarioActual.email} */}
+            </div>
             <Grid className={classes.gridHijo} item>
-              <Menu className={classes.menu} item />
+              <MenuNavbar/>
+
             </Grid>
           </Grid>
         </Toolbar>

@@ -22,7 +22,7 @@ const App = () => (
           <Route exact path="/signup" component={SignUp} /> 
           <Route exact path="/login" component={LogIn} /> 
           <Route exact path="/forgot-password" component={ForgotPassword} /> 
-          <PrivateRoute path="/edit-profile" component={EditProfile} /> 
+          <PrivateRoute path="/editar-perfil" component={EditProfile} /> 
           <PrivateRoute exact path="/encontrar-un-maestro" component={Profesores} />
           <PrivateRoute exact path="/inicio" component={Inicio} />
           <Route path="/profesores/:profesorId" component={Perfil}/>

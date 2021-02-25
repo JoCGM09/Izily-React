@@ -69,7 +69,7 @@ export default function LogIn() {
         guardarError('') 
         guardarCarga(true)
         await login(emailRef.current.value, contraseñaRef.current.value)
-        history.push('/')
+        history.push('/inicio')
       } catch {
           guardarError('Ocurrió un error al iniciar sesión')
       }

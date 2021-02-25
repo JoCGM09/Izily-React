@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import Alert from '@material-ui/lab/Alert';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import Button from '@material-ui/core/Button'
+import Button from '@material-ui/core/Button';
 
 
 function Home() {
@@ -30,11 +30,11 @@ function Home() {
     <>
       {error && <Alert variant="filled" severity="error">{error}</Alert>}
       <Profesores />
-      <div>
+      {/* <div>
         <Button variant="link" onClick={handleLogOut}> Cerrar sesión </Button>
         <Button variant="link" href="/edit-profile"> Editar perfil </Button>
         <div>{usuarioActual.email}</div>
-      </div>
+      </div> */}
     </>
   );
 }

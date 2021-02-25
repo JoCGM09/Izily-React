@@ -10,7 +10,8 @@ import PrivateRoute from "../components/PrivateRoute";
 import EditProfile from "../components/EditProfile";
 import ForgotPassword from "../components/ForgotPassword";
 import { AuthProvider } from "../contexts/AuthContext";
-
+import Inicio from "../containers/Inicio";
+import Profesores from "../containers/Profesores";
 // probando rama login
 
 const App = () => (
@@ -22,7 +23,8 @@ const App = () => (
           <Route exact path="/login" component={LogIn} /> 
           <Route exact path="/forgot-password" component={ForgotPassword} /> 
           <PrivateRoute path="/edit-profile" component={EditProfile} /> 
-          <PrivateRoute exact path="/" component={Home} />
+          <PrivateRoute exact path="/encontrar-un-maestro" component={Profesores} />
+          <PrivateRoute exact path="/inicio" component={Inicio} />
           <Route path="/profesores/:profesorId" component={Perfil}/>
           <Route component={NotFound} />
         </Switch>

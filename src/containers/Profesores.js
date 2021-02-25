@@ -13,6 +13,10 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 
 import Checkbox from "@material-ui/core/Checkbox";
+import Alert from '@material-ui/lab/Alert';
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import Button from '@material-ui/core/Button';
 
 const drawerWidth = 300;
 const useStyles = makeStyles((theme) => ({
@@ -46,13 +50,51 @@ const useStyles = makeStyles((theme) => ({
   
 }));
 
-export default function Profesores(callback, deps) {
-  const classes = useStyles();
 
+
+
+
+
+
+
+
+
+
+
+export default function Profesores(callback, deps) {
+
+
+    
+    
+  
+  
+    
+  
+   
+        
+     
+
+  const classes = useStyles();
+  const [error, setError] = useState("");
   const [profesores, guardarProfesores] = useState([]);
   const [especialidades, guardarEspecialidades] = useState([]);
   const [etiquetas, guardarEtiquetas] = useState([0]);
   const [profesoresFiltrados, guardarProfesoresFiltrados] = useState([]);
+  const { usuarioActual, logout } = useAuth()
+  const history = useHistory()
+
+
+  async function handleLogOut(){
+    setError('')
+
+    try {
+      await logout()
+      history.push('/login')
+    } catch {
+      setError('Ocurrió un error al salir de la cuenta')
+    }
+
+  }
 
   const traerProfesores = () => {
     const usuariosRef = db.collection("usuarios");
@@ -133,6 +175,14 @@ export default function Profesores(callback, deps) {
   }, [etiquetas]);
 
   return (
+  <>
+  {error && <Alert variant="filled" severity="error">{error}</Alert>}
+<div>
+          <Button variant="link" onClick={handleLogOut}> Cerrar sesión </Button>
+          <Button variant="link" href="/edit-profile"> Editar perfil </Button>
+          <div>{usuarioActual.email}</div>
+        </div>
+
     <div className={classes.root}>
       <div className={classes.content}>
         <div className={classes.drawer}>
@@ -182,5 +232,6 @@ export default function Profesores(callback, deps) {
         </main>
       </div>
     </div>
+  </>
   );
 }

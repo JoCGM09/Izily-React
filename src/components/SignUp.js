@@ -64,7 +64,7 @@ export default function SignUp() {
         guardarError('') 
         guardarCarga(true)
         await signup(emailRef.current.value, contraseñaRef.current.value)
-        history.push("/home")
+        history.push("/inicio")
       } catch {
           guardarError('Ocurrió un error al crear una cuenta')
       }

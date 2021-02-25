@@ -63,7 +63,7 @@ export default function EditProfile() {
     }
 
     Promise.all(promises).then(()=>{
-      history.push('/')
+      history.push('/inicio')
     }).catch(()=>{
       guardarError('Ocurrió un error al actualizar la cuenta')
     }).finally(()=>{
@@ -138,7 +138,7 @@ export default function EditProfile() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link to="/" variant="body2">
+              <Link to="/inicio" variant="body2">
                 Cancelar
               </Link>
             </Grid>

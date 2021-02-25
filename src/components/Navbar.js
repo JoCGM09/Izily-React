@@ -15,12 +15,16 @@ import {
   TextField,
   InputAdornment,
 } from "@material-ui/core";
+import { useTheme } from '@material-ui/core/styles';
+
 import SearchIcon from "@material-ui/icons/Search";
 import MessageIcon from "@material-ui/icons/Message";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import Menu from "../components/Menu";
 import PersonIcon from "@material-ui/icons/Person";
 import { Link } from "react-router-dom";
+import { useAuth } from '../contexts/AuthContext';
+
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
@@ -28,7 +32,20 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 //const matches = useMediaQuery('(min-width:600px)');
 
-const useStyles = makeStyles({
+// const styles = theme => ({
+
+//   gridPadre: {
+//     display: "flex",
+//     alignItems: "center",
+//     [theme.breackpoints.up('md')]:{
+//       height: "56px",
+//     },
+
+//   },
+
+// });
+
+const useStyles = makeStyles ((theme) => ({
   root: {
     backgroundColor: "#FFFFFF",
     boxShadow: "0px 0px 4px 0 rgba(0, 0, 0, 0.2)",
@@ -40,13 +57,19 @@ const useStyles = makeStyles({
   },
 
   
-  gridPadre: {
-    display: "flex",
+  // gridPadre: {
+  //   display: "flex",
     
-    alignItems: "center",
-    //height: "small",
-  },
+  //   alignItems: "center",
+    
 
+  // },
+  gridPadre: {
+        display: "flex",
+        alignItems: "center",
+        // [theme.breackpoints.up('md')]:{
+        //   minHeight: "56px",
+    },
   
 
   gridHijo: {
@@ -88,12 +111,12 @@ const useStyles = makeStyles({
 
 
 
-});
+}));
 
 function ElevationScroll(props) {
 
   
-
+  
   const { children, window } = props;
   // Note that you normally won't need to set the window ref as useScrollTrigger
   // will default to window.
@@ -120,6 +143,7 @@ ElevationScroll.propTypes = {
 
 export default function ElevateAppBar(props) {
   const classes = useStyles();
+  const {usuarioActual} = useAuth()
   return (
     <React.Fragment>
       
@@ -164,14 +188,14 @@ export default function ElevateAppBar(props) {
 
 
             <Grid className={classes.gridHijo} item>
-              <Button className={classes.botones} variant="outlined">
+              <Button component={Link} to={"/inicio"} className={classes.botones} variant="outlined">
                 Inicio
               </Button>
-              <Button component={Link} to={"/"} className={classes.botones} variant="outlined">
+              {/* <Button component={Link} to={"/encontrar-un-maestro"} className={classes.botones} variant="outlined">
                 Encontrar un maestro
-              </Button>
+              </Button> */}
               <Button className={classes.botones} disabled>
-                NOMBRE
+              {usuarioActual.email}
               </Button>
 
               <IconButton className={classes.icon}>
@@ -192,9 +216,9 @@ export default function ElevateAppBar(props) {
                 {/*<Link />*/}
               </IconButton>
             </Grid>
-            {/* <Grid className={classes.gridHijo} item>
+            <Grid className={classes.gridHijo} item>
               <Menu className={classes.menu} item />
-            </Grid> */}
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>

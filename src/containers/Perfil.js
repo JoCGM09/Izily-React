@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 import Profesor from "../components/Profesor";
@@ -24,6 +24,8 @@ import LanguageIcon from '@material-ui/icons/Language';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
+
 
 
 
@@ -106,7 +108,14 @@ TabPanel: {
 categories: {
   background: "white",
   color: "black",
-  
+},
+
+categoriesAppBar:{
+  marginBottom:"-10px",
+},
+
+categorie3:{
+  width:"fullWidht",
 },
 
 
@@ -132,11 +141,9 @@ etiqueta2: {
 },
 
 root: {
-  flexGrow: 1,
-  backgroundColor: theme.palette.background.paper,
+  //flexGrow: 1,
   width: "377px",
   backgroundColor: "rgba(0, 0, 0, 0.0)",
-  
 },
 
 buttonPerfil: {
@@ -190,8 +197,8 @@ function TabPanel(props) {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
       {value === index && (
@@ -211,8 +218,8 @@ TabPanel.propTypes = {
 
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `full-width-tab-${index}`,
+    'aria-controls': `full-width-tabpanel-${index}`,
   };
 }
 
@@ -220,6 +227,7 @@ function a11yProps(index) {
 
 function Perfil() {
   const classes = useStyles();
+  const theme = useTheme();
 
   const [value, setValue] = React.useState(0);
 
@@ -319,14 +327,14 @@ function Perfil() {
 
 
                 <div className={classes.root}>
-                  <AppBar position="static">
-                    <Tabs  className={classes.categories} variant="fullWidth" value={value} onChange={handleChange} aria-label="simple tabs example">
-                      <Tab disableRipple="true" label="Escolar" {...a11yProps(0)} />
-                      <Tab disableRipple="true" label="Preuniv." {...a11yProps(1)} />
-                      <Tab disableRipple="true" label="Universitario" {...a11yProps(2)} />
+                  <AppBar elevation ={1} className={classes.categoriesAppBar} position="static">
+                    <Tabs  className={classes.categories} variant="fullWidth" value={value} onChange={handleChange} aria-label="full width tabs example">
+                      <Tab className={classes.categorie1} disableRipple="true" label="Escolar" {...a11yProps(0)} />
+                      <Tab className={classes.categorie2} disableRipple="true" label="Preuniv." {...a11yProps(1)} />
+                      <Tab className={classes.categorie3} disableRipple="true" label="Universitario" {...a11yProps(2)} />
                     </Tabs>
                   </AppBar>
-                  <TabPanel className={classes.TabPanel} value={value} index={0}>
+                  <TabPanel className={classes.TabPanel} value={value} index={0} >
                   <Paper className={classes.etiquetasContainer}
                     overflow="scroll"
                     variant="outlined" square
@@ -338,7 +346,7 @@ function Perfil() {
                     ))}
                   />
                   </TabPanel>
-                  <TabPanel className={classes.TabPanel} value={value} index={1}>
+                  <TabPanel className={classes.TabPanel} value={value} index={1} >
                   <Paper className={classes.etiquetasContainer}
                     overflow="scroll"
                     variant="outlined" square
@@ -350,7 +358,7 @@ function Perfil() {
                     ))}
                   />
                   </TabPanel>
-                  <TabPanel className={classes.TabPanel} value={value} index={2}>
+                  <TabPanel className={classes.TabPanel} value={value} index={2} >
                     <Paper className={classes.etiquetasContainer}
                     overflow="scroll"
                     variant="outlined" square
@@ -362,6 +370,7 @@ function Perfil() {
                     ))}
                   />
                   </TabPanel>
+                  
                 </div>
 
                 <div className={classes.buttonContainer}>

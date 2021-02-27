@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   drawerContainer: {
+    marginTop:"3rem",
     //paddingTop:"20px",
     overflow: 'auto',
   },
@@ -78,10 +79,7 @@ const useStyles = makeStyles((theme) => ({
   gridContainer: {
     paddingTop: 15,
   },
-  divSeparador:{
-    width:"100%",
-    height:"60px",
-  },
+  
   
   
 }));
@@ -207,7 +205,7 @@ export default function Profesores(callback, deps) {
         }}
         
       >
-        <div className={classes.divSeparador}></div>
+        
         <div className={classes.drawerContainer}>
         <FormControl
                 size="small"

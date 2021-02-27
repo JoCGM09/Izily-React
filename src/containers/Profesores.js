@@ -7,7 +7,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Profesor from "../components/Profesor";
 import { db } from "../firebase";
-
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -46,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   drawerContainer: {
+    //paddingTop:"20px",
     overflow: 'auto',
   },
   // necessary for content to be below app bar
@@ -60,7 +60,12 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     justifyContent:"center",
   },
- 
+  Buscar:{
+    marginTop:"10px",
+    marginBottom:"10px",
+    marginLeft:"10px",
+    width:"200px",
+  },
   
   main: {
     background: "white",
@@ -75,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
   divSeparador:{
     width:"100%",
-    height:"105px",
+    height:"60px",
   },
   
   
@@ -204,24 +209,25 @@ export default function Profesores(callback, deps) {
       >
         <div className={classes.divSeparador}></div>
         <div className={classes.drawerContainer}>
-        <List>
-            <ListItem>
-              <FormControl
+        <FormControl
                 size="small"
-                className={clsx(classes.margin, classes.textField)}
+                //className={clsx(classes.margin, classes.textField)}
+                className={classes.Buscar}
                 variant="outlined"
               >
                 <InputLabel  htmlFor="outlined-adornment-password">
-                  Buscar
+                  Buscar nombre:
                 </InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password"
                   type="text"
                   onChange={filtrarProfesoresInput}
-                  labelWidth={50}
+                  labelWidth={120}
                 />
               </FormControl>
-            </ListItem>
+              <Divider />
+        <List>
+            
             {especialidades.map((especialidad, index) => (
               <ListItem
                 button
@@ -248,7 +254,7 @@ export default function Profesores(callback, deps) {
         
       <Grid container clasName={classes.gridContainer} spacing={3}>
             {profesoresFiltrados.map((profesor) => (
-              <Grid item align="center" xs={12} md={6} lg={4}>
+              <Grid item align="center" xs={12} sm={6} md={4} lg={3}>
                 <Profesor profesor={profesor} />
               </Grid>
             ))}

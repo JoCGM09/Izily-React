@@ -70,10 +70,14 @@ const useStyles = makeStyles((theme) => ({
   nombre: {
     padding: 0,
     margin: 0,
+    width: "100%",
+    whiteSpace: "nowrap",
+    textAlign: "center",
+    textOverflow: "ellipsis",
+    overflow: "hidden",
   },
   paperPresentacion: {
     height: "85px",
-    
     overflow: "auto",
     textAlign: "justify",
     padding: "3px 8px 8px 0px",

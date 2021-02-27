@@ -12,6 +12,7 @@ import ForgotPassword from "../components/ForgotPassword";
 import { AuthProvider } from "../contexts/AuthContext";
 import Inicio from "../containers/Inicio";
 import Profesores from "../containers/Profesores";
+import Landing from "../containers/Landing";
 // probando rama login
 
 const App = () => (
@@ -19,6 +20,7 @@ const App = () => (
     <AuthProvider>
       <Layout>
         <Switch>
+          <Route exact path="/" component={Landing} /> 
           <Route exact path="/signup" component={SignUp} /> 
           <Route exact path="/login" component={LogIn} /> 
           <Route exact path="/forgot-password" component={ForgotPassword} /> 

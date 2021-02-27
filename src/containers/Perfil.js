@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 seccion1: {
   margin: 0,
-  padding: 0,
+  paddingTop: 10,
   display: "flex",
   alignContent: "center",
   alignItems: "center",
@@ -71,7 +71,11 @@ titlePresentacion: {
 },
 
 titlePresentacion_text: {
-  margin: "0px",
+  margin:0,
+  marginLeft: "2px",
+  // marginTop:"0px",
+  fontSize:"15px",
+  fontWeight:"bold",
 },
 
 paperPresentacion: {
@@ -299,7 +303,7 @@ function Perfil() {
                     className={classes.griddatos}
                     >
                 <div className={classes.titlePresentacion}>
-                <p className={classes.titlePresentacion_text}>Presentación:</p>
+                <p className={classes.titlePresentacion_text}>Acerca de mi:</p>
 
                 <Button 
                   variant="contained"

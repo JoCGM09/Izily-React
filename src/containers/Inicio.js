@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
       },
 
       gridArriba:{
+        paddingTop:"10px",
         display:"flex",
         alignContent:"center",
         flexDirection:"row",

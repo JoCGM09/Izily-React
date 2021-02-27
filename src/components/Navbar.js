@@ -29,7 +29,7 @@ import MenuNavbar from "./MenuNavbar";
 import PersonIcon from "@material-ui/icons/Person";
 import { Link } from "react-router-dom";
 import { useAuth } from '../contexts/AuthContext';
-
+import clsx from 'clsx';
 
 import SettingsIcon from '@material-ui/icons/Settings';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
@@ -86,6 +86,11 @@ const useStyles = makeStyles ((theme) => ({
     width: 64,
     height: 40,
     marginLeft: 15,
+  },
+  buttonLogo:{
+    "&:hover":{
+      backgroundColor:"rgba(0, 0, 0, 0)",
+    },
   },
 
   botones: {
@@ -179,6 +184,7 @@ ElevationScroll.propTypes = {
 };
 
 export default function ElevateAppBar(props) {
+
   const classes = useStyles();
   const {usuarioActual} = useAuth()
 
@@ -204,7 +210,15 @@ export default function ElevateAppBar(props) {
                 container 
                 alignItems="center">
             <Grid className={classes.gridHijo} item>
-              <Button disabled>
+              {/* <button href="../containers/Landing.js">
+                <img src={logo} className={classes.logo} />
+              </button> */}
+              <Button component={Link} to={"/"} 
+                      
+                      className={classes.buttonLogo}
+                      disableRipple="true" 
+                      disableFocusRipple="true"
+                      >
                 <img src={logo} className={classes.logo} />
               </Button>
             </Grid>
@@ -245,7 +259,7 @@ export default function ElevateAppBar(props) {
               </IconButton>
             </Grid>
             <Grid className={classes.nombrecontainer} xs>
-              Manuel Baella
+              {/* Manuel Baella */}
               {/* {usuarioActual.email} */}
             </Grid>
             <Grid className={classes.gridHijo} item>

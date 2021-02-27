@@ -16,19 +16,20 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { useAuth } from '../contexts/AuthContext';
-import loginimage from "../assets/images/loginimage.png";
+import fondo from "../assets/images/fondo.png";
+import fondo2 from "../assets/images/fondo2.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '50vh',
   },
   image: {
-    backgroundImage: 'url(../assets/images/loginimage)',
+    backgroundImage: `url(${fondo2})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundPosition: 'left',
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -84,8 +85,8 @@ export default function LogIn() {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={false}  md={7} lg={7} className={classes.image} />
+      <Grid item xs={12}  md={5} lg={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             Iniciar Sesión

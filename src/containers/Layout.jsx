@@ -5,7 +5,7 @@ import NavBar from "../components/Navbar"
 const Layout = ({ children }) => (
     <div className="App">
         <NavBar/>
-        <div className="contenedor" style={{marginTop:"60px"}}>
+        <div className="contenedor" style={{marginTop:"50px"}}>
             {children}  
         </div>
     </div>

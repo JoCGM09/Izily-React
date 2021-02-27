@@ -308,6 +308,18 @@ function Perfil() {
                 <Button 
                   variant="contained"
                   size="small"
+                  target="_blank"
+                  href={profesor.calendly}
+
+
+
+
+
+
+
+
+
+
                   color="inherit"
                   className={classes.buttonPerfil}
                   startIcon={<EventAvailableIcon />}

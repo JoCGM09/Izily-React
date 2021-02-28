@@ -9,7 +9,9 @@ import loginimage from "../assets/images/loginimage.png";
 import fondolanding from "../assets/images/fondolanding.jpg";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
-
+import FunctionsIcon from '@material-ui/icons/Functions';
+import { Icon } from "@material-ui/core";
+import CarouselLanding from "../components/CarouselLanding";
 
 const useStyles = makeStyles((theme) => ({
     
@@ -21,10 +23,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundPosition:"right bottom",
         backgroundSize:"cover",
         //height:"300px",
-        height:"500px",
+        //height:"500px",
         width:"100%",
         margin: "0px",
-        padding:"0px",
+        paddingBottom:"15px",
     },
     titulo:{
         paddingLeft:"50px",
@@ -54,6 +56,28 @@ const useStyles = makeStyles((theme) => ({
         color:"#3493C2",
         margin: "5px 25px 5px 0px",
     },
+    Div2:{
+        padding:"20px",
+        display:"flex",
+        flexDirection:"column",
+        width:"100%",
+        
+        alignItems:"center",
+    },
+    Grid2:{
+        width:"100%",
+        padding:"20px",
+        justifyContent:"center",
+    },
+    Grid2Item:{
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"center",
+        justifyContent:"center",
+        width:"30%",
+        //height:"40px",
+        background:"blue",
+    },
 }));
 
 function Landing() {
@@ -61,7 +85,7 @@ function Landing() {
 const classes = useStyles();
 //const image = require("../assets/images/imagen.jpg");
 return (
-
+<>
     <div className={classes.Div1}>
         <Grid className={classes.titulo}>
             <h1 className={classes.tituloblanco}>Aprende para</h1>
@@ -72,10 +96,35 @@ return (
             <h1 className={classes.tituloazul}>aprender</h1>
 
         </Grid>
-
     </div>
-
-   
+    <div className={classes.Div2}>
+        Cursos más buscados
+        <Grid className={classes.Grid2} container sm={12} md={6} lg={4}>
+            <Grid className={classes.Grid2Item} item>
+                <FunctionsIcon fontSize="medium" />
+                <div>
+                    <p>Matemática</p>
+                </div>
+            </Grid>
+            <Grid className={classes.Grid2Item} item>
+                    dasdasdas
+            </Grid>
+            <Grid className={classes.Grid2Item} item>
+                    dasdasdas
+            </Grid>
+            <Grid className={classes.Grid2Item} item>
+                    dasdasdas
+            </Grid>
+            <Grid className={classes.Grid2Item} item>
+                    dasdasdas
+            </Grid>
+            <Grid className={classes.Grid2Item} item>
+                    dasdasdas
+            </Grid>
+        </Grid>
+    </div>
+    
+</> 
 );
 }
 

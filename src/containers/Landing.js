@@ -10,14 +10,21 @@ import fondolanding from "../assets/images/fondolanding.jpg";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
 import FunctionsIcon from '@material-ui/icons/Functions';
+import backgroundgrid1 from "../assets/images/backgroundgrid1.jpg";
+import logoprincipal from "../assets/images/logoprincipal.webp";
+import mentores from "../assets/images/mentores.png";
+import comunidades from "../assets/images/comunidades.png";
+import backgroundgrid2 from "../assets/images/backgroundgrid2.jpg";
 import { Icon } from "@material-ui/core";
 import CarouselLanding from "../components/CarouselLanding";
+
+
 
 const useStyles = makeStyles((theme) => ({
     
     Div1:{
-        //backgroundImage: `url(${fondolanding})`,
-        backgroundColor: '#E6E7E8', 
+        backgroundImage: `url(${backgroundgrid1})`,
+        //backgroundColor: '#E6E7E8', 
         backgroundRepeat:"no-repeat",
         //backgroundAttachment:"fixed",
         backgroundPosition:"right bottom",
@@ -42,30 +49,45 @@ const useStyles = makeStyles((theme) => ({
     },
     tituloblanco:{
         color: "white",
-        margin: "10px 0px",
+        margin: "5px 0px",
     },
     tituloazul:{
         color:"#3493C2",
-        margin: "10px 0px",
+        margin: "5px 0px",
     },
     tituloblancomedio:{
         color: "white",
-        margin: "5px 0px",
+        margin: "0px 0px 0px 0px",
     },
     tituloazulmedio:{
         color:"#3493C2",
-        margin: "5px 25px 5px 0px",
+        margin: "0px 25px 0px 0px",
+    },
+    tituloazulbajo:{
+        color:"#3493C2",
+        margin: "0px 0px 15px 0px",
     },
     Div2:{
+        backgroundImage: `url(${backgroundgrid2})`,
+        backgroundRepeat:"no-repeat",
+        //backgroundAttachment:"fixed",
+        backgroundPosition:"right bottom",
+        backgroundSize:"cover",
         padding:"20px",
         display:"flex",
         flexDirection:"column",
-        width:"100%",
-        
+        //width:"100%",
         alignItems:"center",
+        //background:"blue",
+    },
+    TituloGrid2:{
+        fontSize:"25px",
+        fontWeight:"bold",
+        color:"#3493C2",
+        margin:10,
     },
     Grid2:{
-        width:"100%",
+        //width:"100%",
         padding:"20px",
         justifyContent:"center",
     },
@@ -73,10 +95,31 @@ const useStyles = makeStyles((theme) => ({
         display:"flex",
         flexDirection:"column",
         alignItems:"center",
+        justifyContent:"flex-start",
+        padding:"10px",
+        //border:"1px solid black",
+    },
+    textgrid2:{
+        width:"80%",
+    },
+    Imagen1:{
+        width:"50%",
+        height:"auto",
+    },
+    imggrid2:{
+        display:"flex",
+        flexDirection:"column",
         justifyContent:"center",
-        width:"30%",
-        //height:"40px",
-        background:"blue",
+        alignItems:"center",
+        height: "200%",
+    },
+    titulogrid2:{
+        color:"#3493C2",
+        fontSize:"17px",
+        fontWeight:"bold",
+    },
+    subtitulogrid2:{
+
     },
 }));
 
@@ -93,34 +136,49 @@ return (
             <h1 className={classes.tituloazulmedio}>enseñar</h1> <h1 className={classes.tituloblancomedio}>y</h1>
             </div>
             <h1 className={classes.tituloblanco}>enseña para</h1>
-            <h1 className={classes.tituloazul}>aprender</h1>
+            <h1 className={classes.tituloazulbajo}>aprender</h1>
 
         </Grid>
     </div>
     <div className={classes.Div2}>
-        Cursos más buscados
-        <Grid className={classes.Grid2} container sm={12} md={6} lg={4}>
-            <Grid className={classes.Grid2Item} item>
-                <FunctionsIcon fontSize="medium" />
-                <div>
-                    <p>Matemática</p>
-                </div>
+        <p className={classes.TituloGrid2}>¿Quiénes somos?</p>
+        <Grid className={classes.Grid2} container >
+            <Grid className={classes.Grid2Item} item xs={10} sm={6} md={4} lg={4}>
+                <Grid className={classes.imggrid2}>
+                    <div align="center">
+                        <img src={logoprincipal} className={classes.Imagen1} alt=""/>
+                    </div>
+                </Grid>
+                <Grid className={classes.textgrid2}>
+                        <p className={classes.titulogrid2}>Red Social Educativa</p>
+                        <p className={classes.subtitulogrid2}>Orientada al desarrollo académico tanto de escolares como de universitarios.</p>
+                </Grid>   
             </Grid>
-            <Grid className={classes.Grid2Item} item>
-                    dasdasdas
+
+            <Grid className={classes.Grid2Item} item xs={10} sm={6} md={4} lg={4}>
+                <Grid className={classes.imggrid2}>
+                    <div align="center">
+                        <img src={comunidades} className={classes.Imagen1} alt=""/>
+                    </div>
+                </Grid>
+                <Grid className={classes.textgrid2}>
+                        <p className={classes.titulogrid2}>Comunidades</p>
+                        <p className={classes.subtitulogrid2}>Enfocadas en distintas áreas, para una mejor selección de contenido.</p>
+                </Grid>   
             </Grid>
-            <Grid className={classes.Grid2Item} item>
-                    dasdasdas
+
+            <Grid className={classes.Grid2Item} item xs={10} sm={6} md={4} lg={4}>
+                <Grid className={classes.imggrid2}>
+                    <div align="center">
+                        <img src={mentores} className={classes.Imagen1} alt=""/>
+                    </div>
+                </Grid>
+                <Grid className={classes.textgrid2}>
+                        <p className={classes.titulogrid2}>Mentores</p>
+                        <p className={classes.subtitulogrid2}>Con experiencia en más de 100 áreas de estudio dispuestos a enseñarte.</p>
+                </Grid>   
             </Grid>
-            <Grid className={classes.Grid2Item} item>
-                    dasdasdas
-            </Grid>
-            <Grid className={classes.Grid2Item} item>
-                    dasdasdas
-            </Grid>
-            <Grid className={classes.Grid2Item} item>
-                    dasdasdas
-            </Grid>
+
         </Grid>
     </div>
     

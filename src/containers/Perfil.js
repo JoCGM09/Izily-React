@@ -240,6 +240,7 @@ function Perfil() {
     if (doc.exists) {
       setProfesor({ ...doc.data(), id: doc.id });
     }
+    
     // if (usuarioActual.uid === profesor.loginid){
     //   setverificarid(true);
     // }

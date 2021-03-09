@@ -114,13 +114,7 @@ export default function Profesor({ profesor }) {
               {profesor.nombre}
             </Typography>
             
-            {/*
-                {profesor.cursos.map((cursos) => (
-                <Typography paragraph variant="body2" component="p">
-                    {cursos.nombre}
-                </Typography>
-                ))}
-             */}
+
             <Paper className={classes.paperPresentacion}
                   overflow= "scroll"
                   elevation={0}

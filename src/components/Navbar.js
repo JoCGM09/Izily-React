@@ -89,7 +89,7 @@ const useStyles = makeStyles ((theme) => ({
   },
   buttonLogo:{
     "&:hover":{
-      backgroundColor:"rgba(0, 0, 0, 0)",
+      backgroundColor:"rgba(255, 255, 255, 0)",
     },
   },
 

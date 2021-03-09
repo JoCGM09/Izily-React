@@ -59,6 +59,7 @@ return (
         <Grid xs></Grid>
         <Grid>
         <TextField
+            disabled
             className={classes.searchInput}
             variant="outlined"
             item

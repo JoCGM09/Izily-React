@@ -240,17 +240,17 @@ export default function ElevateAppBar(props) {
               </Button> */}
               
 
-              <IconButton className={classes.icon}>
+              <IconButton disabled className={classes.icon}>
                 <Badge badgeContent={4}>
                   <MessageIcon  fontSize="small" />
                 </Badge>
               </IconButton>
-              <IconButton className={classes.icon}>
-                <Badge  badgeContent={4}>
+              <IconButton disabled className={classes.icon}>
+                <Badge badgeContent={4}>
                   <NotificationsIcon fontSize="small" />
                 </Badge>
               </IconButton>
-              <IconButton className={classes.icon}>
+              <IconButton disabled className={classes.icon}>
                 {/*<Link to="/perfil">*/}
                   <Badge badgeContent={4}>
                     <PersonIcon fontSize="small" />

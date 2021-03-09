@@ -232,19 +232,21 @@ function Perfil() {
 
   const { profesorId } = useParams();
   const [profesor, setProfesor] = useState(null);
-  // const [verificarid, setverificarid] = useState(false);
+  const [verificarid, setverificarid] = useState(true);
 
   const traerProfesor = async () => {
-    const cityRef = db.collection("usuarios").doc(profesorId);
-    const doc = await cityRef.get();
+    const profesorInfo = db.collection("usuarios").doc(profesorId);
+    const doc = await profesorInfo.get();
     if (doc.exists) {
       setProfesor({ ...doc.data(), id: doc.id });
     }
-    
-    // if (usuarioActual.uid === profesor.loginid){
-    //   setverificarid(true);
-    // }
   };
+
+  // const verificacion = () =>{   
+  //   if (profesor && usuarioActual.uid === profesor.loginid){
+  //     console.log(verificarid);  
+  //   }
+  // };
 
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
@@ -298,7 +300,10 @@ function Perfil() {
               <div className={classes.titlePresentacion}>
                 <p className={classes.titlePresentacion_text}>Acerca de mi:</p>
 
-                <Button
+                {(usuarioActual.uid === profesor.loginid) ? (
+                  <p> </p>
+                ):(
+                  <Button
                     variant="contained"
                     size="small"
                     target="_blank"
@@ -310,6 +315,9 @@ function Perfil() {
                   >
                     Agendar Reunión
                   </Button>
+                )}
+                
+                
                   
               </div>
 
@@ -361,7 +369,7 @@ function Perfil() {
                     overflow="scroll"
                     variant="outlined"
                     square
-                    children={profesor.cursos.map((cursos) => (
+                    children={profesor.cursos.filter(cursos => cursos.numberNivel == '0').map((cursos) => (
                       <Chip
                         className={classes.etiqueta0}
                         label={cursos.nombre}
@@ -375,7 +383,7 @@ function Perfil() {
                     overflow="scroll"
                     variant="outlined"
                     square
-                    children={profesor.cursos.map((cursos) => (
+                    children={profesor.cursos.filter(cursos => cursos.numberNivel == '1').map((cursos) => (
                       <Chip
                         className={classes.etiqueta1}
                         label={cursos.nombre}
@@ -389,7 +397,7 @@ function Perfil() {
                     overflow="scroll"
                     variant="outlined"
                     square
-                    children={profesor.cursos.map((cursos) => (
+                    children={profesor.cursos.filter(cursos => cursos.numberNivel == '2').map((cursos) => (
                       <Chip
                         className={classes.etiqueta2}
                         label={cursos.nombre}
@@ -400,6 +408,9 @@ function Perfil() {
               </div>
 
               <div className={classes.buttonContainer}>
+              {(usuarioActual.uid === profesor.loginid) ? (
+                <p> </p>
+              ):(
                 <Button
                   variant="contained"
                   color="inherit"
@@ -410,6 +421,7 @@ function Perfil() {
                 >
                   Contactar
                 </Button>
+              )}                
 
                 <Button
                   disabled
@@ -449,7 +461,20 @@ function Perfil() {
           </Grid>
 
           <div className={classes.seccion2}>
-            <Publicacion />
+          <p>{usuarioActual.uid}</p>
+          <p>{profesor.loginid}</p>
+          {(usuarioActual.uid === profesor.loginid) ? (
+            <p>Mismo usuario</p>
+          ):(
+            <p>Diferente usuario</p>
+          )}
+            {/*<Publicacion />*/}
+
+          {profesor.cursos.filter(cursos => cursos.numberNivel == '0').map((cursos) => (
+              <Typography>
+              {cursos.nombre}
+             </Typography>
+          ))}
           </div>
         </div>
       )}

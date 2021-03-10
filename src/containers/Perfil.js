@@ -83,6 +83,7 @@ const useStyles = makeStyles((theme) => ({
 
   etiquetasContainer: {
     display: "flex",
+    alignContent:"start",
     flexWrap: "wrap",
     width: "380px",
     height: "120px",
@@ -412,6 +413,7 @@ function Perfil() {
                 <p> </p>
               ):(
                 <Button
+                  disabled
                   variant="contained"
                   color="inherit"
                   size="small"

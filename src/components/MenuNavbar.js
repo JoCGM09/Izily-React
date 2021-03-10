@@ -1,5 +1,5 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -17,6 +17,16 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import {useState } from "react";
+
+const useStyles = makeStyles((theme) => ({
+  item:{
+    
+    "&:onClick":{
+      // backgroundColor:"rgba(255, 255, 255, 0)",
+      backgroundColor:"black",
+    },
+  }
+}));
 
 const StyledMenu = withStyles({
   paper: {
@@ -44,15 +54,13 @@ const StyledMenuItem = withStyles((theme) => ({
   root: {
     //marginLeft:"40px",
     "&:focus": {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: "",
       "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-        color: theme.palette.common.white,
+        color: "",
       },
     },
   },
 }))(MenuItem);
-
-
 
 
 export default function CustomizedMenus() {
@@ -69,7 +77,7 @@ export default function CustomizedMenus() {
   const [error, setError] = useState("");
   const { usuarioActual, logout } = useAuth()
   const history = useHistory()
-
+  const classes = useStyles();
 
 
 
@@ -77,6 +85,7 @@ export default function CustomizedMenus() {
     setError('')
 
     try {
+      handleClose()
       await logout()
       history.push('/login')
     } catch {
@@ -89,7 +98,7 @@ export default function CustomizedMenus() {
     setError('')
 
     try {
-      
+      handleClose()
       history.push('/editar-perfil')
     } catch {
       setError('Ocurrió un error al salir de la cuenta')
@@ -120,7 +129,7 @@ export default function CustomizedMenus() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
+        <StyledMenuItem onClick={handleClose} className={classes.item}>
           <ListItemIcon>
             <PersonIcon fontSize="small" />
           </ListItemIcon>

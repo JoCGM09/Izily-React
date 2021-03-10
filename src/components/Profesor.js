@@ -14,6 +14,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import StarIcon from '@material-ui/icons/Star';
 import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
+import { storage } from '../firebase';
 
 //Cosas raras de MUI
 
@@ -90,15 +91,31 @@ const useStyles = makeStyles((theme) => ({
 export default function Profesor({ profesor }) {
   const classes = useStyles();
   //imagen random
-  const defaultAvatar = "https://i.pravatar.cc/300";
+  // const defaultAvatar = "https://i.pravatar.cc/300";
 
-
+  storage.ref('users/' + profesor.loginid + '/fotodeperfil.jpeg').getDownloadURL()
+  .then((url)=>{
+    var img = document.getElementById(`myimg-${profesor.id}`);
+    img.src = url;
+  }).catch(()=>{
+    var img = document.getElementById(`myimg-${profesor.id}`);
+    img.src = 'https://i.pravatar.cc/300';
+  });
+  
   return (
     <Card className={classes.root}>
       <CardActionArea component={Link} to={`/profesores/${profesor.id}`}>
         <CardContent >
           <div className={classes.avatarContainer}>
-            <img className={classes.avatar} src={defaultAvatar} />
+            <img id={`myimg-${profesor.id}`} className={classes.avatar} />
+          {/*
+            {(fotodeperfil) ? (
+            <img className={classes.avatar} src={fotodeperfil} />
+          ):(
+            <img className={classes.avatar} src='https://i.pravatar.cc/300' />
+          )}     
+          */}
+
             <div>
               <Box component="fieldset" margin={0} border={0} padding={0} mb={-1} borderColor="transparent">
               <StyledRating 
@@ -114,6 +131,7 @@ export default function Profesor({ profesor }) {
             <Typography className={classes.nombre} gutterBottom variant="h5" component="h2">
               {profesor.nombre}
             </Typography>
+
             
 
             <Paper className={classes.paperPresentacion}

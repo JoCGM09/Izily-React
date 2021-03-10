@@ -19,6 +19,7 @@ import { useAuth } from '../contexts/AuthContext';
 import fondo from "../assets/images/fondo.png";
 import fondo2 from "../assets/images/fondo2.png";
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '50vh',

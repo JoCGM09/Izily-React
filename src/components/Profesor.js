@@ -103,7 +103,8 @@ export default function Profesor({ profesor }) {
               <Box component="fieldset" margin={0} border={0} padding={0} mb={-1} borderColor="transparent">
               <StyledRating 
               name="customized-color"
-              defaultValue= {profesor.puntuacion}
+              defaultValue= {5}
+              //defaultValue= {profesor.puntuacion}
               precision={0.1}
               icon={<StarIcon fontSize="large" />}
               readOnly

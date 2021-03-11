@@ -1,5 +1,5 @@
 //Este componente es una card sola
-import React from "react";
+import React, { useEffect } from 'react'
 import Link from "react-router-dom/Link"
 import { makeStyles } from "@material-ui/core/styles";
 import { withStyles } from '@material-ui/core/styles';
@@ -90,32 +90,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Profesor({ profesor }) {
   const classes = useStyles();
-  //imagen random
   // const defaultAvatar = "https://i.pravatar.cc/300";
 
-  storage.ref('users/' + profesor.loginid + '/fotodeperfil.jpeg').getDownloadURL()
-  .then((url)=>{
-    var img = document.getElementById(`myimg-${profesor.id}`);
-    img.src = url;
-  }).catch(()=>{
-    var img = document.getElementById(`myimg-${profesor.id}`);
-    img.src = 'https://i.pravatar.cc/300';
-  });
-  
+  // const profileRef = storage.ref('users/'+profesor.loginid+'/fotodeperfil.jpeg');
+  // profileRef.getDownloadURL()
+  // .then((url)=>{
+  //   var img = document.getElementById(`myimg-${profesor.id}`);
+  //   img.src = url;
+  // }).catch(()=>{
+  //   var img = document.getElementById(`myimg-${profesor.id}`);
+  //   img.src = 'https://i.pravatar.cc/300';
+  // });
+
   return (
     <Card className={classes.root}>
       <CardActionArea component={Link} to={`/profesores/${profesor.id}`}>
         <CardContent >
           <div className={classes.avatarContainer}>
-            <img id={`myimg-${profesor.id}`} className={classes.avatar} />
-          {/*
-            {(fotodeperfil) ? (
-            <img className={classes.avatar} src={fotodeperfil} />
-          ):(
-            <img className={classes.avatar} src='https://i.pravatar.cc/300' />
-          )}     
-          */}
-
+            <img className={classes.avatar} src={profesor.imageURL}/>
+          {/* id={`myimg-${profesor.id} */}
             <div>
               <Box component="fieldset" margin={0} border={0} padding={0} mb={-1} borderColor="transparent">
               <StyledRating 
@@ -131,9 +124,7 @@ export default function Profesor({ profesor }) {
             <Typography className={classes.nombre} gutterBottom variant="h5" component="h2">
               {profesor.nombre}
             </Typography>
-
             
-
             <Paper className={classes.paperPresentacion}
                   overflow= "scroll"
                   elevation={0}

@@ -243,6 +243,11 @@ function Perfil() {
     }
   };
 
+  const calendly = () => {
+    window.Calendly.initPopupWidget({url: 'https://calendly.com/jocgm09/test'});
+    return false;
+  }
+
   // const verificacion = () =>{   
   //   if (profesor && usuarioActual.uid === profesor.loginid){
   //     console.log(verificarid);  
@@ -308,14 +313,16 @@ function Perfil() {
                     variant="contained"
                     size="small"
                     target="_blank"
-                    href={profesor.calendly}
+                    // href={profesor.calendly}
                     color="inherit"
                     className={classes.buttonPerfil}
+                    onClick={calendly}
                     startIcon={<EventAvailableIcon />}
                     disableElevation="true"
                   >
                     Agendar Reunión
                   </Button>
+                  // <a href="" onClick={calendly}>Schedule time with me</a>
                 )}
                 
                 

@@ -244,7 +244,7 @@ function Perfil() {
   };
 
   const calendly = () => {
-    window.Calendly.initPopupWidget({url: 'https://calendly.com/jocgm09/test'});
+    window.Calendly.initPopupWidget({url:`${profesor.calendly}`});
     return false;
   }
 

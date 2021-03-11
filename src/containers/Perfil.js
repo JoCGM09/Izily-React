@@ -463,20 +463,7 @@ function Perfil() {
           </Grid>
 
           <div className={classes.seccion2}>
-          <p>{usuarioActual.uid}</p>
-          <p>{profesor.loginid}</p>
-          {(usuarioActual.uid === profesor.loginid) ? (
-            <p>Mismo usuario</p>
-          ):(
-            <p>Diferente usuario</p>
-          )}
-            {/*<Publicacion />*/}
-
-          {profesor.cursos.filter(cursos => cursos.numberNivel == '0').map((cursos) => (
-              <Typography>
-              {cursos.nombre}
-             </Typography>
-          ))}
+          
           </div>
         </div>
       )}

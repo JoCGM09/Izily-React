@@ -1,22 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Publicacion from "../components/Publicacion";
 import Grid from "@material-ui/core/Grid";
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import loginimage from "../assets/images/loginimage.png";
-import fondolanding from "../assets/images/fondolanding.jpg";
-import SearchIcon from "@material-ui/icons/Search";
-import { Link } from "react-router-dom";
-import FunctionsIcon from '@material-ui/icons/Functions';
 import backgroundgrid1 from "../assets/images/backgroundgrid1.jpg";
 import logoprincipal from "../assets/images/logoprincipal.webp";
 import mentores from "../assets/images/mentores.png";
 import comunidades from "../assets/images/comunidades.png";
 import backgroundgrid2 from "../assets/images/backgroundgrid2.jpg";
-import { Icon } from "@material-ui/core";
-import CarouselLanding from "../components/CarouselLanding";
 
 
 
@@ -24,13 +13,9 @@ const useStyles = makeStyles((theme) => ({
     
     Div1:{
         backgroundImage: `url(${backgroundgrid1})`,
-        //backgroundColor: '#E6E7E8', 
         backgroundRepeat:"no-repeat",
-        //backgroundAttachment:"fixed",
         backgroundPosition:"right bottom",
         backgroundSize:"cover",
-        //height:"300px",
-        //height:"500px",
         width:"100%",
         margin: "0px",
         paddingBottom:"15px",
@@ -70,15 +55,12 @@ const useStyles = makeStyles((theme) => ({
     Div2:{
         backgroundImage: `url(${backgroundgrid2})`,
         backgroundRepeat:"no-repeat",
-        //backgroundAttachment:"fixed",
         backgroundPosition:"right bottom",
         backgroundSize:"cover",
         padding:"20px",
         display:"flex",
         flexDirection:"column",
-        //width:"100%",
         alignItems:"center",
-        //background:"blue",
     },
     TituloGrid2:{
         fontSize:"25px",
@@ -87,7 +69,6 @@ const useStyles = makeStyles((theme) => ({
         margin:10,
     },
     Grid2:{
-        //width:"100%",
         padding:"20px",
         justifyContent:"center",
     },
@@ -97,7 +78,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems:"center",
         justifyContent:"flex-start",
         padding:"10px",
-        //border:"1px solid black",
     },
     textgrid2:{
         width:"80%",
@@ -126,7 +106,6 @@ const useStyles = makeStyles((theme) => ({
 function Landing() {
 
 const classes = useStyles();
-//const image = require("../assets/images/imagen.jpg");
 return (
 <>
     <div className={classes.Div1}>
@@ -146,7 +125,7 @@ return (
             <Grid className={classes.Grid2Item} item xs={10} sm={6} md={4} lg={4}>
                 <Grid className={classes.imggrid2}>
                     <div align="center">
-                        <img src={logoprincipal} className={classes.Imagen1} alt=""/>
+                        <img src={logoprincipal} className={classes.Imagen1} alt="Logo"/>
                     </div>
                 </Grid>
                 <Grid className={classes.textgrid2}>
@@ -158,7 +137,7 @@ return (
             <Grid className={classes.Grid2Item} item xs={10} sm={6} md={4} lg={4}>
                 <Grid className={classes.imggrid2}>
                     <div align="center">
-                        <img src={comunidades} className={classes.Imagen1} alt=""/>
+                        <img src={comunidades} className={classes.Imagen1} alt="Comunidades"/>
                     </div>
                 </Grid>
                 <Grid className={classes.textgrid2}>
@@ -170,7 +149,7 @@ return (
             <Grid className={classes.Grid2Item} item xs={10} sm={6} md={4} lg={4}>
                 <Grid className={classes.imggrid2}>
                     <div align="center">
-                        <img src={mentores} className={classes.Imagen1} alt=""/>
+                        <img src={mentores} className={classes.Imagen1} alt="Mentores"/>
                     </div>
                 </Grid>
                 <Grid className={classes.textgrid2}>

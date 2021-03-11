@@ -144,31 +144,7 @@ return (
      
 
     </Grid>
-    
 
-{/* <Grid align="center" className={classes.gridArriba}>
-        <Grid xs></Grid>
-        <Grid xs></Grid>
-        <Grid xs></Grid>
-
-        <Grid align="start" className={classes.publicacionesContainer}>
-
-            <Publicacion 
-                letter="M"
-                name="Manuel Baella"
-                date="11 de marzo, 2021"
-                content="Esta es mi primera publicacion :D "
-            />
-            <Publicacion />
-            <Publicacion />
-
-        </Grid>
-
-        <Grid xs></Grid>
-        <Grid xs></Grid>
-        <Grid xs></Grid>
-</Grid> */}
-    
 
 </>
 );

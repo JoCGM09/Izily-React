@@ -71,11 +71,11 @@ export default function RecipeReviewCard(props) {
             {props.letter}
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        // action={
+        //   <IconButton aria-label="settings">
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
         title={props.name}
         subheader={props.date}
       />

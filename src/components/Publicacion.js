@@ -16,9 +16,11 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 550,
+    minWidth:"100%",
     margin: "10px 0px",
   },
   media: {
@@ -35,12 +37,25 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  avatar: {
-    backgroundColor: red[500],
+  // avatar: {
+  //   backgroundColor: red[500],
+  // },
+  Content: {
+    widht:"100px",
+    // display: "flex",
+    // alignContent:"start",
+    //flexWrap: "wrap",
+    //hyphens: "auto",
+    wordBreak:"break-all",
+    
+    
+  },
+  containerContent: {
+    widht:"100%",
   },
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -52,8 +67,8 @@ export default function RecipeReviewCard() {
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+          <Avatar aria-label="recipe" className={classes.avatar} style={{backgroundColor:props.color}}>
+            {props.letter}
           </Avatar>
         }
         action={
@@ -61,21 +76,22 @@ export default function RecipeReviewCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={props.name}
+        subheader={props.date}
       />
-      <CardMedia
+      {/* <CardMedia
         className={classes.media}
         image="/static/images/cards/paella.jpg"
         title="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your
-          guests. Add 1 cup of frozen peas along with the mussels, if you like.
+      /> */}
+      <CardContent className={classes.containerContent}>
+        <Typography className={classes.Content} 
+          variant="body2" color="textSecondary" component="p"
+        >
+          {props.content}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      {/* <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
@@ -92,8 +108,8 @@ export default function RecipeReviewCard() {
         >
           <ExpandMoreIcon />
         </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      </CardActions> */}
+      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Method:</Typography>
           <Typography paragraph>
@@ -119,7 +135,7 @@ export default function RecipeReviewCard() {
             Set aside off of the heat to let rest for 10 minutes, and then serve.
           </Typography>
         </CardContent>
-      </Collapse>
+      </Collapse> */}
     </Card>
   );
 }

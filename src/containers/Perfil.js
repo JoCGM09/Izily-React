@@ -243,6 +243,11 @@ function Perfil() {
     }
   };
 
+  const calendly = () => {
+    window.Calendly.initPopupWidget({url:`${profesor.calendly}`});
+    return false;
+  }
+
   // const verificacion = () =>{   
   //   if (profesor && usuarioActual.uid === profesor.loginid){
   //     console.log(verificarid);  
@@ -308,14 +313,16 @@ function Perfil() {
                     variant="contained"
                     size="small"
                     target="_blank"
-                    href={profesor.calendly}
+                    // href={profesor.calendly}
                     color="inherit"
                     className={classes.buttonPerfil}
+                    onClick={calendly}
                     startIcon={<EventAvailableIcon />}
                     disableElevation="true"
                   >
                     Agendar Reunión
                   </Button>
+                  // <a href="" onClick={calendly}>Schedule time with me</a>
                 )}
                 
                 
@@ -463,20 +470,7 @@ function Perfil() {
           </Grid>
 
           <div className={classes.seccion2}>
-          <p>{usuarioActual.uid}</p>
-          <p>{profesor.loginid}</p>
-          {(usuarioActual.uid === profesor.loginid) ? (
-            <p>Mismo usuario</p>
-          ):(
-            <p>Diferente usuario</p>
-          )}
-            {/*<Publicacion />*/}
-
-          {profesor.cursos.filter(cursos => cursos.numberNivel == '0').map((cursos) => (
-              <Typography>
-              {cursos.nombre}
-             </Typography>
-          ))}
+          
           </div>
         </div>
       )}

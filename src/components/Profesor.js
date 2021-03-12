@@ -1,5 +1,5 @@
 //Este componente es una card sola
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from "react-router-dom/Link"
 import { makeStyles } from "@material-ui/core/styles";
 import { withStyles } from '@material-ui/core/styles';
@@ -10,13 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import StarIcon from '@material-ui/icons/Star';
-import EmojiObjectsIcon from '@material-ui/icons/EmojiObjects';
-import Brightness1Icon from '@material-ui/icons/Brightness1';
-import { storage } from '../firebase';
-
-//Cosas raras de MUI
 
 const StyledRating = withStyles({
   iconFilled: {
@@ -24,8 +18,6 @@ const StyledRating = withStyles({
   },
  
 })(Rating);
-
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -124,14 +116,14 @@ export default function Profesor({ profesor }) {
             <Typography className={classes.nombre} gutterBottom variant="h5" component="h2">
               {profesor.nombre}
             </Typography>
-            
+
             <Paper className={classes.paperPresentacion}
                   overflow= "scroll"
                   elevation={0}
                   children={profesor.descripcion}
                 />
             <Typography className={classes.datos} gutterBottom variant="body2" component="p">
-              {/*profesor.calificaciones*/} X calificaciones | {/*profesor.horas*/}  X horas dictadas
+              {/* X calificaciones*/}{ profesor.calificaciones} calificaciones | {/* X horas dictadas*/} {profesor.horas} horas dictadas
             </Typography>            
             
           </div>

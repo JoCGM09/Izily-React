@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import logo from "../assets/images/logoprincipal.webp";
 import {
@@ -12,50 +9,16 @@ import {
   Button,
   IconButton,
   Badge,
-  TextField,
-  InputAdornment,
 } from "@material-ui/core";
-import { useTheme } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-
-import SearchIcon from "@material-ui/icons/Search";
 import MessageIcon from "@material-ui/icons/Message";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MenuNavbar from "./MenuNavbar";
 import PersonIcon from "@material-ui/icons/Person";
 import { Link } from "react-router-dom";
 import { useAuth } from '../contexts/AuthContext';
-import clsx from 'clsx';
-
-import SettingsIcon from '@material-ui/icons/Settings';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-import { useHistory } from 'react-router-dom';
-import {useState } from "react";
-
-
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-
-
-
-//const matches = useMediaQuery('(min-width:600px)');
-
-// const styles = theme => ({
-
-//   gridPadre: {
-//     display: "flex",
-//     alignItems: "center",
-//     [theme.breackpoints.up('md')]:{
-//       height: "56px",
-//     },
-
-//   },
-
-// });
 
 const useStyles = makeStyles ((theme) => ({
   root: {
@@ -145,7 +108,6 @@ const StyledMenu = withStyles({
 
 const StyledMenuItem = withStyles((theme) => ({
   root: {
-    //marginLeft:"40px",
     "&:focus": {
       backgroundColor: theme.palette.primary.main,
       "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
@@ -160,9 +122,6 @@ function ElevationScroll(props) {
   
   
   const { children, window } = props;
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
@@ -176,17 +135,12 @@ function ElevationScroll(props) {
 
 ElevationScroll.propTypes = {
   children: PropTypes.element.isRequired,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };
 
 export default function ElevateAppBar(props) {
 
   const classes = useStyles();
-  const {usuarioActual} = useAuth()
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -210,9 +164,6 @@ export default function ElevateAppBar(props) {
                 container 
                 alignItems="center">
             <Grid className={classes.gridHijo} item>
-              {/* <button href="../containers/Landing.js">
-                <img src={logo} className={classes.logo} />
-              </button> */}
               <Button component={Link} to={"/"} 
                       
                       className={classes.buttonLogo}
@@ -226,20 +177,11 @@ export default function ElevateAppBar(props) {
 
             <Grid className={classes.gridHijo} item xs></Grid> 
 
-
-
-
-
-
             <Grid className={classes.gridHijo} item>
               <Button component={Link} to={"/inicio"} className={classes.botones} variant="outlined">
                 Inicio
               </Button>
-              {/* <Button component={Link} to={"/encontrar-un-maestro"} className={classes.botones} variant="outlined">
-                Encontrar un maestro
-              </Button> */}
-              
-
+          
               <IconButton disabled className={classes.icon}>
                 <Badge badgeContent={4}>
                   <MessageIcon  fontSize="small" />

@@ -4,21 +4,16 @@ import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 import Profesor from "../components/Profesor";
 import { useAuth } from "../contexts/AuthContext";
-import Publicacion from "../components/Publicacion";
-import CategoryCurses from "../components/CategoryCurses";
 import Grid from "@material-ui/core/Grid";
-import Link from "react-router-dom/Link";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import Icon from "@material-ui/core/Icon";
 import PeopleIcon from "@material-ui/icons/People";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import LanguageIcon from "@material-ui/icons/Language";
@@ -83,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
 
   etiquetasContainer: {
     display: "flex",
-    alignContent:"start",
+    alignContent: "start",
     flexWrap: "wrap",
     width: "380px",
     height: "120px",
@@ -182,8 +177,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//Cosas de la tabla
-
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -233,7 +226,6 @@ function Perfil() {
 
   const { profesorId } = useParams();
   const [profesor, setProfesor] = useState(null);
-  const [verificarid, setverificarid] = useState(true);
 
   const traerProfesor = async () => {
     const profesorInfo = db.collection("usuarios").doc(profesorId);
@@ -244,15 +236,9 @@ function Perfil() {
   };
 
   const calendly = () => {
-    window.Calendly.initPopupWidget({url:`${profesor.calendly}`});
+    window.Calendly.initPopupWidget({ url: `${profesor.calendly}` });
     return false;
-  }
-
-  // const verificacion = () =>{   
-  //   if (profesor && usuarioActual.uid === profesor.loginid){
-  //     console.log(verificarid);  
-  //   }
-  // };
+  };
 
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
@@ -262,11 +248,9 @@ function Perfil() {
     setOpen(!open);
   };
 
-
   useEffect(() => {
     traerProfesor();
   }, []);
-
 
   return (
     <>
@@ -306,9 +290,9 @@ function Perfil() {
               <div className={classes.titlePresentacion}>
                 <p className={classes.titlePresentacion_text}>Acerca de mi:</p>
 
-                {(usuarioActual.uid === profesor.loginid) ? (
+                {usuarioActual.uid === profesor.loginid ? (
                   <p> </p>
-                ):(
+                ) : (
                   <Button
                     variant="contained"
                     size="small"
@@ -324,9 +308,6 @@ function Perfil() {
                   </Button>
                   // <a href="" onClick={calendly}>Schedule time with me</a>
                 )}
-                
-                
-                  
               </div>
 
               <Paper
@@ -377,12 +358,14 @@ function Perfil() {
                     overflow="scroll"
                     variant="outlined"
                     square
-                    children={profesor.cursos.filter(cursos => cursos.numberNivel == '0').map((cursos) => (
-                      <Chip
-                        className={classes.etiqueta0}
-                        label={cursos.nombre}
-                      />
-                    ))}
+                    children={profesor.cursos
+                      .filter((cursos) => cursos.numberNivel == "0")
+                      .map((cursos) => (
+                        <Chip
+                          className={classes.etiqueta0}
+                          label={cursos.nombre}
+                        />
+                      ))}
                   />
                 </TabPanel>
                 <TabPanel className={classes.TabPanel} value={value} index={1}>
@@ -391,12 +374,14 @@ function Perfil() {
                     overflow="scroll"
                     variant="outlined"
                     square
-                    children={profesor.cursos.filter(cursos => cursos.numberNivel == '1').map((cursos) => (
-                      <Chip
-                        className={classes.etiqueta1}
-                        label={cursos.nombre}
-                      />
-                    ))}
+                    children={profesor.cursos
+                      .filter((cursos) => cursos.numberNivel == "1")
+                      .map((cursos) => (
+                        <Chip
+                          className={classes.etiqueta1}
+                          label={cursos.nombre}
+                        />
+                      ))}
                   />
                 </TabPanel>
                 <TabPanel className={classes.TabPanel} value={value} index={2}>
@@ -405,32 +390,34 @@ function Perfil() {
                     overflow="scroll"
                     variant="outlined"
                     square
-                    children={profesor.cursos.filter(cursos => cursos.numberNivel == '2').map((cursos) => (
-                      <Chip
-                        className={classes.etiqueta2}
-                        label={cursos.nombre}
-                      />
-                    ))}
+                    children={profesor.cursos
+                      .filter((cursos) => cursos.numberNivel == "2")
+                      .map((cursos) => (
+                        <Chip
+                          className={classes.etiqueta2}
+                          label={cursos.nombre}
+                        />
+                      ))}
                   />
                 </TabPanel>
               </div>
 
               <div className={classes.buttonContainer}>
-              {(usuarioActual.uid === profesor.loginid) ? (
-                <p> </p>
-              ):(
-                <Button
-                  disabled
-                  variant="contained"
-                  color="inherit"
-                  size="small"
-                  className={classes.buttonPerfil}
-                  startIcon={<PeopleIcon />}
-                  disableElevation="true"
-                >
-                  Contactar
-                </Button>
-              )}                
+                {usuarioActual.uid === profesor.loginid ? (
+                  <p> </p>
+                ) : (
+                  <Button
+                    disabled
+                    variant="contained"
+                    color="inherit"
+                    size="small"
+                    className={classes.buttonPerfil}
+                    startIcon={<PeopleIcon />}
+                    disableElevation="true"
+                  >
+                    Contactar
+                  </Button>
+                )}
 
                 <Button
                   disabled
@@ -469,9 +456,7 @@ function Perfil() {
             </Grid>
           </Grid>
 
-          <div className={classes.seccion2}>
-          
-          </div>
+          <div className={classes.seccion2}></div>
         </div>
       )}
       {!profesor && (

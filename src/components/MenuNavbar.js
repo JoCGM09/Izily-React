@@ -4,16 +4,11 @@ import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
 import { IconButton } from "@material-ui/core";
-import ListIcon from "@material-ui/icons/List";
 import PersonIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import {useState } from "react";
@@ -22,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
   item:{
     
     "&:onClick":{
-      // backgroundColor:"rgba(255, 255, 255, 0)",
       backgroundColor:"black",
     },
   }
@@ -52,7 +46,6 @@ const StyledMenu = withStyles({
 
 const StyledMenuItem = withStyles((theme) => ({
   root: {
-    //marginLeft:"40px",
     "&:focus": {
       backgroundColor: "",
       "& .MuiListItemIcon-root, & .MuiListItemText-primary": {

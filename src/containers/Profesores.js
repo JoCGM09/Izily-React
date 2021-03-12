@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
@@ -10,33 +9,16 @@ import { db } from "../firebase";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
-
 import Checkbox from "@material-ui/core/Checkbox";
-import Alert from '@material-ui/lab/Alert';
-import { useHistory } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import Button from '@material-ui/core/Button';
-
-
-
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-
-
-import NavBar from "../components/Navbar"
-
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Divider from "@material-ui/core/Divider";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -45,12 +27,11 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   drawerContainer: {
-    marginTop:"3rem",
+    marginTop: "3rem",
     //paddingTop:"20px",
-    overflow: 'auto',
+    overflow: "auto",
   },
   // necessary for content to be below app bar
-  
 
   root: {
     display: "flex",
@@ -59,15 +40,15 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    justifyContent:"center",
+    justifyContent: "center",
   },
-  Buscar:{
-    marginTop:"10px",
-    marginBottom:"10px",
-    marginLeft:"10px",
-    width:"200px",
+  Buscar: {
+    marginTop: "10px",
+    marginBottom: "10px",
+    marginLeft: "10px",
+    width: "200px",
   },
-  
+
   main: {
     background: "white",
     overflow: "auto",
@@ -79,35 +60,27 @@ const useStyles = makeStyles((theme) => ({
   gridContainer: {
     paddingTop: 15,
   },
-  
-  
-  
 }));
 
-
 export default function Profesores(callback, deps) {
-
-
   const classes = useStyles();
   const [error, setError] = useState("");
   const [profesores, guardarProfesores] = useState([]);
   const [especialidades, guardarEspecialidades] = useState([]);
   const [etiquetas, guardarEtiquetas] = useState([0]);
   const [profesoresFiltrados, guardarProfesoresFiltrados] = useState([]);
-  const { usuarioActual, logout } = useAuth()
-  const history = useHistory()
+  const { logout } = useAuth();
+  const history = useHistory();
 
-
-  async function handleLogOut(){
-    setError('')
+  async function handleLogOut() {
+    setError("");
 
     try {
-      await logout()
-      history.push('/login')
+      await logout();
+      history.push("/login");
     } catch {
-      setError('Ocurrió un error al salir de la cuenta')
+      setError("Ocurrió un error al salir de la cuenta");
     }
-
   }
 
   const traerProfesores = () => {
@@ -188,44 +161,36 @@ export default function Profesores(callback, deps) {
     filtrarProfesores("");
   }, [etiquetas]);
 
-
   return (
-
-
     <div className={classes.root}>
-
-    
       <CssBaseline />
-      
+
       <Drawer
         className={classes.drawer}
         variant="permanent"
         classes={{
           paper: classes.drawerPaper,
         }}
-        
       >
-        
         <div className={classes.drawerContainer}>
-        <FormControl
-                size="small"
-                //className={clsx(classes.margin, classes.textField)}
-                className={classes.Buscar}
-                variant="outlined"
-              >
-                <InputLabel  htmlFor="outlined-adornment-password">
-                  Buscar nombre:
-                </InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type="text"
-                  onChange={filtrarProfesoresInput}
-                  labelWidth={120}
-                />
-              </FormControl>
-              <Divider />
-        <List>
-            
+          <FormControl
+            size="small"
+            //className={clsx(classes.margin, classes.textField)}
+            className={classes.Buscar}
+            variant="outlined"
+          >
+            <InputLabel htmlFor="outlined-adornment-password">
+              Buscar nombre:
+            </InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type="text"
+              onChange={filtrarProfesoresInput}
+              labelWidth={120}
+            />
+          </FormControl>
+          <Divider />
+          <List>
             {especialidades.map((especialidad, index) => (
               <ListItem
                 button
@@ -243,25 +208,17 @@ export default function Profesores(callback, deps) {
               </ListItem>
             ))}
           </List>
-          </div>
-
-
-
+        </div>
       </Drawer>
       <main className={classes.content}>
-        
-      <Grid container clasName={classes.gridContainer} spacing={3}>
-            {profesoresFiltrados.map((profesor) => (
-              <Grid item align="center" xs={12} sm={6} md={4} lg={3}>
-                <Profesor profesor={profesor} />
-              </Grid>
-            ))}
-      </Grid>
-
-
+        <Grid container clasName={classes.gridContainer} spacing={3}>
+          {profesoresFiltrados.map((profesor) => (
+            <Grid item align="center" xs={12} sm={6} md={4} lg={3}>
+              <Profesor profesor={profesor} />
+            </Grid>
+          ))}
+        </Grid>
       </main>
     </div>
-    
   );
-
 }

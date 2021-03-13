@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
@@ -226,7 +227,8 @@ function Perfil() {
 
   const { profesorId } = useParams();
   const [profesor, setProfesor] = useState(null);
-
+  const [events, setEvents] = useState([]);
+ 
   const traerProfesor = async () => {
     const profesorInfo = db.collection("usuarios").doc(profesorId);
     const doc = await profesorInfo.get();
@@ -251,6 +253,35 @@ function Perfil() {
   useEffect(() => {
     traerProfesor();
   }, []);
+
+  useEffect(() => {
+    const organizationid ='https://api.calendly.com/organizations/CFEFXIJXXUT225N7';
+    const client = axios.create({
+      baseURL: 'https://api.calendly.com',
+      timeout: 3000,
+      headers: {'Authorization': 'Bearer v6PBAXkfspGMWnC7_hTaRfiw5vvHRHZnX9eB51frgYY'}
+    });
+    client
+      .get(`/scheduled_events?count=25&organization=${organizationid}&status=active`)
+      .then(function (response) {
+        console.log(response.data.collection);
+        const uris = response.data.collection.map((event)=>{
+          return event.uri;
+        });
+        uris.map((uri)=>{
+          client.get(`${uri}/invitees`).then((uriResponse)=>{
+            console.log(uriResponse);
+          })
+        })
+        console.log(uris);
+        setEvents(response.data.collection);
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }, []);
+
 
   return (
     <>
@@ -452,6 +483,24 @@ function Perfil() {
                 >
                   <LanguageIcon fontSize="small" /> Español, Portugués.
                 </Typography>
+              </div>
+              <div>
+                  <div>
+                    {events.map((event)=>{
+                        return (
+                          <div>
+                            <span>
+                            {event.created_at}
+                            </span>
+                            <ul>
+                              {event.event_guests.map((guest)=>{
+                                return <li>{guest.email}</li>
+                              })}
+                            </ul>
+                          </div>
+                        )
+                    })}
+                  </div>
               </div>
             </Grid>
           </Grid>

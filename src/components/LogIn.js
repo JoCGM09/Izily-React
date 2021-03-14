@@ -1,8 +1,6 @@
 
-///////////////////////////////// LogIn = Iniciar Sesión ///////////////////////////////////
-
+///////////////////////////////// LogIn = Iniciar Sesión ////////////////////////////
 // los ids cambian a email-login y password-login 
-
 import React, { useRef, useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';

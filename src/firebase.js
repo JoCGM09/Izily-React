@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
-import 'firebase/firestore'
-import 'firebase/auth'
-import 'firebase/storage'
+import "firebase/firestore";
+import "firebase/auth";
+import "firebase/storage";
 
 var firebaseConfig = {
   apiKey: "AIzaSyDe94zOvsOKBCHOlnEcEV7Tl0bbZOwNkbs",
@@ -11,7 +11,6 @@ var firebaseConfig = {
   messagingSenderId: "1042871062612",
   appId: "1:1042871062612:web:bfe66427e1f3684d605dc1",
 };
-// Initialize Firebase
 
 const fb = firebase.initializeApp(firebaseConfig);
 export const db = fb.firestore();

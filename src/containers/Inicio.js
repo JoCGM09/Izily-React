@@ -5,9 +5,12 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
-
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
+import backgroundgrid1 from "../assets/images/backgroundgrid1.jpg";
+import { useAuth } from '../contexts/AuthContext';
+import { useParams } from "react-router-dom";
+import { db } from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   botones: {
@@ -56,6 +59,46 @@ const useStyles = makeStyles((theme) => ({
 function Home() {
   const classes = useStyles();
 
+
+
+  const { usuarioActual } = useAuth();
+
+  
+
+  
+  const [profesor, setProfesor] = useState(null);
+  
+ 
+  const traerProfesor = () => {
+    const idd = usuarioActual.uid;
+    const usuariosRef = db.collection("usuarios");
+    usuariosRef
+      .where("loginid", "==", idd)
+      .get()
+      .then((querySnapshot) => {
+        const docs = [];
+        querySnapshot.forEach((doc) => {
+          docs.push({ ...doc.data(), id: doc.id });
+        });
+        setProfesor(docs);
+        console.log({profesor});
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  
+
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    traerProfesor();
+  }, []);
+
   return (
     <>
       <Grid align="center" className={classes.gridTotal}>
@@ -98,6 +141,36 @@ function Home() {
             </Grid>
           </Grid>
           <Grid align="start" className={classes.publicacionesContainer}>
+          <div>
+          {profesor && (
+            
+                  <div>
+                    {profesor.map((profe)=>(
+                      <p>
+                        {profe.nombre}
+                        {profe.loginid}
+                        {}
+                      </p>
+                    ))}
+                    <p>{profesor.nombre}</p>
+                  </div>
+                  
+                
+                )} 
+
+                
+
+          </div>
+          
+          <Publicacion
+              letter="M"
+              color="Purple"
+              name="Margaly Flores"
+              //image="url(${backgroundgrid1})"
+              imagen={backgroundgrid1}
+              date="16 de marzo, 2021"
+              content="Alguien me ayuda con este problema porfavor?"
+            />
             <Publicacion
               letter="M"
               color="red"

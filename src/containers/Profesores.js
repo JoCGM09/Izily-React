@@ -10,6 +10,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Checkbox from "@material-ui/core/Checkbox";
+import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Drawer from "@material-ui/core/Drawer";
@@ -213,7 +214,7 @@ export default function Profesores(callback, deps) {
       <main className={classes.content}>
         <Grid container clasName={classes.gridContainer} spacing={3}>
           {profesoresFiltrados.map((profesor) => (
-            <Grid item align="center" xs={12} sm={6} md={4} lg={3}>
+            <Grid item align="center" xs={12} sm={12} md={6} lg={3}>
               <Profesor profesor={profesor} />
             </Grid>
           ))}

@@ -105,13 +105,13 @@ export default function Profesor({ profesor }) {
               <Box component="fieldset" margin={0} border={0} padding={0} mb={-1} borderColor="transparent">
               <StyledRating 
               name="customized-color"
-              defaultValue= {5}
-              //defaultValue= {profesor.puntuacion}
+              //defaultValue= {5}
+              defaultValue= {profesor.puntuacion}
               precision={0.1}
               icon={<StarIcon fontSize="large" />}
               readOnly
               /></Box>
-              <span className={classes.numero}>{/*profesor.puntuacion*/}</span>
+              <span className={classes.numero}>{profesor.puntuacion}</span>
             </div>
             <Typography className={classes.nombre} gutterBottom variant="h5" component="h2">
               {profesor.nombre}

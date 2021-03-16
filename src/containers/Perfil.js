@@ -21,6 +21,7 @@ import LanguageIcon from "@material-ui/icons/Language";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import GreenSwitch from "../components/Switch";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -154,6 +155,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-around",
     marginTop: "-10px",
+    alignItems:"center",
 
     width: "370px",
     paddingLeft: "5px",
@@ -176,6 +178,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "column",
   },
+
 }));
 
 function TabPanel(props) {
@@ -435,7 +438,7 @@ function Perfil() {
 
               <div className={classes.buttonContainer}>
                 {usuarioActual.uid === profesor.loginid ? (
-                  <p> </p>
+                  <GreenSwitch/>
                 ) : (
                   <Button
                     disabled
@@ -475,7 +478,7 @@ function Perfil() {
                 </Button>
               </div>
 
-              <div className={classes.idiomsContainer}>
+              {/* <div className={classes.idiomsContainer}>
                 <Typography
                   className={classes.idioms}
                   variant="caption"
@@ -483,7 +486,7 @@ function Perfil() {
                 >
                   <LanguageIcon fontSize="small" /> Español, Portugués.
                 </Typography>
-              </div>
+              </div> */}
               <div>
                   <div>
                     {events.map((event)=>{
@@ -505,7 +508,10 @@ function Perfil() {
             </Grid>
           </Grid>
 
-          <div className={classes.seccion2}></div>
+          <div className={classes.seccion2}>
+            <GreenSwitch/>
+            {profesor.nombre}
+          </div>
         </div>
       )}
       {!profesor && (

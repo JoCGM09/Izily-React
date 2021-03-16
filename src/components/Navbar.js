@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
@@ -19,6 +19,7 @@ import MenuNavbar from "./MenuNavbar";
 import PersonIcon from "@material-ui/icons/Person";
 import { Link } from "react-router-dom";
 import { useAuth } from '../contexts/AuthContext';
+import { db } from "../firebase";
 
 const useStyles = makeStyles ((theme) => ({
   root: {
@@ -152,9 +153,34 @@ export default function ElevateAppBar(props) {
     setAnchorEl(null);
   };
 
+  const { usuarioActual } = useAuth();
 
+  const [profesor, setProfesor] = useState(null);
+ 
+  const traerProfesor = () => {
+    const idd = usuarioActual.uid;
+    const usuariosRef = db.collection("usuarios");
+    usuariosRef
+      .where("loginid", "==", idd)
+      .get()
+      .then((querySnapshot) => {
+        const docs = [];
+        querySnapshot.forEach((doc) => {
+          docs.push({ ...doc.data(), id: doc.id });
+        });
+        setProfesor(docs);
+        console.log({profesor});
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
-  return (
+  useEffect(() => {
+    traerProfesor();
+  }, []);
+
+  return usuarioActual ? (
     <React.Fragment>
       
       <ElevationScroll {...props}>
@@ -178,6 +204,9 @@ export default function ElevateAppBar(props) {
             <Grid className={classes.gridHijo} item xs></Grid> 
 
             <Grid className={classes.gridHijo} item>
+
+
+
               <Button component={Link} to={"/inicio"} className={classes.botones} variant="outlined">
                 Inicio
               </Button>
@@ -201,13 +230,64 @@ export default function ElevateAppBar(props) {
               </IconButton>
             </Grid>
             <Grid className={classes.nombrecontainer} xs>
-              {/* Manuel Baella */}
-              {/* {usuarioActual.email} */}
+            
+          {profesor && (
+            
+                  <div>
+                    {profesor.map((profe)=>(
+                      <p>
+                        {profe.nombre}
+                      </p>
+                    ))}
+                  </div>
+                  
+                
+                )} 
+
             </Grid>
             <Grid className={classes.gridHijo} item>
               <MenuNavbar/>
 
             </Grid>
+          </Grid>
+          {/* </Toolbar> */}
+      </AppBar>
+    </ElevationScroll> 
+    </React.Fragment>
+  ):(
+    <React.Fragment>
+      
+      <ElevationScroll {...props}>
+        <AppBar  className={classes.root}>
+        {/* <Toolbar> */}
+          <Grid className={classes.gridPadre} 
+                container 
+                alignItems="center">
+            <Grid className={classes.gridHijo} item>
+              <Button component={Link} to={"/"} 
+                      
+                      className={classes.buttonLogo}
+                      disableRipple="true" 
+                      disableFocusRipple="true"
+                      >
+                <img src={logo} className={classes.logo} />
+              </Button>
+            </Grid>
+            
+
+            <Grid className={classes.gridHijo} item xs></Grid> 
+
+            <Grid className={classes.gridHijo} item>
+              <Button component={Link} to={"/login"} className={classes.botones} variant="outlined">
+                Ingresar
+              </Button>
+              <Button component={Link} to={"/signup"} className={classes.botones} variant="outlined">
+                Regístrate
+              </Button>
+          
+            </Grid>
+            
+  
           </Grid>
           {/* </Toolbar> */}
       </AppBar>

@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
@@ -14,8 +15,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "10px 0px",
   },
   media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+    width:"100%",
+    height: "auto",
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -32,15 +33,17 @@ const useStyles = makeStyles((theme) => ({
   // },
   Content: {
     widht:"100px",
+    color:"black",
     // display: "flex",
     // alignContent:"start",
     //flexWrap: "wrap",
     //hyphens: "auto",
-    wordBreak:"break-all",
+    //wordBreak:"break-all",
     
     
   },
   containerContent: {
+    paddingTop:"0px",
     widht:"100%",
   },
 }));
@@ -69,11 +72,6 @@ export default function RecipeReviewCard(props) {
         title={props.name}
         subheader={props.date}
       />
-      {/* <CardMedia
-        className={classes.media}
-        image="/static/images/cards/paella.jpg"
-        title="Paella dish"
-      /> */}
       <CardContent className={classes.containerContent}>
         <Typography className={classes.Content} 
           variant="body2" color="textSecondary" component="p"
@@ -81,6 +79,17 @@ export default function RecipeReviewCard(props) {
           {props.content}
         </Typography>
       </CardContent>
+      {/* <CardMedia
+        className={classes.media}
+        src={props.image}
+        title="image"
+      /> */}
+      <img
+          src={props.imagen}
+          className={classes.media}
+          alt=""
+      />
+      
     </Card>
   );
 }

@@ -158,7 +158,7 @@ export default function ElevateAppBar(props) {
   const [profesor, setProfesor] = useState(null);
  
   // const traerProfesor = () => {
-  //   if(usuarioActual){
+    
   //     const idd = usuarioActual.uid;
   //     const usuariosRef = db.collection("usuarios");
   //     usuariosRef
@@ -176,7 +176,7 @@ export default function ElevateAppBar(props) {
   //       console.error(error);
   //     });
       
-  //   }
+    
     
   // };
 
@@ -238,9 +238,9 @@ export default function ElevateAppBar(props) {
             </Grid>
             
             
-          {/* {profesor && (
+          {profesor && (
             <>
-              <Grid className={classes.nombrecontainer} xs>
+              {/* <Grid className={classes.nombrecontainer} xs>
                   <div>
                     {profesor.map((profe)=>(
                       <p>
@@ -248,12 +248,12 @@ export default function ElevateAppBar(props) {
                       </p>
                     ))}
                   </div>
-              </Grid>  
+              </Grid>   */}
               <Grid className={classes.gridHijo} item>
-                <MenuNavbar perfil={miProfesorID} />
+                <MenuNavbar/>
               </Grid> 
             </>  
-                )}  */}
+                )} 
 
             
             

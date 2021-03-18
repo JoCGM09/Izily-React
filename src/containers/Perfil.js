@@ -22,6 +22,7 @@ import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import GreenSwitch from "../components/Switch";
+import Calificacion from "../components/Calificación";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -338,7 +339,7 @@ function Perfil() {
                     startIcon={<EventAvailableIcon />}
                     disableElevation="true"
                   >
-                    Agendar Reunión
+                    Agendar Mentoría
                   </Button>
                   // <a href="" onClick={calendly}>Schedule time with me</a>
                 )}
@@ -487,7 +488,9 @@ function Perfil() {
                   <LanguageIcon fontSize="small" /> Español, Portugués.
                 </Typography>
               </div> */}
-              <div>
+
+
+              {/* <div>
                   <div>
                     {events.map((event)=>{
                         return (
@@ -504,14 +507,15 @@ function Perfil() {
                         )
                     })}
                   </div>
-              </div>
+              </div> */}
             </Grid>
           </Grid>
+          
 
-          <div className={classes.seccion2}>
+          {/* <div className={classes.seccion2}>
             <GreenSwitch/>
             {profesor.nombre}
-          </div>
+          </div> */}
         </div>
       )}
       {!profesor && (

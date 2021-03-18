@@ -6,17 +6,24 @@ import logoprincipal from "../assets/images/logoprincipal.webp";
 import mentores from "../assets/images/mentores.png";
 import comunidades from "../assets/images/comunidades.png";
 import backgroundgrid2 from "../assets/images/backgroundgrid2.jpg";
+import videollamada from "../assets/images/videollamada.png";
 import CarouselLanding from "../components/CarouselLanding";
+import Divider from "@material-ui/core/Divider";
+
 
 const useStyles = makeStyles((theme) => ({
   Div1: {
-    backgroundImage: `url(${backgroundgrid1})`,
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-between",
+    background:"#F5F5F5",
+    // backgroundImage: `url(${backgroundgrid1})`,
     backgroundRepeat: "no-repeat",
-    backgroundPosition: "right bottom",
+    backgroundPosition: "right center",
     backgroundSize: "cover",
     width: "100%",
     margin: "0px",
-    paddingBottom: "15px",
+    padding: "50px 0px 65px 0px",
   },
   titulo: {
     paddingLeft: "50px",
@@ -26,12 +33,25 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     fontSize: "35px",
   },
+  tituloimageContainer:{
+    margin:"30px 60px",
+    display:"flex",
+    justifyContent:"center",
+    padding:"40px",
+    alignItems:"center",
+    backgroundImage: `url(${videollamada})`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "right center",
+    backgroundSize: "contain",
+    width:"600px",
+    height:"400px",
+  },
   renglon: {
     display: "flex",
     margin: "0px",
   },
   tituloblanco: {
-    color: "white",
+    color: "black",
     margin: "5px 0px",
   },
   tituloazul: {
@@ -39,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "5px 0px",
   },
   tituloblancomedio: {
-    color: "white",
+    color: "black",
     margin: "0px 0px 0px 0px",
   },
   tituloazulmedio: {
@@ -51,7 +71,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "0px 0px 15px 0px",
   },
   Div2: {
-    backgroundImage: `url(${backgroundgrid2})`,
+    background:"white",
+    // backgroundImage: `url(${backgroundgrid2})`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "right bottom",
     backgroundSize: "cover",
@@ -76,6 +97,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "flex-start",
     padding: "10px",
+    borderTop:"1px solid #EBECEC",
+    borderBottom:"1px solid #EBECEC",
   },
   textgrid2: {
     width: "80%",
@@ -85,6 +108,7 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
   },
   imggrid2: {
+    paddingTop:"20px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -103,8 +127,8 @@ function Landing() {
   const classes = useStyles();
   return (
     <>
-      <div className={classes.Div1}>
-        <Grid className={classes.titulo}>
+      <Grid container className={classes.Div1}>
+        <Grid item className={classes.titulo}>
           <h1 className={classes.tituloblanco}>Aprende para</h1>
           <div className={classes.renglon}>
             <h1 className={classes.tituloazulmedio}>enseñar</h1>{" "}
@@ -113,7 +137,9 @@ function Landing() {
           <h1 className={classes.tituloblanco}>enseña para</h1>
           <h1 className={classes.tituloazulbajo}>aprender</h1>
         </Grid>
-      </div>
+        <Grid item className={classes.tituloimageContainer}>
+        </Grid>
+      </Grid>
       <div className={classes.Div2}>
         <p className={classes.TituloGrid2}>¿Quiénes somos?</p>
         <Grid className={classes.Grid2} container>
@@ -175,7 +201,11 @@ function Landing() {
           </Grid>
         </Grid>
       </div>
+      <Grid style={{display:"flex", padding:"10px 0px 50px 0px"}}>
       <CarouselLanding/>
+      {/* <Carousel2/> */}
+      </Grid>
+      
     </>
   );
 }

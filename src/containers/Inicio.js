@@ -212,7 +212,7 @@ function Home() {
             </Grid>
           </Grid>
           <Grid align="start" className={classes.publicacionesContainer}>
-          <div>
+          {/* <div>
           {profesor && (
             
                   <div>
@@ -229,7 +229,7 @@ function Home() {
                 
 
           </div>
-          <Calificacion/>
+          <Calificacion/> */}
           <CrearPublicacion/>
 
 

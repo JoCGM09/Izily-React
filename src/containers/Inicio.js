@@ -11,6 +11,21 @@ import backgroundgrid1 from "../assets/images/backgroundgrid1.jpg";
 import { useAuth } from '../contexts/AuthContext';
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import CrearPublicacion from "../components/CrearPublicacion";
+import Calificacion from "../components/Calificación";
+import Comentario from "../components/Comentario";
+import Problema1 from "../assets/images/problema1.jpeg";
+import Chip from "@material-ui/core/Chip";
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   botones: {
@@ -20,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
     fontSize: "12px",
   },
+
 
   searchInput: {
     opacity: "0.9",
@@ -54,6 +70,61 @@ const useStyles = makeStyles((theme) => ({
   gridMedio: {
     //minWidth:"90px",
   },
+  root: {
+    maxWidth: 550,
+    minWidth:"100%",
+    margin: "10px 0px",
+  },
+  media: {
+    width:"100%",
+    height: "auto",
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+  // avatar: {
+  //   backgroundColor: red[500],
+  // },
+  Content: {
+    widht:"100px",
+    color:"black",
+    // display: "flex",
+    // alignContent:"start",
+    //flexWrap: "wrap",
+    //hyphens: "auto",
+    //wordBreak:"break-all",
+    
+    
+  },
+
+  etiqueta0: {
+    margin: "15px",
+    background: "#51B852",
+    color: "white",
+    fontWeight: "bold",
+  },
+
+  etiqueta1: {
+    marginRight: "15px",
+    background: "#3493C2",
+    color: "white",
+    fontWeight: "bold",
+  },
+
+  etiqueta2: {
+    margin: "15px",
+    background: "#8F55A0",
+    color: "white",
+    fontWeight: "bold",
+  },
+  
 }));
 
 function Home() {
@@ -102,8 +173,8 @@ function Home() {
   return (
     <>
       <Grid align="center" className={classes.gridTotal}>
-        <Grid xs></Grid>
-        <Grid xs></Grid>
+        {/* <Grid xs></Grid>
+        <Grid xs></Grid> */}
         <Grid xs></Grid>
 
         <Grid>
@@ -131,12 +202,12 @@ function Home() {
             <Grid>
               <Button
                 component={Link}
-                to={"/encontrar-un-maestro"}
+                to={"/buscar-un-mentor"}
                 className={classes.botones}
                 variant="outlined"
                 size="small"
               >
-                Encontrar un maestro
+                Buscar un mentor
               </Button>
             </Grid>
           </Grid>
@@ -149,27 +220,70 @@ function Home() {
                       <p>
                         {profe.nombre}
                         {profe.loginid}
-                        {}
                       </p>
                     ))}
-                    <p>{profesor.nombre}</p>
                   </div>
                   
                 
                 )} 
-
                 
 
           </div>
-          
+          <Calificacion/>
+          <CrearPublicacion/>
+
+
           <Publicacion
               letter="M"
               color="Purple"
               name="Margaly Flores"
               //image="url(${backgroundgrid1})"
-              imagen={backgroundgrid1}
+              imagen={Problema1}
               date="16 de marzo, 2021"
               content="Alguien me ayuda con este problema porfavor?"
+              interesados={15}
+              comentarios={1}
+              tag={
+                <Chip
+                  className={classes.etiqueta2}
+                  label="Circuitos Electrónicos 2"
+                />
+              }
+              children={
+                <Comentario
+                  name="Vivian Quispe"
+                  color="brown"
+                  letter="V"
+                  comentario="Recuerdo que el Ing. Medina resolvió ese problema en clases."
+                />
+              }
+            />
+            <Publicacion
+              letter="J"
+              color="blue"
+              name="José Guerra"
+              date="9 de marzo, 2021"
+              content="¿Algún mentor especializado en Física para nivel escolar?"
+              interesados={4}
+              comentarios={1}
+              tag={
+                <Chip
+                  className={classes.etiqueta0}
+                  label="Física"
+                />
+              }
+              children={
+                <div>
+
+                <Comentario
+                  name="Manuel Baella"
+                  color="red"
+                  letter="M"
+                  comentario="Jesús Cama es bueno en esos temas, lo puedes encontrar en el buscador de mentores."
+                />
+
+                </div>
+              }
             />
             <Publicacion
               letter="M"
@@ -177,13 +291,32 @@ function Home() {
               name="Manuel Baella"
               date="11 de marzo, 2021"
               content="Necesito referencias de que libros puedo usar para RadioPropagación en la UNI, porfa ayudenme este ciclo estará dificil :c"
-            />
-            <Publicacion
-              letter="J"
-              color="blue"
-              name="José Guerra"
-              date="9 de marzo, 2021"
-              content="¿Algún profesor especializado en Cálculo Multivariacional?"
+              interesados={7}
+              comentarios={2}
+              tag={
+                <Chip
+                  className={classes.etiqueta2}
+                  label="RadioPropagación"
+                />
+              }
+              children={
+                <div>
+                
+                <Comentario
+                  name="Jesus Cama"
+                  color="grey"
+                  letter="J"
+                  comentario="Puedes buscar en los libros virtuales que subió el Centro Cultural Pedro Paulet a su drive."
+                />
+                <Comentario
+                  name="Margaly Flores"
+                  color="purple"
+                  letter="M"
+                  comentario="Frente a la puerta 3 de la UNI puedes encontrar los más importantes para ese curso. Suerte!"
+                />
+
+                </div>
+              }
             />
             <Publicacion
               letter="J"
@@ -191,12 +324,38 @@ function Home() {
               name="Jhomar Astuyauri"
               date="1 de marzo, 2021"
               content="Me estoy preparando para postular a la Cayetano Heredia, ¿alguien tiene exámenes pasados porfa?"
+              interesados={16}
+              comentarios={2}
+              tag={
+                <Chip
+                  className={classes.etiqueta1}
+                  label="Preuniversitario"
+                />
+              }
+              children={
+                
+                <div>
+                  <Comentario
+                    name="Margaly Flores"
+                    color="purple"
+                    letter="M"
+                    comentario="Me parece que frente a la UNI venden exámenes para Cayetano también. Éxitos!"
+                  />
+                  <Comentario
+                    name="Jhomar Astuyauri"
+                    color="green"
+                    letter="J"
+                    comentario="Muchas gracias, si encontré :D"
+                />
+                </div>
+
+              }
             />
           </Grid>
         </Grid>
         <Grid xs></Grid>
-        <Grid xs></Grid>
-        <Grid xs></Grid>
+        {/* <Grid xs></Grid>
+        <Grid xs></Grid> */}
       </Grid>
     </>
   );

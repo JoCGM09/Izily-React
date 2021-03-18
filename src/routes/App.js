@@ -27,11 +27,11 @@ const App = () => (
           <PrivateRoute path="/editar-perfil" component={EditProfile} />
           <PrivateRoute
             exact
-            path="/encontrar-un-maestro"
+            path="/buscar-un-mentor"
             component={Profesores}
           />
           <PrivateRoute exact path="/inicio" component={Inicio} />
-          <Route path="/profesores/:profesorId" component={Perfil} />
+          <Route path="/perfil/:profesorId" component={Perfil} />
           <Route component={NotFound} />
         </Switch>
       </Layout>

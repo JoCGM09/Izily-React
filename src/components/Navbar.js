@@ -157,28 +157,35 @@ export default function ElevateAppBar(props) {
 
   const [profesor, setProfesor] = useState(null);
  
-  const traerProfesor = () => {
-    const idd = usuarioActual.uid;
-    const usuariosRef = db.collection("usuarios");
-    usuariosRef
-      .where("loginid", "==", idd)
-      .get()
-      .then((querySnapshot) => {
-        const docs = [];
-        querySnapshot.forEach((doc) => {
-          docs.push({ ...doc.data(), id: doc.id });
-        });
-        setProfesor(docs);
-        console.log({profesor});
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  // const traerProfesor = () => {
+  //   if(usuarioActual){
+  //     const idd = usuarioActual.uid;
+  //     const usuariosRef = db.collection("usuarios");
+  //     usuariosRef
+  //     .where("loginid", "==", idd)
+  //     .get()
+  //     .then((querySnapshot) => {
+  //       const docs = [];
+  //       querySnapshot.forEach((doc) => {
+  //         docs.push({ ...doc.data(), id: doc.id });
+  //       });
+  //       setProfesor(docs);
+  //       console.log({profesor});
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+      
+  //   }
+    
+  // };
 
-  useEffect(() => {
-    traerProfesor();
-  }, []);
+  // useEffect(() => {
+  //   traerProfesor();
+  // }, []);
+
+
+  
 
   return usuarioActual ? (
     <React.Fragment>
@@ -229,10 +236,11 @@ export default function ElevateAppBar(props) {
                 {/*<Link />*/}
               </IconButton>
             </Grid>
-            <Grid className={classes.nombrecontainer} xs>
             
-          {profesor && (
             
+          {/* {profesor && (
+            <>
+              <Grid className={classes.nombrecontainer} xs>
                   <div>
                     {profesor.map((profe)=>(
                       <p>
@@ -240,15 +248,15 @@ export default function ElevateAppBar(props) {
                       </p>
                     ))}
                   </div>
-                  
-                
-                )} 
+              </Grid>  
+              <Grid className={classes.gridHijo} item>
+                <MenuNavbar perfil={miProfesorID} />
+              </Grid> 
+            </>  
+                )}  */}
 
-            </Grid>
-            <Grid className={classes.gridHijo} item>
-              <MenuNavbar/>
-
-            </Grid>
+            
+            
           </Grid>
           {/* </Toolbar> */}
       </AppBar>

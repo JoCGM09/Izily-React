@@ -12,6 +12,7 @@ import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import {useState } from "react";
+import Link from "react-router-dom/Link";
 
 const useStyles = makeStyles((theme) => ({
   item:{
@@ -56,7 +57,7 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 
-export default function CustomizedMenus() {
+export default function CustomizedMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -99,7 +100,17 @@ export default function CustomizedMenus() {
 
   }
 
+  async function goProfile(){
+    setError('')
 
+    try {
+      handleClose()
+      history.push(`/perfil/${props.perfil}`)
+    } catch {
+      setError('Ocurrió un error al salir de la cuenta')
+    }
+
+  }
 
 
 
@@ -122,9 +133,10 @@ export default function CustomizedMenus() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem onClick={handleClose} className={classes.item}>
+        <StyledMenuItem variante="link" onClick={goProfile} className={classes.item}
+        >
           <ListItemIcon>
-            <PersonIcon fontSize="small" />
+            <PersonIcon fontSize="small"/>
           </ListItemIcon>
           <ListItemText primary="Perfil" />
         </StyledMenuItem>

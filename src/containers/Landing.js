@@ -6,6 +6,7 @@ import logoprincipal from "../assets/images/logoprincipal.webp";
 import mentores from "../assets/images/mentores.png";
 import comunidades from "../assets/images/comunidades.png";
 import backgroundgrid2 from "../assets/images/backgroundgrid2.jpg";
+import CarouselLanding from "../components/CarouselLanding";
 
 const useStyles = makeStyles((theme) => ({
   Div1: {
@@ -174,6 +175,7 @@ function Landing() {
           </Grid>
         </Grid>
       </div>
+      <CarouselLanding/>
     </>
   );
 }

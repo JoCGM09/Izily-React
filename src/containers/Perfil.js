@@ -3,7 +3,7 @@ import axios from "axios";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
-import Profesor from "../components/Profesor";
+import Profesor from "../components/ProfesorPerfil";
 import { useAuth } from "../contexts/AuthContext";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -114,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
 
   etiqueta0: {
     margin: "4px",
-    background: "#AADB55",
+    background: "#51B852",
     color: "white",
     fontWeight: "bold",
   },

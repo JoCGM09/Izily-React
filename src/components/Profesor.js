@@ -11,6 +11,7 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import StarIcon from '@material-ui/icons/Star';
+import Button from "@material-ui/core/Button";
 
 const StyledRating = withStyles({
   iconFilled: {
@@ -23,8 +24,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
     borderRadius: 3,
+    "&:hover":{
+      backgroundColor:"#FAFAFA",
+    },
   },
   cardContent: {
+    paddingBottom:"10px",
     margin: "0px",
   },
   avatar: {
@@ -70,13 +75,21 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
   },
   paperPresentacion: {
-    height: "85px",
+    backgroundColor:"rgba(0,0,0,0)",
+    height: "75px",
     overflow: "auto",
     textAlign: "justify",
     padding: "3px 8px 8px 0px",
     marginLeft: "10px",
     marginTop: "5px",
-    marginBottom: "15px",
+    marginBottom: "5px",
+  },
+  boton:{
+    marginTop:"10px",
+    border:"1px solid grey",
+    "&:hover":{
+      backgroundColor:"none",
+    }
   },
 }));
 
@@ -96,8 +109,8 @@ export default function Profesor({ profesor }) {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea component={Link} to={`/profesores/${profesor.id}`}>
-        <CardContent >
+      {/* <CardActionArea component={Link} to={`/perfil/${profesor.id}`}> */}
+        <CardContent style={{paddingBottom:"10px",}}>
           <div className={classes.avatarContainer}>
             <img className={classes.avatar} src={profesor.imageURL}/>
           {/* id={`myimg-${profesor.id} */}
@@ -124,11 +137,14 @@ export default function Profesor({ profesor }) {
                 />
             <Typography className={classes.datos} gutterBottom variant="body2" component="p">
               {/* X calificaciones*/}{ profesor.calificaciones} calificaciones | {/* X horas dictadas*/} {profesor.horas} horas dictadas
-            </Typography>            
+            </Typography>
+            <Button component={Link} to={`/perfil/${profesor.id}`} className={classes.boton}>
+              Conectar
+            </Button>           
             
           </div>
         </CardContent>
-      </CardActionArea>
+      {/* </CardActionArea> */}
     </Card>
   );
 }

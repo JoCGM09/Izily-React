@@ -268,21 +268,17 @@ function Perfil() {
     client
       .get(`/scheduled_events?count=25&organization=${organizationid}&status=active`)
       .then(function (response) {
-        console.log(response.data.collection);
         const uris = response.data.collection.map((event)=>{
           return event.uri;
         });
         uris.map((uri)=>{
           client.get(`${uri}/invitees`).then((uriResponse)=>{
-            console.log(uriResponse);
           })
         })
-        console.log(uris);
         setEvents(response.data.collection);
 
       })
       .catch(function (error) {
-        console.log(error);
       })
   }, []);
 
@@ -324,8 +320,8 @@ function Perfil() {
             >
               <div className={classes.titlePresentacion}>
                 <p className={classes.titlePresentacion_text}>Acerca de mi:</p>
-
-                {usuarioActual.uid === profesor.loginid ? (
+                
+                {usuarioActual?.uid === profesor.loginid ? (
                   <p> </p>
                 ) : (
                   <Button
@@ -438,7 +434,7 @@ function Perfil() {
               </div>
 
               <div className={classes.buttonContainer}>
-                {usuarioActual.uid === profesor.loginid ? (
+                {usuarioActual?.uid === profesor.loginid ? (
                   <GreenSwitch/>
                 ) : (
                   <Button

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
@@ -157,34 +157,35 @@ export default function ElevateAppBar(props) {
 
   const [profesor, setProfesor] = useState(null);
  
-  const traerProfesor = () => {
-      if(usuarioActual){
-        const idd = usuarioActual.uid;
-        const usuariosRef = db.collection("usuarios");
-        usuariosRef
-        .where("loginid", "==", idd)
-        .get()
-        .then((querySnapshot) => {
-          const docs = [];
-          querySnapshot.forEach((doc) => {
-            docs.push({ ...doc.data(), id: doc.id });
-          });
-          setProfesor(docs);
-          console.log({profesor});
-        })
-        .catch((error) => {
-          console.error(error);
+  const traerPerfil = useCallback(()=>{
+    if(usuarioActual){
+      const idd = usuarioActual.uid;
+      const usuariosRef = db.collection("usuarios");
+      usuariosRef
+      .where("loginid", "==", idd)
+      .get()
+      .then((querySnapshot) => {
+        const docs = [];
+        querySnapshot.forEach((doc) => {
+          docs.push({ ...doc.data(), id: doc.id });
         });
-      }
+        if(docs.length>0){
+          setProfesor(docs[0]);
+        } 
+        console.log("docs",docs);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    }
+  },[setProfesor]); 
       
-      
-    
-    
-  };
+  
 
   useEffect(() => {
-    traerProfesor();
-  }, []);
+    
+    traerPerfil();
+  },[]);
 
 
   
@@ -244,15 +245,15 @@ export default function ElevateAppBar(props) {
             <>
               <Grid className={classes.nombrecontainer} xs>
                   <div>
-                    {profesor.map((profe)=>(
+              
                       <p>
-                        {profe.nombre}
+                        {profesor.nombre}
                       </p>
-                    ))}
+              
                   </div>
               </Grid>  
               <Grid className={classes.gridHijo} item>
-                <MenuNavbar/>
+                <MenuNavbar perfil={profesor.id}/>
               </Grid> 
             </>  
                 )} 

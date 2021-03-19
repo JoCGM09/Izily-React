@@ -130,16 +130,16 @@ export default function RecipeReviewCard(props) {
           {props.content}
         </Typography>
       </CardContent>
-      {/* <CardMedia
+      <CardMedia
         className={classes.media}
-        src={props.image}
+        src={props?.image}
         title="image"
-      /> */}
-      <img
+      />
+      {/* <img
           src={props.imagen}
           className={classes.media}
           alt=""
-      />
+      /> */}
       <Grid container style={{display:"flex", justifyContent:"space-between",}}>
 
         <Grid  style={{"&:hover":{cursor:"default"}}} item>

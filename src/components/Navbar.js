@@ -157,32 +157,34 @@ export default function ElevateAppBar(props) {
 
   const [profesor, setProfesor] = useState(null);
  
-  // const traerProfesor = () => {
-    
-  //     const idd = usuarioActual.uid;
-  //     const usuariosRef = db.collection("usuarios");
-  //     usuariosRef
-  //     .where("loginid", "==", idd)
-  //     .get()
-  //     .then((querySnapshot) => {
-  //       const docs = [];
-  //       querySnapshot.forEach((doc) => {
-  //         docs.push({ ...doc.data(), id: doc.id });
-  //       });
-  //       setProfesor(docs);
-  //       console.log({profesor});
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
+  const traerProfesor = () => {
+      if(usuarioActual){
+        const idd = usuarioActual.uid;
+        const usuariosRef = db.collection("usuarios");
+        usuariosRef
+        .where("loginid", "==", idd)
+        .get()
+        .then((querySnapshot) => {
+          const docs = [];
+          querySnapshot.forEach((doc) => {
+            docs.push({ ...doc.data(), id: doc.id });
+          });
+          setProfesor(docs);
+          console.log({profesor});
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      }
+      
       
     
     
-  // };
+  };
 
-  // useEffect(() => {
-  //   traerProfesor();
-  // }, []);
+  useEffect(() => {
+    traerProfesor();
+  }, []);
 
 
   
@@ -240,7 +242,7 @@ export default function ElevateAppBar(props) {
             
           {profesor && (
             <>
-              {/* <Grid className={classes.nombrecontainer} xs>
+              <Grid className={classes.nombrecontainer} xs>
                   <div>
                     {profesor.map((profe)=>(
                       <p>
@@ -248,7 +250,7 @@ export default function ElevateAppBar(props) {
                       </p>
                     ))}
                   </div>
-              </Grid>   */}
+              </Grid>  
               <Grid className={classes.gridHijo} item>
                 <MenuNavbar/>
               </Grid> 

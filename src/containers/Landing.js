@@ -5,7 +5,6 @@ import backgroundgrid1 from "../assets/images/backgroundgrid1.jpg";
 import logoprincipal from "../assets/images/logoprincipal.webp";
 import mentores from "../assets/images/mentores.png";
 import comunidades from "../assets/images/comunidades.png";
-import backgroundgrid2 from "../assets/images/backgroundgrid2.jpg";
 import videollamada from "../assets/images/videollamada.png";
 import CarouselLanding from "../components/CarouselLanding";
 import Divider from "@material-ui/core/Divider";
@@ -201,7 +200,7 @@ function Landing() {
           </Grid>
         </Grid>
       </div>
-      <Grid style={{display:"flex", padding:"10px 0px 50px 0px"}}>
+      <Grid style={{display:"flex", padding:"10px 0px 50px 0px", background:"white"}}>
       <CarouselLanding/>
       {/* <Carousel2/> */}
       </Grid>

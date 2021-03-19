@@ -154,7 +154,7 @@ const useStyles = makeStyles((theme) => ({
 
   buttonContainer: {
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     marginTop: "-10px",
     alignItems:"center",
 
@@ -435,8 +435,24 @@ function Perfil() {
 
               <div className={classes.buttonContainer}>
                 {usuarioActual?.uid === profesor.loginid ? (
-                  <GreenSwitch/>
+                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly"}}>
+                    <GreenSwitch/>
+                    <Button
+                      disabled
+                      variant="contained"
+                      color="inherit"
+                      size="small"
+                      className={classes.buttonPerfil}
+                      startIcon={<PlayArrowIcon />}
+                      disableElevation="true"
+                    >
+                    Video
+                    </Button>
+                  </div>
+                  
                 ) : (
+                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly"}}>
+                  <Calificacion/>
                   <Button
                     disabled
                     variant="contained"
@@ -448,9 +464,7 @@ function Perfil() {
                   >
                     Contactar
                   </Button>
-                )}
-
-                <Button
+                  <Button
                   disabled
                   variant="contained"
                   color="inherit"
@@ -461,8 +475,12 @@ function Perfil() {
                 >
                   Video
                 </Button>
+                  </div>
+                )}
 
-                <Button
+                
+
+                {/* <Button
                   disabled
                   variant="contained"
                   size="small"
@@ -472,7 +490,8 @@ function Perfil() {
                   disableElevation="true"
                 >
                   Mi Drive
-                </Button>
+                </Button> */}
+                
               </div>
 
               {/* <div className={classes.idiomsContainer}>

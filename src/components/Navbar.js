@@ -20,6 +20,9 @@ import PersonIcon from "@material-ui/icons/Person";
 import { Link } from "react-router-dom";
 import { useAuth } from '../contexts/AuthContext';
 import { db } from "../firebase";
+import Avatar from '@material-ui/core/Avatar';
+import { useHistory } from 'react-router-dom';
+
 
 const useStyles = makeStyles ((theme) => ({
   root: {
@@ -74,7 +77,10 @@ const useStyles = makeStyles ((theme) => ({
   },
 
 nombrecontainer:{
-  maxWidth: "120px",
+  display: "flex",
+  justifyContent:"flex-end",
+  alignItems:"center",
+  maxWidth: "160px",
   whiteSpace: "nowrap",
   textOverflow: "ellipsis",
   overflow: "hidden",
@@ -82,6 +88,21 @@ nombrecontainer:{
   paddingLeft: "10px",
 },
 
+rootAvatar: {
+  marginRight:"10px",
+  width:"33px",
+  height:"33px",
+  display: 'flex',
+  '& > *': {
+    margin: theme.spacing(1),
+  },
+  "&:hover":{cursor:"pointer",},
+},
+nombre:{
+  margin:"0px", 
+  padding:"0px", 
+  "&:hover":{cursor:"pointer"},
+}
 }));
 
 
@@ -142,7 +163,8 @@ ElevationScroll.propTypes = {
 export default function ElevateAppBar(props) {
 
   const classes = useStyles();
-
+  const [error, setError] = useState("");
+  const history = useHistory()
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -172,7 +194,6 @@ export default function ElevateAppBar(props) {
         if(docs.length>0){
           setProfesor(docs[0]);
         } 
-        console.log("docs",docs);
       })
       .catch((error) => {
         console.error(error);
@@ -187,7 +208,17 @@ export default function ElevateAppBar(props) {
     traerPerfil();
   },[]);
 
+  async function goProfile(){
+    setError('')
 
+    try {
+      history.push(`/perfil/${profesor.id}`)
+    } catch {
+      setError('Ocurrió un error al salir de la cuenta')
+    }
+
+  }
+  
   
 
   return usuarioActual ? (
@@ -243,14 +274,18 @@ export default function ElevateAppBar(props) {
             
           {profesor && (
             <>
-              <Grid className={classes.nombrecontainer} xs>
-                  <div>
+              <Grid className={classes.nombrecontainer}  xs>
+                  
               
-                      <p>
-                        {profesor.nombre}
-                      </p>
-              
+                  <Avatar component={Link} to={`/perfil/${profesor.id}`} className={classes.rootAvatar} alt={profesor.nombre} src={profesor.imageURL} />
+                  <div className={classes.nombre}
+                  variante="link" onClick={goProfile}
+                  >
+                    {profesor.nombre}
                   </div>
+                      
+              
+                  
               </Grid>  
               <Grid className={classes.gridHijo} item>
                 <MenuNavbar perfil={profesor.id}/>

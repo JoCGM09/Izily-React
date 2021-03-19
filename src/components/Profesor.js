@@ -12,6 +12,7 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import StarIcon from '@material-ui/icons/Star';
 import Button from "@material-ui/core/Button";
+import Popover from '@material-ui/core/Popover';
 
 const StyledRating = withStyles({
   iconFilled: {
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     margin: 0,
     textAlign: "center",
-    color: "#636363"
+    color: "white"
   },
   calificacion: {
     
@@ -91,10 +92,35 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor:"none",
     }
   },
+  popover: {
+    pointerEvents: 'none',
+    boxShadow:"0px",
+    textShadow:"0px",
+  },
+  paper: {
+    padding: "5px",
+    boxShadow:"0px",
+    textShadow:"0px",
+    width:"30px",
+    display:"flex",
+    justifyContent:"center",
+    background:"#A8A8A8",
+  },
 }));
 
 export default function Profesor({ profesor }) {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
   // const defaultAvatar = "https://i.pravatar.cc/300";
 
   // const profileRef = storage.ref('users/'+profesor.loginid+'/fotodeperfil.jpeg');
@@ -114,17 +140,53 @@ export default function Profesor({ profesor }) {
           <div className={classes.avatarContainer}>
             <img className={classes.avatar} src={profesor.imageURL}/>
           {/* id={`myimg-${profesor.id} */}
-            <div>
-              <Box component="fieldset" margin={0} border={0} padding={0} mb={-1} borderColor="transparent">
-              <StyledRating 
-              name="customized-color"
-              //defaultValue= {5}
-              defaultValue= {profesor.puntuacion}
-              precision={0.1}
-              icon={<StarIcon fontSize="large" />}
-              readOnly
-              /></Box>
-              <span className={classes.numero}>{profesor.puntuacion}</span>
+            <div style={{width:"100%", marginBottom:"5px", display:"flex", justifyContent:"center"}}>
+              <Box aria-owns={open ? 'mouse-over-popover' : undefined}
+                  aria-haspopup="true"
+                  onMouseEnter={handlePopoverOpen}
+                  onMouseLeave={handlePopoverClose} component="fieldset" margin={0} border={0} padding={0} mb={-1} borderColor="transparent"
+                  >
+                <StyledRating 
+                name="customized-color"
+                //defaultValue= {5}
+                defaultValue= {profesor.puntuacion}
+                precision={0.1}
+                icon={<StarIcon fontSize="large" />}
+                readOnly
+                />
+              </Box>
+              <Popover
+                variant="outlined"
+                id="mouse-over-popover"
+                className={classes.popover}
+                classes={{
+                  paper: classes.paper,
+                }}
+                open={open}
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                elevation={0}
+                onClose={handlePopoverClose}
+                disableRestoreFocus
+                anchorOrigin={{
+                  vertical: 'center',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'center',
+                  horizontal: 'left',
+                }}
+              >
+                <span className={classes.numero}>{profesor.puntuacion}</span>
+              </Popover>
+              
             </div>
             <Typography className={classes.nombre} gutterBottom variant="h5" component="h2">
               {profesor.nombre}

@@ -7,7 +7,7 @@ import Switch from '@material-ui/core/Switch';
 
 const GreenSwitch = withStyles({
   switchBase: {
-    color: "#99CC42",
+    color: "grey",
     '&$checked': {
       color: "#99CC42",
     },

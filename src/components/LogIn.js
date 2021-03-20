@@ -82,7 +82,8 @@ export default function LogIn() {
   } 
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <div style={{background:"#EEEFF0", height:"calc(100vh - 50px)"}}>
+      <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false}  md={7} lg={7} className={classes.image} />
       <Grid item xs={12}  md={5} lg={5} component={Paper} elevation={6} square>
@@ -146,5 +147,7 @@ export default function LogIn() {
         </div>
       </Grid>
     </Grid>
+    </div>
+    
   );
 }

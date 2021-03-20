@@ -30,9 +30,14 @@ const tutorialSteps = [
       'https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/carousel%2FIMAGEN3.png?alt=media&token=12dc1405-979e-4918-a11b-fa1abf7b7dae',
   },
   {
-    label: 'Califica a tu mentor, así ayudarás a que mejore y a que otros usuarios tengan una mejor experiencia.',
+    label: 'Califica a tu mentor, así ayudarás a que mejore y a que otros usuarios tengan una mejor experiencia',
     imgPath:
       'https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/carousel%2FIMAGEN4.png?alt=media&token=f93fe3ca-aa40-496b-a8ea-e43163b19722',
+  },
+  {
+    label: 'Conviértete en un mentor y también comparte tu conocimiento con los demás',
+    imgPath:
+      'https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/carousel%2FIMAGEN5.png?alt=media&token=ad284742-588c-4150-b6a8-58ee16bdffb5',
   },
 ];
 

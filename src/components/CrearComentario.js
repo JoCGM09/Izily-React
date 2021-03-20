@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     resize: "inherit",
     fontSize:"14px",
     fontFamily:"arial",
-    border:"1px solid grey",
+    border:"1px solid #C7C6C6",
     borderRadius:"15px",
     width:"100%",
     padding:"10px 10px 10px 10px",

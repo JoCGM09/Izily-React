@@ -287,11 +287,12 @@ export default function ElevateAppBar(props) {
               
                   
               </Grid>  
-              <Grid className={classes.gridHijo} item>
-                <MenuNavbar perfil={profesor.id}/>
-              </Grid> 
+               
             </>  
-                )} 
+                )}
+            <Grid className={classes.gridHijo} item>
+                <MenuNavbar perfil={profesor?.id}/>
+              </Grid>
 
             
             

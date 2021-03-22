@@ -1,4 +1,4 @@
-//Este componente es una card sola
+//Este componente es una card sola de profesor
 import React from 'react'
 import Link from "react-router-dom/Link"
 import { makeStyles } from "@material-ui/core/styles";

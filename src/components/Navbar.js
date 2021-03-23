@@ -167,6 +167,11 @@ export default function ElevateAppBar(props) {
   const history = useHistory()
   const [anchorEl, setAnchorEl] = React.useState(null);
 
+// const reload = () => {
+//     window.location.reload(true);
+// };
+
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -213,9 +218,11 @@ export default function ElevateAppBar(props) {
 
     try {
       history.push(`/perfil/${profesor.id}`)
+      //reload()
     } catch {
       setError('Ocurrió un error al salir de la cuenta')
     }
+    
 
   }
   

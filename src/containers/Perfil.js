@@ -154,7 +154,7 @@ const useStyles = makeStyles((theme) => ({
 
   buttonContainer: {
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     marginTop: "-10px",
     alignItems:"center",
 
@@ -268,21 +268,17 @@ function Perfil() {
     client
       .get(`/scheduled_events?count=25&organization=${organizationid}&status=active`)
       .then(function (response) {
-        console.log(response.data.collection);
         const uris = response.data.collection.map((event)=>{
           return event.uri;
         });
         uris.map((uri)=>{
           client.get(`${uri}/invitees`).then((uriResponse)=>{
-            console.log(uriResponse);
           })
         })
-        console.log(uris);
         setEvents(response.data.collection);
 
       })
       .catch(function (error) {
-        console.log(error);
       })
   }, []);
 
@@ -324,8 +320,8 @@ function Perfil() {
             >
               <div className={classes.titlePresentacion}>
                 <p className={classes.titlePresentacion_text}>Acerca de mi:</p>
-
-                {usuarioActual.uid === profesor.loginid ? (
+                
+                {usuarioActual?.uid === profesor.loginid ? (
                   <p> </p>
                 ) : (
                   <Button
@@ -438,9 +434,25 @@ function Perfil() {
               </div>
 
               <div className={classes.buttonContainer}>
-                {usuarioActual.uid === profesor.loginid ? (
-                  <GreenSwitch/>
+                {usuarioActual?.uid === profesor.loginid ? (
+                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly"}}>
+                    <GreenSwitch/>
+                    <Button
+                      disabled
+                      variant="contained"
+                      color="inherit"
+                      size="small"
+                      className={classes.buttonPerfil}
+                      startIcon={<PlayArrowIcon />}
+                      disableElevation="true"
+                    >
+                    Video
+                    </Button>
+                  </div>
+                  
                 ) : (
+                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly"}}>
+                  <Calificacion/>
                   <Button
                     disabled
                     variant="contained"
@@ -452,9 +464,7 @@ function Perfil() {
                   >
                     Contactar
                   </Button>
-                )}
-
-                <Button
+                  <Button
                   disabled
                   variant="contained"
                   color="inherit"
@@ -465,8 +475,12 @@ function Perfil() {
                 >
                   Video
                 </Button>
+                  </div>
+                )}
 
-                <Button
+                
+
+                {/* <Button
                   disabled
                   variant="contained"
                   size="small"
@@ -476,7 +490,8 @@ function Perfil() {
                   disableElevation="true"
                 >
                   Mi Drive
-                </Button>
+                </Button> */}
+                
               </div>
 
               {/* <div className={classes.idiomsContainer}>

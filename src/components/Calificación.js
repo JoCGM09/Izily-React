@@ -106,11 +106,17 @@ rootStars: {
     justifyContent:"space-between"
   },
   PublicarButton: {
-    margin: "0px 5px",
+    background: "white",
     color: "#3493C2",
+    border: "1px solid #3493C2",
+    fontSize: "11px",
+    height: "25px",
     fontWeight: "bold",
-    height: "30px",
-    fontSize: "12px",
+    "&:hover": {
+      backgroundColor: "#DAF1FC",
+    },
+    
+    
   },
 
   inputText: {
@@ -118,7 +124,7 @@ rootStars: {
     resize: "inherit",
     fontSize:"14px",
     fontFamily:"arial",
-    border:"1px solid grey",
+    border:"1px solid #C7C6C6",
     borderRadius:"10px",
     width:"95%",
     padding:"10px",

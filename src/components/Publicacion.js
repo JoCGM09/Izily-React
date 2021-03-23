@@ -21,6 +21,7 @@ import Divider from "@material-ui/core/Divider";
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import CrearComentario from "../components/CrearComentario";
 import Comentario from "../components/Comentario";
+import Problema1 from "../assets/images/problema1.jpeg";
 
 
 
@@ -132,11 +133,11 @@ export default function RecipeReviewCard(props) {
       </CardContent>
       {/* <CardMedia
         className={classes.media}
-        src={props.image}
+        image={props.imagen}
         title="image"
       /> */}
       <img
-          src={props.imagen}
+          src={props?.imagen}
           className={classes.media}
           alt=""
       />

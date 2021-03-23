@@ -4,8 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import backgroundgrid1 from "../assets/images/backgroundgrid1.jpg";
 import logoprincipal from "../assets/images/logoprincipal.webp";
 import mentores from "../assets/images/mentores.png";
-import comunidades from "../assets/images/comunidades.png";
-import backgroundgrid2 from "../assets/images/backgroundgrid2.jpg";
+import comunidad from "../assets/images/comunidad.png";
 import videollamada from "../assets/images/videollamada.png";
 import CarouselLanding from "../components/CarouselLanding";
 import Divider from "@material-ui/core/Divider";
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     display:"flex",
     flexDirection:"row",
     justifyContent:"space-between",
-    background:"#F5F5F5",
+    background:"white",
     // backgroundImage: `url(${backgroundgrid1})`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "right center",
@@ -24,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     margin: "0px",
     padding: "50px 0px 65px 0px",
+    borderBottom:"1px solid #EBECEC",
   },
   titulo: {
     paddingLeft: "50px",
@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "flex-start",
     padding: "10px",
-    borderTop:"1px solid #EBECEC",
+    //borderTop:"1px solid #EBECEC",
     borderBottom:"1px solid #EBECEC",
   },
   textgrid2: {
@@ -156,7 +156,7 @@ function Landing() {
             <Grid className={classes.textgrid2}>
               <p className={classes.titulogrid2}>Red Social Educativa</p>
               <p className={classes.subtitulogrid2}>
-                Orientada al desarrollo académico tanto de escolares como de
+                Orientada a ayudar tanto a escolares como a
                 universitarios.
               </p>
             </Grid>
@@ -166,17 +166,16 @@ function Landing() {
             <Grid className={classes.imggrid2}>
               <div align="center">
                 <img
-                  src={comunidades}
+                  src={comunidad}
                   className={classes.Imagen1}
                   alt="Comunidades"
                 />
               </div>
             </Grid>
             <Grid className={classes.textgrid2}>
-              <p className={classes.titulogrid2}>Comunidades</p>
+              <p className={classes.titulogrid2}>Comunidad</p>
               <p className={classes.subtitulogrid2}>
-                Enfocadas en distintas áreas, para una mejor selección de
-                contenido.
+                Donde puedes compartir tu experiencia y conocimiento.
               </p>
             </Grid>
           </Grid>
@@ -194,14 +193,13 @@ function Landing() {
             <Grid className={classes.textgrid2}>
               <p className={classes.titulogrid2}>Mentores</p>
               <p className={classes.subtitulogrid2}>
-                Con experiencia en más de 100 áreas de estudio dispuestos a
-                enseñarte.
+                Con experiencia dispuestos a ayudarte a resolver todas tus dudas.
               </p>
             </Grid>
           </Grid>
         </Grid>
       </div>
-      <Grid style={{display:"flex", padding:"10px 0px 50px 0px"}}>
+      <Grid style={{display:"flex", padding:"10px 0px 50px 0px", background:"white"}}>
       <CarouselLanding/>
       {/* <Carousel2/> */}
       </Grid>

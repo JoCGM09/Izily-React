@@ -17,22 +17,27 @@ const tutorialSteps = [
   {
     label: 'Resuelve tus dudas y ayuda a resolver las de los demás',
     imgPath:
-      'https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/carousel%2Fcaptura1.png?alt=media&token=6da6ede2-17fb-4eea-af54-553a1cb8a11d',
+      'https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/carousel%2FIMAGEN1.png?alt=media&token=125f68df-9372-4edb-a3ee-f8311e434214',
   },
   {
     label: 'Encuentra un mentor de acuerdo al área que necesites y contáctalo',
     imgPath:
-      'https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/carousel%2Fcaptura2.png?alt=media&token=1f295568-6487-483a-af89-710e321ea404',
+      'https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/carousel%2FIMAGEN2.png?alt=media&token=00c97343-9ee9-4c95-aa20-37bae1d5cdbe',
   },
   {
     label: 'Agenda una mentoría y recibe una clase personalizada',
     imgPath:
-      'https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/carousel%2Fcaptura3.png?alt=media&token=88373288-5819-462e-bc18-8c83a6709c96',
+      'https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/carousel%2FIMAGEN3.png?alt=media&token=12dc1405-979e-4918-a11b-fa1abf7b7dae',
   },
   {
-    label: 'Califica a tu mentor, así ayudarás a que mejore y a que otros usuarios tengan una mejor experiencia.',
+    label: 'Califica a tu mentor, así ayudarás a que mejore y a que otros usuarios tengan una mejor experiencia',
     imgPath:
-      'https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/carousel%2Fcaptura4.png?alt=media&token=8b1b49d3-c166-4854-919b-cf8e4b560031',
+      'https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/carousel%2FIMAGEN4.png?alt=media&token=f93fe3ca-aa40-496b-a8ea-e43163b19722',
+  },
+  {
+    label: 'Conviértete en un mentor y también comparte tu conocimiento con los demás',
+    imgPath:
+      'https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/carousel%2FIMAGEN5.png?alt=media&token=ad284742-588c-4150-b6a8-58ee16bdffb5',
   },
 ];
 
@@ -46,10 +51,12 @@ const useStyles = makeStyles((theme) => ({
     padding:"20px",
     alignItems: 'center',
     minHeight: 400,
+    minWidth: 600,
     paddingLeft: theme.spacing(4),
     backgroundColor:"rgba(0, 0, 0, 0.0)",
   },
   textHeader:{
+    backgroundColor:"rgba(0, 0, 0, 0.0)",
     fontSize:"50px",
   },
   img: {
@@ -82,7 +89,7 @@ function SwipeableTextMobileStepper() {
   return (
     <Grid container style={{display:"flex", alignItems:"center", justifyContent:"space-between"}}>
       <Grid lg={6} md={12} item className={classes.header}>
-        <Paper style={{padding:"0px 30px"}} square elevation={0} >
+        <Paper style={{padding:"0px 30px", backgroundColor:"rgba(0, 0, 0, 0.0)",}} square elevation={0} >
           <Typography className={classes.textHeader}>{tutorialSteps[activeStep].label}</Typography>
         </Paper>
       </Grid>
@@ -98,7 +105,7 @@ function SwipeableTextMobileStepper() {
                 index={activeStep}
                 onChangeIndex={handleStepChange}
                 enableMouseEvents
-                style={{border:"1px solid #F5F5F5"}}
+                
             >
                 {tutorialSteps.map((step, index) => (
                 <div key={step.label}>

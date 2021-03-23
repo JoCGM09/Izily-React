@@ -152,7 +152,6 @@ function Home() {
           docs.push({ ...doc.data(), id: doc.id });
         });
         setProfesor(docs);
-        console.log({profesor});
       })
       .catch((error) => {
         console.error(error);
@@ -212,24 +211,8 @@ function Home() {
             </Grid>
           </Grid>
           <Grid align="start" className={classes.publicacionesContainer}>
-          {/* <div>
-          {profesor && (
-            
-                  <div>
-                    {profesor.map((profe)=>(
-                      <p>
-                        {profe.nombre}
-                        {profe.loginid}
-                      </p>
-                    ))}
-                  </div>
-                  
-                
-                )} 
-                
-
-          </div>
-          <Calificacion/> */}
+          
+          {/* <Calificacion/> */}
           <CrearPublicacion/>
 
 
@@ -237,8 +220,7 @@ function Home() {
               letter="M"
               color="Purple"
               name="Margaly Flores"
-              //image="url(${backgroundgrid1})"
-              imagen={Problema1}
+              imagen="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/publicacionImages%2Fproblema1.jpeg?alt=media&token=f4e69610-db14-4e2d-a5fa-b97bae16daec"
               date="16 de marzo, 2021"
               content="Alguien me ayuda con este problema porfavor?"
               interesados={15}

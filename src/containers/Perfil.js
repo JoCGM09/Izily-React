@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 import Profesor from "../components/ProfesorPerfil";
@@ -23,6 +23,8 @@ import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import GreenSwitch from "../components/Switch";
 import Calificacion from "../components/Calificación";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -86,7 +88,6 @@ const useStyles = makeStyles((theme) => ({
     width: "380px",
     height: "120px",
     paddingBottom: "0px",
-
     overflow: "auto",
     marginLeft: "-25px",
     marginTop: "-10px",
@@ -103,6 +104,7 @@ const useStyles = makeStyles((theme) => ({
   categories: {
     background: "white",
     color: "black",
+    paddingBottom:"0px",
   },
 
   categoriesAppBar: {
@@ -157,7 +159,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-evenly",
     marginTop: "-10px",
     alignItems:"center",
-
     width: "370px",
     paddingLeft: "5px",
   },
@@ -218,6 +219,23 @@ function a11yProps(index) {
 //termina cosas de la tabla
 
 function Perfil() {
+
+  const GreenSwitch = withStyles({
+    switchBase: {
+      
+      color: "grey",
+      '&$checked': {
+        color: "#99CC42",
+      },
+      '&$checked + $track': {
+        backgroundColor: "#99CC42",
+      },
+    },
+    checked: {},
+    track: {},
+  })(Switch);
+
+
   const classes = useStyles();
   const theme = useTheme();
 
@@ -282,6 +300,15 @@ function Perfil() {
       })
   }, []);
 
+  const [state, setState] = React.useState({
+    checked: true,
+    
+  });
+
+  const handleChangeSwitch = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
 
   return (
     <>
@@ -321,9 +348,7 @@ function Perfil() {
               <div className={classes.titlePresentacion}>
                 <p className={classes.titlePresentacion_text}>Acerca de mi:</p>
                 
-                {usuarioActual?.uid === profesor.loginid ? (
-                  <p> </p>
-                ) : (
+                {usuarioActual?.uid !== profesor.loginid && profesor?.esProfesor === true && profesor?.disponible === true ? (
                   <Button
                     variant="contained"
                     size="small"
@@ -337,7 +362,8 @@ function Perfil() {
                   >
                     Agendar Mentoría
                   </Button>
-                  // <a href="" onClick={calendly}>Schedule time with me</a>
+                ) : (
+                  <p></p>
                 )}
               </div>
 
@@ -435,9 +461,59 @@ function Perfil() {
 
               <div className={classes.buttonContainer}>
                 {usuarioActual?.uid === profesor.loginid ? (
-                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly"}}>
-                    <GreenSwitch/>
-                    <Button
+                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly", marginTop:"0px",}}>
+                    {
+                      profesor?.esProfesor === true ? (
+                        <>
+                          <FormControlLabel
+                            control={<GreenSwitch size="small" checked={state.checked} onChange={handleChangeSwitch} name="checked" />}
+                            label="Disponible"
+                          />
+                          <Button
+                            disabled
+                            variant="contained"
+                            color="inherit"
+                            size="small"
+                            className={classes.buttonPerfil}
+                            startIcon={<PlayArrowIcon />}
+                            disableElevation="true"
+                          >
+                            Video
+                          </Button>
+                        </>
+                        
+                      ) : (
+                        <Button
+                            disabled
+                            variant="contained"
+                            color="inherit"
+                            size="small"
+                            className={classes.buttonPerfil}
+                            startIcon={<PlayArrowIcon />}
+                            disableElevation="true"
+                          >
+                            Video
+                          </Button>
+                      )
+                    }
+                    
+                  </div>
+                  
+                ) : (
+                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly", marginTop:"0px",}}>
+                    <Calificacion/>
+                      <Button
+                        disabled
+                        variant="contained"
+                        color="inherit"
+                        size="small"
+                        className={classes.buttonPerfil}
+                        startIcon={<PeopleIcon />}
+                        disableElevation="true"
+                      >
+                        Contactar
+                      </Button>
+                      <Button
                       disabled
                       variant="contained"
                       color="inherit"
@@ -445,53 +521,11 @@ function Perfil() {
                       className={classes.buttonPerfil}
                       startIcon={<PlayArrowIcon />}
                       disableElevation="true"
-                    >
-                    Video
-                    </Button>
+                      >
+                        Video
+                      </Button>
                   </div>
-                  
-                ) : (
-                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly"}}>
-                  <Calificacion/>
-                  <Button
-                    disabled
-                    variant="contained"
-                    color="inherit"
-                    size="small"
-                    className={classes.buttonPerfil}
-                    startIcon={<PeopleIcon />}
-                    disableElevation="true"
-                  >
-                    Contactar
-                  </Button>
-                  <Button
-                  disabled
-                  variant="contained"
-                  color="inherit"
-                  size="small"
-                  className={classes.buttonPerfil}
-                  startIcon={<PlayArrowIcon />}
-                  disableElevation="true"
-                >
-                  Video
-                </Button>
-                  </div>
-                )}
-
-                
-
-                {/* <Button
-                  disabled
-                  variant="contained"
-                  size="small"
-                  color="inherit"
-                  className={classes.buttonPerfil}
-                  startIcon={<PeopleIcon />}
-                  disableElevation="true"
-                >
-                  Mi Drive
-                </Button> */}
-                
+                )}          
               </div>
 
               {/* <div className={classes.idiomsContainer}>
@@ -504,33 +538,9 @@ function Perfil() {
                 </Typography>
               </div> */}
 
-
-              {/* <div>
-                  <div>
-                    {events.map((event)=>{
-                        return (
-                          <div>
-                            <span>
-                            {event.created_at}
-                            </span>
-                            <ul>
-                              {event.event_guests.map((guest)=>{
-                                return <li>{guest.email}</li>
-                              })}
-                            </ul>
-                          </div>
-                        )
-                    })}
-                  </div>
-              </div> */}
             </Grid>
           </Grid>
-          
-
-          {/* <div className={classes.seccion2}>
-            <GreenSwitch/>
-            {profesor.nombre}
-          </div> */}
+                   
         </div>
       )}
       {!profesor && (

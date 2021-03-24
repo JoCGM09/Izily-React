@@ -56,7 +56,9 @@ const useStyles = makeStyles((theme) => ({
     
   },
   IconosContainer: {
-    padding:"10px",
+    paddingLeft:"5px",
+    paddingTop:"5px",
+    // padding:"0px",
     justifyContent:"space-between"
   },
   PublicarButton: {
@@ -65,6 +67,10 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     height: "30px",
     fontSize: "12px",
+    border:"0px",
+    "&:hover":{
+        backgroundColor:"white",
+    },
   },
 
   inputText: {
@@ -90,20 +96,14 @@ export default function RecipeReviewCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardHeader
-        
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title="Crear una Publicación"
-      />
+      <p style={{paddingLeft:"12px", fontSize:"18px", margin:"10px 0px"}}>
+        Crear Publicación
+      </p>
       
       <CardContent align="center" className={classes.containerContent}>
 
       <TextareaAutosize className={classes.inputText}
-          aria-label="minimum height" placeholder="Escribir publicación..." widht="500px" rowsMin={3}/>
+          aria-label="minimum height" placeholder="Escribir publicación..." widht="500px" rowsMin={1}/>
       </CardContent>
       <Grid container className={classes.IconosContainer}>
         <Grid item style={{display:"flex", alignItems:"center"}}>
@@ -112,17 +112,17 @@ export default function RecipeReviewCard(props) {
             </Button>
         </Grid>
 
-        <Grid item style={{display: "flex", flexDirection: "row",}}>
-        <Grid item>
-        <IconButton>  
-                  <AddAPhotoIcon  fontSize="medium" />     
-        </IconButton>
-        </Grid>
-        <Grid item>
-        <IconButton>  
-                  <TheatersIcon  fontSize="medium" />     
-        </IconButton>
-        </Grid>
+        <Grid item style={{display: "flex", flexDirection: "row"}}>
+          <Grid item>
+            <IconButton style={{padding:"10px"}}>  
+                      <AddAPhotoIcon  fontSize="medium" />     
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <IconButton style={{padding:"10px"}}>  
+                      <TheatersIcon  fontSize="medium" />     
+            </IconButton>
+          </Grid>
         </Grid>
 
         

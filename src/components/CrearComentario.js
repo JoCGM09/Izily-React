@@ -112,12 +112,12 @@ export default function RecipeReviewCard(props) {
 
         <Grid item style={{display: "flex", flexDirection: "row",}}>
         <Grid item>
-        <IconButton>  
+        <IconButton style={{padding:"10px 10px 10px 10px"}}>  
                   <AddAPhotoIcon  fontSize="medium" />     
         </IconButton>
         </Grid>
         <Grid item>
-        <IconButton>  
+        <IconButton style={{padding:"10px 10px 10px 10px"}}>  
                   <TheatersIcon  fontSize="medium" />     
         </IconButton>
         </Grid>

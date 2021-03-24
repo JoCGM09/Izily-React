@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     border:"0px",
     boxShadow:"0px",
     display:"flex",
+    paddingBottom:"0px",
   },
   media: {
     width:"100%",
@@ -51,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection:"column",
     justifyContent:"start",
     paddingTop:"10px",
+    paddingBottom:"0px",
     paddingRight:"0px",
     alignContent:"start",
     justifyItems:"end",
@@ -73,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
   containerContent: {
     paddingTop:"20px",
+    paddingBottom:"0px",
     paddingLeft:"0px",
     widht:"100%",
   },
@@ -115,7 +118,7 @@ export default function RecipeReviewCard(props) {
           className={classes.avatarContainer}
         />
         <CardContent className={classes.containerContent}>
-        <Typography className={classes.nombre} 
+          <Typography className={classes.nombre} 
             variant="body2" color="textSecondary" component="p"
           >
             {props.name}

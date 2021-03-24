@@ -7,21 +7,10 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
-import backgroundgrid1 from "../assets/images/backgroundgrid1.jpg";
 import { useAuth } from '../contexts/AuthContext';
-import { useParams } from "react-router-dom";
 import { db } from "../firebase";
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
 import CrearPublicacion from "../components/CrearPublicacion";
-import Calificacion from "../components/Calificación";
 import Comentario from "../components/Comentario";
-import Problema1 from "../assets/images/problema1.jpeg";
 import Chip from "@material-ui/core/Chip";
 
 
@@ -105,21 +94,21 @@ const useStyles = makeStyles((theme) => ({
   },
 
   etiqueta0: {
-    margin: "15px",
+    //margin: "15px",
     background: "#51B852",
     color: "white",
     fontWeight: "bold",
   },
 
   etiqueta1: {
-    marginRight: "15px",
+    //marginRight: "15px",
     background: "#3493C2",
     color: "white",
     fontWeight: "bold",
   },
 
   etiqueta2: {
-    margin: "15px",
+    //margin: "15px",
     background: "#8F55A0",
     color: "white",
     fontWeight: "bold",

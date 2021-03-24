@@ -154,10 +154,6 @@ export default function ElevateAppBar(props) {
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  // const reload = () => {
-  //     window.location.reload(true);
-  // };
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -169,9 +165,9 @@ export default function ElevateAppBar(props) {
   const { usuarioActual } = useAuth();
 
   const [profesor, setProfesor] = useState(null);
-
-  const traerPerfil = useCallback(() => {
-    if (usuarioActual) {
+  
+  const traerPerfil = useCallback(()=>{
+    if(usuarioActual){
       const idd = usuarioActual.uid;
       const usuariosRef = db.collection("usuarios");
       usuariosRef
@@ -196,14 +192,21 @@ export default function ElevateAppBar(props) {
     traerPerfil();
   }, []);
 
-  async function goProfile() {
-    setError("");
-
+  async function goProfile(){
+    setError('')
     try {
-      history.push(`/perfil/${profesor.id}`);
-      //reload()
+      history.push(`/perfil/${profesor.id}`)
+      window.location.reload();
     } catch {
       setError("Ocurrió un error al salir de la cuenta");
+    }
+  }
+  async function goInicio(){
+    setError('')
+    try {
+      history.push(`/inicio`)
+    } catch {
+      setError('Ocurrió un error al salir de la cuenta')
     }
   }
 
@@ -228,12 +231,10 @@ export default function ElevateAppBar(props) {
             <Grid className={classes.gridHijo} item xs></Grid>
 
             <Grid className={classes.gridHijo} item>
-              <Button
-                component={Link}
-                to={"/inicio"}
-                className={classes.botones}
-                variant="outlined"
-              >
+
+
+
+              <Button variante="link" onClick={goInicio} className={classes.botones} variant="outlined">
                 Inicio
               </Button>
 
@@ -255,21 +256,15 @@ export default function ElevateAppBar(props) {
                 {/*<Link />*/}
               </IconButton>
             </Grid>
-
-            {profesor && (
-              <>
-                <Grid className={classes.nombrecontainer} xs>
-                  <Avatar
-                    component={Link}
-                    to={`/perfil/${profesor.id}`}
-                    className={classes.rootAvatar}
-                    alt={profesor.nombre}
-                    src={profesor.imageURL}
-                  />
-                  <div
-                    className={classes.nombre}
-                    variante="link"
-                    onClick={goProfile}
+                  
+          {profesor && (
+            <>
+              <Grid className={classes.nombrecontainer}  xs>
+                  
+              
+                  <Avatar variante="link" onClick={goProfile} className={classes.rootAvatar} alt={profesor.nombre} src={profesor.imageURL} />
+                  <div className={classes.nombre}
+                  variante="link" onClick={goProfile}
                   >
                     {profesor.nombre}
                   </div>
@@ -277,8 +272,9 @@ export default function ElevateAppBar(props) {
               </>
             )}
             <Grid className={classes.gridHijo} item>
-              <MenuNavbar perfil={profesor?.id} />
-            </Grid>
+              <MenuNavbar perfil={profesor?.id}/>
+            </Grid>  
+            
           </Grid>
           {/* </Toolbar> */}
         </AppBar>

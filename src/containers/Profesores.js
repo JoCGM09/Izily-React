@@ -151,6 +151,7 @@ export default function Profesores(callback, deps) {
     const usuariosRef = db.collection("usuarios");
     usuariosRef
       .where("esProfesor", "==", true)
+      .where("disponible", "==", true)
       .get()
       .then((querySnapshot) => {
         const docs = [];
@@ -336,7 +337,9 @@ export default function Profesores(callback, deps) {
                 />
                 <ListItemText primary={especialidad.nombre} />
               </ListItem>
-        ))}
+        ))
+        
+        }
 
         </AccordionDetails>
       </Accordion>

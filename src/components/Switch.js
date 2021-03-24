@@ -7,6 +7,7 @@ import Switch from '@material-ui/core/Switch';
 
 const GreenSwitch = withStyles({
   switchBase: {
+    
     color: "grey",
     '&$checked': {
       color: "#99CC42",
@@ -23,6 +24,7 @@ const GreenSwitch = withStyles({
 export default function CustomizedSwitches() {
   const [state, setState] = React.useState({
     checked: true,
+    
   });
 
   const handleChange = (event) => {
@@ -31,7 +33,7 @@ export default function CustomizedSwitches() {
 
   return (
       <FormControlLabel
-        control={<GreenSwitch checked={state.checked} onChange={handleChange} name="checked" />}
+        control={<GreenSwitch size="small" checked={state.checked} onChange={handleChange} name="checked" />}
         label="Disponible"
       />
   );

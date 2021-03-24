@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
 import Profesor from "../components/ProfesorPerfil";
@@ -23,6 +23,8 @@ import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import GreenSwitch from "../components/Switch";
 import Calificacion from "../components/Calificación";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -217,6 +219,23 @@ function a11yProps(index) {
 //termina cosas de la tabla
 
 function Perfil() {
+
+  const GreenSwitch = withStyles({
+    switchBase: {
+      
+      color: "grey",
+      '&$checked': {
+        color: "#99CC42",
+      },
+      '&$checked + $track': {
+        backgroundColor: "#99CC42",
+      },
+    },
+    checked: {},
+    track: {},
+  })(Switch);
+
+
   const classes = useStyles();
   const theme = useTheme();
 
@@ -281,6 +300,15 @@ function Perfil() {
       })
   }, []);
 
+  const [state, setState] = React.useState({
+    checked: true,
+    
+  });
+
+  const handleChangeSwitch = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
 
   return (
     <>
@@ -320,9 +348,7 @@ function Perfil() {
               <div className={classes.titlePresentacion}>
                 <p className={classes.titlePresentacion_text}>Acerca de mi:</p>
                 
-                {usuarioActual?.uid === profesor.loginid ? (
-                  <p> </p>
-                ) : (
+                {usuarioActual?.uid !== profesor.loginid && profesor?.esProfesor === true && profesor?.disponible === true ? (
                   <Button
                     variant="contained"
                     size="small"
@@ -336,7 +362,8 @@ function Perfil() {
                   >
                     Agendar Mentoría
                   </Button>
-                  // <a href="" onClick={calendly}>Schedule time with me</a>
+                ) : (
+                  <p></p>
                 )}
               </div>
 
@@ -434,23 +461,46 @@ function Perfil() {
 
               <div className={classes.buttonContainer}>
                 {usuarioActual?.uid === profesor.loginid ? (
-                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly", marginTop:"-10px",}}>
-                    <GreenSwitch/>
-                    <Button
-                      disabled
-                      variant="contained"
-                      color="inherit"
-                      size="small"
-                      className={classes.buttonPerfil}
-                      startIcon={<PlayArrowIcon />}
-                      disableElevation="true"
-                    >
-                    Video
-                    </Button>
+                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly", marginTop:"0px",}}>
+                    {
+                      profesor?.esProfesor === true ? (
+                        <>
+                          <FormControlLabel
+                            control={<GreenSwitch size="small" checked={state.checked} onChange={handleChangeSwitch} name="checked" />}
+                            label="Disponible"
+                          />
+                          <Button
+                            disabled
+                            variant="contained"
+                            color="inherit"
+                            size="small"
+                            className={classes.buttonPerfil}
+                            startIcon={<PlayArrowIcon />}
+                            disableElevation="true"
+                          >
+                            Video
+                          </Button>
+                        </>
+                        
+                      ) : (
+                        <Button
+                            disabled
+                            variant="contained"
+                            color="inherit"
+                            size="small"
+                            className={classes.buttonPerfil}
+                            startIcon={<PlayArrowIcon />}
+                            disableElevation="true"
+                          >
+                            Video
+                          </Button>
+                      )
+                    }
+                    
                   </div>
                   
                 ) : (
-                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly", marginTop:"-10px",}}>
+                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly", marginTop:"0px",}}>
                     <Calificacion/>
                       <Button
                         disabled

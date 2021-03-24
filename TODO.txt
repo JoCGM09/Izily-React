@@ -19,18 +19,9 @@ $ Mostrar información del perfil (2)
 
 
 
+$ Colocar datos en la base de datos 
+$ Editar los datos de las personas
 
 
-"hice un cambio en el texto"
-
-
-
-" manuel es un puto "
-
-"hice un cambio en el texto"
-
-"hice otro cambio para footer"
-
-
-- Colocar datos en la base de datos
-- Editar los datos de las personas
+- Crear un perfil vacío cuando creas un perfil con auth
+- Crear publicaciones directamente

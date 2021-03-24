@@ -1,7 +1,5 @@
-
-///////////////////////////////// LogIn = Iniciar Sesión ////////////////////////////
-// los ids cambian a email-login y password-login 
-import React, { useRef, useState, useEffect } from 'react';
+// LogIn = Iniciar Sesión, los ids cambian a email-login y password-login 
+import React, { useRef, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -14,7 +12,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { useAuth } from '../contexts/AuthContext';
-import fondo from "../assets/images/fondo.png";
 import fondo2 from "../assets/images/fondo2.png";
 
 

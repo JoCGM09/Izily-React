@@ -12,7 +12,6 @@ import Container from "@material-ui/core/Container";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import Divider from "@material-ui/core/Divider";
-import Columnas from "../components/Columnas";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

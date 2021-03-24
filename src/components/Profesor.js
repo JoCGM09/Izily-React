@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
   datos: {
     fontWeight: "bold",
-    margin: "0px",
+    margin: "10px 0px 0px 0px",
   },
   descripcion: {
     padding: 0,

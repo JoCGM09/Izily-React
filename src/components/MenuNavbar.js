@@ -79,7 +79,6 @@ export default function CustomizedMenu(props) {
       handleClose();
       await logout();
       history.push("/login");
-      window.location.reload();
     } catch {
       setError("Ocurrió un error al salir de la cuenta");
     }

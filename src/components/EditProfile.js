@@ -86,9 +86,9 @@ export default function EditProfile() {
     });
   }
 
-  function updateCalendly(description) {
+  function updateCalendly(calendly) {
     db.collection("usuarios").doc(`${profesor.id}`).update({
-      descripcion: description
+      calendly: calendly
     });
   }
 
@@ -171,6 +171,7 @@ export default function EditProfile() {
                 fullWidth
                 name="password"
                 label="Contraseña"
+                // defaultValue={[null]}
                 inputRef={contraseñaRef}
                 placeholder="Dejar en blanco para mantener la contaseña"
                 type="password"

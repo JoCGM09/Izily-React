@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
   gridPadre: {
     display: "flex",
     alignItems: "center",
+    justifyContent:"space-between",
   },
 
   gridHijo: {
@@ -71,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 
   nombrecontainer: {
     display: "flex",
-    justifyContent: "flex-end",
+    justifyContent: "flex-start",
     alignItems: "center",
     maxWidth: "160px",
     whiteSpace: "nowrap",
@@ -228,7 +229,7 @@ export default function ElevateAppBar(props) {
               </Button>
             </Grid>
 
-            <Grid className={classes.gridHijo} item xs></Grid>
+            {/* <Grid className={classes.gridHijo} item xs></Grid> */}
 
             <Grid className={classes.gridHijo} item>
 
@@ -255,25 +256,28 @@ export default function ElevateAppBar(props) {
                 </Badge>
                 {/*<Link />*/}
               </IconButton>
+
+              {profesor && (
+                
+                  <Grid className={classes.nombrecontainer}  xs>
+                      
+                  
+                      <Avatar variante="link" onClick={goProfile} className={classes.rootAvatar} alt={profesor.nombre} src={profesor.imageURL} />
+                      <div className={classes.nombre}
+                      variante="link" onClick={goProfile}
+                      >
+                        {profesor.nombre}
+                      </div>
+                    </Grid>
+                  
+                )}
+                {/* <Grid className={classes.gridHijo} item> */}
+                  <MenuNavbar perfil={profesor?.id}/>
+                {/* </Grid>   */}
+
             </Grid>
                   
-          {profesor && (
-            <>
-              <Grid className={classes.nombrecontainer}  xs>
-                  
-              
-                  <Avatar variante="link" onClick={goProfile} className={classes.rootAvatar} alt={profesor.nombre} src={profesor.imageURL} />
-                  <div className={classes.nombre}
-                  variante="link" onClick={goProfile}
-                  >
-                    {profesor.nombre}
-                  </div>
-                </Grid>
-              </>
-            )}
-            <Grid className={classes.gridHijo} item>
-              <MenuNavbar perfil={profesor?.id}/>
-            </Grid>  
+          
             
           </Grid>
           {/* </Toolbar> */}

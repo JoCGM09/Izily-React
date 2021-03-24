@@ -11,26 +11,56 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    // width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
+    display:"flex",
+    flexDirection:"column",
+    alignItems:"center",
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    width:"300px",
+    color: "#3493C2",
+    fontWeight: "bold",
+  },
+  subContainer :{
+    display:"flex",
+    flexDirection:"row",
+    margin:0,
+    justifyContent:"center",
+  },
+  subSubContainer:{
+    display:"flex",
+    flexDirection:"column",
+    justifyContent:"center",
+  },
+  Input:{
+    width:"400px",
+    margin:"10px 0px",
+  },
+  cancelar:{
+    margin:"0px 0px 20px 0px",
+    textDecoration:"underline",
+    fontSize:"15px",
+    "&:hover":{
+      cursor:"pointer",
+    },
   },
 }));
 
 export default function EditProfile() {
   const classes = useStyles();
-
+  const vacio = "";
   const emailRef = useRef();
   const contraseñaRef = useRef();
   const confirmContraseñaRef = useRef();
@@ -40,7 +70,6 @@ export default function EditProfile() {
   const calendlyRef = useRef();
 
   const { usuarioActual, updatePassword, updateEmail } = useAuth();
-
   const [error, guardarError] = useState();
   const [carga, guardarCarga] = useState(false);
   const [profesor, setProfesor] = useState(null);
@@ -86,9 +115,9 @@ export default function EditProfile() {
     });
   }
 
-  function updateCalendly(description) {
+  function updateCalendly(calendly) {
     db.collection("usuarios").doc(`${profesor.id}`).update({
-      descripcion: description
+      calendly: calendly
     });
   }
 
@@ -138,137 +167,161 @@ export default function EditProfile() {
     traerPerfil();
   }, []);
 
+  async function goInicio(){
+    guardarError()
+    try {
+      history.push(`/inicio`)
+    } catch {
+      guardarError("Ocurrió un error al salir de la cuenta");
+    }
+  }
+
   return (
-    <Container component="main" maxWidth="xs">
+    <Container className={classes.container}>
       <CssBaseline />
       <div className={classes.paper}>
+      <Divider/>
         <Typography component="h1" variant="h5">
           Editar perfil
         </Typography>
+        <Divider/>
         {error && (
           <Alert variant="filled" severity="error">
             {error}
           </Alert>
         )}
+        <Divider/>
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                defaultValue={usuarioActual.email}
-                fullWidth
-                id="email"
-                inputRef={emailRef}
-                label="Correo Electrónico"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                name="password"
-                label="Contraseña"
-                inputRef={contraseñaRef}
-                placeholder="Dejar en blanco para mantener la contaseña"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                name="confirm-password"
-                label="Confirmar contraseña"
-                inputRef={confirmContraseñaRef}
-                placeholder="Dejar en blanco para mantener la contaseña"
-                type="password"
-                id="confirm-password"
-                autoComplete="confirm-password"
-              />
-            </Grid>
-            {profesor && (
-              <Grid item xs={12}>
+          <Grid style={{marginTop:"-20px", width:"90%"}}>
+            <Divider/>
+          </Grid>
+          <Grid container className={classes.subContainer} spacing={2}>
+            <Grid item className={classes.subSubContainer}>
+              {/* <Grid > */}
                 <TextField
                   variant="outlined"
-                  fullWidth
-                  name="name"
-                  label="Nombre"
-                  defaultValue={profesor.nombre}
-                  inputRef={nombreRef}
-                  id="rename"
-                  autoComplete="current-name"
+                  required
+                  defaultValue={usuarioActual.email}
+                  className={classes.Input}
+                  id="email"
+                  inputRef={emailRef}
+                  label="Correo Electrónico"
+                  name="email"
+                  autoComplete="email"
                 />
-              </Grid>
-            )}
-            {profesor && (
-              <Grid item xs={12}>
+              {/* </Grid> */}
+              {/* <Grid  > */}
                 <TextField
                   variant="outlined"
-                  fullWidth
-                  name="aboutMe"
-                  label="Acerca de mí"
-                  defaultValue={profesor.presentacion}
-                  inputRef={aboutMeRef}
-                  id="aboutMe"
-                  autoComplete="current-aboutMe"
-                  multiline
+                  className={classes.Input}
+                  name="password"
+                  label="Contraseña"
+                  defaultValue=""
+                  inputRef={contraseñaRef}
+                  placeholder="Dejar en blanco para mantener la contaseña"
+                  type="password"
+                  id="password"
+                  //autoComplete="current-password"
                 />
-              </Grid>
-            )}
-            {profesor && (
-              <Grid item xs={12}>
+              {/* </Grid> */}
+              {/* <Grid  > */}
                 <TextField
                   variant="outlined"
-                  fullWidth
-                  name="description"
-                  label="Descripción"
-                  defaultValue={profesor.descripcion}
-                  inputRef={descriptionRef}
-                  id="description"
-                  autoComplete="current-description"
-                  multiline
+                  className={classes.Input}
+                  name="confirm-password"
+                  label="Confirmar contraseña"
+                  inputRef={confirmContraseñaRef}
+                  placeholder="Dejar en blanco para mantener la contaseña"
+                  type="password"
+                  id="confirm-password"
+                  autoComplete="confirm-password"
                 />
-              </Grid>
-            )}
+              {/* </Grid> */}
+              {profesor && (
+                // <Grid >
+                  <TextField
+                    variant="outlined"
+                    className={classes.Input}
+                    name="name"
+                    label="Nombre y Apellido"
+                    defaultValue={profesor.nombre}
+                    inputRef={nombreRef}
+                    id="rename"
+                    autoComplete="current-name"
+                  />
+                // </Grid>
+              )}
+            </Grid>
+            <Grid item className={classes.subSubContainer}>
+              
+              {profesor && (
+                // <Grid >
+                  <TextField
+                    variant="outlined"
+                    className={classes.Input}
+                    name="aboutMe"
+                    label="Acerca de mí"
+                    defaultValue={profesor.presentacion}
+                    inputRef={aboutMeRef}
+                    id="aboutMe"
+                    autoComplete="current-aboutMe"
+                    multiline
+                  />
+                // </Grid>
+              )}
+              {profesor && (
+                // <Grid >
+                  <TextField
+                    variant="outlined"
+                    className={classes.Input}
+                    name="description"
+                    label="Descripción"
+                    defaultValue={profesor.descripcion}
+                    inputRef={descriptionRef}
+                    id="description"
+                    autoComplete="current-description"
+                    multiline
+                  />
+                // </Grid>
+              )}
 
-            {profesor && (
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  name="calendly"
-                  label="Link de Calendly"
-                  defaultValue={profesor.calendly}
-                  inputRef={calendlyRef}
-                  id="calendly"
-                  autoComplete="current-calendly"
-                  multiline
-                />
-              </Grid>
-            )}
+              {profesor && (
+                // <Grid >
+                  <TextField
+                    variant="outlined"
+                    className={classes.Input}
+                    name="calendly"
+                    label="Link de Calendly"
+                    defaultValue={profesor.calendly}
+                    inputRef={calendlyRef}
+                    id="calendly"
+                    autoComplete="current-calendly"
+                    multiline
+                  />
+                // </Grid>
+              )}
             </Grid>
+
+            
+          </Grid>
+
           <Button
             type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
+            variant="outlined"
             className={classes.submit}
             disabled={carga}
           >
             Actualizar
           </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link to="/inicio" variant="body2">
+          <Grid container justify="flex-end" style={{width:"100%"}}>
+          <p className={classes.cancelar} variante="link" onClick={goInicio}>Cancelar</p>
+              {/* <Link to="/inicio" variant="body2">
                 Cancelar
-              </Link>
-            </Grid>
+              </Link> */}
+            
           </Grid>
+
+          
         </form>
       </div>
     </Container>

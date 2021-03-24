@@ -128,7 +128,8 @@ export default function Profesor({ profesor }) {
           <div className={classes.avatarContainer}>
             <img className={classes.avatar} src={profesor.imageURL}/>
           {/* id={`myimg-${profesor.id} */}
-          <div style={{width:"100%", marginBottom:"5px", display:"flex", justifyContent:"center"}}>
+          {profesor.esProfesor === true ? (
+            <div style={{width:"100%", marginBottom:"5px", display:"flex", justifyContent:"center"}}>
               <Box aria-owns={open ? 'mouse-over-popover' : undefined}
                   aria-haspopup="true"
                   onMouseEnter={handlePopoverOpen}
@@ -176,6 +177,12 @@ export default function Profesor({ profesor }) {
               </Popover>
               
             </div>
+          ) : (
+            <p>
+
+            </p>
+          )}
+          
             <Typography className={classes.nombre} gutterBottom variant="h5" component="h2">
               {profesor.nombre}
             </Typography>
@@ -185,9 +192,16 @@ export default function Profesor({ profesor }) {
                   elevation={0}
                   children={profesor.descripcion}
                 />
-            <Typography className={classes.datos} gutterBottom variant="body2" component="p">
+            {profesor.esProfesor === true ? (
+              <Typography className={classes.datos} gutterBottom variant="body2" component="p">
               {/* X calificaciones*/}{ profesor.calificaciones} calificaciones | {/* X horas dictadas*/} {profesor.horas} horas dictadas
-            </Typography>            
+              </Typography> 
+            ) : (
+              <p>
+
+              </p>
+            )}
+                       
             
           </div>
         </CardContent>

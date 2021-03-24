@@ -20,6 +20,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
+
 const labels = {
     0.5: 'Useless',
     1: 'Muy Mala',
@@ -182,7 +183,13 @@ export default function RecipeReviewCard(props) {
 
   <div>
 
-    <Button type="button" onClick={handleOpen} variant="outlined" size="small" className={classes.PublicarButton}>
+    <Button 
+      type="button" 
+      onClick={handleOpen} 
+      variant="outlined" 
+      size="small" 
+      startIcon={<StarIcon />}
+      className={classes.PublicarButton}>
         Calificar
     </Button>
       <Modal

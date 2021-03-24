@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
+import { db } from "../firebase";
 
 const AuthContext = React.createContext();
 
@@ -12,7 +13,36 @@ export function AuthProvider({ children }) {
   const [carga, guardarCarga] = useState(true);
 
   function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return auth.createUserWithEmailAndPassword(email, password)
+    .then(()=>{
+      const user = auth.currentUser; 
+      const userUid = user.uid;
+      // const email = user.email;
+      // const displayName = user.displayName;
+
+      // valores iniciales
+      const account = {
+        loginid: userUid,
+        calendly: " ",
+        calificaciones: 0,
+        cursos: [],
+        descripcion: " ",
+        disponible: false,
+        esProfesor: false,
+        horas: 0,
+        imageURL: " ",
+        nombre: " ",
+        presentacion: " ",
+        puntuacion: 0
+      }
+      db.collection('usuarios').doc().set(account)
+      .then(()=>{
+        console.log("usuario creado en las colecciones");
+      })
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   function login(email, password) {

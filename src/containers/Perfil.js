@@ -21,8 +21,7 @@ import LanguageIcon from "@material-ui/icons/Language";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import GreenSwitch from "../components/Switch";
-import Calificacion from "../components/Calificación";
+import Calificacion from "../components/Calificacion";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 

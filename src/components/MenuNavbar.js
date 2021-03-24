@@ -5,6 +5,16 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { IconButton } from "@material-ui/core";
+<<<<<<< HEAD
+import PersonIcon from '@material-ui/icons/Person';
+import SettingsIcon from '@material-ui/icons/Settings';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
+import { useHistory } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import {useState } from "react";
+import InfoIcon from '@material-ui/icons/Info';
+=======
 import PersonIcon from "@material-ui/icons/Person";
 import SettingsIcon from "@material-ui/icons/Settings";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
@@ -13,7 +23,9 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useState } from "react";
 import InfoIcon from "@material-ui/icons/Info";
+>>>>>>> b7661971d6b8a2d3dee7f2e8738f73bcd3d9831a
 import Divider from "@material-ui/core/Divider";
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -88,9 +100,26 @@ export default function CustomizedMenu(props) {
     setError("");
 
     try {
+<<<<<<< HEAD
+      handleClose()
+      history.push('/editar-perfil')
+    } catch {
+      setError('Ocurrió un error al salir de la cuenta')
+    }
+
+  }
+
+  async function misCursos(){
+    setError('')
+
+    try {
+      handleClose()
+      history.push('/mis-cursos')
+=======
       handleClose();
       history.push("/editar-perfil");
       window.location.reload();
+>>>>>>> b7661971d6b8a2d3dee7f2e8738f73bcd3d9831a
     } catch {
       setError("Ocurrió un error al salir de la cuenta");
     }
@@ -154,6 +183,17 @@ export default function CustomizedMenu(props) {
           </ListItemIcon>
           <ListItemText primary="Editar Perfil" />
         </StyledMenuItem>
+        {props.esProfesor === true ? (
+          <StyledMenuItem variant="link" onClick={misCursos}>
+            <ListItemIcon>
+              <MenuBookIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Mis Cursos" />
+          </StyledMenuItem>
+        ) : (
+          <>
+          </>
+        )}
         <StyledMenuItem variant="link" onClick={handleLogOut}>
           <ListItemIcon>
             <ExitToAppTwoToneIcon fontSize="small" />

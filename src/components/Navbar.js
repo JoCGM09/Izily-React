@@ -260,6 +260,25 @@ export default function ElevateAppBar(props) {
               </IconButton>
 
               {profesor && (
+<<<<<<< HEAD
+                
+                  <Grid className={classes.nombrecontainer}  xs>
+                      
+                  
+                      <Avatar variante="link" onClick={goProfile} className={classes.rootAvatar} alt={profesor.nombre} src={profesor.imageURL} />
+                      <div className={classes.nombre}
+                      variante="link" onClick={goProfile}
+                      >
+                        {profesor.nombre}
+                      </div>
+                    </Grid>
+                  
+                )}
+                {/* <Grid className={classes.gridHijo} item> */}
+                  <MenuNavbar perfil={profesor?.id} esProfesor={profesor?.esProfesor}/>
+                {/* </Grid>   */}
+
+=======
                 <Grid className={classes.nombrecontainer} xs>
                   <Avatar
                     variante="link"
@@ -280,6 +299,7 @@ export default function ElevateAppBar(props) {
               {/* <Grid className={classes.gridHijo} item> */}
               <MenuNavbar perfil={profesor?.id} />
               {/* </Grid>   */}
+>>>>>>> b7661971d6b8a2d3dee7f2e8738f73bcd3d9831a
             </Grid>
           </Grid>
           {/* </Toolbar> */}

@@ -179,11 +179,9 @@ export default function EditProfile() {
     <Container className={classes.container}>
       <CssBaseline />
       <div className={classes.paper}>
-      <Divider/>
         <Typography component="h1" variant="h5">
           Editar perfil
         </Typography>
-        <Divider/>
         {error && (
           <Alert variant="filled" severity="error">
             {error}
@@ -252,22 +250,6 @@ export default function EditProfile() {
               )}
             </Grid>
             <Grid item className={classes.subSubContainer}>
-              
-              {profesor && (
-                // <Grid >
-                  <TextField
-                    variant="outlined"
-                    className={classes.Input}
-                    name="aboutMe"
-                    label="Acerca de mí"
-                    defaultValue={profesor.presentacion}
-                    inputRef={aboutMeRef}
-                    id="aboutMe"
-                    autoComplete="current-aboutMe"
-                    multiline
-                  />
-                // </Grid>
-              )}
               {profesor && (
                 // <Grid >
                   <TextField
@@ -283,7 +265,21 @@ export default function EditProfile() {
                   />
                 // </Grid>
               )}
-
+              {profesor && (
+                // <Grid >
+                  <TextField
+                    variant="outlined"
+                    className={classes.Input}
+                    name="aboutMe"
+                    label="Acerca de mí"
+                    defaultValue={profesor.presentacion}
+                    inputRef={aboutMeRef}
+                    id="aboutMe"
+                    autoComplete="current-aboutMe"
+                    multiline
+                  />
+                // </Grid>
+              )}
               {profesor && (
                 // <Grid >
                   <TextField

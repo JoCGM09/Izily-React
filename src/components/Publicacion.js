@@ -72,6 +72,8 @@ const useStyles = makeStyles((theme) => ({
 
   comentariosP:{
     marginRight:"20px", 
+    marginTop:"10px",
+    marginBottom:"10px",
     "&:hover":{
       textDecoration:"underline",
       cursor:"pointer",
@@ -80,13 +82,20 @@ const useStyles = makeStyles((theme) => ({
 
   interesadosP:{
     marginLeft:"20px", 
+    marginTop:"10px",
+    marginBottom:"10px",
     "&:hover":{
       cursor:"default",
     },
   },
 
-  
+  CardHeader:{
+    paddingTop: "15px",
+    paddingLeft:"15px",
+  },
+
   header:{
+    paddingRight:"15px",
     display:"flex",
     justifyContent:"space-between",
     alignItems:"center",
@@ -106,6 +115,7 @@ export default function RecipeReviewCard(props) {
     <Card className={classes.root}>
       <div className={classes.header}>
       <CardHeader
+        className={classes.CardHeader}
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar} style={{backgroundColor:props.color}}>
             {props.letter}
@@ -158,7 +168,7 @@ export default function RecipeReviewCard(props) {
       </div>
 
 
-      <CardActions style={{display:"flex", justifyContent:"space-around", padding:"10px",}}>
+      <CardActions style={{display:"flex", justifyContent:"space-around", padding:"5px",}}>
         <Button aria-label="add to favorites" style={{height:"35px",}}>
           <FavoriteIcon /> <p style={{marginLeft:"10px"}}>Me Interesa</p>
         </Button>

@@ -183,7 +183,7 @@ export default function ElevateAppBar(props) {
   const { usuarioActual } = useAuth();
 
   const [profesor, setProfesor] = useState(null);
- 
+  
   const traerPerfil = useCallback(()=>{
     if(usuarioActual){
       const idd = usuarioActual.uid;
@@ -209,21 +209,26 @@ export default function ElevateAppBar(props) {
   
 
   useEffect(() => {
-    
     traerPerfil();
   },[]);
 
   async function goProfile(){
     setError('')
-
     try {
       history.push(`/perfil/${profesor.id}`)
-      //reload()
+      window.location.reload();
     } catch {
       setError('Ocurrió un error al salir de la cuenta')
     }
-    
+  }
 
+  async function goInicio(){
+    setError('')
+    try {
+      history.push(`/inicio`)
+    } catch {
+      setError('Ocurrió un error al salir de la cuenta')
+    }
   }
   
   
@@ -255,7 +260,7 @@ export default function ElevateAppBar(props) {
 
 
 
-              <Button component={Link} to={"/inicio"} className={classes.botones} variant="outlined">
+              <Button variante="link" onClick={goInicio} className={classes.botones} variant="outlined">
                 Inicio
               </Button>
           
@@ -284,7 +289,7 @@ export default function ElevateAppBar(props) {
               <Grid className={classes.nombrecontainer}  xs>
                   
               
-                  <Avatar component={Link} to={`/perfil/${profesor.id}`} className={classes.rootAvatar} alt={profesor.nombre} src={profesor.imageURL} />
+                  <Avatar variante="link" onClick={goProfile} className={classes.rootAvatar} alt={profesor.nombre} src={profesor.imageURL} />
                   <div className={classes.nombre}
                   variante="link" onClick={goProfile}
                   >
@@ -298,8 +303,8 @@ export default function ElevateAppBar(props) {
             </>  
                 )}
             <Grid className={classes.gridHijo} item>
-                <MenuNavbar perfil={profesor?.id}/>
-              </Grid>
+              <MenuNavbar perfil={profesor?.id}/>
+            </Grid>
 
             
             

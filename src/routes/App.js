@@ -13,6 +13,7 @@ import { AuthProvider } from "../contexts/AuthContext";
 import Inicio from "../containers/Inicio";
 import Profesores from "../containers/Profesores";
 import Landing from "../containers/Landing";
+import AcercaDeIzily from "../containers/AcercaDeIzily";
 // probando rama login
 
 const App = () => (
@@ -32,6 +33,7 @@ const App = () => (
           />
           <PrivateRoute exact path="/inicio" component={Inicio} />
           <Route path="/perfil/:profesorId" component={Perfil} />
+          <PrivateRoute exact path="/acerca-de-izily" component={AcercaDeIzily} />
           <Route component={NotFound} />
         </Switch>
       </Layout>

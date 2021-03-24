@@ -86,7 +86,6 @@ const useStyles = makeStyles((theme) => ({
     width: "380px",
     height: "120px",
     paddingBottom: "0px",
-
     overflow: "auto",
     marginLeft: "-25px",
     marginTop: "-10px",
@@ -103,6 +102,7 @@ const useStyles = makeStyles((theme) => ({
   categories: {
     background: "white",
     color: "black",
+    paddingBottom:"0px",
   },
 
   categoriesAppBar: {
@@ -157,7 +157,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-evenly",
     marginTop: "-10px",
     alignItems:"center",
-
     width: "370px",
     paddingLeft: "5px",
   },
@@ -435,7 +434,7 @@ function Perfil() {
 
               <div className={classes.buttonContainer}>
                 {usuarioActual?.uid === profesor.loginid ? (
-                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly"}}>
+                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly", marginTop:"-10px",}}>
                     <GreenSwitch/>
                     <Button
                       disabled
@@ -451,47 +450,32 @@ function Perfil() {
                   </div>
                   
                 ) : (
-                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly"}}>
-                  <Calificacion/>
-                  <Button
-                    disabled
-                    variant="contained"
-                    color="inherit"
-                    size="small"
-                    className={classes.buttonPerfil}
-                    startIcon={<PeopleIcon />}
-                    disableElevation="true"
-                  >
-                    Contactar
-                  </Button>
-                  <Button
-                  disabled
-                  variant="contained"
-                  color="inherit"
-                  size="small"
-                  className={classes.buttonPerfil}
-                  startIcon={<PlayArrowIcon />}
-                  disableElevation="true"
-                >
-                  Video
-                </Button>
+                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly", marginTop:"-10px",}}>
+                    <Calificacion/>
+                      <Button
+                        disabled
+                        variant="contained"
+                        color="inherit"
+                        size="small"
+                        className={classes.buttonPerfil}
+                        startIcon={<PeopleIcon />}
+                        disableElevation="true"
+                      >
+                        Contactar
+                      </Button>
+                      <Button
+                      disabled
+                      variant="contained"
+                      color="inherit"
+                      size="small"
+                      className={classes.buttonPerfil}
+                      startIcon={<PlayArrowIcon />}
+                      disableElevation="true"
+                      >
+                        Video
+                      </Button>
                   </div>
-                )}
-
-                
-
-                {/* <Button
-                  disabled
-                  variant="contained"
-                  size="small"
-                  color="inherit"
-                  className={classes.buttonPerfil}
-                  startIcon={<PeopleIcon />}
-                  disableElevation="true"
-                >
-                  Mi Drive
-                </Button> */}
-                
+                )}          
               </div>
 
               {/* <div className={classes.idiomsContainer}>
@@ -504,33 +488,9 @@ function Perfil() {
                 </Typography>
               </div> */}
 
-
-              {/* <div>
-                  <div>
-                    {events.map((event)=>{
-                        return (
-                          <div>
-                            <span>
-                            {event.created_at}
-                            </span>
-                            <ul>
-                              {event.event_guests.map((guest)=>{
-                                return <li>{guest.email}</li>
-                              })}
-                            </ul>
-                          </div>
-                        )
-                    })}
-                  </div>
-              </div> */}
             </Grid>
           </Grid>
-          
-
-          {/* <div className={classes.seccion2}>
-            <GreenSwitch/>
-            {profesor.nombre}
-          </div> */}
+                   
         </div>
       )}
       {!profesor && (

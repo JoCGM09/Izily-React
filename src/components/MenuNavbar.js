@@ -13,6 +13,8 @@ import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import {useState } from "react";
 import Link from "react-router-dom/Link";
+import InfoIcon from '@material-ui/icons/Info';
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
   item:{
@@ -82,6 +84,7 @@ export default function CustomizedMenu(props) {
       handleClose()
       await logout()
       history.push('/login')
+      window.location.reload();
     } catch {
       setError('Ocurrió un error al salir de la cuenta')
     }
@@ -94,6 +97,7 @@ export default function CustomizedMenu(props) {
     try {
       handleClose()
       history.push('/editar-perfil')
+      window.location.reload();
     } catch {
       setError('Ocurrió un error al salir de la cuenta')
     }
@@ -106,6 +110,19 @@ export default function CustomizedMenu(props) {
     try {
       handleClose()
       history.push(`/perfil/${props.perfil}`)
+      window.location.reload();
+    } catch {
+      setError('Ocurrió un error al salir de la cuenta')
+    }
+
+  }
+
+  async function acercaDeIzily(){
+    setError('')
+
+    try {
+      handleClose()
+      history.push(`/acerca-de-izily`)
     } catch {
       setError('Ocurrió un error al salir de la cuenta')
     }
@@ -151,6 +168,13 @@ export default function CustomizedMenu(props) {
             <ExitToAppTwoToneIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Cerrar Sesión" />
+        </StyledMenuItem>
+        <Divider/>
+        <StyledMenuItem variant="link" onClick={acercaDeIzily}>
+          <ListItemIcon>
+            <InfoIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Acerca de Izily" />
         </StyledMenuItem>
       </StyledMenu>
     </div>

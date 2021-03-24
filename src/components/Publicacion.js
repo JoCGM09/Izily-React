@@ -105,9 +105,7 @@ export default function RecipeReviewCard(props) {
       <CardHeader
         className={classes.CardHeader}
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar} style={{backgroundColor:props.color}}>
-            {props.letter}
-          </Avatar>
+          <Avatar aria-label="recipe" className={classes.avatar} alt={props.name} src={props.imgeURL} />
         }
         // action={
         //   <IconButton aria-label="settings">

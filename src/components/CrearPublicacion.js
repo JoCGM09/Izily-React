@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -75,6 +75,42 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
+  const initialBody = {
+    body: '',
+    createAt: '',
+    userHandle: '',
+  }
+  const [body, Setbody] = useState("");
+
+  const { usuarioActual } = useAuth();
+
+  const [profesor, setProfesor] = useState(null);
+
+  const traerPerfil = useCallback(() => {
+    if (usuarioActual) {
+      const idd = usuarioActual.uid;
+      const usuariosRef = db.collection("usuarios");
+      usuariosRef
+        .where("loginid", "==", idd)
+        .get()
+        .then((querySnapshot) => {
+          const docs = [];
+          querySnapshot.forEach((doc) => {
+            docs.push({ ...doc.data(), id: doc.id });
+          });
+          if (docs.length > 0) {
+            setProfesor(docs[0]);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [setProfesor]);
+
+  useEffect(() => {
+    traerPerfil();
+  }, []);
 
   return (
     <Card className={classes.root}>

@@ -7,14 +7,11 @@ import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import CrearPublicacion from "../components/CrearPublicacion";
 import Comentario from "../components/Comentario";
 import Chip from "@material-ui/core/Chip";
-
-
-
 
 const useStyles = makeStyles((theme) => ({
   botones: {
@@ -24,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
     fontSize: "12px",
   },
-
 
   searchInput: {
     opacity: "0.9",
@@ -61,36 +57,34 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     maxWidth: 550,
-    minWidth:"100%",
+    minWidth: "100%",
     margin: "10px 0px",
   },
   media: {
-    width:"100%",
+    width: "100%",
     height: "auto",
   },
   expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: "rotate(180deg)",
   },
   // avatar: {
   //   backgroundColor: red[500],
   // },
   Content: {
-    widht:"100px",
-    color:"black",
+    widht: "100px",
+    color: "black",
     // display: "flex",
     // alignContent:"start",
     //flexWrap: "wrap",
     //hyphens: "auto",
     //wordBreak:"break-all",
-    
-    
   },
 
   etiqueta0: {
@@ -113,22 +107,15 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     fontWeight: "bold",
   },
-  
 }));
 
 function Home() {
   const classes = useStyles();
 
-
-
   const { usuarioActual } = useAuth();
 
-  
-
-  
   const [profesor, setProfesor] = useState(null);
-  
- 
+
   const traerProfesor = () => {
     const idd = usuarioActual.uid;
     const usuariosRef = db.collection("usuarios");
@@ -146,8 +133,6 @@ function Home() {
         console.error(error);
       });
   };
-
-  
 
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
@@ -200,14 +185,11 @@ function Home() {
             </Grid>
           </Grid>
           <Grid align="start" className={classes.publicacionesContainer}>
-          
-          {/* <Calificacion/> */}
-          <CrearPublicacion/>
+            {/* <Calificacion/> */}
+            <CrearPublicacion />
 
-
-          <Publicacion
-              letter="M"
-              color="Purple"
+            <Publicacion
+              imageURL={profesor.imageURL}
               name="Margaly Flores"
               imagen="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/publicacionImages%2Fproblema1.jpeg?alt=media&token=f4e69610-db14-4e2d-a5fa-b97bae16daec"
               date="16 de marzo, 2021"
@@ -237,22 +219,15 @@ function Home() {
               content="¿Algún mentor especializado en Física para nivel escolar?"
               interesados={4}
               comentarios={1}
-              tag={
-                <Chip
-                  className={classes.etiqueta0}
-                  label="Física"
-                />
-              }
+              tag={<Chip className={classes.etiqueta0} label="Física" />}
               children={
                 <div>
-
-                <Comentario
-                  name="Manuel Baella"
-                  color="red"
-                  letter="M"
-                  comentario="Jesús Cama es bueno en esos temas, lo puedes encontrar en el buscador de mentores."
-                />
-
+                  <Comentario
+                    name="Manuel Baella"
+                    color="red"
+                    letter="M"
+                    comentario="Jesús Cama es bueno en esos temas, lo puedes encontrar en el buscador de mentores."
+                  />
                 </div>
               }
             />
@@ -265,27 +240,22 @@ function Home() {
               interesados={7}
               comentarios={2}
               tag={
-                <Chip
-                  className={classes.etiqueta2}
-                  label="RadioPropagación"
-                />
+                <Chip className={classes.etiqueta2} label="RadioPropagación" />
               }
               children={
                 <div>
-                
-                <Comentario
-                  name="Jesus Cama"
-                  color="grey"
-                  letter="J"
-                  comentario="Puedes buscar en los libros virtuales que subió el Centro Cultural Pedro Paulet a su drive."
-                />
-                <Comentario
-                  name="Margaly Flores"
-                  color="purple"
-                  letter="M"
-                  comentario="Frente a la puerta 3 de la UNI puedes encontrar los más importantes para ese curso. Suerte!"
-                />
-
+                  <Comentario
+                    name="Jesus Cama"
+                    color="grey"
+                    letter="J"
+                    comentario="Puedes buscar en los libros virtuales que subió el Centro Cultural Pedro Paulet a su drive."
+                  />
+                  <Comentario
+                    name="Margaly Flores"
+                    color="purple"
+                    letter="M"
+                    comentario="Frente a la puerta 3 de la UNI puedes encontrar los más importantes para ese curso. Suerte!"
+                  />
                 </div>
               }
             />
@@ -298,13 +268,9 @@ function Home() {
               interesados={16}
               comentarios={2}
               tag={
-                <Chip
-                  className={classes.etiqueta1}
-                  label="Preuniversitario"
-                />
+                <Chip className={classes.etiqueta1} label="Preuniversitario" />
               }
               children={
-                
                 <div>
                   <Comentario
                     name="Margaly Flores"
@@ -317,9 +283,8 @@ function Home() {
                     color="green"
                     letter="J"
                     comentario="Muchas gracias, si encontré :D"
-                />
+                  />
                 </div>
-
               }
             />
           </Grid>

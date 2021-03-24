@@ -31,3 +31,6 @@ $ Mostrar información del perfil (2)
 
 "hice otro cambio para footer"
 
+
+- Colocar datos en la base de datos
+- Editar los datos de las personas

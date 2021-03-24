@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   gridPadre: {
     display: "flex",
     alignItems: "center",
-    justifyContent:"space-between",
+    justifyContent: "space-between",
   },
 
   gridHijo: {
@@ -166,9 +166,9 @@ export default function ElevateAppBar(props) {
   const { usuarioActual } = useAuth();
 
   const [profesor, setProfesor] = useState(null);
-  
-  const traerPerfil = useCallback(()=>{
-    if(usuarioActual){
+
+  const traerPerfil = useCallback(() => {
+    if (usuarioActual) {
       const idd = usuarioActual.uid;
       const usuariosRef = db.collection("usuarios");
       usuariosRef
@@ -193,21 +193,21 @@ export default function ElevateAppBar(props) {
     traerPerfil();
   }, []);
 
-  async function goProfile(){
-    setError('')
+  async function goProfile() {
+    setError("");
     try {
-      history.push(`/perfil/${profesor.id}`)
+      history.push(`/perfil/${profesor.id}`);
       window.location.reload();
     } catch {
       setError("Ocurrió un error al salir de la cuenta");
     }
   }
-  async function goInicio(){
-    setError('')
+  async function goInicio() {
+    setError("");
     try {
-      history.push(`/inicio`)
+      history.push(`/inicio`);
     } catch {
-      setError('Ocurrió un error al salir de la cuenta')
+      setError("Ocurrió un error al salir de la cuenta");
     }
   }
 
@@ -232,10 +232,12 @@ export default function ElevateAppBar(props) {
             {/* <Grid className={classes.gridHijo} item xs></Grid> */}
 
             <Grid className={classes.gridHijo} item>
-
-
-
-              <Button variante="link" onClick={goInicio} className={classes.botones} variant="outlined">
+              <Button
+                variante="link"
+                onClick={goInicio}
+                className={classes.botones}
+                variant="outlined"
+              >
                 Inicio
               </Button>
 
@@ -258,27 +260,27 @@ export default function ElevateAppBar(props) {
               </IconButton>
 
               {profesor && (
-                
-                  <Grid className={classes.nombrecontainer}  xs>
-                      
-                  
-                      <Avatar variante="link" onClick={goProfile} className={classes.rootAvatar} alt={profesor.nombre} src={profesor.imageURL} />
-                      <div className={classes.nombre}
-                      variante="link" onClick={goProfile}
-                      >
-                        {profesor.nombre}
-                      </div>
-                    </Grid>
-                  
-                )}
-                {/* <Grid className={classes.gridHijo} item> */}
-                  <MenuNavbar perfil={profesor?.id}/>
-                {/* </Grid>   */}
-
+                <Grid className={classes.nombrecontainer} xs>
+                  <Avatar
+                    variante="link"
+                    onClick={goProfile}
+                    className={classes.rootAvatar}
+                    alt={profesor.nombre}
+                    src={profesor.imageURL}
+                  />
+                  <div
+                    className={classes.nombre}
+                    variante="link"
+                    onClick={goProfile}
+                  >
+                    {profesor.nombre}
+                  </div>
+                </Grid>
+              )}
+              {/* <Grid className={classes.gridHijo} item> */}
+              <MenuNavbar perfil={profesor?.id} />
+              {/* </Grid>   */}
             </Grid>
-                  
-          
-            
           </Grid>
           {/* </Toolbar> */}
         </AppBar>

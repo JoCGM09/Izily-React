@@ -5,32 +5,29 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { IconButton } from "@material-ui/core";
-import PersonIcon from '@material-ui/icons/Person';
-import SettingsIcon from '@material-ui/icons/Settings';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-import { useHistory } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import {useState } from "react";
-import Link from "react-router-dom/Link";
-import InfoIcon from '@material-ui/icons/Info';
+import PersonIcon from "@material-ui/icons/Person";
+import SettingsIcon from "@material-ui/icons/Settings";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import ExitToAppTwoToneIcon from "@material-ui/icons/ExitToAppTwoTone";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { useState } from "react";
+import InfoIcon from "@material-ui/icons/Info";
 import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
-  item:{
-    
-    "&:onClick":{
-      backgroundColor:"black",
+  item: {
+    "&:onClick": {
+      backgroundColor: "black",
     },
-  }
+  },
 }));
 
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
-    marginLeft:"-10px",
+    marginLeft: "-10px",
   },
-
 })((props) => (
   <Menu
     elevation={0}
@@ -58,7 +55,6 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-
 export default function CustomizedMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -71,70 +67,62 @@ export default function CustomizedMenu(props) {
   };
 
   const [error, setError] = useState("");
-  const { usuarioActual, logout } = useAuth()
-  const history = useHistory()
+  const { usuarioActual, logout } = useAuth();
+  const history = useHistory();
   const classes = useStyles();
 
-
-
-  async function handleLogOut(){
-    setError('')
+  async function handleLogOut() {
+    setError("");
 
     try {
-      handleClose()
-      await logout()
-      history.push('/login')
+      handleClose();
+      await logout();
+      history.push("/login");
       window.location.reload();
     } catch {
-      setError('Ocurrió un error al salir de la cuenta')
+      setError("Ocurrió un error al salir de la cuenta");
     }
-
   }
 
-  async function editProfile(){
-    setError('')
+  async function editProfile() {
+    setError("");
 
     try {
-      handleClose()
-      history.push('/editar-perfil')
+      handleClose();
+      history.push("/editar-perfil");
       window.location.reload();
     } catch {
-      setError('Ocurrió un error al salir de la cuenta')
+      setError("Ocurrió un error al salir de la cuenta");
     }
-
   }
 
-  async function goProfile(){
-    setError('')
+  async function goProfile() {
+    setError("");
 
     try {
-      handleClose()
-      history.push(`/perfil/${props.perfil}`)
+      handleClose();
+      history.push(`/perfil/${props.perfil}`);
       window.location.reload();
     } catch {
-      setError('Ocurrió un error al salir de la cuenta')
+      setError("Ocurrió un error al salir de la cuenta");
     }
-
   }
 
-  async function acercaDeIzily(){
-    setError('')
+  async function acercaDeIzily() {
+    setError("");
 
     try {
-      handleClose()
-      history.push(`/acerca-de-izily`)
+      handleClose();
+      history.push(`/acerca-de-izily`);
     } catch {
-      setError('Ocurrió un error al salir de la cuenta')
+      setError("Ocurrió un error al salir de la cuenta");
     }
-
   }
-
-
 
   return (
     <div>
       <IconButton
-        padding= "0px"
+        padding="0px"
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
@@ -150,10 +138,13 @@ export default function CustomizedMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem variante="link" onClick={goProfile} className={classes.item}
+        <StyledMenuItem
+          variante="link"
+          onClick={goProfile}
+          className={classes.item}
         >
           <ListItemIcon>
-            <PersonIcon fontSize="small"/>
+            <PersonIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Perfil" />
         </StyledMenuItem>
@@ -169,7 +160,7 @@ export default function CustomizedMenu(props) {
           </ListItemIcon>
           <ListItemText primary="Cerrar Sesión" />
         </StyledMenuItem>
-        <Divider/>
+        <Divider />
         <StyledMenuItem variant="link" onClick={acercaDeIzily}>
           <ListItemIcon>
             <InfoIcon fontSize="small" />

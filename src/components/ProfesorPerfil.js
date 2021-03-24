@@ -1,23 +1,20 @@
 //Este componente es una card sola
-import React from 'react'
-import Link from "react-router-dom/Link"
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Rating from '@material-ui/lab/Rating';
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import StarIcon from '@material-ui/icons/Star';
-import Popover from '@material-ui/core/Popover';
+import Rating from "@material-ui/lab/Rating";
+import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
+import StarIcon from "@material-ui/icons/Star";
+import Popover from "@material-ui/core/Popover";
 
 const StyledRating = withStyles({
   iconFilled: {
-    color: '#3493C2',
+    color: "#3493C2",
   },
- 
 })(Rating);
 
 const useStyles = makeStyles((theme) => ({
@@ -45,13 +42,11 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     margin: 0,
     textAlign: "center",
-    color: "white"
+    color: "white",
   },
   calificacion: {
-    
     flexDirection: "row",
     textAlign: "center",
-    
   },
   datos: {
     fontWeight: "bold",
@@ -71,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
   },
   paperPresentacion: {
-    backgroundColor:"rgba(0,0,0,0)",
+    backgroundColor: "rgba(0,0,0,0)",
     height: "75px",
     overflow: "auto",
     textAlign: "justify",
@@ -81,18 +76,18 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "5px",
   },
   popover: {
-    pointerEvents: 'none',
-    boxShadow:"0px",
-    textShadow:"0px",
+    pointerEvents: "none",
+    boxShadow: "0px",
+    textShadow: "0px",
   },
   paper: {
     padding: "5px",
-    boxShadow:"0px",
-    textShadow:"0px",
-    width:"30px",
-    display:"flex",
-    justifyContent:"center",
-    background:"#A8A8A8",
+    boxShadow: "0px",
+    textShadow: "0px",
+    width: "30px",
+    display: "flex",
+    justifyContent: "center",
+    background: "#A8A8A8",
   },
 }));
 
@@ -123,25 +118,42 @@ export default function Profesor({ profesor }) {
 
   return (
     <Card className={classes.root} variant="outlined">
-      
-        <CardContent style={{paddingBottom:"10px",}}>
-          <div className={classes.avatarContainer}>
-            <img className={classes.avatar} src={profesor.imageURL}/>
+      <CardContent style={{ paddingBottom: "10px" }}>
+        <div className={classes.avatarContainer}>
+          <img
+            alt="user avatar"
+            className={classes.avatar}
+            src={profesor.imageURL}
+          />
           {/* id={`myimg-${profesor.id} */}
           {profesor.esProfesor === true ? (
-            <div style={{width:"100%", marginBottom:"5px", display:"flex", justifyContent:"center"}}>
-              <Box aria-owns={open ? 'mouse-over-popover' : undefined}
-                  aria-haspopup="true"
-                  onMouseEnter={handlePopoverOpen}
-                  onMouseLeave={handlePopoverClose} component="fieldset" margin={0} border={0} padding={0} mb={-1} borderColor="transparent"
-                  >
-                <StyledRating 
-                name="customized-color"
-                //defaultValue= {5}
-                defaultValue= {profesor.puntuacion}
-                precision={0.1}
-                icon={<StarIcon fontSize="large" />}
-                readOnly
+            <div
+              style={{
+                width: "100%",
+                marginBottom: "5px",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                aria-owns={open ? "mouse-over-popover" : undefined}
+                aria-haspopup="true"
+                onMouseEnter={handlePopoverOpen}
+                onMouseLeave={handlePopoverClose}
+                component="fieldset"
+                margin={0}
+                border={0}
+                padding={0}
+                mb={-1}
+                borderColor="transparent"
+              >
+                <StyledRating
+                  name="customized-color"
+                  //defaultValue= {5}
+                  defaultValue={profesor.puntuacion}
+                  precision={0.1}
+                  icon={<StarIcon fontSize="large" />}
+                  readOnly
                 />
               </Box>
               <Popover
@@ -154,58 +166,55 @@ export default function Profesor({ profesor }) {
                 open={open}
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
+                  vertical: "bottom",
+                  horizontal: "left",
                 }}
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
+                  vertical: "top",
+                  horizontal: "left",
                 }}
                 elevation={0}
                 onClose={handlePopoverClose}
                 disableRestoreFocus
-                anchorOrigin={{
-                  vertical: 'center',
-                  horizontal: 'right',
-                }}
-                transformOrigin={{
-                  vertical: 'center',
-                  horizontal: 'left',
-                }}
               >
                 <span className={classes.numero}>{profesor.puntuacion}</span>
               </Popover>
-              
             </div>
           ) : (
-            <p>
-
-            </p>
+            <p></p>
           )}
-          
-            <Typography className={classes.nombre} gutterBottom variant="h5" component="h2">
-              {profesor.nombre}
+
+          <Typography
+            className={classes.nombre}
+            gutterBottom
+            variant="h5"
+            component="h2"
+          >
+            {profesor.nombre}
+          </Typography>
+
+          <Paper
+            className={classes.paperPresentacion}
+            overflow="scroll"
+            elevation={0}
+            children={profesor.descripcion}
+          />
+          {profesor.esProfesor === true ? (
+            <Typography
+              className={classes.datos}
+              gutterBottom
+              variant="body2"
+              component="p"
+            >
+              {/* X calificaciones*/}
+              {profesor.calificaciones} calificaciones | {/* X horas dictadas*/}{" "}
+              {profesor.horas} horas dictadas
             </Typography>
-
-            <Paper className={classes.paperPresentacion}
-                  overflow= "scroll"
-                  elevation={0}
-                  children={profesor.descripcion}
-                />
-            {profesor.esProfesor === true ? (
-              <Typography className={classes.datos} gutterBottom variant="body2" component="p">
-              {/* X calificaciones*/}{ profesor.calificaciones} calificaciones | {/* X horas dictadas*/} {profesor.horas} horas dictadas
-              </Typography> 
-            ) : (
-              <p>
-
-              </p>
-            )}
-                       
-            
-          </div>
-        </CardContent>
-      
+          ) : (
+            <p></p>
+          )}
+        </div>
+      </CardContent>
     </Card>
   );
 }

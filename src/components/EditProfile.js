@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
@@ -60,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EditProfile() {
   const classes = useStyles();
-  const vacio = "";
   const emailRef = useRef();
   const contraseñaRef = useRef();
   const confirmContraseñaRef = useRef();

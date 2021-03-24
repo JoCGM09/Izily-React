@@ -154,6 +154,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
+  buttonConvertirmeProfesor:{
+    background: "white",
+    color: "#3493C2",
+    marginTop:"10px",
+    border: "1px solid #3493C2",
+    fontSize: "15px",
+    height: "70px",
+    width:"220px",
+    fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: "#DAF1FC",
+    },
+  },
+
   buttonContainer: {
     display: "flex",
     justifyContent: "space-evenly",
@@ -348,7 +362,31 @@ function Perfil() {
               <div className={classes.titlePresentacion}>
                 <p className={classes.titlePresentacion_text}>Acerca de mi:</p>
                 
-                {usuarioActual?.uid !== profesor.loginid && profesor?.esProfesor === true && profesor?.disponible === true ? (
+                {usuarioActual?.uid !== profesor.loginid ? (
+                  <>
+                  {profesor?.esProfesor === true && profesor?.disponible === true ? (
+                    <Button
+                      variant="contained"
+                      size="small"
+                      target="_blank"
+                      // href={profesor.calendly}
+                      color="inherit"
+                      className={classes.buttonPerfil}
+                      onClick={calendly}
+                      startIcon={<EventAvailableIcon />}
+                      disableElevation="true"
+                    >
+                      Agendar Mentoría
+                    </Button>
+                  ) : (
+                    <p>
+
+                    </p>
+                  )}
+                  
+                  </>
+                  
+                ) : (
                   <Button
                     variant="contained"
                     size="small"
@@ -356,14 +394,12 @@ function Perfil() {
                     // href={profesor.calendly}
                     color="inherit"
                     className={classes.buttonPerfil}
-                    onClick={calendly}
+                    // onClick={calendly}
                     startIcon={<EventAvailableIcon />}
                     disableElevation="true"
                   >
-                    Agendar Mentoría
+                    Ver mi Calendly
                   </Button>
-                ) : (
-                  <p></p>
                 )}
               </div>
 
@@ -376,88 +412,97 @@ function Perfil() {
                 children={profesor.presentacion}
               />
 
-              <div className={classes.root}>
-                <AppBar
-                  elevation={1}
-                  className={classes.categoriesAppBar}
-                  position="static"
-                >
-                  <Tabs
-                    className={classes.categories}
-                    variant="fullWidth"
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="full width tabs example"
+                {profesor?.esProfesor === true ? (
+
+                <div className={classes.root}>
+                  <AppBar
+                    elevation={1}
+                    className={classes.categoriesAppBar}
+                    position="static"
                   >
-                    <Tab
-                      className={classes.categorie1}
-                      disableRipple="true"
-                      label="Escolar"
-                      {...a11yProps(0)}
+                    <Tabs
+                      className={classes.categories}
+                      variant="fullWidth"
+                      value={value}
+                      onChange={handleChange}
+                      aria-label="full width tabs example"
+                    >
+                      <Tab
+                        className={classes.categorie1}
+                        disableRipple="true"
+                        label="Escolar"
+                        {...a11yProps(0)}
+                      />
+                      <Tab
+                        className={classes.categorie2}
+                        disableRipple="true"
+                        label="Preuniv."
+                        {...a11yProps(1)}
+                      />
+                      <Tab
+                        className={classes.categorie3}
+                        disableRipple="true"
+                        label="Universitario"
+                        {...a11yProps(2)}
+                      />
+                    </Tabs>
+                  </AppBar>
+                  <TabPanel className={classes.TabPanel} value={value} index={0}>
+                    <Paper
+                      className={classes.etiquetasContainer}
+                      overflow="scroll"
+                      variant="outlined"
+                      square
+                      children={profesor.cursos
+                        .filter((cursos) => cursos.numberNivel == "0")
+                        .map((cursos) => (
+                          <Chip
+                            className={classes.etiqueta0}
+                            label={cursos.nombre}
+                          />
+                        ))}
                     />
-                    <Tab
-                      className={classes.categorie2}
-                      disableRipple="true"
-                      label="Preuniv."
-                      {...a11yProps(1)}
+                  </TabPanel>
+                  <TabPanel className={classes.TabPanel} value={value} index={1}>
+                    <Paper
+                      className={classes.etiquetasContainer}
+                      overflow="scroll"
+                      variant="outlined"
+                      square
+                      children={profesor.cursos
+                        .filter((cursos) => cursos.numberNivel == "1")
+                        .map((cursos) => (
+                          <Chip
+                            className={classes.etiqueta1}
+                            label={cursos.nombre}
+                          />
+                        ))}
                     />
-                    <Tab
-                      className={classes.categorie3}
-                      disableRipple="true"
-                      label="Universitario"
-                      {...a11yProps(2)}
+                  </TabPanel>
+                  <TabPanel className={classes.TabPanel} value={value} index={2}>
+                    <Paper
+                      className={classes.etiquetasContainer}
+                      overflow="scroll"
+                      variant="outlined"
+                      square
+                      children={profesor.cursos
+                        .filter((cursos) => cursos.numberNivel == "2")
+                        .map((cursos) => (
+                          <Chip
+                            className={classes.etiqueta2}
+                            label={cursos.nombre}
+                          />
+                        ))}
                     />
-                  </Tabs>
-                </AppBar>
-                <TabPanel className={classes.TabPanel} value={value} index={0}>
-                  <Paper
-                    className={classes.etiquetasContainer}
-                    overflow="scroll"
-                    variant="outlined"
-                    square
-                    children={profesor.cursos
-                      .filter((cursos) => cursos.numberNivel == "0")
-                      .map((cursos) => (
-                        <Chip
-                          className={classes.etiqueta0}
-                          label={cursos.nombre}
-                        />
-                      ))}
-                  />
-                </TabPanel>
-                <TabPanel className={classes.TabPanel} value={value} index={1}>
-                  <Paper
-                    className={classes.etiquetasContainer}
-                    overflow="scroll"
-                    variant="outlined"
-                    square
-                    children={profesor.cursos
-                      .filter((cursos) => cursos.numberNivel == "1")
-                      .map((cursos) => (
-                        <Chip
-                          className={classes.etiqueta1}
-                          label={cursos.nombre}
-                        />
-                      ))}
-                  />
-                </TabPanel>
-                <TabPanel className={classes.TabPanel} value={value} index={2}>
-                  <Paper
-                    className={classes.etiquetasContainer}
-                    overflow="scroll"
-                    variant="outlined"
-                    square
-                    children={profesor.cursos
-                      .filter((cursos) => cursos.numberNivel == "2")
-                      .map((cursos) => (
-                        <Chip
-                          className={classes.etiqueta2}
-                          label={cursos.nombre}
-                        />
-                      ))}
-                  />
-                </TabPanel>
-              </div>
+                  </TabPanel>
+                </div>
+
+                ):(
+                  <p>
+
+                  </p>
+                )}
+              
 
               <div className={classes.buttonContainer}>
                 {usuarioActual?.uid === profesor.loginid ? (
@@ -483,17 +528,19 @@ function Perfil() {
                         </>
                         
                       ) : (
-                        <Button
-                            disabled
+                        <>
+                          <Button
+                            
                             variant="contained"
                             color="inherit"
                             size="small"
-                            className={classes.buttonPerfil}
-                            startIcon={<PlayArrowIcon />}
+                            className={classes.buttonConvertirmeProfesor}
+                            startIcon={ <img style={{marginLeft:"5px", height:"45px", width:"auto"}} src="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/icons%2FConvertirmeEnProfesor.png?alt=media&token=a45096cb-1a3b-4134-811c-aaba4103528f"/> }
                             disableElevation="true"
                           >
-                            Video
+                            Convertirme en Mentor
                           </Button>
+                        </>
                       )
                     }
                     
@@ -501,7 +548,33 @@ function Perfil() {
                   
                 ) : (
                   <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly", marginTop:"0px",}}>
-                    <Calificacion/>
+                    {profesor.esProfesor === true ? (
+                      <>
+                        <Calificacion/>
+                        <Button
+                        disabled
+                        variant="contained"
+                        color="inherit"
+                        size="small"
+                        className={classes.buttonPerfil}
+                        startIcon={<PlayArrowIcon />}
+                        disableElevation="true"
+                        >
+                          Video
+                        </Button>
+                        <Button
+                        disabled
+                        variant="contained"
+                        color="inherit"
+                        size="small"
+                        className={classes.buttonPerfil}
+                        startIcon={<PeopleIcon />}
+                        disableElevation="true"
+                        >
+                          Contactar
+                        </Button>
+                      </>
+                    ) : (
                       <Button
                         disabled
                         variant="contained"
@@ -513,17 +586,8 @@ function Perfil() {
                       >
                         Contactar
                       </Button>
-                      <Button
-                      disabled
-                      variant="contained"
-                      color="inherit"
-                      size="small"
-                      className={classes.buttonPerfil}
-                      startIcon={<PlayArrowIcon />}
-                      disableElevation="true"
-                      >
-                        Video
-                      </Button>
+                    )}
+                      
                   </div>
                 )}          
               </div>

@@ -12,6 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import StarIcon from "@material-ui/icons/Star";
 import Button from "@material-ui/core/Button";
 import Popover from "@material-ui/core/Popover";
+import Avatar from "@material-ui/core/Avatar";
 
 const StyledRating = withStyles({
   iconFilled: {
@@ -37,12 +38,15 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "50%",
     AlignItems: "center",
     marginBottom: 0,
+    fontSize:"110px",
   },
   avatarContainer: {
+    width:"100%",
     border: 5,
     marginBottom: 3,
     marginTop: 2,
     textAlign: "center",
+    justifyContent:"center",
   },
   numero: {
     padding: 0,
@@ -134,7 +138,10 @@ export default function Profesor({ profesor }) {
       {/* <CardActionArea component={Link} to={`/perfil/${profesor.id}`}> */}
       <CardContent style={{ paddingBottom: "10px" }}>
         <div className={classes.avatarContainer}>
-          <img className={classes.avatar} src={profesor.imageURL} />
+          <div style={{margin: "0px 0px 5px 0px", padding:"0px", width:"100%", display:"flex", justifyContent:"center"}}>
+            <Avatar className={classes.avatar} alt={profesor.nombre} src={profesor.imageURL} />
+          </div>
+          {/* <img  className={classes.avatar} src={profesor.imageURL} /> */}
           {/* id={`myimg-${profesor.id} */}
           <div
             style={{

@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
         disponible: false,
         esProfesor: false,
         horas: 0,
-        imageURL: " ",
+        imageURL: "https://firebasestorage.com",
         nombre: " ",
         presentacion: " ",
         puntuacion: 0

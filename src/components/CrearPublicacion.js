@@ -4,12 +4,12 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { IconButton } from "@material-ui/core";
 import TheatersIcon from "@material-ui/icons/Theaters";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,14 +81,17 @@ export default function RecipeReviewCard(props) {
   const initialBody = {
     content: '',
     date: '',
+    loginid: '',
     name: '',
     interesados: 0,
     comentarios: 0,
     label: '', 
   }
-  const [body, Setbody] = useState(initialBody);
+
+  const [body, setBody] = useState(initialBody);
 
   const { usuarioActual } = useAuth();
+  const history = useHistory();
 
   const [profesor, setProfesor] = useState(null);
 
@@ -114,13 +117,28 @@ export default function RecipeReviewCard(props) {
     }
   }, [setProfesor]);
 
-  const handleClick = e => {
-    console.log(body);
-  }
 
   const handleInputChange = text => {
-    const {value} = text.taget;
-    console.log(value);
+    if(text && profesor){
+      const { name, value } = text.target;
+      setBody({...body, [name]: value, name: profesor.nombre, loginid: profesor.loginid, date: new Date().toLocaleDateString()});
+    }else{
+      console.log("error");
+    }
+  }
+
+  const handleClick = async e => {
+    e.preventDefault();
+    await db.collection('publicaciones').doc().set(body)
+    .then(()=>{
+      setBody({...initialBody})
+    }).then(()=>{
+      history.push('/inicio');
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   useEffect(() => {
@@ -134,13 +152,17 @@ export default function RecipeReviewCard(props) {
       </p>
 
       <CardContent align="center" className={classes.containerContent}>
-        <TextareaAutosize
+        <input
           className={classes.inputText}
+          type="text"
+          name="content"
           aria-label="minimum height"
           placeholder="Escribir publicación..."
           widht="500px"
           rowsMin={1}
           onChange={handleInputChange}
+          value={body.content}
+          
         />
       </CardContent>
       <Grid container className={classes.IconosContainer}>

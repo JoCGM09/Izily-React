@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -8,6 +8,8 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { IconButton } from "@material-ui/core";
 import TheatersIcon from "@material-ui/icons/Theaters";
+import { useAuth } from "../contexts/AuthContext";
+import { db } from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,12 +77,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
+
   const initialBody = {
-    body: '',
-    createAt: '',
-    userHandle: '',
+    content: '',
+    date: '',
+    name: '',
+    interesados: 0,
+    comentarios: 0,
+    label: '', 
   }
-  const [body, Setbody] = useState("");
+  const [body, Setbody] = useState(initialBody);
 
   const { usuarioActual } = useAuth();
 
@@ -108,6 +114,15 @@ export default function RecipeReviewCard(props) {
     }
   }, [setProfesor]);
 
+  const handleClick = e => {
+    console.log(body);
+  }
+
+  const handleInputChange = text => {
+    const {value} = text.taget;
+    console.log(value);
+  }
+
   useEffect(() => {
     traerPerfil();
   }, []);
@@ -125,6 +140,7 @@ export default function RecipeReviewCard(props) {
           placeholder="Escribir publicación..."
           widht="500px"
           rowsMin={1}
+          onChange={handleInputChange}
         />
       </CardContent>
       <Grid container className={classes.IconosContainer}>
@@ -133,6 +149,7 @@ export default function RecipeReviewCard(props) {
             className={classes.PublicarButton}
             variant="outlined"
             size="small"
+            onClick={handleClick}
           >
             Publicar
           </Button>

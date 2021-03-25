@@ -10,6 +10,8 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import StarIcon from "@material-ui/icons/Star";
 import Popover from "@material-ui/core/Popover";
+import Avatar from "@material-ui/core/Avatar";
+
 
 const StyledRating = withStyles({
   iconFilled: {
@@ -31,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "50%",
     AlignItems: "center",
     marginBottom: 0,
+    fontSize:"110px",
   },
   avatarContainer: {
     border: 5,
@@ -120,11 +123,10 @@ export default function Profesor({ profesor }) {
     <Card className={classes.root} variant="outlined">
       <CardContent style={{ paddingBottom: "10px" }}>
         <div className={classes.avatarContainer}>
-          <img
-            alt="user avatar"
-            className={classes.avatar}
-            src={profesor.imageURL}
-          />
+          <div style={{margin: "0px 0px 5px 0px", padding:"0px", width:"100%", display:"flex", justifyContent:"center"}}>
+            <Avatar className={classes.avatar} alt={profesor.nombre} src={profesor.imageURL} />
+          </div>
+          
           {/* id={`myimg-${profesor.id} */}
           {profesor.esProfesor === true ? (
             <div

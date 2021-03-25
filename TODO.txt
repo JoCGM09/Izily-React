@@ -23,5 +23,6 @@ $ Colocar datos en la base de datos
 $ Editar los datos de las personas
 
 
-- Crear un perfil vacío cuando creas un perfil con auth
+$ Crear un perfil vacío cuando creas un perfil con auth
 - Crear publicaciones directamente
+    - Condicionar la publicación a no vacía

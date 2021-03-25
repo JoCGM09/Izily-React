@@ -343,21 +343,6 @@ export default function Profesores(callback, deps) {
 
         </AccordionDetails>
       </Accordion>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           {/* <List>
             {especialidades.map((especialidad, index) => (
               <ListItem

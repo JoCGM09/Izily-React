@@ -15,6 +15,7 @@ import Profesores from "../containers/Profesores";
 import Landing from "../containers/Landing";
 import AcercaDeIzily from "../containers/AcercaDeIzily";
 import MisCursos from "../containers/MisCursos";
+import ConvertirmeEnMentor from "../containers/ConvertirmeEnMentor";
 
 // probando rama login
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route exact path="/forgot-password" component={ForgotPassword} />
           <PrivateRoute path="/editar-perfil" component={EditProfile} />
           <PrivateRoute path="/mis-cursos" component={MisCursos} />
+          <PrivateRoute path="/convertirme-en-mentor" component={ConvertirmeEnMentor} />
           <PrivateRoute
             exact
             path="/buscar-un-mentor"

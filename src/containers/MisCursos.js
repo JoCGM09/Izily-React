@@ -88,7 +88,7 @@ export default function MisCursos() {
                   inputProps={{ 'aria-labelledby': labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`List item ${value + 1}`} />
+              <ListItemText id={labelId} primary={`Curso ${value + 1}`} />
             </ListItem>
           );
         })}

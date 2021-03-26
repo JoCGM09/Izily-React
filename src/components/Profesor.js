@@ -11,7 +11,7 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import StarIcon from "@material-ui/icons/Star";
 import Button from "@material-ui/core/Button";
-import Popover from "@material-ui/core/Popover";
+import Popper from "@material-ui/core/Popper";
 import Avatar from "@material-ui/core/Avatar";
 
 const StyledRating = withStyles({
@@ -49,10 +49,14 @@ const useStyles = makeStyles((theme) => ({
     justifyContent:"center",
   },
   numero: {
-    padding: 0,
+    padding: 5,
     margin: 0,
     textAlign: "center",
     color: "white",
+    background:"#757575",
+    fontWeight:"bold",
+    borderRadius:"7px",
+    widht:"20px",
   },
   calificacion: {
     flexDirection: "row",
@@ -172,7 +176,7 @@ export default function Profesor({ profesor }) {
                 readOnly
               />
             </Box>
-            <Popover
+            <Popper
               variant="outlined"
               id="mouse-over-popover"
               className={classes.popover}
@@ -181,20 +185,13 @@ export default function Profesor({ profesor }) {
               }}
               open={open}
               anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
+              placement="right"
               elevation={0}
               onClose={handlePopoverClose}
               disableRestoreFocus
             >
               <span className={classes.numero}>{profesor.puntuacion}</span>
-            </Popover>
+            </Popper>
           </div>
           <Typography
             className={classes.nombre}

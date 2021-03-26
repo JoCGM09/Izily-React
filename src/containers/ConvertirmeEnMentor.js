@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useCallback, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Checkbox from '@material-ui/core/Checkbox';
@@ -6,7 +7,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
-
+import TextField from '@material-ui/core/TextField';
+import Grid from "@material-ui/core/Grid";
+import Divider from "@material-ui/core/Divider";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { db } from "../firebase";
 
 
 
@@ -14,7 +20,7 @@ import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme) => ({
     boton: {
-      margin: "0px 5px",
+      margin: "0px 0px 40px 0px",
       color: "#3493C2",
       fontWeight: "bold",
       height: "40px",
@@ -22,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
     },
     root: {
       padding:"20px",
+      maxWidth:"900px",
+      display:"flex",
+      flexDirection:"column",
+      justifyItems:"center",
+      alignContent:"center",
     },
     title: {
       marginTop: 0,
@@ -32,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft:"20px",
     },
     preguntaContainer: {
-      margin:"20px",
+      margin:"30px 20px 30px 20px",
     },
     numeroPregunta: {
       fontWeight:"bold",
@@ -40,16 +51,52 @@ const useStyles = makeStyles((theme) => ({
     check: {
       color: "rgba(52, 147, 194, 1)",
     },
+    TextField: {
+      marginTop:"10px",
+      width:"350px",
+    },
   }));
 
 export default function AcercaDeIzily() {
     
   const classes = useStyles();
   const [value, setValue] = React.useState();
+  const [error, guardarError] = useState("");
+  const history = useHistory();
+  const [profesor, setProfesor] = useState(null);
+  const { usuarioActual } = useAuth();
+  const [carga, guardarCarga] = useState(false);
+
+
+  const traerPerfil = useCallback(() => {
+    if (usuarioActual) {
+      const idd = usuarioActual.uid;
+      const usuariosRef = db.collection("usuarios");
+      usuariosRef
+        .where("loginid", "==", idd)
+        .get()
+        .then((querySnapshot) => {
+          const docs = [];
+          querySnapshot.forEach((doc) => {
+            docs.push({ ...doc.data(), id: doc.id });
+          });
+          if (docs.length > 0) {
+            setProfesor(docs[0]);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [setProfesor]);
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+  useEffect(() => {
+    traerPerfil();
+  }, []);
   
   const preguntas = [
     {
@@ -99,202 +146,304 @@ export default function AcercaDeIzily() {
       ],
     },
     {
-      pregunta: "",
-      respuestas: [
-        {respuestaText: "No", puntaje: 1},
-        {respuestaText: "Un poco", puntaje: 1},
-        {respuestaText: "A la perfección", puntaje: 1}, 
-      ],
-    },
-    {
       pregunta: "¿Qué amas hacer?",
-      respuestas: {},
+      respuestas: [],
     },
     {
       pregunta: "¿De qué estás orgulloso(a)?",
-      respuestas: {},
+      respuestas: [],
     },
     {
       pregunta: "¿Qué expectativas tienes en esta propuesta educativa?",
-      respuestas: {},
+      respuestas: [],
     },
     {
       pregunta: "Basándose en su experiencia ¿Qué puede aportar a sus estudiantes?",
-      respuestas: {},
+      respuestas: [],
     },
     {
       pregunta: "¿Qué expectativas tienes en esta propuesta educativa?",
-      respuestas: {},
+      respuestas: [],
     },
     {
-      pregunta: "¿Qué expectativas tienes en esta propuesta educativa?",
-      respuestas: {},
+      pregunta: "Sabemos que el mundo globalizado cambia constantemente ¿Qué opina al respecto?",
+      respuestas: [],
     },
-    
-
-
-
+    {
+      pregunta: "En la actualidad muchos temas han pasado a formar parte de la normalidad ¿Eres capaz de compartir y debatir, sin ser invasivos en las creencias ideológicas de los estudiantes?",
+      respuestas: [],
+    },
   ]
 
+  // async function convertMentor() {
+  //   setError("");
+  //   try {
+
+  //     window.location.reload();
+  //   } catch {
+  //     setError("Ocurrió un error al salir de la cuenta");
+  //   }
+  // }
+
+  function updateEsProfesor(value) {
+    db.collection("usuarios").doc(`${profesor.id}`).update({
+      esProfesor: value
+    });
+  }
+
+  function handleClick() {
+
+    const promises = [];
+    guardarCarga(true);
+    guardarError("");
+
+    if (profesor.esProfesor === false) {
+      promises.push(updateEsProfesor(true));
+    }
+    
+    Promise.all(promises)
+      .then(() => {
+        history.push(`/perfil/${profesor.id}`);
+        // window.location.reload();
+
+      })
+      .catch(() => {
+        guardarError("Ocurrió un error al actualizar la cuenta");
+      })
+      .finally(() => {
+        guardarCarga(false);
+      });
+
+      // window.location.reload(500);
+  }
 
 
   return (
-    <form className={classes.root}>
-      <h1 className={classes.title}>
-        ¡Genial! Estás a punto de convertirte en un(a) mentor(a) de Izily :D
-      </h1>
-      <p className={classes.subTitle}> 
-        Antes de dar esta importante paso para ti y para Izily, tenemos algunas preguntas para ti:
-      </p>
-      <div className={classes.preguntaContainer}>
-        <div style={{display:"flex", flexDirection:"column"}}>
-          <span className={classes.numeroPregunta}>Pregunta 1:</span> 
-          {preguntas[0].pregunta}
-        </div>
-        <div>
-          <FormControl component="fieldset">
-            <RadioGroup row aria-label="gender" value={value} onChange={handleChange}>
-              {preguntas[0].respuestas.map((respuesta)=> 
-                <FormControlLabel
-                  control={<Radio className={classes.check}/>}
-                  value={respuesta.respuestaText}
-                  label={respuesta.respuestaText}
-                />
-              )}
-            </RadioGroup>
-          </FormControl>
-        </div>
-      </div>
-      <div className={classes.preguntaContainer}>
-        <div style={{display:"flex", flexDirection:"column"}}>
-          <span className={classes.numeroPregunta}>Pregunta 2:</span> 
-          {preguntas[1].pregunta}
-        </div>
-        <div>
-          <FormControl component="fieldset">
-            <RadioGroup row aria-label="gender" value={value} onChange={handleChange}>
-              {preguntas[1].respuestas.map((respuesta)=> 
-                <FormControlLabel
-                  control={<Radio />}
-                  value={respuesta.respuestaText}
-                  label={respuesta.respuestaText}
-                />
-              )}
-            </RadioGroup>
-          </FormControl>
-        </div>
-      </div>
-      <div className={classes.preguntaContainer}>
-        <div style={{display:"flex", flexDirection:"column"}}>
-          <span className={classes.numeroPregunta}>Pregunta 3:</span> 
-          {preguntas[2].pregunta}
-        </div>
-        <div>
-          <FormControl component="fieldset">
-            <RadioGroup row aria-label="gender" value={value} onChange={handleChange}>
-              {preguntas[2].respuestas.map((respuesta)=> 
-                <FormControlLabel
-                  control={<Checkbox className={classes.check}/>}
-                  value={respuesta.respuestaText}
-                  label={respuesta.respuestaText}
-                />
-              )}
-            </RadioGroup>
-          </FormControl>
-        </div>
-      </div>
-      <div className={classes.preguntaContainer}>
-        <div style={{display:"flex", flexDirection:"column"}}>
-          <span className={classes.numeroPregunta}>Pregunta 4:</span> 
-          {preguntas[3].pregunta}
-        </div>
-        <div>
-          <FormControl component="fieldset">
-            <RadioGroup row aria-label="gender" value={value} onChange={handleChange}>
-              {preguntas[3].respuestas.map((respuesta)=> 
-                <FormControlLabel
-                  control={<Radio />}
-                  value={respuesta.respuestaText}
-                  label={respuesta.respuestaText}
-                />
-              )}
-            </RadioGroup>
-          </FormControl>
-        </div>
-      </div>
-      <div className={classes.preguntaContainer}>
-        <div style={{display:"flex", flexDirection:"column"}}>
-          <span className={classes.numeroPregunta}>Pregunta 5:</span> 
-          {preguntas[4].pregunta}
-        </div>
-        <div>
-          <FormControl component="fieldset">
-            <RadioGroup row aria-label="gender" value={value} onChange={handleChange}>
-              {preguntas[4].respuestas.map((respuesta)=> 
-                <FormControlLabel
-                  control={<Radio />}
-                  value={respuesta.respuestaText}
-                  label={respuesta.respuestaText}
-                />
-              )}
-            </RadioGroup>
-          </FormControl>
-        </div>
-      </div>
-      <div className={classes.preguntaContainer}>
-        <div style={{display:"flex", flexDirection:"column"}}>
-          <span className={classes.numeroPregunta}>Pregunta 6:</span> 
-          {preguntas[5].pregunta}
-        </div>
-        <div>
-          <FormControl component="fieldset">
-            <RadioGroup row aria-label="gender" value={value} onChange={handleChange}>
-              {preguntas[5].respuestas.map((respuesta)=> 
-                <FormControlLabel
-                  control={<Radio />}
-                  value={respuesta.respuestaText}
-                  label={respuesta.respuestaText}
-                />
-              )}
-            </RadioGroup>
-          </FormControl>
-        </div>
-      </div>
-      <div className={classes.preguntaContainer}>
-        <div style={{display:"flex", flexDirection:"column"}}>
-          <span className={classes.numeroPregunta}>Pregunta 6:</span> 
-          {preguntas[5].pregunta}
-        </div>
-        <div>
-          <FormControl component="fieldset">
-            <RadioGroup row aria-label="gender" value={value} onChange={handleChange}>
-              {preguntas[5].respuestas.map((respuesta)=> 
-                <FormControlLabel
-                  control={<Radio />}
-                  value={respuesta.respuestaText}
-                  label={respuesta.respuestaText}
-                />
-              )}
-            </RadioGroup>
-          </FormControl>
-        </div>
-      </div>
+  
+  <>
+    {profesor && (
+      <div style={{display:"flex", justifyContent:"center",}}>
+        {profesor.esProfesor == false ? (
+          
+            <Grid className={classes.root}>
+              <h1 className={classes.title}>
+                ¡Genial! Estás a punto de convertirte en un(a) mentor(a) de Izily :D
+              </h1>
+              <p className={classes.subTitle}> 
+                Antes de dar esta importante paso para ti y para Izily, tenemos algunas preguntas para ti:
+              </p>
 
-
-
-
-
-
-
-      <Button
-        href="javascript:history.back()"
-        className={classes.boton}
-        variant="outlined"
-        size="small"
-      >
-        Volver atrás
-      </Button>
-    </form>
+              <Grid className={classes.preguntaContainer}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                  <span className={classes.numeroPregunta}>Pregunta 1:</span> 
+                  {preguntas[0].pregunta}
+                </div>
+                <div>
+                  <FormControl component="fieldset">
+                    <RadioGroup row aria-label="gender" value={value} onChange={handleChange}>
+                      {preguntas[0].respuestas.map((respuesta)=> 
+                        <FormControlLabel
+                          control={<Radio color="none" className={classes.check}/>}
+                          value={respuesta.respuestaText}
+                          label={respuesta.respuestaText}
+                        />
+                      )}
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+              </Grid>
+              
+              <Divider/>
+              <Grid className={classes.preguntaContainer}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                  <span className={classes.numeroPregunta}>Pregunta 2:</span> 
+                  {preguntas[1].pregunta}
+                </div>
+                <div>
+                  <FormControl component="fieldset">
+                    <RadioGroup row aria-label="gender" value={value} onChange={handleChange}>
+                      {preguntas[1].respuestas.map((respuesta)=> 
+                        <FormControlLabel
+                          control={<Radio color="none" className={classes.check}/>}
+                          value={respuesta.respuestaText}
+                          label={respuesta.respuestaText}
+                        />
+                      )}
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+              </Grid>
+              <Divider/>
+              <Grid className={classes.preguntaContainer}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                  <span className={classes.numeroPregunta}>Pregunta 3:</span> 
+                  {preguntas[2].pregunta}
+                </div>
+                <div>
+                  <FormControl component="fieldset">
+                    <RadioGroup row aria-label="gender" value={value} onChange={handleChange}>
+                      {preguntas[2].respuestas.map((respuesta)=> 
+                        <FormControlLabel
+                          control={<Checkbox color="none" className={classes.check}/>}
+                          value={respuesta.respuestaText}
+                          label={respuesta.respuestaText}
+                        />
+                      )}
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+              </Grid>
+              <Divider/>
+              <Grid className={classes.preguntaContainer}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                  <span className={classes.numeroPregunta}>Pregunta 4:</span> 
+                  {preguntas[3].pregunta}
+                </div>
+                <div>
+                  <FormControl component="fieldset">
+                    <RadioGroup row aria-label="gender" value={value} onChange={handleChange}>
+                      {preguntas[3].respuestas.map((respuesta)=> 
+                        <FormControlLabel
+                          control={<Radio color="none" className={classes.check}/>}
+                          value={respuesta.respuestaText}
+                          label={respuesta.respuestaText}
+                        />
+                      )}
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+              </Grid>
+              <Divider/>
+              <Grid className={classes.preguntaContainer}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                  <span className={classes.numeroPregunta}>Pregunta 5:</span> 
+                  {preguntas[4].pregunta}
+                </div>
+                <div>
+                  <FormControl component="fieldset">
+                    <RadioGroup row aria-label="gender" value={value} onChange={handleChange}>
+                      {preguntas[4].respuestas.map((respuesta)=> 
+                        <FormControlLabel
+                          control={<Radio color="none" className={classes.check}/>}
+                          value={respuesta.respuestaText}
+                          label={respuesta.respuestaText}
+                        />
+                      )}
+                    </RadioGroup>
+                  </FormControl>
+                </div>
+              </Grid>
+              <Divider/>
+              <Grid className={classes.preguntaContainer}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                  <span className={classes.numeroPregunta}>Pregunta 6:</span> 
+                  {preguntas[5].pregunta}
+                </div>
+                <TextField 
+                  className={classes.TextField} 
+                  id="standard-basic" 
+                  placeholder="Responder brevemente"
+                  multiline 
+                />
+              </Grid>
+              <Divider/>
+              <Grid className={classes.preguntaContainer}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                  <span className={classes.numeroPregunta}>Pregunta 7:</span> 
+                  {preguntas[6].pregunta}
+                </div>
+                <TextField 
+                  className={classes.TextField} 
+                  id="standard-basic" 
+                  placeholder="Responder brevemente"
+                  multiline 
+                />
+              </Grid>
+              <Divider/>
+              <Grid className={classes.preguntaContainer}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                  <span className={classes.numeroPregunta}>Pregunta 8:</span> 
+                  {preguntas[7].pregunta}
+                </div>
+                <TextField 
+                  className={classes.TextField} 
+                  id="standard-basic" 
+                  placeholder="Responder brevemente"
+                  multiline 
+                />
+              </Grid>
+              <Divider/>
+              <Grid className={classes.preguntaContainer}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                  <span className={classes.numeroPregunta}>Pregunta 9:</span> 
+                  {preguntas[8].pregunta}
+                </div>
+                <TextField 
+                  className={classes.TextField} 
+                  id="standard-basic" 
+                  placeholder="Responder brevemente"
+                  multiline 
+                />
+              </Grid>
+              <Divider/>
+              <Grid className={classes.preguntaContainer}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                  <span className={classes.numeroPregunta}>Pregunta 10:</span> 
+                  {preguntas[9].pregunta}
+                </div>
+                <TextField 
+                  className={classes.TextField} 
+                  id="standard-basic" 
+                  placeholder="Responder brevemente"
+                  multiline 
+                />
+              </Grid>
+              <Divider/>
+              <Grid className={classes.preguntaContainer}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                  <span className={classes.numeroPregunta}>Pregunta 11:</span> 
+                  {preguntas[10].pregunta}
+                </div>
+                <TextField 
+                  className={classes.TextField} 
+                  id="standard-basic" 
+                  placeholder="Responder brevemente"
+                  multiline 
+                />
+              </Grid>
+              <Divider/>
+              <Grid className={classes.preguntaContainer}>
+                <div style={{display:"flex", flexDirection:"column"}}>
+                  <span className={classes.numeroPregunta}>Pregunta 12:</span> 
+                  {preguntas[11].pregunta}
+                </div>
+                <TextField 
+                  className={classes.TextField} 
+                  id="standard-basic" 
+                  placeholder="Responder brevemente"
+                  multiline 
+                />
+              </Grid>
+              
+              <Grid style={{display:"flex", justifyContent:"center", width:"100%"}}>
+                <Button
+                  onClick={handleClick}
+                  className={classes.boton}
+                  variant="outlined"
+                  size="small"
+                >
+                  Convertirme en Mentor
+                </Button>
+              </Grid>
+              
+            </Grid>
+          
+        ) : (
+          <p>Felicidades</p>
+        )}
+      </div>
+    )}
+  </>
   );
 }
 

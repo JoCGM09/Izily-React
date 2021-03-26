@@ -9,7 +9,7 @@ import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import StarIcon from "@material-ui/icons/Star";
-import Popover from "@material-ui/core/Popover";
+import Popper from "@material-ui/core/Popper";
 import Avatar from "@material-ui/core/Avatar";
 
 
@@ -42,10 +42,13 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   numero: {
-    padding: 0,
+    padding: 5,
     margin: 0,
     textAlign: "center",
     color: "white",
+    background:"#757575",
+    fontWeight:"bold",
+    borderRadius:"7px"
   },
   calificacion: {
     flexDirection: "row",
@@ -107,18 +110,7 @@ export default function Profesor({ profesor }) {
   };
 
   const open = Boolean(anchorEl);
-  // const defaultAvatar = "https://i.pravatar.cc/300";
-
-  // const profileRef = storage.ref('users/'+profesor.loginid+'/fotodeperfil.jpeg');
-  // profileRef.getDownloadURL()
-  // .then((url)=>{
-  //   var img = document.getElementById(`myimg-${profesor.id}`);
-  //   img.src = url;
-  // }).catch(()=>{
-  //   var img = document.getElementById(`myimg-${profesor.id}`);
-  //   img.src = 'https://i.pravatar.cc/300';
-  // });
-
+ 
   return (
     <Card className={classes.root} variant="outlined">
       <CardContent style={{ paddingBottom: "10px" }}>
@@ -158,8 +150,9 @@ export default function Profesor({ profesor }) {
                   readOnly
                 />
               </Box>
-              <Popover
+              <Popper
                 variant="outlined"
+                placement="right"
                 id="mouse-over-popover"
                 className={classes.popover}
                 classes={{
@@ -167,20 +160,12 @@ export default function Profesor({ profesor }) {
                 }}
                 open={open}
                 anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
                 elevation={0}
                 onClose={handlePopoverClose}
                 disableRestoreFocus
               >
                 <span className={classes.numero}>{profesor.puntuacion}</span>
-              </Popover>
+              </Popper>
             </div>
           ) : (
             <p></p>

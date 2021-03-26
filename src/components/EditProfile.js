@@ -50,9 +50,9 @@ const useStyles = makeStyles((theme) => ({
   },
   cancelar:{
     margin:"0px 0px 20px 0px",
-    textDecoration:"underline",
     fontSize:"15px",
     "&:hover":{
+      textDecoration:"underline",
       cursor:"pointer",
     },
   },
@@ -159,6 +159,7 @@ export default function EditProfile() {
       })
       .finally(() => {
         guardarCarga(false);
+        window.location.reload();
       });
   }
 
@@ -213,7 +214,7 @@ export default function EditProfile() {
                   className={classes.Input}
                   name="password"
                   label="Contraseña"
-                  defaultValue=""
+                  defaultValue={null}
                   inputRef={contraseñaRef}
                   placeholder="Dejar en blanco para mantener la contaseña"
                   type="password"

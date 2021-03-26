@@ -113,9 +113,8 @@ function Home() {
   const classes = useStyles();
 
   const { usuarioActual } = useAuth();
-
   const [profesor, setProfesor] = useState(null);
-  const [screams, setScreams] = useState(["hola, no he cambiado"]);
+  const [screams, setScreams] = useState(["2"]);
 
   const traerProfesor = () => {
     const idd = usuarioActual.uid;
@@ -137,20 +136,18 @@ function Home() {
 
   const getScreams = () => {
     const screamRef = db.collection("publicaciones");
-    if(screamRef.length !== 0){
-      screamRef.get()
-      .then((querySnapshot) => {
-        const docs = [];
-        querySnapshot.forEach((doc) => {
-          docs.push({ ...doc.data(), id: doc.id });
-        });
-        setScreams(docs);
-        console.log(screams);
-      })
-      .catch((error) => {
-        console.error(error);
+    screamRef.get()
+    .then((querySnapshot) => {
+      const docs = [];
+      querySnapshot.forEach((doc) => {
+        docs.push({ ...doc.data(), id: doc.id });
       });
-    }
+      setScreams(docs);
+      console.log(screams);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   };
 
   const [open, setOpen] = React.useState(false);

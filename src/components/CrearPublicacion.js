@@ -121,7 +121,7 @@ export default function RecipeReviewCard(props) {
   const handleInputChange = text => {
     if(text && profesor){
       const { name, value } = text.target;
-      setBody({...body, [name]: value, name: profesor.nombre, loginid: profesor.loginid, date: new Date().toLocaleDateString(), comentarios: []});
+      setBody({...body, [name]: value, name: profesor.nombre, loginid: profesor.loginid, date: new Date().toLocaleDateString(), comentarios: 0});
     }else{
       console.log("error");
     }

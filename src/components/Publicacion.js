@@ -20,7 +20,7 @@ import CrearComentario from "../components/CrearComentario";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 550,
+    width: 550,
     minWidth:"100%",
     margin: "10px 0px",
   },
@@ -124,7 +124,7 @@ export default function RecipeReviewCard(props) {
         subheader={props.date}
       />
       
-        {props.tag}
+        {/* {props.tag} */}
 
       </div>
       
@@ -140,11 +140,11 @@ export default function RecipeReviewCard(props) {
         image={props.imagen}
         title="image"
       /> */}
-      <img
+      {/* <img
           src={props?.imagen}
           className={classes.media}
           alt=" "
-      />
+      /> */}
       <Grid container style={{display:"flex", justifyContent:"space-between",}}>
 
         <Grid  style={{"&:hover":{cursor:"default"}}} item>

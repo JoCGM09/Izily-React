@@ -256,7 +256,7 @@ function Perfil() {
   const { usuarioActual } = useAuth();
   const [error, setError] = useState();
   const [value, setValue] = React.useState(0);
-
+  const [carga, guardarCarga] = useState(false);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -290,6 +290,10 @@ function Perfil() {
     traerProfesor();
   }, []);
 
+  // useEffect(() => {
+  //   setState();
+  // }, [profesor.disponible]);
+
   useEffect(() => {
     const organizationid ='https://api.calendly.com/organizations/CFEFXIJXXUT225N7';
     const client = axios.create({
@@ -315,12 +319,44 @@ function Perfil() {
   }, []);
 
   const [state, setState] = React.useState({
-    checked: true,
-    
+    // checked: profesor.disponible,
   });
 
+  function updateDisponible(value) {
+    db.collection("usuarios").doc(`${profesor.id}`).update({
+      disponible: value
+    });
+  }
+
+
   const handleChangeSwitch = (event) => {
+
     setState({ ...state, [event.target.name]: event.target.checked });
+
+    const promises = [];
+    guardarCarga(true);
+    setError("");
+
+    if (profesor.disponible === false) {
+      promises.push(updateDisponible(true));
+    }
+    else {
+      promises.push(updateDisponible(false));
+    }
+    
+    Promise.all(promises)
+      .then(() => {
+        // history.push(`/perfil/${profesor.id}`)
+
+        // window.location.reload();
+
+      })
+      .catch(() => {
+        setError("Ocurrió un error al actualizar la cuenta");
+      })
+      .finally(() => {
+        guardarCarga(false);
+      });
   };
 
   async function convertToMentor(){
@@ -520,7 +556,7 @@ function Perfil() {
                       profesor?.esProfesor === true ? (
                         <>
                           <FormControlLabel
-                            control={<GreenSwitch size="small" checked={state.checked} onChange={handleChangeSwitch} name="checked" />}
+                            control={<GreenSwitch size="small" checked={profesor.disponible} onChange={handleChangeSwitch} name="checked" />}
                             label="Disponible"
                           />
                           <Button

@@ -78,86 +78,90 @@ const useStyles = makeStyles((theme) => ({
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
 
-  const initialComment = {
-    content: '',
-    loginid: '',
-    name: '', 
-    image: '',
-  }
+  // const initialComment = {
+  //   content: '',
+  //   loginid: '',
+  //   name: '', 
+  //   image: '',
+  // }
 
-  const [comment, setComment] = useState(initialComment);
+  // const [comment, setComment] = useState(initialComment);
 
-  const { usuarioActual } = useAuth();
-  const history = useHistory();
+  // const { usuarioActual } = useAuth();
+  // const history = useHistory();
 
-  const [profesor, setProfesor] = useState(null);
+  // const [profesor, setProfesor] = useState(null);
 
-  const traerPerfil = useCallback(() => {
-    if (usuarioActual) {
-      const idd = usuarioActual.uid;
-      const usuariosRef = db.collection("usuarios");
-      usuariosRef
-        .where("loginid", "==", idd)
-        .get()
-        .then((querySnapshot) => {
-          const docs = [];
-          querySnapshot.forEach((doc) => {
-            docs.push({ ...doc.data(), id: doc.id });
-          });
-          if (docs.length > 0) {
-            setProfesor(docs[0]);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [setProfesor]);
+  // const traerPerfil = useCallback(() => {
+  //   if (usuarioActual) {
+  //     const idd = usuarioActual.uid;
+  //     const usuariosRef = db.collection("usuarios");
+  //     usuariosRef
+  //       .where("loginid", "==", idd)
+  //       .get()
+  //       .then((querySnapshot) => {
+  //         const docs = [];
+  //         querySnapshot.forEach((doc) => {
+  //           docs.push({ ...doc.data(), id: doc.id });
+  //         });
+  //         if (docs.length > 0) {
+  //           setProfesor(docs[0]);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   }
+  // }, [setProfesor]);
 
-  const handleInputChange = text => {
-    if(comment && profesor){
-      const { name, value } = text.target;
-      setComment({...comment, [name]: value, name: profesor.nombre, loginid: profesor.loginid});
-    }else{
-      console.log("error");
-    }
-  }
+  // const handleInputChange = text => {
+  //   if(comment && profesor){
+  //     const { name, value } = text.target;
+  //     setComment({...comment, [name]: value, name: profesor.nombre, loginid: profesor.loginid});
+  //   }else{
+  //     console.log("error");
+  //   }
+  // }
 
-  const handleClick = async e => {
-    e.preventDefault();
-    await db.collection('publicaciones').doc().set(body)
-    .then(()=>{
-      setComment({...initialComment})
-    }).then(()=>{
-      history.push('/inicio');
-      window.location.reload();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+  // const handleClick = async e => {
+  //   e.preventDefault();
+  //   await db.collection('publicaciones').doc().set(body)
+  //   .then(()=>{
+  //     setComment({...initialComment})
+  //   }).then(()=>{
+  //     history.push('/inicio');
+  //     window.location.reload();
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  // }
 
-  useEffect(() => {
-    traerPerfil();
-  }, []);
+  // useEffect(() => {
+  //   traerPerfil();
+  // }, []);
 
   return (
     <Card variant="outlined" className={classes.root}>
       <CardContent align="center" className={classes.containerContent}>
-        <Input
+        <input
           className={classes.inputText}
           variant="outline"
-          name="content"
+          // name="content"
           aria-label="minimum height"
           placeholder="Comentar..."
           rowsMin={1}
-          onChange={handleInputChange}
-          value={comment.content}
+          // onChange={handleInputChange}
+          // value={comment.content}
         />
       </CardContent>
       <Grid container className={classes.IconosContainer}>
         <Grid item style={{ display: "flex", alignItems: "center" }}>
-          <Button className={classes.PublicarButton} size="small" onClick={handleClick}>
+          <Button 
+          className={classes.PublicarButton} 
+          size="small" 
+          // onClick={handleClick}
+          >
             Enviar
           </Button>
         </Grid>

@@ -10,6 +10,10 @@ import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import Button from '@material-ui/core/Button';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import Divider from "@material-ui/core/Divider";
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import CrearComentario from "../components/CrearComentario";
@@ -99,15 +103,17 @@ export default function RecipeReviewCard(props) {
     setExpanded(!expanded);
   };
 
+  const handleClick = () => {
+    
+  }
+
   return (
     <Card className={classes.root}>
       <div className={classes.header}>
       <CardHeader
         className={classes.CardHeader}
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar} style={{backgroundColor:props.color}}>
-            {props.letter}
-          </Avatar>
+          <Avatar aria-label="recipe" className={classes.avatar} alt={props.name} src={props.imgeURL} />
         }
         // action={
         //   <IconButton aria-label="settings">
@@ -137,7 +143,7 @@ export default function RecipeReviewCard(props) {
       <img
           src={props?.imagen}
           className={classes.media}
-          alt=""
+          alt=" "
       />
       <Grid container style={{display:"flex", justifyContent:"space-between",}}>
 
@@ -158,7 +164,12 @@ export default function RecipeReviewCard(props) {
 
       <CardActions style={{display:"flex", justifyContent:"space-around", padding:"5px",}}>
         <Button aria-label="add to favorites" style={{height:"35px",}}>
-          <FavoriteIcon /> <p style={{marginLeft:"10px"}}>Me Interesa</p>
+          {/*<FavoriteIcon /> <p style={{marginLeft:"10px"}}>Me Interesa</p>*/}
+          <FormControlLabel
+          control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
+          label="Me interesa"
+          onClick={handleClick}
+        />
         </Button>
         <Button onClick={handleExpandClick} aria-label="share" style={{height:"35px",}}>
           <ChatBubbleOutlineIcon /> <p style={{marginLeft:"10px"}}>Comentar</p>

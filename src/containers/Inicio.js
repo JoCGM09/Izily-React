@@ -228,10 +228,9 @@ function Home() {
                     }
                     children={
                       <Comentario
-                        name="Vivian Quispe"
-                        color="brown"
-                        letter="V"
-                        comentario="Recuerdo que el Ing. Medina resolvió ese problema en clases."
+                        name="hola"
+                        comment="Recuerdo que el Ing. Medina resolvió ese problema en clases."
+                        image=""
                       />
                     }
                   />

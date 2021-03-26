@@ -24,6 +24,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Calificacion from "../components/Calificacion";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -251,9 +252,9 @@ function Perfil() {
 
   const classes = useStyles();
   const theme = useTheme();
-
+  const history = useHistory();
   const { usuarioActual } = useAuth();
-
+  const [error, setError] = useState();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -321,6 +322,15 @@ function Perfil() {
   const handleChangeSwitch = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
+
+  async function convertToMentor(){
+    setError()
+    try {
+      history.push(`/convertirme-en-mentor`)
+    } catch {
+      setError("Ocurrió un error al salir de la cuenta");
+    }
+  }
 
 
   return (
@@ -533,6 +543,7 @@ function Perfil() {
                             variant="contained"
                             color="inherit"
                             size="small"
+                            onClick={convertToMentor}
                             className={classes.buttonConvertirmeProfesor}
                             startIcon={ <img style={{marginLeft:"5px", height:"45px", width:"auto"}} src="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/icons%2FConvertirmeEnProfesor.png?alt=media&token=a45096cb-1a3b-4134-811c-aaba4103528f"/> }
                             disableElevation="true"

@@ -159,7 +159,7 @@ export default function EditProfile() {
       })
       .finally(() => {
         guardarCarga(false);
-        window.location.reload();
+        // window.location.reload();
       });
   }
 

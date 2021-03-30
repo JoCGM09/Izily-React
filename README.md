@@ -24,12 +24,16 @@ cd Izily-React
 ```
 npm install
 ```
-Finalmente debes registrarte y editar tu perfil para empezar a usar la plataforma.
-
-
 
 ## Demostración
-Si quieres visitar nuestra plataforma ingresa a
+***Ejecutar el proyecto***
+```
+npm start
+```
+
+Debes registrarte y editar tu perfil para empezar a usar la plataforma.
+
+Si quieres visitar nuestra plataforma en la nube ingresa a
 [nuestra página](https://stage-pkabgbtwaa-ue.a.run.app/)
 
 

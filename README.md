@@ -7,7 +7,8 @@
 
 ## Pre-requisitos
 
-Se necesita instalar **[Node.js](https://nodejs.org/es/download/)**
+Se necesita instalar **[Node.js](https://nodejs.org/es/download/)**.
+
 Conocimientos en : **Reactjs** , **Nodejs** y **Firebase**.
 
 

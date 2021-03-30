@@ -40,7 +40,7 @@ Si quieres visitar nuestra plataforma ingresa a
 1. José Carlos Guerra Martinez
 2. Jhomar Christian Elias Atuyauri Herencia
 3. Leonardo Moina
-4. Manuel Alejandro Baella Vidal **[mnuxD](https://github.com/mnuxD)**
+4. Manuel Alejandro Baella Vidal - **[mnuxD(Github)](https://github.com/mnuxD)**
 
 ## Preguntas frecuentes
 ### ¿Si soy un estudiante puedo ser un mentor?

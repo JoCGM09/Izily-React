@@ -231,7 +231,7 @@ function Home() {
                         label={scream.label}
                       />
                     }
-                    // children={comentarios.map((comentarios) => (
+                    // children={screams.comentarios.map((comentarios) => (
                     //   <Comentario
                     //     nameComent={comentarios.name}
                     //     contentComent={comentarios.content}

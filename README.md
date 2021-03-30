@@ -11,6 +11,22 @@
 
 ### Nos proyectamos a permitir realizar publicaciones y comentarios, además de modificar todos tus parámatros de la cuenta de manera manual. 
 
+
+## Instalación
+***Clonar el Repositorio***
+```
+git clone https://github.com/faztcommunity/fazt-oficial-web
+cd fazt-oficial-web
+```
+
+***Instalacion de Librerías***
+```
+npm install
+```
+Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo
+
+
+
 ## Demostración
 Si quieres visitar nuestra plataforma ingresa a
 [nuestra página](https://stage-pkabgbtwaa-ue.a.run.app/)

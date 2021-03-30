@@ -115,6 +115,8 @@ function Home() {
   const { usuarioActual } = useAuth();
   const [profesor, setProfesor] = useState(null);
   const [screams, setScreams] = useState(["2"]);
+  
+
 
   const traerProfesor = () => {
     const idd = usuarioActual.uid;
@@ -152,6 +154,8 @@ function Home() {
         console.error(error);
       });
   };
+
+
 
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
@@ -212,27 +216,31 @@ function Home() {
               <div>
                 {screams.map((scream) => (
                   <Publicacion
-                    letter="M"
-                    color="Purple"
+                    screamId={scream.id}
+                    imageURL={scream.imageURL}
                     name={scream.name}
                     imagen="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/publicacionImages%2Fproblema1.jpeg?alt=media&token=f4e69610-db14-4e2d-a5fa-b97bae16daec"
                     date={scream.date}
                     content={scream.content}
                     interesados={scream.interesados}
                     comentarios={scream.comentarios}
+                    numeroDeComentarios={scream.numeroDeComentarios}
                     tag={
                       <Chip
                         className={classes.etiqueta2}
                         label={scream.label}
                       />
                     }
-                    children={
-                      <Comentario
-                        name="hola"
-                        comment="Recuerdo que el Ing. Medina resolvió ese problema en clases."
-                        image=""
-                      />
-                    }
+                    // children={comentarios.map((comentarios) => (
+                    //   <Comentario
+                    //     nameComent={comentarios.name}
+                    //     contentComent={comentarios.content}
+                    //     dateComent={comentarios.date}
+                    //     imageURLComent={comentarios.imageURL}
+                    //     loginidComent={comentarios.loginid}
+                    //     idPerfilComent={comentarios.idPerfil}
+                    //   />
+                    //   ))} 
                   />
                 ))}
               </div>

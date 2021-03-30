@@ -121,7 +121,15 @@ export default function RecipeReviewCard(props) {
   const handleInputChange = text => {
     if(text && profesor){
       const { name, value } = text.target;
-      setBody({...body, [name]: value, name: profesor.nombre, loginid: profesor.loginid, date: new Date().toLocaleDateString(), comentarios: 0});
+      setBody({...body, [name]: value, 
+              name: profesor.nombre, 
+              loginid: profesor.loginid, 
+              date: new Date().toLocaleDateString(), 
+              imageURL: profesor.imageURL,
+              idPerfil: profesor.id,
+              comentarios: [],
+              numeroDeComentarios:0
+            });
     }else{
       console.log("error");
     }

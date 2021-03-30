@@ -89,8 +89,8 @@ export default function RecipeReviewCard(props) {
               style={{
                 margin: "0px 0px 0px 10px",
               }}
-              alt={props.name}
-              src={props.image}
+              alt={props.nameComent}
+              src={props.imageURLComent}
             />
           }
           className={classes.avatarContainer}
@@ -102,7 +102,7 @@ export default function RecipeReviewCard(props) {
             color="textSecondary"
             component="p"
           >
-            {props.name}
+            {props.nameComent}
           </Typography>
           <div style={{ padding: "0px 10px" }}>
             <Divider />
@@ -114,7 +114,7 @@ export default function RecipeReviewCard(props) {
               color="textSecondary"
               component="p"
             >
-              {props.comment}
+              {props.contentComent}
             </Typography>
           </div>
         </CardContent>

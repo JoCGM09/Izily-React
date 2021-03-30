@@ -32,9 +32,12 @@ Finalmente debes registrarte y editar tu perfil para empezar a usar la plataform
 Si quieres visitar nuestra plataforma ingresa a
 [nuestra página](https://stage-pkabgbtwaa-ue.a.run.app/)
 
+
 ## Lista de tecnologías usadas y enlaces con más información
-- [ReactJS](https://es.reactjs.org/docs/getting-started.html)
 - [Firebase](https://firebase.google.com/docs)
+- [ReactJS](https://es.reactjs.org/docs/getting-started.html)
+- [Material UI](https://material-ui.com/)
+- [Calendly API](https://developer.calendly.com/)
 
 ## Miembros del Equipo
 1. José Carlos Guerra Martinez

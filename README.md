@@ -44,10 +44,10 @@ Si quieres visitar nuestra plataforma en la nube ingresa a
 - [Calendly API](https://developer.calendly.com/)
 
 ## Miembros del Equipo
-1. José Carlos Guerra Martinez
-2. Jhomar Christian Elias Atuyauri Herencia
-3. Leonardo Moina
-4. Manuel Alejandro Baella Vidal - **[mnuxD(Github)](https://github.com/mnuxD)**
+1. José Carlos Guerra Martinez - **[JoCGM09(Github)](https://github.com/JoCGM09)**
+2. Manuel Alejandro Baella Vidal - **[mnuxD(Github)](https://github.com/mnuxD)**
+3. Jhomar Christian Elias Atuyauri Herencia - **[Jhomar1158-ux(Github)](https://github.com/Jhomar1158-ux)**
+4. Leonardo Moina - **[leuu-1998(Github)](https://github.com/leuu-1998)**
 
 ## Preguntas frecuentes
 ### ¿Si soy un estudiante puedo ser un mentor?

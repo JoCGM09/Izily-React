@@ -13,7 +13,7 @@ import { AuthProvider } from "../contexts/AuthContext";
 import Inicio from "../containers/Inicio";
 import Profesores from "../containers/Profesores";
 import Landing from "../containers/Landing";
-import AcercaDeIzily from "../containers/AcercaDeIzily";
+import CalificaAIzily from "../containers/CalificaAIzily";
 import MisCursos from "../containers/MisCursos";
 import ConvertirmeEnMentor from "../containers/ConvertirmeEnMentor";
 
@@ -38,7 +38,7 @@ const App = () => (
           />
           <PrivateRoute exact path="/inicio" component={Inicio} />
           <PrivateRoute path="/perfil/:profesorId" component={Perfil} />
-          <PrivateRoute exact path="/acerca-de-izily" component={AcercaDeIzily} />
+          <PrivateRoute exact path="/califica-a-izily" component={CalificaAIzily} />
           <Route component={NotFound} />
         </Switch>
       </Layout>

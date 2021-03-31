@@ -125,7 +125,8 @@ export default function CustomizedMenu(props) {
 
     try {
       handleClose();
-      history.push(`/acerca-de-izily`);
+      history.push(`/califica-a-izily`);
+      window.location.reload();
     } catch {
       setError("Ocurrió un error al salir de la cuenta");
     }
@@ -188,7 +189,7 @@ export default function CustomizedMenu(props) {
           <ListItemIcon>
             <InfoIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary="Acerca de Izily" />
+          <ListItemText primary="Califica a Izily" />
         </StyledMenuItem>
       </StyledMenu>
     </div>

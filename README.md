@@ -43,7 +43,7 @@ npm start
 You must register and edit your profile to start using the platform.
 
 If you want to visit our cloud platform, go to
-[our page] (https://stage-pkabgbtwaa-ue.a.run.app/)
+[our page](https://stage-pkabgbtwaa-ue.a.run.app/)
 
 
 ## List of technologies used and links with more information
@@ -55,10 +55,10 @@ If you want to visit our cloud platform, go to
 - [Calendly API] (https://developer.calendly.com/) - Because it allows us to schedule meetings directly to Google Calendar.
 
 ## Team members
-1. José Carlos Guerra Martinez - **[JoCGM09 (Github)] (https://github.com/JoCGM09)**
-2. Manuel Alejandro Baella Vidal - **[mnuxD (Github)] (https://github.com/mnuxD)**
-3. Jhomar Christian Elias Atuyauri Heritage - **[Jhomar1158-ux (Github)] (https://github.com/Jhomar1158-ux)**
-4. Leonardo Moina - **[leuu-1998 (Github)] (https://github.com/leuu-1998)**
+1. José Carlos Guerra Martinez - **[JoCGM09 (Github)](https://github.com/JoCGM09)**
+2. Manuel Alejandro Baella Vidal - **[mnuxD (Github)](https://github.com/mnuxD)**
+3. Jhomar Christian Elias Atuyauri Heritage - **[Jhomar1158-ux (Github)](https://github.com/Jhomar1158-ux)**
+4. Leonardo Moina - **[leuu-1998 (Github)](https://github.com/leuu-1998)**
 
 ## Frequent questions
 ### How can I upload a profile picture?

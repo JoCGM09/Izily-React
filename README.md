@@ -55,10 +55,12 @@ Si quieres visitar nuestra plataforma en la nube ingresa a
 4. Leonardo Moina - **[leuu-1998(Github)](https://github.com/leuu-1998)**
 
 ## Preguntas frecuentes
+### ¿Como puedo subir una imagen de perfil?
+-  De momento comunícate con nosotros a nuestro correo oficial **aprendeizily@gmail.com** para añadir una foto de perfil.
 ### ¿Si soy un estudiante puedo ser un mentor?
 - Sí, en Izily todos pueden ser mentores.
 ### ¿Como puedo ser un mentor?
--  De momento comunícate con nosotros a nuestro correo oficial **aprendeizily@gmail.com** para añadir los cursos que necesites a tu perfil.
+-  Primero debes hacer el test de "Convertirme en Mentor" en tu perfil. Luego comunícate con nosotros a nuestro correo oficial **aprendeizily@gmail.com** para añadirte los cursos que necesites a tu perfil, especificando el nivel de cada curso (Escolar, Preuniversitario o Universitario).
 ### Si soy un mentor ¿Debo pagar dinero adicional por usar la plataforma?
 - No, no existe de momento ningún monto de efectivo adicional.
 

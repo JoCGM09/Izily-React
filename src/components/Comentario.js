@@ -87,12 +87,11 @@ export default function RecipeReviewCard(props) {
               aria-label="recipe"
               className={classes.avatar}
               style={{
-                backgroundColor: props.color,
                 margin: "0px 0px 0px 10px",
               }}
-            >
-              {props.letter}
-            </Avatar>
+              alt={props.nameComent}
+              src={props.imageURLComent}
+            />
           }
           className={classes.avatarContainer}
         />
@@ -103,7 +102,7 @@ export default function RecipeReviewCard(props) {
             color="textSecondary"
             component="p"
           >
-            {props.name}
+            {props.nameComent}
           </Typography>
           <div style={{ padding: "0px 10px" }}>
             <Divider />
@@ -115,7 +114,7 @@ export default function RecipeReviewCard(props) {
               color="textSecondary"
               component="p"
             >
-              {props.comentario}
+              {props.contentComent}
             </Typography>
           </div>
         </CardContent>

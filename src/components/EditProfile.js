@@ -159,7 +159,7 @@ export default function EditProfile() {
       })
       .finally(() => {
         guardarCarga(false);
-        window.location.reload();
+        // window.location.reload();
       });
   }
 
@@ -307,7 +307,7 @@ export default function EditProfile() {
             className={classes.submit}
             disabled={carga}
           >
-            Actualizar
+            Guardar
           </Button>
           <Grid container justify="flex-end" style={{width:"100%"}}>
           <p className={classes.cancelar} variante="link" onClick={goInicio}>Cancelar</p>

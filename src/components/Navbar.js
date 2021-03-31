@@ -260,7 +260,6 @@ export default function ElevateAppBar(props) {
               </IconButton>
 
               {profesor && (
-                
                   <Grid className={classes.nombrecontainer}  xs>
 
                       <Avatar variante="link" onClick={goProfile} className={classes.rootAvatar} alt={profesor.nombre} src={profesor.imageURL} />
@@ -269,8 +268,7 @@ export default function ElevateAppBar(props) {
                       >
                         {profesor.nombre}
                       </div>
-                    </Grid>
-                  
+                    </Grid>  
                 )}
                   <MenuNavbar perfil={profesor?.id} esProfesor={profesor?.esProfesor}/>              
             </Grid>

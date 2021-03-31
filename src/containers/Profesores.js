@@ -343,21 +343,6 @@ export default function Profesores(callback, deps) {
 
         </AccordionDetails>
       </Accordion>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           {/* <List>
             {especialidades.map((especialidad, index) => (
               <ListItem
@@ -381,7 +366,7 @@ export default function Profesores(callback, deps) {
       <main className={classes.content}>
         <Grid container clasName={classes.gridContainer} spacing={3}>
           {profesoresFiltrados.map((profesor) => (
-            <Grid item align="center" xs={12} sm={12} md={6} lg={3}>
+            <Grid item align="center" xs={12} sm={12} md={6} lg={4}>
               <Profesor profesor={profesor} />
             </Grid>
           ))}

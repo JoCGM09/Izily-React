@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { IconButton } from "@material-ui/core";
 import TheatersIcon from "@material-ui/icons/Theaters";
+import { useAuth } from "../contexts/AuthContext";
+import { db } from "../firebase";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,6 +78,81 @@ const useStyles = makeStyles((theme) => ({
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
 
+  const initialBody = {
+    content: '',
+    date: '',
+    loginid: '',
+    name: '',
+    interesados: 0,
+    comentarios: 0,
+    label: '', 
+  }
+
+  const [body, setBody] = useState(initialBody);
+
+  const { usuarioActual } = useAuth();
+  const history = useHistory();
+
+  const [profesor, setProfesor] = useState(null);
+
+  const traerPerfil = useCallback(() => {
+    if (usuarioActual) {
+      const idd = usuarioActual.uid;
+      const usuariosRef = db.collection("usuarios");
+      usuariosRef
+        .where("loginid", "==", idd)
+        .get()
+        .then((querySnapshot) => {
+          const docs = [];
+          querySnapshot.forEach((doc) => {
+            docs.push({ ...doc.data(), id: doc.id });
+          });
+          if (docs.length > 0) {
+            setProfesor(docs[0]);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [setProfesor]);
+
+
+  const handleInputChange = text => {
+    if(text && profesor){
+      const { name, value } = text.target;
+      setBody({...body, [name]: value, 
+              name: profesor.nombre, 
+              loginid: profesor.loginid, 
+              date: new Date().toLocaleDateString(), 
+              imageURL: profesor.imageURL,
+              idPerfil: profesor.id,
+              comentarios: [],
+              numeroDeComentarios:0
+            });
+    }else{
+      console.log("error");
+    }
+  }
+
+  const handleClick = async e => {
+    e.preventDefault();
+    await db.collection('publicaciones').doc().set(body)
+    .then(()=>{
+      setBody({...initialBody})
+    }).then(()=>{
+      history.push('/inicio');
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+
+  useEffect(() => {
+    traerPerfil();
+  }, []);
+
   return (
     <Card className={classes.root}>
       <p style={{ paddingLeft: "12px", fontSize: "18px", margin: "10px 0px" }}>
@@ -83,12 +160,17 @@ export default function RecipeReviewCard(props) {
       </p>
 
       <CardContent align="center" className={classes.containerContent}>
-        <TextareaAutosize
+        <input
           className={classes.inputText}
+          type="text"
+          name="content"
           aria-label="minimum height"
           placeholder="Escribir publicación..."
           widht="500px"
           rowsMin={1}
+          onChange={handleInputChange}
+          value={body.content}
+          
         />
       </CardContent>
       <Grid container className={classes.IconosContainer}>
@@ -97,6 +179,7 @@ export default function RecipeReviewCard(props) {
             className={classes.PublicarButton}
             variant="outlined"
             size="small"
+            onClick={handleClick}
           >
             Publicar
           </Button>

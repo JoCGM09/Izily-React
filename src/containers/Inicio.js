@@ -227,6 +227,7 @@ function Home() {
                     numeroDeComentarios={scream.numeroDeComentarios}
                     tag={
                       <Chip
+                        //Soy Jhomar
                         className={classes.etiqueta2}
                         label={scream.label}
                       />

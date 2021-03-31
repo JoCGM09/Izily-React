@@ -2,18 +2,50 @@ import React, { useState, useEffect, useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-    boton: {
+    root: {
+      width:"450px",
+      margin: "10px 0px",
+      paddingBottom:"5px",
+    },
+    containerContent: {
+      padding: "0px 10px",
+      widht: "100%",
+      display: "flex",
+      justifyContent: "center",
+    },
+    IconosContainer: {
+      paddingLeft: "5px",
+      paddingTop: "5px",
+      justifyContent: "space-between",
+    },
+    PublicarButton: {
       margin: "0px 5px",
       color: "#3493C2",
       fontWeight: "bold",
-      height: "40px",
+      height: "30px",
       fontSize: "12px",
+      border: "0px",
+      "&:hover": {
+        backgroundColor: "white",
+      },
+    },
+    inputText: {
+      outline: "none",
+      resize: "inherit",
+      fontSize: "14px",
+      fontFamily: "arial",
+      border: "1px solid #C7C6C6",
+      borderRadius: "10px",
+      width: "100%",
+      padding: "10px",
+      boxShadow: "rgba(0, 0, 0, 1)",
     },
   }));
 
@@ -88,43 +120,38 @@ function FeedbackForm(props) {
     }, []);
   
     return (
-      <div>
-        <CardContent align="center" className={classes.containerContent}>
-          <input
-            className={classes.inputText}
-            type="text"
-            name="content"
-            aria-label="minimum height"
-            placeholder="Escribir publicación..."
-            widht="500px"
-            rowsMin={1}
-            onChange={handleInputChange}
-            value={body.content}
-          />
-        </CardContent>
-  
-        <Grid container className={classes.IconosContainer}>
-          <Grid item style={{ display: "flex", alignItems: "center" }}>
-            <Button
-              className={classes.PublicarButton}
-              variant="outlined"
-              size="small"
-              onClick={handleClick}
-            >
-              Publicar
-            </Button>
+        <Card className={classes.root}>
+          <p style={{ display:"flex", justifyContent:"left", paddingLeft: "12px", fontSize: "16px", margin: "10px 0px" }}>
+            Envíanos un Comentario
+          </p>
+
+          <CardContent align="center" className={classes.containerContent}>
+              <input
+                className={classes.inputText}
+                variant="outline"
+                type="text"
+                name="content"
+                aria-label="minimum height"
+                placeholder="Escribir comentario..."
+                rowsMin={1}
+                onChange={handleInputChange}
+                value={body.content}
+              />
+            </CardContent>
+          
+          <Grid container className={classes.IconosContainer}>
+            <Grid item style={{ display: "flex", alignItems: "center" }}>
+              <Button
+                className={classes.PublicarButton}
+                variant="outlined"
+                size="small"
+                onClick={handleClick}
+              >
+                Publicar
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-  
-        <Button
-          href="javascript:history.back()"
-          className={classes.boton}
-          variant="outlined"
-          size="small"
-        >
-          Volver atrás
-        </Button>
-      </div>
+        </Card>
     );
 }
 

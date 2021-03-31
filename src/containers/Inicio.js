@@ -170,8 +170,6 @@ function Home() {
   return (
     <>
       <Grid align="center" className={classes.gridTotal}>
-        {/* <Grid xs></Grid>
-        <Grid xs></Grid> */}
         <Grid xs></Grid>
 
         <Grid>
@@ -209,7 +207,7 @@ function Home() {
             </Grid>
           </Grid>
           <Grid align="start" className={classes.publicacionesContainer}>
-            {/* <Calificacion/> */}
+  
             <CrearPublicacion />
 
             {screams && (
@@ -245,115 +243,9 @@ function Home() {
                 ))}
               </div>
             )}
-            {
-              // <Publicacion
-              //   letter="J"
-              //   color="blue"
-              //   name="José Guerra"
-              //   date="9 de marzo, 2021"
-              //   content="¿Algún mentor especializado en Física para nivel escolar?"
-              //   interesados={4}
-              //   comentarios={1}
-              //   tag={<Chip className={classes.etiqueta0} label="Física" />}
-              //   children={
-              //     <div>
-              //       <Comentario
-              //         name="Manuel Baella"
-              //         color="red"
-              //         letter="M"
-              //         comentario="Jesús Cama es bueno en esos temas, lo puedes encontrar en el buscador de mentores."
-              //       />
-              //     </div>
-              //   }
-              // />
-              // <Publicacion
-              //   letter="M"
-              //   color="red"
-              //   name="Manuel Baella"
-              //   date="11 de marzo, 2021"
-              //   content="Necesito referencias de que libros puedo usar para RadioPropagación en la UNI, porfa ayudenme este ciclo estará dificil :c"
-              //   interesados={7}
-              //   comentarios={2}
-              //   tag={
-              //     <Chip className={classes.etiqueta2} label="RadioPropagación" />
-              //   }
-              //   children={
-              //     <div>
-              //       <Comentario
-              //         name="Jesus Cama"
-              //         color="grey"
-              //         letter="J"
-              //         comentario="Puedes buscar en los libros virtuales que subió el Centro Cultural Pedro Paulet a su drive."
-              //       />
-              //       <Comentario
-              //         name="Margaly Flores"
-              //         color="purple"
-              //         letter="M"
-              //         comentario="Frente a la puerta 3 de la UNI puedes encontrar los más importantes para ese curso. Suerte!"
-              //       />
-              //     </div>
-              //   }
-              // />
-              // <Publicacion
-              //   letter="J"
-              //   color="green"
-              //   name="Jhomar Astuyauri"
-              //   date="1 de marzo, 2021"
-              //   content="Me estoy preparando para postular a la Cayetano Heredia, ¿alguien tiene exámenes pasados porfa?"
-              //   interesados={16}
-              //   comentarios={2}
-              //   tag={
-              //     <Chip className={classes.etiqueta1} label="Preuniversitario" />
-              //   }
-              //   children={
-              //     <div>
-              //       <Comentario
-              //         name="Margaly Flores"
-              //         color="purple"
-              //         letter="M"
-              //         comentario="Me parece que frente a la UNI venden exámenes para Cayetano también. Éxitos!"
-              //       />
-              //       <Comentario
-              //         name="Jhomar Astuyauri"
-              //         color="green"
-              //         letter="J"
-              //         comentario="Muchas gracias, si encontré :D"
-              //       />
-              //     </div>
-              //   }
-              // />
-              // screams.map((scream)=>{
-              //   <Publicacion
-              //     letter="M"
-              //     color="Purple"
-              //     name={scream.name}
-              //     imagen="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/publicacionImages%2Fproblema1.jpeg?alt=media&token=f4e69610-db14-4e2d-a5fa-b97bae16daec"
-              //     date={scream.date}
-              //     content={scream.content}
-              //     interesados={scream.interesados}
-              //     comentarios={scream.comentarios}
-              //     tag={
-              //       <Chip
-              //         className={classes.etiqueta2}
-              //         label={scream.label}
-              //       />
-              //     }
-              //     children={
-              //       <Comentario
-              //         name="Vivian Quispe"
-              //         color="brown"
-              //         letter="V"
-              //         comentario="Recuerdo que el Ing. Medina resolvió ese problema en clases."
-              //       />
-              //     }
-              //   />
-              // })
-            }
           </Grid>
         </Grid>
         <Grid xs></Grid>
-        {/* <Grid xs></Grid>
-        <Grid xs></Grid> */}
       </Grid>
     </>
   );

@@ -12,6 +12,12 @@ import Container from "@material-ui/core/Container";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import Divider from "@material-ui/core/Divider";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert2(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+};
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -56,6 +62,12 @@ const useStyles = makeStyles((theme) => ({
       cursor:"pointer",
     },
   },
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
 }));
 
 export default function EditProfile() {
@@ -67,6 +79,7 @@ export default function EditProfile() {
   const aboutMeRef = useRef();
   const descriptionRef = useRef();
   const calendlyRef = useRef();
+  const [open, setOpen] = React.useState(false);
 
   const { usuarioActual, updatePassword, updateEmail } = useAuth();
   const [error, guardarError] = useState();
@@ -152,7 +165,7 @@ export default function EditProfile() {
 
     Promise.all(promises)
       .then(() => {
-        history.push("/inicio");
+        setOpen(true);
       })
       .catch(() => {
         guardarError("Ocurrió un error al actualizar la cuenta");
@@ -175,6 +188,23 @@ export default function EditProfile() {
       guardarError("Ocurrió un error al salir de la cuenta");
     }
   }
+
+  async function actualizar(){
+    guardarError()
+    try {
+      window.location.reload();
+    } catch {
+      guardarError("Ocurrió un error al salir de la cuenta");
+    }
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   return (
     <Container className={classes.container}>
@@ -300,7 +330,11 @@ export default function EditProfile() {
 
             
           </Grid>
-
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success">
+              This is a success message!
+            </Alert>
+          </Snackbar>
           <Button
             type="submit"
             variant="outlined"
@@ -309,11 +343,10 @@ export default function EditProfile() {
           >
             Guardar
           </Button>
-          <Grid container justify="flex-end" style={{width:"100%"}}>
+          <Grid container justify="space-between" style={{width:"100%"}}>
+          <p className={classes.cancelar} variante="link" onClick={actualizar}> Actualiza para visualizar los cambios</p>
           <p className={classes.cancelar} variante="link" onClick={goInicio}>Cancelar</p>
-              {/* <Link to="/inicio" variant="body2">
-                Cancelar
-              </Link> */}
+              
             
           </Grid>
 

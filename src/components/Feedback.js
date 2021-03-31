@@ -115,9 +115,6 @@ function Feedback() {
                 
               </Card>
               )}
-              <div>
-                <p>hola</p>
-              </div>
             </div>
         )}
       </Grid>

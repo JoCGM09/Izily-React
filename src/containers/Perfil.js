@@ -368,7 +368,6 @@ function Perfil() {
     }
   }
 
-
   return (
     <>
       {profesor && (
@@ -436,14 +435,14 @@ function Perfil() {
                     variant="contained"
                     size="small"
                     target="_blank"
-                    // href={profesor.calendly}
+                    href="https://calendar.google.com/calendar/"
                     color="inherit"
                     className={classes.buttonPerfil}
                     // onClick={calendly}
                     startIcon={<EventAvailableIcon />}
                     disableElevation="true"
                   >
-                    Ver mi Calendly
+                    Mi Google Calendar
                   </Button>
                 )}
               </div>

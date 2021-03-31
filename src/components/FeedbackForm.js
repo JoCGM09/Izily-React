@@ -111,7 +111,7 @@ function FeedbackForm(props) {
       e.preventDefault();
       await props.addFeedback(body);
       setBody({...initialBody});
-      history.push('/acerca-de-izily');
+      history.push('/califica-a-izily');
       window.location.reload();
     }
     
@@ -123,7 +123,7 @@ function FeedbackForm(props) {
     return (
         <Card className={classes.root}>
           <p style={{ display:"flex", justifyContent:"left", paddingLeft: "12px", fontSize: "16px", margin: "10px 0px" }}>
-            Envíanos un Comentario
+            Envíanos tu opinión para seguir mejorando
           </p>
 
           <CardContent align="center" className={classes.containerContent}>
@@ -133,7 +133,7 @@ function FeedbackForm(props) {
                 type="text"
                 name="content"
                 aria-label="minimum height"
-                placeholder="Escribir comentario..."
+                placeholder="¿Qué opinas de Izily?"
                 rowsMin={1}
                 onChange={handleInputChange}
                 value={body.content}

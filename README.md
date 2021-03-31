@@ -1,9 +1,14 @@
 # Proyecto IZILY
 ##### Red social y plataforma orientada a la educación que permite aprender, enseñar y conectar con nuestra propia comunidad virtual netamente educativa.
 
-### IZILY V0.2 permite crear una cuenta y agendar una mentoría en función a las necesidades de los temas que sean de tu interés, ubicando mentores que se ajustan a los cursos que estás buscando.
+### IZILY V0.3 permite crear una cuenta, editar tu perfil y agendar una mentoría en función a las necesidades de los temas que sean de tu interés, ubicando mentores que se ajusten a los cursos que estás buscando. Además, puedes realizar publicaciones, convertirte en un mentor y dejarnos una opinión acerca de la plataforma. 
 
-### Nos proyectamos a permitir realizar publicaciones y comentarios, además de modificar todos tus parámatros de la cuenta de manera manual. 
+### En la siguiente versión de Izily nos proyectamos a:
+- Realizar comentarios en las publicaciones
+- Cargar imágenes en el perfil y las publicaciones
+- Implementar un chat en la plataforma
+- Implementar sistema de videollamada basada en la API de Google Meet.
+- Introducir distintos idiomas (Inglés en primer lugar) para permitir su uso en distintas regiones del mundo. 
 
 ## Pre-requisitos
 

@@ -95,6 +95,8 @@ export default function RecipeReviewCard(props) {
 
   const [profesor, setProfesor] = useState(null);
 
+  // Get current user with database values and set on useState
+
   const traerPerfil = useCallback(() => {
     if (usuarioActual) {
       const idd = usuarioActual.uid;
@@ -118,6 +120,8 @@ export default function RecipeReviewCard(props) {
   }, [setProfesor]);
 
 
+  // save input values inside the state localy
+
   const handleInputChange = text => {
     if(text && profesor){
       const { name, value } = text.target;
@@ -135,6 +139,8 @@ export default function RecipeReviewCard(props) {
     }
   }
 
+  // set values on the database
+  
   const handleClick = async e => {
     e.preventDefault();
     await db.collection('publicaciones').doc().set(body)

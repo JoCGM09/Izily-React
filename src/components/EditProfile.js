@@ -1,4 +1,3 @@
-////////////////////////////////// SignUp = Registro //////////////////////////////////
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -86,6 +85,8 @@ export default function EditProfile() {
   const [profesor, setProfesor] = useState(null);
   const history = useHistory();
 
+  // Get current user with database values and set on useState
+
   const traerPerfil = useCallback(() => {
     if (usuarioActual) {
       const idd = usuarioActual.uid;
@@ -107,6 +108,8 @@ export default function EditProfile() {
         });
     }
   }, [setProfesor]);
+
+  //Functions to update individual values
 
   function updateName(name) {
     db.collection("usuarios").doc(`${profesor.id}`).update({
@@ -132,6 +135,8 @@ export default function EditProfile() {
     });
   }
 
+  // Get promises and execute the functions
+  
   function handleSubmit(e) {
     e.preventDefault();
 

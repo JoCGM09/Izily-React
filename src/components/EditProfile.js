@@ -172,7 +172,6 @@ export default function EditProfile() {
       })
       .finally(() => {
         guardarCarga(false);
-        // window.location.reload();
       });
   }
 
@@ -183,7 +182,8 @@ export default function EditProfile() {
   async function goInicio(){
     guardarError()
     try {
-      history.push(`/inicio`)
+      history.push(`/inicio`);
+      window.location.reload();
     } catch {
       guardarError("Ocurrió un error al salir de la cuenta");
     }

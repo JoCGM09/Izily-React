@@ -13,8 +13,8 @@
 ## Pre-requirements
 
 You need to install:
-- **[Git] (https://git-scm.com/downloads)** (Include Git Bash)
-- **[Node.js] (https://nodejs.org/es/download/)**
+- **[Git](https://git-scm.com/downloads)** (Include Git Bash)
+- **[Node.js](https://nodejs.org/es/download/)**
 - **npm**
 
 
@@ -47,12 +47,12 @@ If you want to visit our cloud platform, go to
 
 
 ## List of technologies used and links with more information
-- [Google Cloud] (https://cloud.google.com/) - Because it brings together a large number of scalable products such as Cloud Run.
-- [Firebase] (https://firebase.google.com/docs) - Because it is a backend-as-a-Service - BaaS. It also has services such as **Firestore Database**, **Authentication** and **Storage**.
-- [JavaScript] (https://es.reactjs.org/docs/getting-started.html) - Because it is one of the best programming languages for web design.
-- [ReactJS] (https://www.w3schools.com/js/DEFAULT.asp) - Because it is a JavaScript library that allows you to create user interfaces quickly and easily.
-- [Material UI] (https://material-ui.com/) - Because it offers versatile components that adjust to the needs of the project.
-- [Calendly API] (https://developer.calendly.com/) - Because it allows us to schedule meetings directly to Google Calendar.
+- [Google Cloud](https://cloud.google.com/) - Because it brings together a large number of scalable products such as Cloud Run.
+- [Firebase](https://firebase.google.com/docs) - Because it is a backend-as-a-Service - BaaS. It also has services such as **Firestore Database**, **Authentication** and **Storage**.
+- [JavaScript](https://es.reactjs.org/docs/getting-started.html) - Because it is one of the best programming languages for web design.
+- [ReactJS](https://www.w3schools.com/js/DEFAULT.asp) - Because it is a JavaScript library that allows you to create user interfaces quickly and easily.
+- [Material UI](https://material-ui.com/) - Because it offers versatile components that adjust to the needs of the project.
+- [Calendly API](https://developer.calendly.com/) - Because it allows us to schedule meetings directly to Google Calendar.
 
 ## Team members
 1. José Carlos Guerra Martinez - **[JoCGM09 (Github)](https://github.com/JoCGM09)**

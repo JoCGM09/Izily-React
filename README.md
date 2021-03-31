@@ -1,74 +1,74 @@
-# Proyecto IZILY
-##### Virtual Social Network orientada a la educación que permite aprender, enseñar y conectar con nuestra propia comunidad virtual netamente educativa.
+# IZILY Project
+##### Virtual social network oriented to education that allows us to learn, teach and connect with our own purely educational virtual community.
 
-### IZILY V0.3 permite crear una cuenta, editar tu perfil y agendar una mentoría en función a las necesidades de los temas que sean de tu interés, ubicando mentores que se ajusten a los cursos que estás buscando. Además, puedes realizar publicaciones, convertirte en un mentor y dejarnos una opinión acerca de la plataforma. 
+### IZILY V0.3 allows you to create an account, edit your profile and schedule a mentorship based on the needs of the topics that interest you, locating mentors that fit the courses you are looking for. In addition, you can post, become a mentor and leave us an opinion about the platform.
 
-### En la siguiente versión de Izily nos proyectamos a:
-- Realizar comentarios en las publicaciones
-- Cargar imágenes en el perfil y las publicaciones
-- Implementar un chat en la plataforma
-- Implementar un sistema de videollamada basada en la API de Jitsi Meet
-- Introducir distintos idiomas (Inglés en primer lugar) para permitir su uso en distintas regiones del mundo
+### In the next version of Izily we project ourselves to:
+- Make comments on publications
+- Upload images to profile and posts
+- Implement a chat on the platform
+- Implement a video calling system based on the Jitsi Meet API
+- Introduce different languages ​​(English first) to allow its use in different regions of the world
 
-## Pre-requisitos
+## Pre-requirements
 
-Se necesita instalar:
-- **[Git](https://git-scm.com/downloads)** (Incluir Git Bash)
-- **[Node.js](https://nodejs.org/es/download/)**
+You need to install:
+- **[Git] (https://git-scm.com/downloads)** (Include Git Bash)
+- **[Node.js] (https://nodejs.org/es/download/)**
 - **npm**
 
 
-Conocimientos en : **JavaScript**, **Reactjs** , **Nodejs**, **Git** y **Firebase**.
+Knowledge of: **JavaScript**, **Reactjs**, **Nodejs**, **Git** and **Firebase**.
 
 
 
-## Instalación
-***Clonar el Repositorio***
-```
+## Installation
+**Clone the Repository**
+''
 git clone https://github.com/JoCGM09/Izily-React.git
 cd Izily-React
-```
+''
 
-***Instalacion de Librerías***
-```
+**Installation of Libraries**
+''
 npm install
-```
+''
 
-## Demostración
-***Ejecutar el proyecto***
-```
+## Demo
+**Run the project**
+''
 npm start
-```
+''
 
-Debes registrarte y editar tu perfil para empezar a usar la plataforma.
+You must register and edit your profile to start using the platform.
 
-Si quieres visitar nuestra plataforma en la nube ingresa a
-[nuestra página](https://stage-pkabgbtwaa-ue.a.run.app/)
+If you want to visit our cloud platform, go to
+[our page] (https://stage-pkabgbtwaa-ue.a.run.app/)
 
 
-## Lista de tecnologías usadas y enlaces con más información
-- [Google Cloud](https://cloud.google.com/) - Porque reune una gran cantidad de productos escalables como Cloud Run.
-- [Firebase](https://firebase.google.com/docs) - Porque is a Backend-as-a-Service — BaaS. Además cuenta con servicios como **Firestore Database**, **Authentication** y **Storage**.  
-- [JavaScript](https://es.reactjs.org/docs/getting-started.html) - Porque es uno de los mejores lenguajes de programación para diseño web.
-- [ReactJS](https://www.w3schools.com/js/DEFAULT.asp) - Porque es una biblioteca de JavaScript que permite crear interfaces de usuario de manera rápida y sencilla.
-- [Material UI](https://material-ui.com/) - Porque ofrece componentes versátiles que se ajustan a las necesidades del proyecto.
-- [Calendly API](https://developer.calendly.com/) - Porque nos permite programar reuniones directas a Google Calendar.
+## List of technologies used and links with more information
+- [Google Cloud] (https://cloud.google.com/) - Because it brings together a large number of scalable products such as Cloud Run.
+- [Firebase] (https://firebase.google.com/docs) - Because it is a backend-as-a-Service - BaaS. It also has services such as **Firestore Database**, **Authentication** and **Storage**.
+- [JavaScript] (https://es.reactjs.org/docs/getting-started.html) - Because it is one of the best programming languages for web design.
+- [ReactJS] (https://www.w3schools.com/js/DEFAULT.asp) - Because it is a JavaScript library that allows you to create user interfaces quickly and easily.
+- [Material UI] (https://material-ui.com/) - Because it offers versatile components that adjust to the needs of the project.
+- [Calendly API] (https://developer.calendly.com/) - Because it allows us to schedule meetings directly to Google Calendar.
 
-## Miembros del Equipo
-1. José Carlos Guerra Martinez - **[JoCGM09(Github)](https://github.com/JoCGM09)**
-2. Manuel Alejandro Baella Vidal - **[mnuxD(Github)](https://github.com/mnuxD)**
-3. Jhomar Christian Elias Atuyauri Herencia - **[Jhomar1158-ux(Github)](https://github.com/Jhomar1158-ux)**
-4. Leonardo Moina - **[leuu-1998(Github)](https://github.com/leuu-1998)**
+## Team members
+1. José Carlos Guerra Martinez - **[JoCGM09 (Github)] (https://github.com/JoCGM09)**
+2. Manuel Alejandro Baella Vidal - **[mnuxD (Github)] (https://github.com/mnuxD)**
+3. Jhomar Christian Elias Atuyauri Heritage - **[Jhomar1158-ux (Github)] (https://github.com/Jhomar1158-ux)**
+4. Leonardo Moina - **[leuu-1998 (Github)] (https://github.com/leuu-1998)**
 
-## Preguntas frecuentes
-### ¿Como puedo subir una imagen de perfil?
--  De momento comunícate con nosotros a nuestro correo oficial **aprendeizily@gmail.com** para añadir una foto de perfil.
-### ¿Si soy un estudiante puedo ser un mentor?
-- Sí, en Izily todos pueden ser mentores.
-### ¿Como puedo ser un mentor?
--  Primero debes hacer el test de "Convertirme en Mentor" en tu perfil. Luego comunícate con nosotros a nuestro correo oficial **aprendeizily@gmail.com** para añadirte los cursos que necesites a tu perfil, especificando el nivel de cada curso (Escolar, Preuniversitario o Universitario).
-### Si soy un mentor ¿Debo pagar dinero adicional por usar la plataforma?
-- No, no existe de momento ningún monto de efectivo adicional.
+## Frequent questions
+### How can I upload a profile picture?
+- For now, contact us at our official email **aprendeizily@gmail.com** to add a profile photo.
+### If I am a student, can I be a mentor?
+- Yes, in Izily everyone can be a mentor.
+### How can I be a mentor?
+- First you must do the "Become a mentor" test in your profile. Then contact us at our official email **aprendeizily@gmail.com** to add the courses you need to your profile, specifying the level of each course (School, Pre-university or University).
+### If I am a mentor, do I have to pay additional money to use the platform?
+- No, there is currently no additional cash amount.
 
-# Licencia
+# License
 Izily

@@ -24,21 +24,21 @@ Knowledge of: **JavaScript**, **Reactjs**, **Nodejs**, **Git** and **Firebase**.
 
 ## Installation
 **Clone the Repository**
-''
+```
 git clone https://github.com/JoCGM09/Izily-React.git
 cd Izily-React
-''
+```
 
 **Installation of Libraries**
-''
+```
 npm install
-''
+```
 
 ## Demo
 **Run the project**
-''
+```
 npm start
-''
+```
 
 You must register and edit your profile to start using the platform.
 

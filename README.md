@@ -1,7 +1,7 @@
 # IZILY Project
 ##### Virtual social network oriented to education that allows us to learn, teach and connect with our own purely educational virtual community.
 
-### IZILY V0.3 allows you to create an account, edit your profile and schedule a mentorship based on the needs of the topics that interest you, locating mentors that fit the courses you are looking for. In addition, you can post, become a mentor and leave us an opinion about the platform.
+### IZILY V0.3 allows you to create an account, edit your profile and schedule a mentorship based on the needs of the topics that interest you, locating mentors that fit the subjects you are looking for. In addition, you can post, become a mentor and leave us an opinion about the platform.
 
 ### In the next version of Izily we project ourselves to:
 - Make comments on publications

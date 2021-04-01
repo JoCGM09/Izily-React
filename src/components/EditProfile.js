@@ -11,12 +11,12 @@ import Container from "@material-ui/core/Container";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import Divider from "@material-ui/core/Divider";
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 function Alert2(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
+}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -27,42 +27,42 @@ const useStyles = makeStyles((theme) => ({
   },
   form: {
     marginTop: theme.spacing(3),
-    display:"flex",
-    flexDirection:"column",
-    alignItems:"center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    width:"300px",
+    width: "300px",
     color: "#3493C2",
     fontWeight: "bold",
   },
-  subContainer :{
-    display:"flex",
-    flexDirection:"row",
-    margin:0,
-    justifyContent:"center",
+  subContainer: {
+    display: "flex",
+    flexDirection: "row",
+    margin: 0,
+    justifyContent: "center",
   },
-  subSubContainer:{
-    display:"flex",
-    flexDirection:"column",
-    justifyContent:"center",
+  subSubContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
-  Input:{
-    width:"400px",
-    margin:"10px 0px",
+  Input: {
+    width: "400px",
+    margin: "10px 0px",
   },
-  cancelar:{
-    margin:"0px 0px 20px 0px",
-    fontSize:"15px",
-    "&:hover":{
-      textDecoration:"underline",
-      cursor:"pointer",
+  cancelar: {
+    margin: "0px 0px 20px 0px",
+    fontSize: "15px",
+    "&:hover": {
+      textDecoration: "underline",
+      cursor: "pointer",
     },
   },
   root: {
-    width: '100%',
-    '& > * + *': {
+    width: "100%",
+    "& > * + *": {
       marginTop: theme.spacing(2),
     },
   },
@@ -113,30 +113,30 @@ export default function EditProfile() {
 
   function updateName(name) {
     db.collection("usuarios").doc(`${profesor.id}`).update({
-      nombre: name
+      nombre: name,
     });
   }
 
   function updateAboutMe(presentation) {
     db.collection("usuarios").doc(`${profesor.id}`).update({
-      presentacion: presentation
+      presentacion: presentation,
     });
   }
 
   function updateDescription(description) {
     db.collection("usuarios").doc(`${profesor.id}`).update({
-      descripcion: description
+      descripcion: description,
     });
   }
 
   function updateCalendly(calendly) {
     db.collection("usuarios").doc(`${profesor.id}`).update({
-      calendly: calendly
+      calendly: calendly,
     });
   }
 
   // Get promises and execute the functions
-  
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -183,8 +183,8 @@ export default function EditProfile() {
     traerPerfil();
   }, []);
 
-  async function goInicio(){
-    guardarError()
+  async function goInicio() {
+    guardarError();
     try {
       history.push(`/inicio`);
       window.location.reload();
@@ -193,8 +193,8 @@ export default function EditProfile() {
     }
   }
 
-  async function actualizar(){
-    guardarError()
+  async function actualizar() {
+    guardarError();
     try {
       window.location.reload();
     } catch {
@@ -203,7 +203,7 @@ export default function EditProfile() {
   }
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -222,121 +222,119 @@ export default function EditProfile() {
             {error}
           </Alert>
         )}
-        <Divider/>
+        <Divider />
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
-          <Grid style={{marginTop:"-20px", width:"90%"}}>
-            <Divider/>
+          <Grid style={{ marginTop: "-20px", width: "90%" }}>
+            <Divider />
           </Grid>
           <Grid container className={classes.subContainer} spacing={2}>
             <Grid item className={classes.subSubContainer}>
               {/* <Grid > */}
-                <TextField
-                  variant="outlined"
-                  required
-                  defaultValue={usuarioActual.email}
-                  className={classes.Input}
-                  id="email"
-                  inputRef={emailRef}
-                  label="Correo Electrónico"
-                  name="email"
-                  autoComplete="email"
-                />
+              <TextField
+                variant="outlined"
+                required
+                defaultValue={usuarioActual.email}
+                className={classes.Input}
+                id="email"
+                inputRef={emailRef}
+                label="Correo Electrónico"
+                name="email"
+                autoComplete="email"
+              />
               {/* </Grid> */}
               {/* <Grid  > */}
-                <TextField
-                  variant="outlined"
-                  className={classes.Input}
-                  name="password"
-                  label="Contraseña"
-                  defaultValue={null}
-                  inputRef={contraseñaRef}
-                  placeholder="Dejar en blanco para mantener la contaseña"
-                  type="password"
-                  id="password"
-                  //autoComplete="current-password"
-                />
+              <TextField
+                variant="outlined"
+                className={classes.Input}
+                name="password"
+                label="Contraseña"
+                defaultValue={null}
+                inputRef={contraseñaRef}
+                placeholder="Dejar en blanco para mantener la contaseña"
+                type="password"
+                id="password"
+                //autoComplete="current-password"
+              />
               {/* </Grid> */}
               {/* <Grid  > */}
-                <TextField
-                  variant="outlined"
-                  className={classes.Input}
-                  name="confirm-password"
-                  label="Confirmar contraseña"
-                  inputRef={confirmContraseñaRef}
-                  placeholder="Dejar en blanco para mantener la contaseña"
-                  type="password"
-                  id="confirm-password"
-                  autoComplete="confirm-password"
-                />
+              <TextField
+                variant="outlined"
+                className={classes.Input}
+                name="confirm-password"
+                label="Confirmar contraseña"
+                inputRef={confirmContraseñaRef}
+                placeholder="Dejar en blanco para mantener la contaseña"
+                type="password"
+                id="confirm-password"
+                autoComplete="confirm-password"
+              />
               {/* </Grid> */}
               {profesor && (
                 // <Grid >
-                  <TextField
-                    variant="outlined"
-                    className={classes.Input}
-                    name="name"
-                    label="Nombre y Apellido"
-                    defaultValue={profesor.nombre}
-                    inputRef={nombreRef}
-                    id="rename"
-                    autoComplete="current-name"
-                  />
+                <TextField
+                  variant="outlined"
+                  className={classes.Input}
+                  name="name"
+                  label="Nombre y Apellido"
+                  defaultValue={profesor.nombre}
+                  inputRef={nombreRef}
+                  id="rename"
+                  autoComplete="current-name"
+                />
                 // </Grid>
               )}
             </Grid>
             <Grid item className={classes.subSubContainer}>
               {profesor && (
                 // <Grid >
-                  <TextField
-                    variant="outlined"
-                    className={classes.Input}
-                    name="description"
-                    label="Descripción"
-                    defaultValue={profesor.descripcion}
-                    inputRef={descriptionRef}
-                    id="description"
-                    autoComplete="current-description"
-                    multiline
-                  />
+                <TextField
+                  variant="outlined"
+                  className={classes.Input}
+                  name="description"
+                  label="Descripción"
+                  defaultValue={profesor.descripcion}
+                  inputRef={descriptionRef}
+                  id="description"
+                  autoComplete="current-description"
+                  multiline
+                />
                 // </Grid>
               )}
               {profesor && (
                 // <Grid >
-                  <TextField
-                    variant="outlined"
-                    className={classes.Input}
-                    name="aboutMe"
-                    label="Acerca de mí"
-                    defaultValue={profesor.presentacion}
-                    inputRef={aboutMeRef}
-                    id="aboutMe"
-                    autoComplete="current-aboutMe"
-                    multiline
-                  />
+                <TextField
+                  variant="outlined"
+                  className={classes.Input}
+                  name="aboutMe"
+                  label="Acerca de mí"
+                  defaultValue={profesor.presentacion}
+                  inputRef={aboutMeRef}
+                  id="aboutMe"
+                  autoComplete="current-aboutMe"
+                  multiline
+                />
                 // </Grid>
               )}
               {profesor && (
                 // <Grid >
-                  <TextField
-                    variant="outlined"
-                    className={classes.Input}
-                    name="calendly"
-                    label="Link de Calendly"
-                    defaultValue={profesor.calendly}
-                    inputRef={calendlyRef}
-                    id="calendly"
-                    autoComplete="current-calendly"
-                    multiline
-                  />
+                <TextField
+                  variant="outlined"
+                  className={classes.Input}
+                  name="calendly"
+                  label="Link de Calendly"
+                  defaultValue={profesor.calendly}
+                  inputRef={calendlyRef}
+                  id="calendly"
+                  autoComplete="current-calendly"
+                  multiline
+                />
                 // </Grid>
               )}
             </Grid>
-
-            
           </Grid>
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="success">
-              This is a success message!
+              ¡Tus datos fueron guardados con éxito!
             </Alert>
           </Snackbar>
           <Button
@@ -347,14 +345,19 @@ export default function EditProfile() {
           >
             Guardar
           </Button>
-          <Grid container justify="space-between" style={{width:"100%"}}>
-          <p className={classes.cancelar} variante="link" onClick={actualizar}> Actualiza para visualizar los cambios</p>
-          <p className={classes.cancelar} variante="link" onClick={goInicio}>Cancelar</p>
-              
-            
+          <Grid container justify="space-between" style={{ width: "100%" }}>
+            <p
+              className={classes.cancelar}
+              variante="link"
+              onClick={actualizar}
+            >
+              {" "}
+              Actualiza para poder ver los cambios
+            </p>
+            <p className={classes.cancelar} variante="link" onClick={goInicio}>
+              Volver al inicio
+            </p>
           </Grid>
-
-          
         </form>
       </div>
     </Container>

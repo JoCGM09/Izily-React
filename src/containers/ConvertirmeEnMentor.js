@@ -117,7 +117,6 @@ export default function AcercaDeIzily() {
     if (profesor.esProfesor === false) {
         updateEsProfesor(true);
         history.push(`/perfil/${profesor.id}`);
-        window.location.reload();
       }
   };
 

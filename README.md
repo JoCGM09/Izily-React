@@ -43,7 +43,7 @@ npm start
 You must register and edit your profile to start using the platform.
 
 If you want to visit our cloud platform, go to
-[our page](https://stage-pkabgbtwaa-ue.a.run.app/)
+[Izily](https://izily.online/).
 
 
 ## List of technologies used and links with more information

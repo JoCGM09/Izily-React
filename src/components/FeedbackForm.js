@@ -98,7 +98,7 @@ function FeedbackForm(props) {
           [name]: value,
           name: profesor.nombre,
           loginid: profesor.loginid,
-          date: new Date().toLocaleDateTimeString(),
+          date: new Date().toLocaleDateString(),
           imageURL: profesor.imageURL,
           idPerfil: profesor.id,
         });

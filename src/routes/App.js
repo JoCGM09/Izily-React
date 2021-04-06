@@ -30,7 +30,7 @@ const App = () => (
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/forgot-password" component={ForgotPassword} />
           <PrivateRoute path="/editar-perfil" component={EditProfile} />
-          <PrivateRoute path="/mis-cursos" component={MisCursos} />
+          {/* <PrivateRoute path="/mis-cursos" component={MisCursos} /> */}
           <PrivateRoute path="/convertirme-en-mentor" component={ConvertirmeEnMentor} />
           <PrivateRoute
             exact

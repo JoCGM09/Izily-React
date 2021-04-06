@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
       justifyContent: "space-between",
     },
     PublicarButton: {
-      margin: "0px 5px",
+      margin: "5px 5px 0px 5px",
       color: "#3493C2",
       fontWeight: "bold",
       height: "30px",
@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: "rgba(0, 0, 0, 1)",
     },
   }));
+
 
 function FeedbackForm(props) {
     const classes = useStyles();
@@ -115,10 +116,15 @@ function FeedbackForm(props) {
       window.location.reload();
     }
     
+    
   
     useEffect(() => {
       traerPerfil();
     }, []);
+
+    function validarInput() {
+      document.getElementById("btn_Validar").disabled = !document.getElementById("content").value.length;
+    }
   
     return (
         <Card className={classes.root}>
@@ -132,11 +138,13 @@ function FeedbackForm(props) {
                 variant="outline"
                 type="text"
                 name="content"
+                id="content"
                 aria-label="minimum height"
                 placeholder="¿Qué opinas de Izily?"
                 rowsMin={1}
                 onChange={handleInputChange}
                 value={body.content}
+                // onInput={validarInput}
               />
             </CardContent>
           
@@ -147,6 +155,8 @@ function FeedbackForm(props) {
                 variant="outlined"
                 size="small"
                 onClick={handleClick}
+                id="btn_Validar"
+                disabled={!body.content}
               >
                 Publicar
               </Button>

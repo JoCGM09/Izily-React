@@ -186,6 +186,7 @@ export default function RecipeReviewCard(props) {
             variant="outlined"
             size="small"
             onClick={handleClick}
+            disabled={!body.content}
           >
             Publicar
           </Button>

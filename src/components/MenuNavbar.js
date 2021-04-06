@@ -167,7 +167,7 @@ export default function CustomizedMenu(props) {
           </ListItemIcon>
           <ListItemText primary="Editar Perfil" />
         </StyledMenuItem>
-        {props.esProfesor === true ? (
+        {/* {props.esProfesor === true ? (
           <StyledMenuItem disabled variant="link" onClick={misCursos}>
             <ListItemIcon>
               <MenuBookIcon fontSize="small" />
@@ -177,7 +177,7 @@ export default function CustomizedMenu(props) {
         ) : (
           <>
           </>
-        )}
+        )} */}
         <StyledMenuItem variant="link" onClick={handleLogOut}>
           <ListItemIcon>
             <ExitToAppTwoToneIcon fontSize="small" />

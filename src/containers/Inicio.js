@@ -115,8 +115,6 @@ function Home() {
   const { usuarioActual } = useAuth();
   const [profesor, setProfesor] = useState(null);
   const [screams, setScreams] = useState(["2"]);
-  
-
 
   const traerProfesor = () => {
     const idd = usuarioActual.uid;
@@ -155,8 +153,6 @@ function Home() {
       });
   };
 
-
-
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
@@ -175,22 +171,15 @@ function Home() {
         <Grid>
           <Grid className={classes.gridArriba}>
             <Grid>
-              <TextField
-                disabled
-                className={classes.searchInput}
+              <Button
+                component={Link}
+                to={"/buscar"}
+                className={classes.botones}
                 variant="outlined"
-                item
-                id="buscador"
-                placeholder="Buscar"
                 size="small"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon fontSize="small" />
-                    </InputAdornment>
-                  ),
-                }}
-              />
+              >
+                Buscar
+              </Button>
             </Grid>
             <Grid xs className={classes.gridMedio}></Grid>
 
@@ -207,7 +196,6 @@ function Home() {
             </Grid>
           </Grid>
           <Grid align="start" className={classes.publicacionesContainer}>
-  
             <CrearPublicacion />
 
             {screams && (
@@ -239,7 +227,7 @@ function Home() {
                     //     loginidComent={comentarios.loginid}
                     //     idPerfilComent={comentarios.idPerfil}
                     //   />
-                    //   ))} 
+                    //   ))}
                   />
                 ))}
               </div>

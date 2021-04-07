@@ -25,6 +25,7 @@ import Calificacion from "../components/Calificacion";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { useHistory } from "react-router-dom";
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -613,7 +614,7 @@ function Perfil() {
                         color="inherit"
                         size="small"
                         className={classes.buttonPerfil}
-                        startIcon={<PeopleIcon />}
+                        startIcon={<QuestionAnswerIcon />}
                         disableElevation="true"
                         >
                           Contactar

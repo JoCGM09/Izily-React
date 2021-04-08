@@ -247,7 +247,8 @@ export default function RecipeReviewCard(props) {
   }
 
   const handleClick = async e => {
-    db.collection('publicaciones').doc(`${props.screamId}`).update(bodyComent)
+    db.collection('publicaciones').doc(`${props.screamId}`).collection('coments').doc(`${props.comentId}`)
+    .add(bodyComent)
     .then(()=>{
       setBodyComent({...initialBody})
     }).then(()=>{
@@ -365,7 +366,7 @@ export default function RecipeReviewCard(props) {
             <Button 
             className={classes.PublicarButton} 
             size="small" 
-            //onClick={handleClick}
+            // onClick={handleClick}
             >
               Enviar
             </Button>

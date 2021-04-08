@@ -218,16 +218,16 @@ function Home() {
                         label={scream.label}
                       />
                     }
-                    // children={screams.comentarios.map((comentarios) => (
-                    //   <Comentario
-                    //     nameComent={comentarios.name}
-                    //     contentComent={comentarios.content}
-                    //     dateComent={comentarios.date}
-                    //     imageURLComent={comentarios.imageURL}
-                    //     loginidComent={comentarios.loginid}
-                    //     idPerfilComent={comentarios.idPerfil}
-                    //   />
-                    //   ))}
+                    children={screams.comentarios && screams.comentarios.map((comentarios) => (
+                      <Comentario
+                        nameComent={comentarios.name}
+                        contentComent={comentarios.bodyComent}
+                        dateComent={comentarios.date}
+                        imageURLComent={comentarios.imageURL}
+                        loginidComent={comentarios.loginid}
+                        idPerfilComent={comentarios.idPerfil}
+                      />
+                    ))}
                   />
                 ))}
               </div>

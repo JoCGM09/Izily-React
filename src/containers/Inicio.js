@@ -146,7 +146,6 @@ function Home() {
         });
         //error
         setScreams(docs);
-        console.log(screams);
       })
       .catch((error) => {
         console.error(error);

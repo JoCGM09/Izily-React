@@ -3,6 +3,7 @@ import axios from "axios";
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
+import { storage } from "../firebase";
 import Profesor from "../components/ProfesorPerfil";
 import { useAuth } from "../contexts/AuthContext";
 import Grid from "@material-ui/core/Grid";
@@ -22,10 +23,10 @@ import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Calificacion from "../components/Calificacion";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 import { useHistory } from "react-router-dom";
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -105,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
   categories: {
     background: "white",
     color: "black",
-    paddingBottom:"0px",
+    paddingBottom: "0px",
   },
 
   categoriesAppBar: {
@@ -155,14 +156,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  buttonConvertirmeProfesor:{
+  buttonConvertirmeProfesor: {
     background: "white",
     color: "#3493C2",
-    marginTop:"10px",
+    marginTop: "10px",
     border: "1px solid #3493C2",
     fontSize: "15px",
     height: "70px",
-    width:"220px",
+    width: "220px",
     fontWeight: "bold",
     "&:hover": {
       backgroundColor: "#DAF1FC",
@@ -173,7 +174,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-evenly",
     marginTop: "-10px",
-    alignItems:"center",
+    alignItems: "center",
     width: "370px",
     paddingLeft: "5px",
   },
@@ -195,7 +196,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "column",
   },
-
 }));
 
 function TabPanel(props) {
@@ -234,22 +234,19 @@ function a11yProps(index) {
 //termina cosas de la tabla
 
 function Perfil() {
-
   const GreenSwitch = withStyles({
     switchBase: {
-      
       color: "grey",
-      '&$checked': {
+      "&$checked": {
         color: "#99CC42",
       },
-      '&$checked + $track': {
+      "&$checked + $track": {
         backgroundColor: "#99CC42",
       },
     },
     checked: {},
     track: {},
   })(Switch);
-
 
   const classes = useStyles();
   const theme = useTheme();
@@ -265,7 +262,8 @@ function Perfil() {
   const { profesorId } = useParams();
   const [profesor, setProfesor] = useState(null);
   const [events, setEvents] = useState([]);
- 
+  const [fileUrl, setFileUrl] = useState("-");
+
   const traerProfesor = async () => {
     const profesorInfo = db.collection("usuarios").doc(profesorId);
     const doc = await profesorInfo.get();
@@ -296,27 +294,29 @@ function Perfil() {
   // }, [profesor.disponible]);
 
   useEffect(() => {
-    const organizationid ='https://api.calendly.com/organizations/CFEFXIJXXUT225N7';
+    const organizationid =
+      "https://api.calendly.com/organizations/CFEFXIJXXUT225N7";
     const client = axios.create({
-      baseURL: 'https://api.calendly.com',
+      baseURL: "https://api.calendly.com",
       timeout: 3000,
-      headers: {'Authorization': 'Bearer v6PBAXkfspGMWnC7_hTaRfiw5vvHRHZnX9eB51frgYY'}
+      headers: {
+        Authorization: "Bearer v6PBAXkfspGMWnC7_hTaRfiw5vvHRHZnX9eB51frgYY",
+      },
     });
     client
-      .get(`/scheduled_events?count=25&organization=${organizationid}&status=active`)
+      .get(
+        `/scheduled_events?count=25&organization=${organizationid}&status=active`
+      )
       .then(function (response) {
-        const uris = response.data.collection.map((event)=>{
+        const uris = response.data.collection.map((event) => {
           return event.uri;
         });
-        uris.map((uri)=>{
-          client.get(`${uri}/invitees`).then((uriResponse)=>{
-          })
-        })
+        uris.map((uri) => {
+          client.get(`${uri}/invitees`).then((uriResponse) => {});
+        });
         setEvents(response.data.collection);
-
       })
-      .catch(function (error) {
-      })
+      .catch(function (error) {});
   }, []);
 
   const [state, setState] = React.useState({
@@ -325,13 +325,32 @@ function Perfil() {
 
   function updateDisponible(value) {
     db.collection("usuarios").doc(`${profesor.id}`).update({
-      disponible: value
+      disponible: value,
     });
   }
 
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = storage.ref();
+    const fileRef = storageRef.child(`users/${profesor.loginid}/${file.name}`);
+    await fileRef.put(file);
+    setFileUrl(await fileRef.getDownloadURL());
+    console.log(fileUrl);
+  };
+
+  const handleUpdateClick = async (e) => {
+    e.preventDefault();
+    await db
+      .collection("usuarios")
+      .doc(`${profesor.id}`)
+      .update({
+        imageURL: fileUrl,
+      })
+      .then(() => window.location.reload())
+      .catch((error) => console.log(error));
+  };
 
   const handleChangeSwitch = (event) => {
-
     setState({ ...state, [event.target.name]: event.target.checked });
 
     const promises = [];
@@ -340,17 +359,14 @@ function Perfil() {
 
     if (profesor.disponible === false) {
       promises.push(updateDisponible(true));
-    }
-    else {
+    } else {
       promises.push(updateDisponible(false));
     }
-    
+
     Promise.all(promises)
       .then(() => {
         // history.push(`/perfil/${profesor.id}`)
-
         // window.location.reload();
-
       })
       .catch(() => {
         setError("Ocurrió un error al actualizar la cuenta");
@@ -360,10 +376,10 @@ function Perfil() {
       });
   };
 
-  async function convertToMentor(){
-    setError()
+  async function convertToMentor() {
+    setError();
     try {
-      history.push(`/convertirme-en-mentor`)
+      history.push(`/convertirme-en-mentor`);
     } catch {
       setError("Ocurrió un error al salir de la cuenta");
     }
@@ -406,31 +422,28 @@ function Perfil() {
             >
               <div className={classes.titlePresentacion}>
                 <p className={classes.titlePresentacion_text}>Acerca de mi:</p>
-                
+
                 {usuarioActual?.uid !== profesor.loginid ? (
                   <>
-                  {profesor?.esProfesor === true && profesor?.disponible === true ? (
-                    <Button
-                      variant="contained"
-                      size="small"
-                      target="_blank"
-                      // href={profesor.calendly}
-                      color="inherit"
-                      className={classes.buttonPerfil}
-                      onClick={calendly}
-                      startIcon={<EventAvailableIcon />}
-                      disableElevation="true"
-                    >
-                      Agendar Mentoría
-                    </Button>
-                  ) : (
-                    <p>
-
-                    </p>
-                  )}
-                  
+                    {profesor?.esProfesor === true &&
+                    profesor?.disponible === true ? (
+                      <Button
+                        variant="contained"
+                        size="small"
+                        target="_blank"
+                        // href={profesor.calendly}
+                        color="inherit"
+                        className={classes.buttonPerfil}
+                        onClick={calendly}
+                        startIcon={<EventAvailableIcon />}
+                        disableElevation="true"
+                      >
+                        Agendar Mentoría
+                      </Button>
+                    ) : (
+                      <p></p>
+                    )}
                   </>
-                  
                 ) : (
                   <Button
                     variant="contained"
@@ -448,6 +461,15 @@ function Perfil() {
                 )}
               </div>
 
+              {usuarioActual?.uid == profesor?.loginid && (
+                <div>
+                  <input type="file" onChange={handleFileChange} />
+                  {fileUrl != "-" && (
+                    <button onClick={handleUpdateClick}>Subir foto</button>
+                  )}
+                </div>
+              )}
+
               <Paper
                 className={classes.paperPresentacion}
                 overflow="scroll"
@@ -457,8 +479,7 @@ function Perfil() {
                 children={profesor.presentacion}
               />
 
-                {profesor?.esProfesor === true ? (
-
+              {profesor?.esProfesor === true ? (
                 <div className={classes.root}>
                   <AppBar
                     elevation={1}
@@ -492,7 +513,11 @@ function Perfil() {
                       />
                     </Tabs>
                   </AppBar>
-                  <TabPanel className={classes.TabPanel} value={value} index={0}>
+                  <TabPanel
+                    className={classes.TabPanel}
+                    value={value}
+                    index={0}
+                  >
                     <Paper
                       className={classes.etiquetasContainer}
                       overflow="scroll"
@@ -508,7 +533,11 @@ function Perfil() {
                         ))}
                     />
                   </TabPanel>
-                  <TabPanel className={classes.TabPanel} value={value} index={1}>
+                  <TabPanel
+                    className={classes.TabPanel}
+                    value={value}
+                    index={1}
+                  >
                     <Paper
                       className={classes.etiquetasContainer}
                       overflow="scroll"
@@ -524,7 +553,11 @@ function Perfil() {
                         ))}
                     />
                   </TabPanel>
-                  <TabPanel className={classes.TabPanel} value={value} index={2}>
+                  <TabPanel
+                    className={classes.TabPanel}
+                    value={value}
+                    index={2}
+                  >
                     <Paper
                       className={classes.etiquetasContainer}
                       overflow="scroll"
@@ -541,81 +574,103 @@ function Perfil() {
                     />
                   </TabPanel>
                 </div>
-
-                ):(
-                  <p>
-
-                  </p>
-                )}
-              
+              ) : (
+                <p></p>
+              )}
 
               <div className={classes.buttonContainer}>
                 {usuarioActual?.uid === profesor.loginid ? (
-                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly", marginTop:"0px",}}>
-                    {
-                      profesor?.esProfesor === true ? (
-                        <>
-                          <FormControlLabel
-                            control={<GreenSwitch size="small" checked={profesor.disponible} onChange={handleChangeSwitch} name="checked" />}
-                            label="Disponible"
-                          />
-                          <Button
-                            disabled
-                            variant="contained"
-                            color="inherit"
-                            size="small"
-                            className={classes.buttonPerfil}
-                            startIcon={<PlayArrowIcon />}
-                            disableElevation="true"
-                          >
-                            Video
-                          </Button>
-                        </>
-                        
-                      ) : (
-                        <>
-                          <Button
-                            
-                            variant="contained"
-                            color="inherit"
-                            size="small"
-                            onClick={convertToMentor}
-                            className={classes.buttonConvertirmeProfesor}
-                            startIcon={ <img style={{marginLeft:"5px", height:"45px", width:"auto"}} src="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/icons%2FConvertirmeEnProfesor.png?alt=media&token=a45096cb-1a3b-4134-811c-aaba4103528f"/> }
-                            disableElevation="true"
-                          >
-                            Convertirme en Mentor
-                          </Button>
-                        </>
-                      )
-                    }
-                    
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      alignItems: "center",
+                      justifyContent: "space-evenly",
+                      marginTop: "0px",
+                    }}
+                  >
+                    {profesor?.esProfesor === true ? (
+                      <>
+                        <FormControlLabel
+                          control={
+                            <GreenSwitch
+                              size="small"
+                              checked={profesor.disponible}
+                              onChange={handleChangeSwitch}
+                              name="checked"
+                            />
+                          }
+                          label="Disponible"
+                        />
+                        <Button
+                          disabled
+                          variant="contained"
+                          color="inherit"
+                          size="small"
+                          className={classes.buttonPerfil}
+                          startIcon={<PlayArrowIcon />}
+                          disableElevation="true"
+                        >
+                          Video
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button
+                          variant="contained"
+                          color="inherit"
+                          size="small"
+                          onClick={convertToMentor}
+                          className={classes.buttonConvertirmeProfesor}
+                          startIcon={
+                            <img
+                              style={{
+                                marginLeft: "5px",
+                                height: "45px",
+                                width: "auto",
+                              }}
+                              src="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/icons%2FConvertirmeEnProfesor.png?alt=media&token=a45096cb-1a3b-4134-811c-aaba4103528f"
+                            />
+                          }
+                          disableElevation="true"
+                        >
+                          Convertirme en Mentor
+                        </Button>
+                      </>
+                    )}
                   </div>
-                  
                 ) : (
-                  <div style={{display:"flex", width:"100%", alignItems:"center", justifyContent:"space-evenly", marginTop:"0px",}}>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      alignItems: "center",
+                      justifyContent: "space-evenly",
+                      marginTop: "0px",
+                    }}
+                  >
                     {profesor.esProfesor === true ? (
                       <>
-                        <Calificacion/>
+                        <Calificacion />
                         <Button
-                        disabled
-                        variant="contained"
-                        color="inherit"
-                        size="small"
-                        className={classes.buttonPerfil}
-                        startIcon={<PlayArrowIcon />}
-                        disableElevation="true"
+                          disabled
+                          variant="contained"
+                          color="inherit"
+                          size="small"
+                          className={classes.buttonPerfil}
+                          startIcon={<PlayArrowIcon />}
+                          disableElevation="true"
                         >
                           Video
                         </Button>
                         <Button
-                        disabled
-                        variant="contained"
-                        color="inherit"
-                        size="small"
-                        className={classes.buttonPerfil}
-                        startIcon={<QuestionAnswerIcon />}
-                        disableElevation="true"
+                          disabled
+                          variant="contained"
+                          color="inherit"
+                          size="small"
+                          className={classes.buttonPerfil}
+                          startIcon={<QuestionAnswerIcon />}
+                          disableElevation="true"
                         >
                           Contactar
                         </Button>
@@ -633,9 +688,8 @@ function Perfil() {
                         Contactar
                       </Button>
                     )}
-                      
                   </div>
-                )}          
+                )}
               </div>
 
               {/* <div className={classes.idiomsContainer}>
@@ -647,10 +701,8 @@ function Perfil() {
                   <LanguageIcon fontSize="small" /> Español, Portugués.
                 </Typography>
               </div> */}
-
             </Grid>
           </Grid>
-                   
         </div>
       )}
       {!profesor && (

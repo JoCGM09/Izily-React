@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
+// import { useMemo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
@@ -152,10 +150,10 @@ function Home() {
       });
   };
 
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const [open, setOpen] = React.useState(false);
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   useEffect(() => {
     traerProfesor();

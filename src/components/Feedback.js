@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import FeedbackForm from "../components/FeedbackForm";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize:"14px",
     display:"flex",
     justifyContent:"left",
-    background:"red",
     padding:"5px 10px 5px 10px",
     borderRadius:"10px",
     background:"white",

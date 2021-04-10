@@ -3,7 +3,7 @@ import axios from "axios";
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
-import { storage } from "../firebase";
+// import { storage } from "../firebase";
 import Profesor from "../components/ProfesorPerfil";
 import { useAuth } from "../contexts/AuthContext";
 import Grid from "@material-ui/core/Grid";
@@ -18,7 +18,7 @@ import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import PeopleIcon from "@material-ui/icons/People";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import LanguageIcon from "@material-ui/icons/Language";
+// import LanguageIcon from "@material-ui/icons/Language";
 import EventAvailableIcon from "@material-ui/icons/EventAvailable";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -262,7 +262,6 @@ function Perfil() {
   const { profesorId } = useParams();
   const [profesor, setProfesor] = useState(null);
   const [events, setEvents] = useState([]);
-  const [fileUrl, setFileUrl] = useState("-");
 
   const traerProfesor = async () => {
     const profesorInfo = db.collection("usuarios").doc(profesorId);
@@ -280,9 +279,6 @@ function Perfil() {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
   };
 
   useEffect(() => {
@@ -329,26 +325,6 @@ function Perfil() {
     });
   }
 
-  const handleFileChange = async (e) => {
-    const file = e.target.files[0];
-    const storageRef = storage.ref();
-    const fileRef = storageRef.child(`users/${profesor.loginid}/${file.name}`);
-    await fileRef.put(file);
-    setFileUrl(await fileRef.getDownloadURL());
-    console.log(fileUrl);
-  };
-
-  const handleUpdateClick = async (e) => {
-    e.preventDefault();
-    await db
-      .collection("usuarios")
-      .doc(`${profesor.id}`)
-      .update({
-        imageURL: fileUrl,
-      })
-      .then(() => window.location.reload())
-      .catch((error) => console.log(error));
-  };
 
   const handleChangeSwitch = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -460,15 +436,6 @@ function Perfil() {
                   </Button>
                 )}
               </div>
-
-              {usuarioActual?.uid == profesor?.loginid && (
-                <div>
-                  <input type="file" onChange={handleFileChange} />
-                  {fileUrl != "-" && (
-                    <button onClick={handleUpdateClick}>Subir foto</button>
-                  )}
-                </div>
-              )}
 
               <Paper
                 className={classes.paperPresentacion}

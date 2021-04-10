@@ -125,7 +125,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard(props) {
+export default function RecipeReviewCard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
@@ -168,7 +168,6 @@ export default function RecipeReviewCard(props) {
         className={classes.modal}
         open={open}
         onClose={handleClose}
-        closeBeforeTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,

@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard(props) {
+export default function RecipeReviewCard() {
   const classes = useStyles();
 
   const initialBody = {

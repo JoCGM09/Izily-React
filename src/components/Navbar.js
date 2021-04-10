@@ -99,37 +99,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const StyledMenu = withStyles({
-  paper: {
-    border: "1px solid #d3d4d5",
-    marginLeft: "-40px",
-  },
-})((props) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "center",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "center",
-    }}
-    {...props}
-  />
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    "&:focus": {
-      backgroundColor: theme.palette.primary.main,
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem);
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -153,15 +122,6 @@ export default function ElevateAppBar(props) {
   const classes = useStyles();
   const [error, setError] = useState("");
   const history = useHistory();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   const { usuarioActual } = useAuth();
 
@@ -222,8 +182,6 @@ export default function ElevateAppBar(props) {
                 component={Link}
                 to={"/"}
                 className={classes.buttonLogo}
-                disableRipple="true"
-                disableFocusRipple="true"
               >
                 <img src={logo} className={classes.logo} />
               </Button>
@@ -288,8 +246,6 @@ export default function ElevateAppBar(props) {
                 component={Link}
                 to={"/"}
                 className={classes.buttonLogo}
-                disableRipple="true"
-                disableFocusRipple="true"
               >
                 <img src={logo} className={classes.logo} />
               </Button>

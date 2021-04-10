@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
+// import { useState, useEffect, useCallback } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { IconButton } from "@material-ui/core";
 import TheatersIcon from "@material-ui/icons/Theaters";
-import { useAuth } from "../contexts/AuthContext";
-import { db } from "../firebase";
-import { useHistory } from "react-router-dom";
+// import { useAuth } from "../contexts/AuthContext";
+// import { db } from "../firebase";
+// import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {

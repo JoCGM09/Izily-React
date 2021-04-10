@@ -246,19 +246,19 @@ export default function RecipeReviewCard(props) {
     
   }
 
-  const handleClick = async e => {
-    db.collection('publicaciones').doc(`${props.screamId}`).collection('coments').doc(`${props.comentId}`)
-    .add(bodyComent)
-    .then(()=>{
-      setBodyComent({...initialBody})
-    }).then(()=>{
-      history.push('/inicio');
-      window.location.reload();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+  // const handleClick = async e => {
+  //   db.collection('publicaciones').doc(`${props.screamId}`).collection('coments').doc(`${props.comentId}`)
+  //   .add(bodyComent)
+  //   .then(()=>{
+  //     setBodyComent({...initialBody})
+  //   }).then(()=>{
+  //     history.push('/inicio');
+  //     window.location.reload();
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  // }
 
   useEffect(() => {
     traerPerfil();

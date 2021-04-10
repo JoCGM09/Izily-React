@@ -12,11 +12,9 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import Divider from "@material-ui/core/Divider";
 import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import { storage } from "../firebase";
+import Avatar from "@material-ui/core/Avatar";
 
-function Alert2(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -66,6 +64,39 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  avatar: {
+    height: 150,
+    width: 150,
+    borderRadius: "50%",
+    AlignItems: "center",
+    marginTop: 10,
+    marginBottom: 15,
+    fontSize:"110px",
+  },
+  changePhotoContainer: {
+    display:"flex",
+    flexDirection:"column",
+    alignItems:"center",
+  },
+  
+  inputFileContent: {
+    display:"flex",
+    justifyItems:"center",
+    alignItems:"center",
+    border: "1px solid #C7C6C6",
+    borderRadius:"50px",
+    padding:"10px",
+    marginBottom:"10px",
+  },
+  boton: {
+    marginBottom:"10px",
+    marginTop:"5px",
+    height:"30px",
+    border: "1px solid grey",
+    "&:hover": {
+      backgroundColor: "none",
+    },
+  },
 }));
 
 export default function EditProfile() {
@@ -84,6 +115,8 @@ export default function EditProfile() {
   const [carga, guardarCarga] = useState(false);
   const [profesor, setProfesor] = useState(null);
   const history = useHistory();
+  const [fileUrl, setFileUrl] = useState("-");
+
 
   // Get current user with database values and set on useState
 
@@ -210,6 +243,28 @@ export default function EditProfile() {
     setOpen(false);
   };
 
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = storage.ref();
+    const fileRef = storageRef.child(`users/${profesor.loginid}/${file.name}`);
+    await fileRef.put(file);
+    setFileUrl(await fileRef.getDownloadURL());
+    console.log(fileUrl);
+  };
+
+  const handleUpdateClick = async (e) => {
+    e.preventDefault();
+    await db
+      .collection("usuarios")
+      .doc(`${profesor.id}`)
+      .update({
+        imageURL: fileUrl,
+      })
+      .then(() => window.location.reload())
+      .catch((error) => console.log(error));
+  };
+
   return (
     <Container className={classes.container}>
       <CssBaseline />
@@ -223,6 +278,21 @@ export default function EditProfile() {
           </Alert>
         )}
         <Divider />
+        {usuarioActual?.uid == profesor?.loginid && (
+          <div className={classes.changePhotoContainer}>
+            <Avatar className={classes.avatar} alt={profesor.nombre} src={profesor.imageURL} /> 
+            {fileUrl == "-" ? (
+              <div className={classes.inputFileContent}>
+              <input className={classes.inputFile} accept=".jpg,.jpeg,.png" type="file" onChange={handleFileChange}/>
+              </div>
+            ):(
+              <div style={{display:"flex", flexDirection:"column"}}>
+                Tu foto esta lista para subir.
+                <Button className={classes.boton} onClick={handleUpdateClick}>Subir foto</Button>
+              </div> 
+            )}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className={classes.form} noValidate>
           <Grid style={{ marginTop: "-20px", width: "90%" }}>
             <Divider />

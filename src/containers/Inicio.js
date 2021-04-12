@@ -174,8 +174,9 @@ function Home() {
                 className={classes.botones}
                 variant="outlined"
                 size="small"
+                disabled
               >
-                Buscar
+                Buscar personas
               </Button>
             </Grid>
             <Grid xs className={classes.gridMedio}></Grid>

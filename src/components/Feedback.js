@@ -47,11 +47,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize:"14px",
     display:"flex",
     justifyContent:"left",
-    padding:"5px 10px 5px 10px",
-    borderRadius:"10px",
-    background:"white",
+    padding:"0px 10px 5px 0px",
+    // borderRadius:"10px",
+    // background:"white",
     textAlign:"left",
-    border: "1px solid #C7C6C6",
+    // border: "1px solid #C7C6C6",
   },
 }));
 

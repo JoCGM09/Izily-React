@@ -36,7 +36,7 @@ const App = () => (
             component={ConvertirmeEnMentor}
           />
           <PrivateRoute exact path="/buscar-un-mentor" component={Profesores} />
-          <PrivateRoute exact path="/buscar" component={BuscarUsuarios} />
+          {/* <PrivateRoute exact path="/buscar" component={BuscarUsuarios} /> */}
           <PrivateRoute exact path="/inicio" component={Inicio} />
           <PrivateRoute path="/perfil/:profesorId" component={Perfil} />
           <PrivateRoute

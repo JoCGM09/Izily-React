@@ -132,7 +132,8 @@ export default function RecipeReviewCard() {
               imageURL: profesor.imageURL,
               idPerfil: profesor.id,
               comentarios: [],
-              numeroDeComentarios:0
+              numeroDeComentarios:0,
+              dateNumber: new Date(),
             });
     }else{
       console.log("error");

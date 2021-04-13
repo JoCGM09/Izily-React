@@ -10,7 +10,12 @@ import CrearPublicacion from "../components/CrearPublicacion";
 import Publicacion from "../components/Publicacion";
 import Comentario from "../components/Comentario";
 import Chip from "@material-ui/core/Chip";
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
+const drawerWidth = 300;
 const useStyles = makeStyles((theme) => ({
   botones: {
     margin: "0px 5px",
@@ -29,11 +34,13 @@ const useStyles = makeStyles((theme) => ({
   },
 
   gridTotal: {
-    paddingTop: "10px",
+    paddingTop: "15px",
     display: "flex",
+    justifyContent:"center",
     alignContent: "center",
     flexDirection: "row",
-    width: "100%",
+    flexGrow: 1,
+    // width: "100%",
   },
   gridArriba: {
     display: "flex",
@@ -55,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     maxWidth: 550,
-    minWidth: "100%",
+    // minWidth: "100%",
     margin: "10px 0px",
   },
   media: {
@@ -105,6 +112,36 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     fontWeight: "bold",
   },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    paddingTop:"50px",
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    padding:"50px 20px 10px 20px",
+  },
+  main: {
+    flexGrow: 1,
+  },
+  divMain: {
+    display:"flex",
+  },
+  FB: {
+    color:"#3b5998",
+    fontSize:"50px"
+  },
+  Li: {
+    color:"#0e76a8",
+    fontSize:"50px"
+  },
+  buttonLogo: {
+    width:"400px",
+    height:"40px",
+    "&:hover": {
+      backgroundColor: "rgba(255, 255, 255, 0)",
+    },
+  },
 }));
 
 function Home() {
@@ -133,7 +170,7 @@ function Home() {
   };
 
   const getScreams = () => {
-    const screamRef = db.collection("publicaciones");
+    const screamRef = db.collection("publicaciones").orderBy("dateNumber");
     screamRef
       .get()
       .then((querySnapshot) => {
@@ -161,9 +198,12 @@ function Home() {
   }, []);
 
   return (
-    <>
-      <Grid align="center" className={classes.gridTotal}>
-        <Grid xs></Grid>
+    <div className={classes.divMain}>
+      <CssBaseline />
+      
+      <main className={classes.main}>
+      <Grid className={classes.gridTotal} spacing={0}>
+        {/* <Grid xs></Grid> */}
 
         <Grid>
           <Grid className={classes.gridArriba}>
@@ -232,9 +272,50 @@ function Home() {
             )}
           </Grid>
         </Grid>
-        <Grid xs></Grid>
+        {/* <Grid xs></Grid> */}
       </Grid>
-    </>
+      </main>
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor="right"
+      >
+        <h1 style={{color:"#3493C2", textAlign:"center"}}>
+          Gracias por apoyar el proyecto Izily :D
+        </h1>
+        <p>
+          Estamos trabajando para que este sea un mejor lugar para aprender.
+        </p>
+        <p>
+            Síguenos en Facebook para enterarte de los avances de Izily.
+          </p>
+        <div style={{display:"flex", alignItems:"center", gap:"10px"}}>
+          <Button
+            target="_blank"
+            href={"https://www.facebook.com/Izily-102740731946306/"}
+            className={classes.buttonLogo}
+          >
+            <FacebookIcon className={classes.FB} />
+          </Button>
+          <Button
+            target="_blank"
+            href={"https://www.linkedin.com/company/izilype/about/"}
+            className={classes.buttonLogo}
+          >
+            <LinkedInIcon className={classes.Li} />
+          </Button>
+          
+        </div>
+        <p>Tambien puedes contactarnos a nuestro correo institucional:</p>
+        <p> aprendeizily@gmail.com</p>
+
+        
+        
+      </Drawer>
+    </div>
   );
 }
 export default Home;

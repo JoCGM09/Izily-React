@@ -112,7 +112,6 @@ export default function AcercaDeIzily() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(textAnswers);
     if (profesor.esProfesor === false) {
         updateEsProfesor(true);
         history.push(`/perfil/${profesor.id}`);

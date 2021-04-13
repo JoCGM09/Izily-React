@@ -219,6 +219,7 @@ export default function Profesores() {
         classes={{
           paper: classes.drawerPaper,
         }}
+        // anchor="right"
       >
         <div className={classes.drawerContainer}>
           <FormControl

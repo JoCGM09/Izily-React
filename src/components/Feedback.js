@@ -73,7 +73,6 @@ function Feedback() {
           docs.push({ ...doc.data(), id: doc.id });
         });
         setFeedback(docs);
-        console.log(docs);
       })
       .catch((error) => {
         console.error(error);

@@ -250,7 +250,6 @@ export default function EditProfile() {
     const fileRef = storageRef.child(`users/${profesor.loginid}/${file.name}`);
     await fileRef.put(file);
     setFileUrl(await fileRef.getDownloadURL());
-    console.log(fileUrl);
   };
 
   const handleUpdateClick = async (e) => {

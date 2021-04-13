@@ -309,7 +309,7 @@ function Home() {
           </Button>
           
         </div>
-        <p>Tambien puedes contactarnos a nuestro correo institucional:</p>
+        <p>También puedes contactarnos a nuestro correo institucional:</p>
         <p> aprendeizily@gmail.com</p>
 
         

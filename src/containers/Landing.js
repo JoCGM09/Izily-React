@@ -7,7 +7,6 @@ import mentores from "../assets/images/mentores.png";
 import comunidad from "../assets/images/comunidad.png";
 import videollamada from "../assets/images/videollamada.png";
 import CarouselLanding from "../components/CarouselLanding";
-import Divider from "@material-ui/core/Divider";
 
 
 const useStyles = makeStyles((theme) => ({

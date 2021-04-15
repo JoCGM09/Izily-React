@@ -302,7 +302,7 @@ export default function RecipeReviewCard(props) {
           className={classes.media}
           alt=" "
       /> */}
-      <Grid container style={{display:"flex", justifyContent:"space-between",}}>
+      {/* <Grid container style={{display:"flex", justifyContent:"space-between",}}>
 
         <Grid  style={{"&:hover":{cursor:"default"}}} item>
           <p className={classes.interesadosP}>A {props.interesados} personas les interesa esto.</p>
@@ -312,7 +312,7 @@ export default function RecipeReviewCard(props) {
           <p className={classes.comentariosP} onClick={handleExpandClick}>{props.numeroDeComentarios} comentarios</p>
         </Grid>
 
-      </Grid>
+      </Grid> */}
 
       <div style={{padding:"0px 10px"}}>
         <Divider  />
@@ -320,7 +320,7 @@ export default function RecipeReviewCard(props) {
 
 
       <CardActions style={{display:"flex", justifyContent:"space-around", padding:"5px",}}>
-        <Button aria-label="add to favorites" style={{height:"35px",}}>
+        <Button disabled aria-label="add to favorites" style={{height:"35px",}}>
           {/*<FavoriteIcon /> <p style={{marginLeft:"10px"}}>Me Interesa</p>*/}
           <FormControlLabel
           control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
@@ -328,7 +328,7 @@ export default function RecipeReviewCard(props) {
           onClick={handleClickHeart}
         />
         </Button>
-        <Button onClick={handleExpandClick} aria-label="share" style={{height:"35px",}}>
+        <Button disabled onClick={handleExpandClick} aria-label="share" style={{height:"35px",}}>
           <ChatBubbleOutlineIcon /> <p style={{marginLeft:"10px"}}>Comentar</p>
         </Button>
         {/* <IconButton
@@ -349,6 +349,7 @@ export default function RecipeReviewCard(props) {
       <Card variant="outlined" className={classes.rootCrearComentario}>
         <CardContent align="center" className={classes.containerContentCrearComentario}>
           <input
+            disabled
             className={classes.inputText}
             variant="outline"
             type="text"
@@ -362,7 +363,8 @@ export default function RecipeReviewCard(props) {
         </CardContent>
         <Grid container className={classes.IconosContainer}>
           <Grid item style={{ display: "flex", alignItems: "center" }}>
-            <Button 
+            <Button
+            disabled
             className={classes.PublicarButton} 
             size="small" 
             // onClick={handleClick}
@@ -373,12 +375,12 @@ export default function RecipeReviewCard(props) {
 
           <Grid item style={{ display: "flex", flexDirection: "row" }}>
             <Grid item>
-              <IconButton style={{ padding: "10px 10px 10px 10px" }}>
+              <IconButton disabled style={{ padding: "10px 10px 10px 10px" }}>
                 <AddAPhotoIcon fontSize="medium" />
               </IconButton>
             </Grid>
             <Grid item>
-              <IconButton style={{ padding: "10px 10px 10px 10px" }}>
+              <IconButton disabled style={{ padding: "10px 10px 10px 10px" }}>
                 <TheatersIcon fontSize="medium" />
               </IconButton>
             </Grid>

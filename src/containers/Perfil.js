@@ -27,6 +27,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import { useHistory } from "react-router-dom";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
+import ConvertirmeEnMentor from "../components/BotonCovertirmeEnMentor";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -404,6 +405,7 @@ function Perfil() {
                     {profesor?.esProfesor === true &&
                     profesor?.disponible === true ? (
                       <Button
+                        disabled
                         variant="contained"
                         size="small"
                         target="_blank"
@@ -583,7 +585,7 @@ function Perfil() {
                       </>
                     ) : (
                       <>
-                        <Button
+                        {/* <Button
                           variant="contained"
                           color="inherit"
                           size="small"
@@ -602,7 +604,8 @@ function Perfil() {
                           disableElevation="true"
                         >
                           Convertirme en Mentor
-                        </Button>
+                        </Button> */}
+                        <ConvertirmeEnMentor/>
                       </>
                     )}
                   </div>
@@ -649,7 +652,7 @@ function Perfil() {
                         color="inherit"
                         size="small"
                         className={classes.buttonPerfil}
-                        startIcon={<PeopleIcon />}
+                        startIcon={<QuestionAnswerIcon />}
                         disableElevation="true"
                       >
                         Contactar

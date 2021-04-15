@@ -14,6 +14,8 @@ import Box from "@material-ui/core/Box";
 import StarIcon from "@material-ui/icons/Star";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
+import Divider from "@material-ui/core/Divider";
+
 
 const labels = {
   0.5: "Useless",
@@ -49,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: "550px",
     marginRight: "20px",
+    padding:"15px",
   },
   root2: {
     maxWidth: "550px",
@@ -92,8 +95,8 @@ const useStyles = makeStyles((theme) => ({
     background: "white",
     color: "#3493C2",
     border: "1px solid #3493C2",
-    fontSize: "11px",
-    height: "25px",
+    fontSize: "14px",
+    height: "30px",
     fontWeight: "bold",
     "&:hover": {
       backgroundColor: "#DAF1FC",
@@ -123,6 +126,29 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  buttonConvertirmeMentor: {
+    background: "white",
+    color: "#3493C2",
+    marginTop: "10px",
+    border: "1px solid #3493C2",
+    fontSize: "15px",
+    height: "70px",
+    width: "220px",
+    fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: "#DAF1FC",
+    },
+  },
+  correo: {
+    color:"#3493C2",
+    fontWeight:"bold",
+    "&:hover":{
+      fontWeight:"bold",
+      color:"#3493C2",
+      textDecoration:"underline",
+      cursor:"pointer",
+    },
+  },
 }));
 
 export default function RecipeReviewCard() {
@@ -138,31 +164,31 @@ export default function RecipeReviewCard() {
     setOpen(false);
   };
 
-  const middle = () => {
-    setOpen(false);
-    setOpen2(true);
-  };
-
-  const handleClose2 = () => {
-    setOpen2(false);
-  };
-
   const [value, setValue] = React.useState(0);
   const [hover, setHover] = React.useState(-1);
 
   return (
     <div>
       <Button
-        disabled
-        type="button"
         onClick={handleOpen}
-        variant="outlined"
+        variant="contained"
+        color="inherit"
         size="small"
-        startIcon={<StarIcon />}
-        className={classes.PublicarButton}
-      >
-        Calificar
-      </Button>
+        className={classes.buttonConvertirmeMentor}
+        startIcon={
+            <img
+            style={{
+            marginLeft: "5px",
+            height: "45px",
+            width: "auto",
+            }}
+            src="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/icons%2FConvertirmeEnProfesor.png?alt=media&token=a45096cb-1a3b-4134-811c-aaba4103528f"
+            />
+            }
+            disableElevation="true"
+        >
+        Convertirme en Mentor
+    </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -181,110 +207,32 @@ export default function RecipeReviewCard() {
             //     <MoreVertIcon />
             //   </IconButton>
             // }
-            title="¿Cómo calificarías esta mentoría?"
+            title="Gracias por formar parte de Izily"
           />
-
-          <div className={classes.rootStars}>
-            <StyledRating
-              className={classes.stars}
-              name="customized-color"
-              value={value}
-              precision={1}
-              icon={<StarIcon fontSize="large" />}
-              onChange={(event, newValue) => {
-                setValue(newValue);
-              }}
-              onChangeActive={(event, newHover) => {
-                setHover(newHover);
-              }}
-            />
-            {value !== null && (
-              <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
-            )}
-          </div>
-
-          <CardContent align="center" className={classes.containerContent}>
-            <p style={{ display: "flex", justify: "start" }}>
-              Déjanos un Comentario:
+          <Divider/>
+          <CardContent className={classes.containerContent}>
+            <p>
+              Para convertirte en un mentor de Izily contáctanos a nuestro correo institucional haciendo click aquí:
             </p>
-            <TextareaAutosize
-              className={classes.inputText}
-              aria-label="minimum height"
-              placeholder="Escribir comentario..."
-              widht="500px"
-              rowsMin={3}
-            />
+            <a target="_blank" className={classes.correo} href="https://mail.google.com/mail/u/0/?fs=1&to=aprendeizily@gmail.com%20&su=QUIERO%20CONVERTIRME%20EN%20MENTOR&body=(Ingrese%20aqu%C3%AD%20sus%20nombres%20y%20apellidos,%20n%C3%BAmero%20de%20celular(WhatsApp)%20y%20el%20link%20de%20su%20perfil%20en%20Izily.%20Este%20%C3%BAltimo%20puede%20obtenerlo%20yendo%20a%20su%20perfil%20dentro%20de%20la%20plataforma%20de%20Izily%20y%20copiando%20el%20URL)&tf=cm">
+              aprendeizily@gmail.com
+            </a>
           </CardContent>
-          <Grid container className={classes.IconosContainer}>
-            <Grid item style={{ display: "flex", alignItems: "center" }}>
+          <Grid className={classes.IconosContainer}>
+            <Grid item style={{ display: "flex", justifyContent: "center" }}>
               <Button
                 className={classes.PublicarButton}
-                onClick={middle}
+                onClick={handleClose}
                 variant="outlined"
-                size="small"
+                size="medium"
               >
-                Enviar
+                Cerrar
               </Button>
             </Grid>
-
-            <Grid item style={{ display: "flex", flexDirection: "row" }}>
-              <Grid item>
-                <IconButton>
-                  <AddAPhotoIcon fontSize="medium" />
-                </IconButton>
-              </Grid>
-            </Grid>
           </Grid>
         </Card>
       </Modal>
 
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open2}
-        onClose={handleClose2}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Card className={classes.root2}>
-          <CardHeader
-            // action={
-            //   <IconButton aria-label="settings">
-            //     <MoreVertIcon />
-            //   </IconButton>
-            // }
-            title="Gracias por Ayudarnos a Mejorar"
-          />
-
-          <CardContent align="center" className={classes.containerContent2}>
-            <p style={{ display: "flex", textAlign: "left" }}>
-              Con tu comentario ayudas a mejorar a tu mentor, y ayudas a nuevos
-              usuarios a poder elegir mejor a sus mentores :)
-            </p>
-          </CardContent>
-          <Grid
-            container
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              paddingBottom: "15px",
-            }}
-          >
-            <Button
-              className={classes.PublicarButton}
-              onClick={handleClose2}
-              variant="outlined"
-              size="small"
-            >
-              Terminar
-            </Button>
-          </Grid>
-        </Card>
-      </Modal>
     </div>
   );
 }

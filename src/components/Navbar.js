@@ -5,8 +5,6 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import logo from "../assets/images/logoprincipal.webp";
 import { makeStyles, Grid, Button, IconButton, Badge } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import MessageIcon from "@material-ui/icons/Message";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MenuNavbar from "./MenuNavbar";
@@ -16,6 +14,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import Avatar from "@material-ui/core/Avatar";
 import { useHistory } from "react-router-dom";
+import SettingsIcon from "@material-ui/icons/Settings";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -99,7 +98,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 function ElevationScroll(props) {
   const { children, window } = props;
   const trigger = useScrollTrigger({
@@ -170,6 +168,15 @@ export default function ElevateAppBar(props) {
       setError("Ocurrió un error al salir de la cuenta");
     }
   }
+  async function editProfile() {
+    setError("");
+
+    try {
+      history.push("/editar-perfil");
+    } catch {
+      setError("Ocurrió un error al salir de la cuenta");
+    }
+  }
 
   return usuarioActual ? (
     <React.Fragment>
@@ -178,11 +185,7 @@ export default function ElevateAppBar(props) {
           {/* <Toolbar> */}
           <Grid className={classes.gridPadre} container alignItems="center">
             <Grid className={classes.gridHijo} item>
-              <Button
-                component={Link}
-                to={"/"}
-                className={classes.buttonLogo}
-              >
+              <Button component={Link} to={"/"} className={classes.buttonLogo}>
                 <img src={logo} className={classes.logo} />
               </Button>
             </Grid>
@@ -199,7 +202,13 @@ export default function ElevateAppBar(props) {
                 Inicio
               </Button>
 
-              <IconButton disabled className={classes.icon}>
+              <IconButton
+                disabled
+                className={classes.icon}
+                onClick={() => {
+                  history.push("/chat");
+                }}
+              >
                 <Badge badgeContent={4}>
                   <MessageIcon fontSize="small" />
                 </Badge>
@@ -209,26 +218,36 @@ export default function ElevateAppBar(props) {
                   <NotificationsIcon fontSize="small" />
                 </Badge>
               </IconButton>
-              <IconButton disabled className={classes.icon}>
+              <IconButton component={Link} onClick={editProfile} className={classes.settings}>
                 {/*<Link to="/perfil">*/}
-                <Badge badgeContent={4}>
-                  <PersonIcon fontSize="small" />
-                </Badge>
+
+                <SettingsIcon fontSize="small" />
+
                 {/*<Link />*/}
               </IconButton>
 
               {profesor && (
-                  <Grid className={classes.nombrecontainer}  xs>
-
-                      <Avatar variante="link" onClick={goProfile} className={classes.rootAvatar} alt={profesor.nombre} src={profesor.imageURL} />
-                      <div className={classes.nombre}
-                      variante="link" onClick={goProfile}
-                      >
-                        {profesor.nombre}
-                      </div>
-                    </Grid>  
-                )}
-                  <MenuNavbar perfil={profesor?.id} esProfesor={profesor?.esProfesor}/>              
+                <Grid className={classes.nombrecontainer} xs>
+                  <Avatar
+                    variante="link"
+                    onClick={goProfile}
+                    className={classes.rootAvatar}
+                    alt={profesor.nombre}
+                    src={profesor.imageURL}
+                  />
+                  <div
+                    className={classes.nombre}
+                    variante="link"
+                    onClick={goProfile}
+                  >
+                    {profesor.nombre}
+                  </div>
+                </Grid>
+              )}
+              <MenuNavbar
+                perfil={profesor?.id}
+                esProfesor={profesor?.esProfesor}
+              />
             </Grid>
           </Grid>
           {/* </Toolbar> */}
@@ -242,11 +261,7 @@ export default function ElevateAppBar(props) {
           {/* <Toolbar> */}
           <Grid className={classes.gridPadre} container alignItems="center">
             <Grid className={classes.gridHijo} item>
-              <Button
-                component={Link}
-                to={"/"}
-                className={classes.buttonLogo}
-              >
+              <Button component={Link} to={"/"} className={classes.buttonLogo}>
                 <img src={logo} className={classes.logo} />
               </Button>
             </Grid>

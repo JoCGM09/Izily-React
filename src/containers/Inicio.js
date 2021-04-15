@@ -14,6 +14,8 @@ import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import EstamosTrabajando from "../assets/images/EstamosTrabajando.png";
+import Divider from "@material-ui/core/Divider";
 
 const drawerWidth = 300;
 const useStyles = makeStyles((theme) => ({
@@ -139,8 +141,23 @@ const useStyles = makeStyles((theme) => ({
     width:"400px",
     height:"40px",
     "&:hover": {
-      backgroundColor: "rgba(255, 255, 255, 0)",
+      // backgroundColor: "rgba(255, 255, 255, 0)",
     },
+  },
+  correo: {
+    color:"#3493C2",
+    marginBottom:"10px",
+    fontWeight:"bold",
+    "&:hover":{
+      fontWeight:"bold",
+      color:"#3493C2",
+      textDecoration:"underline",
+      cursor:"pointer",
+    },
+  },
+  EstamosTrabajandoImg: {
+    width:"300px",
+    height:"auto",
   },
 }));
 
@@ -235,7 +252,21 @@ function Home() {
           </Grid>
           <Grid align="start" className={classes.publicacionesContainer}>
             <CrearPublicacion />
-
+            <Grid style={{display:"flex", justifyContent:"space-between", alignItems:"center", width:"100%", padding:"10px 20px 10px 20px"}}>
+              <img
+                  src={EstamosTrabajando}
+                  className={classes.EstamosTrabajandoImg}
+                  alt="Logo"
+              />
+              <div>
+              <p style={{marginBottom:"0px", width:"150px", textAlign:"right", fontSize:"20px", fontWeight:"bold"}}>
+                Estamos trabajando para que este sea un mejor lugar para
+              </p>
+              <p style={{margin:"0px", width:"150px", textAlign:"right", fontSize:"20px", fontWeight:"bold", color:"#3493C2"}}>aprender</p>
+              </div> 
+              
+            </Grid>
+            
             {screams && (
               <div>
                 {screams.map((scream) => (
@@ -287,11 +318,8 @@ function Home() {
           Gracias por apoyar el proyecto Izily :D
         </h1>
         <p>
-          Estamos trabajando para que este sea un mejor lugar para aprender.
+          Síguenos en Facebook y LinkedIn para enterarte de los avances de Izily.
         </p>
-        <p>
-            Síguenos en Facebook para enterarte de los avances de Izily.
-          </p>
         <div style={{display:"flex", alignItems:"center", gap:"10px"}}>
           <Button
             target="_blank"
@@ -309,9 +337,11 @@ function Home() {
           </Button>
           
         </div>
-        <p>También puedes contactarnos a nuestro correo institucional:</p>
-        <p> aprendeizily@gmail.com</p>
-
+        <p>También puedes contactarnos a nuestro correo institucional dando click aquí:</p>
+        <a target="_blank" className={classes.correo} href="https://mail.google.com/mail/u/0/?fs=1&to=aprendeizily@gmail.com%20&su=CONTACTAR%20A%20IZILY&body=&tf=cm">
+          aprendeizily@gmail.com
+        </a>
+        <Divider/>
         
         
       </Drawer>

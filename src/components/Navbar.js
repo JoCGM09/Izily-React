@@ -16,6 +16,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import Avatar from "@material-ui/core/Avatar";
 import { useHistory } from "react-router-dom";
+import Chat from "./chat/Chat";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -241,7 +242,12 @@ export default function ElevateAppBar(props) {
                 Inicio
               </Button>
 
-              <IconButton disabled className={classes.icon}>
+              <IconButton
+                className={classes.icon}
+                onClick={() => {
+                  history.push("/chat");
+                }}
+              >
                 <Badge badgeContent={4}>
                   <MessageIcon fontSize="small" />
                 </Badge>
@@ -260,17 +266,27 @@ export default function ElevateAppBar(props) {
               </IconButton>
 
               {profesor && (
-                  <Grid className={classes.nombrecontainer}  xs>
-
-                      <Avatar variante="link" onClick={goProfile} className={classes.rootAvatar} alt={profesor.nombre} src={profesor.imageURL} />
-                      <div className={classes.nombre}
-                      variante="link" onClick={goProfile}
-                      >
-                        {profesor.nombre}
-                      </div>
-                    </Grid>  
-                )}
-                  <MenuNavbar perfil={profesor?.id} esProfesor={profesor?.esProfesor}/>              
+                <Grid className={classes.nombrecontainer} xs>
+                  <Avatar
+                    variante="link"
+                    onClick={goProfile}
+                    className={classes.rootAvatar}
+                    alt={profesor.nombre}
+                    src={profesor.imageURL}
+                  />
+                  <div
+                    className={classes.nombre}
+                    variante="link"
+                    onClick={goProfile}
+                  >
+                    {profesor.nombre}
+                  </div>
+                </Grid>
+              )}
+              <MenuNavbar
+                perfil={profesor?.id}
+                esProfesor={profesor?.esProfesor}
+              />
             </Grid>
           </Grid>
           {/* </Toolbar> */}

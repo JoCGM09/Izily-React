@@ -16,7 +16,7 @@ import Landing from "../containers/Landing";
 import CalificaAIzily from "../containers/CalificaAIzily";
 import MisCursos from "../containers/MisCursos";
 import ConvertirmeEnMentor from "../containers/ConvertirmeEnMentor";
-import Chat from "../components/chat/Chat";
+import BuscarUsuarios from "../containers/BuscarUsuarios";
 
 // probando rama login
 
@@ -30,12 +30,13 @@ const App = () => (
           <Route exact path="/login" component={LogIn} />
           <Route exact path="/forgot-password" component={ForgotPassword} />
           <PrivateRoute path="/editar-perfil" component={EditProfile} />
-          <PrivateRoute path="/mis-cursos" component={MisCursos} />
+          {/* <PrivateRoute path="/mis-cursos" component={MisCursos} /> */}
           <PrivateRoute
             path="/convertirme-en-mentor"
             component={ConvertirmeEnMentor}
           />
           <PrivateRoute exact path="/buscar-un-mentor" component={Profesores} />
+          {/* <PrivateRoute exact path="/buscar" component={BuscarUsuarios} /> */}
           <PrivateRoute exact path="/inicio" component={Inicio} />
           <PrivateRoute path="/perfil/:profesorId" component={Perfil} />
           <PrivateRoute
@@ -43,7 +44,6 @@ const App = () => (
             path="/califica-a-izily"
             component={CalificaAIzily}
           />
-          <PrivateRoute exact path="/chat" component={Chat} />
           <Route component={NotFound} />
         </Switch>
       </Layout>

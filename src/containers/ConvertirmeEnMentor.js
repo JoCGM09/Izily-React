@@ -70,7 +70,6 @@ export default function AcercaDeIzily() {
   const [textAnswers, setTextAnswers] = useState(defaultTextAnswers);
   const [profesor, setProfesor] = useState(null);
   const { usuarioActual } = useAuth();
-  const [carga, guardarCarga] = useState(false);
 
   const traerPerfil = useCallback(() => {
     if (usuarioActual) {
@@ -113,7 +112,6 @@ export default function AcercaDeIzily() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log(textAnswers);
     if (profesor.esProfesor === false) {
         updateEsProfesor(true);
         history.push(`/perfil/${profesor.id}`);

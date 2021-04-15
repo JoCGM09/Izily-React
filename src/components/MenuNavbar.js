@@ -14,7 +14,7 @@ import { useAuth } from '../contexts/AuthContext';
 import {useState } from "react";
 import InfoIcon from '@material-ui/icons/Info';
 import Divider from "@material-ui/core/Divider";
-import MenuBookIcon from '@material-ui/icons/MenuBook';
+// import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -97,16 +97,16 @@ export default function CustomizedMenu(props) {
 
   }
 
-  async function misCursos(){
-    setError('')
+  // async function misCursos(){
+  //   setError('')
 
-    try {
-      handleClose()
-      history.push('/mis-cursos')
-    } catch {
-      setError("Ocurrió un error al salir de la cuenta");
-    }
-  }
+  //   try {
+  //     handleClose()
+  //     history.push('/mis-cursos')
+  //   } catch {
+  //     setError("Ocurrió un error al salir de la cuenta");
+  //   }
+  // }
 
   async function goProfile() {
     setError("");
@@ -167,7 +167,7 @@ export default function CustomizedMenu(props) {
           </ListItemIcon>
           <ListItemText primary="Editar Perfil" />
         </StyledMenuItem>
-        {props.esProfesor === true ? (
+        {/* {props.esProfesor === true ? (
           <StyledMenuItem disabled variant="link" onClick={misCursos}>
             <ListItemIcon>
               <MenuBookIcon fontSize="small" />
@@ -177,7 +177,7 @@ export default function CustomizedMenu(props) {
         ) : (
           <>
           </>
-        )}
+        )} */}
         <StyledMenuItem variant="link" onClick={handleLogOut}>
           <ListItemIcon>
             <ExitToAppTwoToneIcon fontSize="small" />

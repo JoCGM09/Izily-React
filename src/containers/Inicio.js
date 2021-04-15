@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
+// import { useMemo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import SearchIcon from "@material-ui/icons/Search";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
@@ -12,7 +10,12 @@ import CrearPublicacion from "../components/CrearPublicacion";
 import Publicacion from "../components/Publicacion";
 import Comentario from "../components/Comentario";
 import Chip from "@material-ui/core/Chip";
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
+const drawerWidth = 300;
 const useStyles = makeStyles((theme) => ({
   botones: {
     margin: "0px 5px",
@@ -31,11 +34,13 @@ const useStyles = makeStyles((theme) => ({
   },
 
   gridTotal: {
-    paddingTop: "10px",
+    paddingTop: "15px",
     display: "flex",
+    justifyContent:"center",
     alignContent: "center",
     flexDirection: "row",
-    width: "100%",
+    flexGrow: 1,
+    // width: "100%",
   },
   gridArriba: {
     display: "flex",
@@ -57,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     maxWidth: 550,
-    minWidth: "100%",
+    // minWidth: "100%",
     margin: "10px 0px",
   },
   media: {
@@ -107,6 +112,36 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     fontWeight: "bold",
   },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    paddingTop:"50px",
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    padding:"50px 20px 10px 20px",
+  },
+  main: {
+    flexGrow: 1,
+  },
+  divMain: {
+    display:"flex",
+  },
+  FB: {
+    color:"#3b5998",
+    fontSize:"50px"
+  },
+  Li: {
+    color:"#0e76a8",
+    fontSize:"50px"
+  },
+  buttonLogo: {
+    width:"400px",
+    height:"40px",
+    "&:hover": {
+      backgroundColor: "rgba(255, 255, 255, 0)",
+    },
+  },
 }));
 
 function Home() {
@@ -115,8 +150,6 @@ function Home() {
   const { usuarioActual } = useAuth();
   const [profesor, setProfesor] = useState(null);
   const [screams, setScreams] = useState(["2"]);
-  
-
 
   const traerProfesor = () => {
     const idd = usuarioActual.uid;
@@ -137,7 +170,7 @@ function Home() {
   };
 
   const getScreams = () => {
-    const screamRef = db.collection("publicaciones");
+    const screamRef = db.collection("publicaciones").orderBy("dateNumber", "desc");
     screamRef
       .get()
       .then((querySnapshot) => {
@@ -148,19 +181,16 @@ function Home() {
         });
         //error
         setScreams(docs);
-        console.log(screams);
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-
-
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const [open, setOpen] = React.useState(false);
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   useEffect(() => {
     traerProfesor();
@@ -168,29 +198,26 @@ function Home() {
   }, []);
 
   return (
-    <>
-      <Grid align="center" className={classes.gridTotal}>
-        <Grid xs></Grid>
+    <div className={classes.divMain}>
+      <CssBaseline />
+      
+      <main className={classes.main}>
+      <Grid className={classes.gridTotal} spacing={0}>
+        {/* <Grid xs></Grid> */}
 
         <Grid>
           <Grid className={classes.gridArriba}>
             <Grid>
-              <TextField
-                disabled
-                className={classes.searchInput}
+              <Button
+                component={Link}
+                to={"/buscar"}
+                className={classes.botones}
                 variant="outlined"
-                item
-                id="buscador"
-                placeholder="Buscar"
                 size="small"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon fontSize="small" />
-                    </InputAdornment>
-                  ),
-                }}
-              />
+                disabled
+              >
+                Buscar personas
+              </Button>
             </Grid>
             <Grid xs className={classes.gridMedio}></Grid>
 
@@ -207,7 +234,6 @@ function Home() {
             </Grid>
           </Grid>
           <Grid align="start" className={classes.publicacionesContainer}>
-  
             <CrearPublicacion />
 
             {screams && (
@@ -230,25 +256,66 @@ function Home() {
                         label={scream.label}
                       />
                     }
-                    // children={screams.comentarios.map((comentarios) => (
-                    //   <Comentario
-                    //     nameComent={comentarios.name}
-                    //     contentComent={comentarios.content}
-                    //     dateComent={comentarios.date}
-                    //     imageURLComent={comentarios.imageURL}
-                    //     loginidComent={comentarios.loginid}
-                    //     idPerfilComent={comentarios.idPerfil}
-                    //   />
-                    //   ))} 
+                    children={screams.comentarios && screams.comentarios.map((comentarios) => (
+                      <Comentario
+                        nameComent={comentarios.name}
+                        contentComent={comentarios.bodyComent}
+                        dateComent={comentarios.date}
+                        imageURLComent={comentarios.imageURL}
+                        loginidComent={comentarios.loginid}
+                        idPerfilComent={comentarios.idPerfil}
+                      />
+                    ))}
                   />
                 ))}
               </div>
             )}
           </Grid>
         </Grid>
-        <Grid xs></Grid>
+        {/* <Grid xs></Grid> */}
       </Grid>
-    </>
+      </main>
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        anchor="right"
+      >
+        <h1 style={{color:"#3493C2", textAlign:"center"}}>
+          Gracias por apoyar el proyecto Izily :D
+        </h1>
+        <p>
+          Estamos trabajando para que este sea un mejor lugar para aprender.
+        </p>
+        <p>
+            Síguenos en Facebook para enterarte de los avances de Izily.
+          </p>
+        <div style={{display:"flex", alignItems:"center", gap:"10px"}}>
+          <Button
+            target="_blank"
+            href={"https://www.facebook.com/Izily-102740731946306/"}
+            className={classes.buttonLogo}
+          >
+            <FacebookIcon className={classes.FB} />
+          </Button>
+          <Button
+            target="_blank"
+            href={"https://www.linkedin.com/company/izilype/about/"}
+            className={classes.buttonLogo}
+          >
+            <LinkedInIcon className={classes.Li} />
+          </Button>
+          
+        </div>
+        <p>También puedes contactarnos a nuestro correo institucional:</p>
+        <p> aprendeizily@gmail.com</p>
+
+        
+        
+      </Drawer>
+    </div>
   );
 }
 export default Home;

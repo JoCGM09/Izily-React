@@ -220,7 +220,6 @@ export default function RecipeReviewCard(props) {
         });
         //error
         setScreams(docs);
-        console.log(screams);
       })
       .catch((error) => {
         console.error(error);
@@ -246,18 +245,19 @@ export default function RecipeReviewCard(props) {
     
   }
 
-  const handleClick = async e => {
-    db.collection('publicaciones').doc(`${props.screamId}`).update(bodyComent)
-    .then(()=>{
-      setBodyComent({...initialBody})
-    }).then(()=>{
-      history.push('/inicio');
-      window.location.reload();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+  // const handleClick = async e => {
+  //   db.collection('publicaciones').doc(`${props.screamId}`).collection('coments').doc(`${props.comentId}`)
+  //   .add(bodyComent)
+  //   .then(()=>{
+  //     setBodyComent({...initialBody})
+  //   }).then(()=>{
+  //     history.push('/inicio');
+  //     window.location.reload();
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  // }
 
   useEffect(() => {
     traerPerfil();
@@ -365,7 +365,7 @@ export default function RecipeReviewCard(props) {
             <Button 
             className={classes.PublicarButton} 
             size="small" 
-            //onClick={handleClick}
+            // onClick={handleClick}
             >
               Enviar
             </Button>

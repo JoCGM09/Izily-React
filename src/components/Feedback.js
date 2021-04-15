@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import FeedbackForm from "../components/FeedbackForm";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
@@ -47,12 +47,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize:"14px",
     display:"flex",
     justifyContent:"left",
-    background:"red",
-    padding:"5px 10px 5px 10px",
-    borderRadius:"10px",
-    background:"white",
+    padding:"0px 10px 5px 0px",
+    // borderRadius:"10px",
+    // background:"white",
     textAlign:"left",
-    border: "1px solid #C7C6C6",
+    // border: "1px solid #C7C6C6",
   },
 }));
 
@@ -74,7 +73,6 @@ function Feedback() {
           docs.push({ ...doc.data(), id: doc.id });
         });
         setFeedback(docs);
-        console.log(docs);
       })
       .catch((error) => {
         console.error(error);

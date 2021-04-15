@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard(props) {
+export default function RecipeReviewCard() {
   const classes = useStyles();
 
   const initialBody = {
@@ -132,7 +132,8 @@ export default function RecipeReviewCard(props) {
               imageURL: profesor.imageURL,
               idPerfil: profesor.id,
               comentarios: [],
-              numeroDeComentarios:0
+              numeroDeComentarios:0,
+              dateNumber: new Date(),
             });
     }else{
       console.log("error");
@@ -186,6 +187,7 @@ export default function RecipeReviewCard(props) {
             variant="outlined"
             size="small"
             onClick={handleClick}
+            disabled={!body.content}
           >
             Publicar
           </Button>

@@ -14,9 +14,6 @@ import { useAuth } from "../contexts/AuthContext";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
-
-
-
 import { withStyles } from '@material-ui/core/styles';
 import MuiAccordion from '@material-ui/core/Accordion';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
@@ -117,14 +114,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Profesores(callback, deps) {
+export default function Profesores() {
   const classes = useStyles();
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const [profesores, guardarProfesores] = useState([]);
   const [especialidades, guardarEspecialidades] = useState([]);
   const [etiquetas, guardarEtiquetas] = useState([0]);
   const [profesoresFiltrados, guardarProfesoresFiltrados] = useState([]);
-  const { logout } = useAuth();
+  // const { logout } = useAuth();
   const history = useHistory();
 
   const [expanded, setExpanded] = React.useState('panel');
@@ -132,18 +129,6 @@ export default function Profesores(callback, deps) {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-
-
-  async function handleLogOut() {
-    setError("");
-
-    try {
-      await logout();
-      history.push("/login");
-    } catch {
-      setError("Ocurrió un error al salir de la cuenta");
-    }
-  }
 
   const traerProfesores = () => {
     const usuariosRef = db.collection("usuarios");
@@ -234,6 +219,7 @@ export default function Profesores(callback, deps) {
         classes={{
           paper: classes.drawerPaper,
         }}
+        // anchor="right"
       >
         <div className={classes.drawerContainer}>
           <FormControl

@@ -5,7 +5,7 @@
 
 ### In the next version of Izily we project ourselves to:
 - Make comments on publications
-- Upload images to profile and posts
+- Upload images to posts
 - Implement a chat on the platform
 - Implement a video calling system based on the Jitsi Meet API
 - Introduce different languages ​​(English first) to allow its use in different regions of the world

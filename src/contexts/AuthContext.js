@@ -12,37 +12,41 @@ export function AuthProvider({ children }) {
   const [usuarioActual, guardarUsuarioActual] = useState();
   const [carga, guardarCarga] = useState(true);
 
-  function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password)
-    .then(()=>{
-      const user = auth.currentUser; 
-      const userUid = user.uid;
-      // const email = user.email;
-      // const displayName = user.displayName;
+  function signup(email, password, name) {
+    return auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        const user = auth.currentUser;
+        const userUid = user.uid;
 
-      // valores iniciales
-      const account = {
-        loginid: userUid,
-        calendly: " ",
-        calificaciones: 0,
-        cursos: [],
-        descripcion: " ",
-        disponible: false,
-        esProfesor: false,
-        horas: 0,
-        imageURL: "https://firebasestorage.com",
-        nombre: " ",
-        presentacion: " ",
-        puntuacion: 0
-      }
-      db.collection('usuarios').doc().set(account)
-      .then(()=>{
-        console.log("usuario creado en las colecciones");
+        // const email = user.email;
+        // const displayName = user.displayName;
+
+        // valores iniciales
+        const account = {
+          loginid: userUid,
+          calendly: " ",
+          calificaciones: 0,
+          cursos: [],
+          descripcion: " ",
+          disponible: false,
+          esProfesor: false,
+          horas: 0,
+          imageURL: "https://firebasestorage.com",
+          nombre: name,
+          presentacion: " ",
+          puntuacion: 0,
+        };
+        db.collection("usuarios")
+          .doc()
+          .set(account)
+          .then(() => {
+            console.log("usuario creado en las colecciones");
+          });
       })
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   function login(email, password) {

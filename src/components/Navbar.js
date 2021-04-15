@@ -5,8 +5,6 @@ import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import logo from "../assets/images/logoprincipal.webp";
 import { makeStyles, Grid, Button, IconButton, Badge } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import MessageIcon from "@material-ui/icons/Message";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MenuNavbar from "./MenuNavbar";
@@ -16,7 +14,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import Avatar from "@material-ui/core/Avatar";
 import { useHistory } from "react-router-dom";
-import Chat from "./chat/Chat";
+import SettingsIcon from "@material-ui/icons/Settings";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,7 +98,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 function ElevationScroll(props) {
   const { children, window } = props;
   const trigger = useScrollTrigger({
@@ -179,11 +176,7 @@ export default function ElevateAppBar(props) {
           {/* <Toolbar> */}
           <Grid className={classes.gridPadre} container alignItems="center">
             <Grid className={classes.gridHijo} item>
-              <Button
-                component={Link}
-                to={"/"}
-                className={classes.buttonLogo}
-              >
+              <Button component={Link} to={"/"} className={classes.buttonLogo}>
                 <img src={logo} className={classes.logo} />
               </Button>
             </Grid>
@@ -206,7 +199,7 @@ export default function ElevateAppBar(props) {
                   history.push("/chat");
                 }}
               >
-                <Badge badgeContent={4}>
+                <Badge disabled badgeContent={4}>
                   <MessageIcon fontSize="small" />
                 </Badge>
               </IconButton>
@@ -215,11 +208,11 @@ export default function ElevateAppBar(props) {
                   <NotificationsIcon fontSize="small" />
                 </Badge>
               </IconButton>
-              <IconButton disabled className={classes.icon}>
+              <IconButton className={classes.settings}>
                 {/*<Link to="/perfil">*/}
-                <Badge badgeContent={4}>
-                  <PersonIcon fontSize="small" />
-                </Badge>
+
+                <SettingsIcon fontSize="small" />
+
                 {/*<Link />*/}
               </IconButton>
 
@@ -258,11 +251,7 @@ export default function ElevateAppBar(props) {
           {/* <Toolbar> */}
           <Grid className={classes.gridPadre} container alignItems="center">
             <Grid className={classes.gridHijo} item>
-              <Button
-                component={Link}
-                to={"/"}
-                className={classes.buttonLogo}
-              >
+              <Button component={Link} to={"/"} className={classes.buttonLogo}>
                 <img src={logo} className={classes.logo} />
               </Button>
             </Grid>

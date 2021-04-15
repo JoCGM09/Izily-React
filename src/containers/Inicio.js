@@ -170,7 +170,7 @@ function Home() {
   };
 
   const getScreams = () => {
-    const screamRef = db.collection("publicaciones").orderBy("dateNumber");
+    const screamRef = db.collection("publicaciones").orderBy("dateNumber", "desc");
     screamRef
       .get()
       .then((querySnapshot) => {

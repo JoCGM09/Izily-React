@@ -4,12 +4,14 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import Input from '@material-ui/core/Input';
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { IconButton } from "@material-ui/core";
 import TheatersIcon from "@material-ui/icons/Theaters";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
+import { storage } from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -94,6 +96,10 @@ export default function RecipeReviewCard() {
   const history = useHistory();
 
   const [profesor, setProfesor] = useState(null);
+  // const [isPhoto, setIsPhoto] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [loading, setLoading] = useState(false)
 
   // Get current user with database values and set on useState
 
@@ -134,6 +140,7 @@ export default function RecipeReviewCard() {
               comentarios: [],
               numeroDeComentarios:0,
               dateNumber: new Date(),
+              photoUrl: " ",
             });
     }else{
       console.log("error");
@@ -144,9 +151,14 @@ export default function RecipeReviewCard() {
   
   const handleClick = async e => {
     e.preventDefault();
-    await db.collection('publicaciones').doc().set(body)
+    const publicationRef = await db.collection('publicaciones').doc()
+    publicationRef.set(body)
     .then(()=>{
       setBody({...initialBody})
+    }).then(()=>{
+      publicationRef.update({
+        photoUrl: photoUrl,
+      })      
     }).then(()=>{
       history.push('/inicio');
       window.location.reload();
@@ -155,6 +167,23 @@ export default function RecipeReviewCard() {
       console.log(error);
     });
   }
+
+  // const handlePhotoClick = async () => {
+  //   setIsPhoto(isPhoto => !isPhoto)
+  // }
+
+  const handlePhotoChange = async (e) => {
+
+    const file = e.target.files[0];
+    const storageRef = storage.ref();
+    const fileRef = storageRef.child(`screams/${profesor.id}/${file.name}`);
+    setLoading(loading => !loading);
+    await fileRef.put(file);
+    setPhotoUrl(await fileRef.getDownloadURL());
+    setLoading(loading => !loading);
+    setIsReady(isReady => !isReady);
+  };
+
 
   useEffect(() => {
     traerPerfil();
@@ -180,6 +209,16 @@ export default function RecipeReviewCard() {
           
         />
       </CardContent>
+      {loading && (
+        <div>
+          <p>Cargando...</p>
+        </div>
+      )}
+      {isReady && (
+        <div style={{display:"flex", flexDirection:"column"}}>
+        <img style={{ width:"100%", height:"auto"}} src={photoUrl} />
+      </div> 
+      )}
       <Grid container className={classes.IconosContainer}>
         <Grid item style={{ display: "flex", alignItems: "center" }}>
           <Button
@@ -187,7 +226,7 @@ export default function RecipeReviewCard() {
             variant="outlined"
             size="small"
             onClick={handleClick}
-            disabled={!body.content}
+            disabled={!(body.content || isReady)}
           >
             Publicar
           </Button>
@@ -195,9 +234,17 @@ export default function RecipeReviewCard() {
 
         <Grid item style={{ display: "flex", flexDirection: "row" }}>
           <Grid item>
-            <IconButton disabled style={{ padding: "10px" }}>
+          {/*
+            <IconButton onClick={handlePhotoClick} style={{ padding: "10px" }}>
               <AddAPhotoIcon fontSize="medium" />
             </IconButton>
+          */}
+                  <div className={classes.inputFileContent}>
+                  <label htmlFor="screamPhoto1">
+                    <AddAPhotoIcon fontSize="medium" />
+                  </label>
+                  <Input style={{ display: "none"}} onChange={handlePhotoChange} accept=".jpg,.jpeg,.png" type="file" id="screamPhoto1"></Input>
+                  </div>
           </Grid>
           <Grid item>
             <IconButton disabled style={{ padding: "10px" }}>

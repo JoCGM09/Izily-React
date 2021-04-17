@@ -274,7 +274,8 @@ function Home() {
                     screamId={scream.id}
                     imageURL={scream.imageURL}
                     name={scream.name}
-                    imagen="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/publicacionImages%2Fproblema1.jpeg?alt=media&token=f4e69610-db14-4e2d-a5fa-b97bae16daec"
+                    // imagen="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/publicacionImages%2Fproblema1.jpeg?alt=media&token=f4e69610-db14-4e2d-a5fa-b97bae16daec"
+                    imagen={scream.photoUrl}
                     date={scream.date}
                     content={scream.content}
                     interesados={scream.interesados}

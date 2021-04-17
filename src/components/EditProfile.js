@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import { useHistory } from "react-router-dom";
+import Input from '@material-ui/core/Input';
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
@@ -77,6 +78,10 @@ const useStyles = makeStyles((theme) => ({
     display:"flex",
     flexDirection:"column",
     alignItems:"center",
+  },
+
+  inputFile: {
+    display: "none"
   },
   
   inputFileContent: {
@@ -281,8 +286,10 @@ export default function EditProfile() {
           <div className={classes.changePhotoContainer}>
             <Avatar className={classes.avatar} alt={profesor.nombre} src={profesor.imageURL} /> 
             {fileUrl == "-" ? (
-              <div className={classes.inputFileContent}>
-              <input className={classes.inputFile} accept=".jpg,.jpeg,.png" type="file" onChange={handleFileChange}/>
+              <div>
+              <label className={classes.inputFileContent} htmlFor="profile123">Cambiar foto de perfil
+              </label>
+              <Input className={classes.inputFile} accept=".jpg,.jpeg,.png" type="file" id="profile123" onChange={handleFileChange}></Input>
               </div>
             ):(
               <div style={{display:"flex", flexDirection:"column"}}>
@@ -387,6 +394,7 @@ export default function EditProfile() {
               {profesor && (
                 // <Grid >
                 <TextField
+                  disabled
                   variant="outlined"
                   className={classes.Input}
                   name="calendly"

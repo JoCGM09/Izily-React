@@ -21,6 +21,8 @@ import TheatersIcon from "@material-ui/icons/Theaters";
 import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
+import Divider from "@material-ui/core/Divider";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -329,11 +331,11 @@ export default function RecipeReviewCard(props) {
           </p>
         </Grid>
       </Grid>
-
+      */}
       <div style={{ padding: "0px 10px" }}>
         <Divider />
       </div>      
-      */}
+      
 
       <CardActions
         style={{

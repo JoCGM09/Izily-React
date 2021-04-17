@@ -15,6 +15,8 @@ import Divider from "@material-ui/core/Divider";
 import Snackbar from "@material-ui/core/Snackbar";
 import { storage } from "../firebase";
 import Avatar from "@material-ui/core/Avatar";
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -88,10 +90,15 @@ const useStyles = makeStyles((theme) => ({
     display:"flex",
     justifyItems:"center",
     alignItems:"center",
-    border: "1px solid #C7C6C6",
     borderRadius:"50px",
-    padding:"10px",
-    marginBottom:"10px",
+    padding:"12px",
+    marginTop:"-8px",
+    marginBottom:"5px",
+    gap:"8px",
+    "&:hover": {
+      backgroundColor: "#F0F0F0",
+      cursor:"pointer",
+    },
   },
   boton: {
     marginBottom:"10px",
@@ -101,6 +108,11 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "none",
     },
+  },
+  photoIcon: {
+    marginTop:"-2px",
+    marginLeft:"-1px",
+    color:"#757575",
   },
 }));
 
@@ -113,6 +125,7 @@ export default function EditProfile() {
   const aboutMeRef = useRef();
   const descriptionRef = useRef();
   const calendlyRef = useRef();
+  const [loading, setLoading] = useState(false)
   const [open, setOpen] = React.useState(false);
 
   const { usuarioActual, updatePassword, updateEmail } = useAuth();
@@ -253,8 +266,10 @@ export default function EditProfile() {
     const file = e.target.files[0];
     const storageRef = storage.ref();
     const fileRef = storageRef.child(`users/${profesor.loginid}/${file.name}`);
+    setLoading(loading => !loading);
     await fileRef.put(file);
     setFileUrl(await fileRef.getDownloadURL());
+    setLoading(loading => !loading);
   };
 
   const handleUpdateClick = async (e) => {
@@ -286,10 +301,16 @@ export default function EditProfile() {
           <div className={classes.changePhotoContainer}>
             <Avatar className={classes.avatar} alt={profesor.nombre} src={profesor.imageURL} /> 
             {fileUrl == "-" ? (
-              <div>
-              <label className={classes.inputFileContent} htmlFor="profile123">Cambiar foto de perfil
+              <div style={{
+                display:"flex", justifyContent:"center", alignItems:"center"
+                }}>
+              <label className={classes.inputFileContent} htmlFor="profile123">
+                <AddAPhotoIcon className={classes.photoIcon} fontSize="medium" /> Cambiar foto
               </label>
               <Input className={classes.inputFile} accept=".jpg,.jpeg,.png" type="file" id="profile123" onChange={handleFileChange}></Input>
+              {loading && (
+                <CircularProgress color="none" size="25px" style={{position:"absolute", marginLeft:"180px", marginTop:"-13px", color:"#3493C2"}} />
+              )}
               </div>
             ):(
               <div style={{display:"flex", flexDirection:"column"}}>

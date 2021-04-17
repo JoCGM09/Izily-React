@@ -12,12 +12,14 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
 import { storage } from "../firebase";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 550,
     minWidth: "100%",
     margin: "10px 0px",
+    paddingBottom:"5px",
   },
   media: {
     width: "100%",
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
     widht: "100%",
     display: "flex",
     justifyContent: "center",
+    marginBottom:"10px",
   },
   IconosContainer: {
     paddingLeft: "5px",
@@ -75,12 +78,24 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px",
     boxShadow: "rgba(0, 0, 0, 1)",
   },
+  botonIcon:{
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    padding:"10px",
+    borderRadius:"50px",
+    "&:hover": {
+      backgroundColor: "#F5F5F5",
+      cursor:"pointer",
+    },
+  },
 }));
 
 export default function RecipeReviewCard() {
   const classes = useStyles();
 
   const initialBody = {
+    // body: '',
     content: '',
     date: '',
     loginid: '',
@@ -176,7 +191,7 @@ export default function RecipeReviewCard() {
 
     const file = e.target.files[0];
     const storageRef = storage.ref();
-    const fileRef = storageRef.child(`screams/${profesor.id}/${file.name}`);
+    const fileRef = storageRef.child(`screams/${profesor.id}/${new Date()}`);
     setLoading(loading => !loading);
     await fileRef.put(file);
     setPhotoUrl(await fileRef.getDownloadURL());
@@ -210,8 +225,8 @@ export default function RecipeReviewCard() {
         />
       </CardContent>
       {loading && (
-        <div>
-          <p>Cargando...</p>
+        <div style={{display:"flex", justifyContent:"center", width:"100%",}}>
+          <CircularProgress color="none" style={{color:"#3493C2"}} />
         </div>
       )}
       {isReady && (
@@ -226,7 +241,7 @@ export default function RecipeReviewCard() {
             variant="outlined"
             size="small"
             onClick={handleClick}
-            disabled={!(body.content || isReady)}
+            disabled={!((body.content && isReady) || (body.content && !isReady))}
           >
             Publicar
           </Button>
@@ -240,8 +255,8 @@ export default function RecipeReviewCard() {
             </IconButton>
           */}
                   <div className={classes.inputFileContent}>
-                  <label htmlFor="screamPhoto1">
-                    <AddAPhotoIcon fontSize="medium" />
+                  <label htmlFor="screamPhoto1" className={classes.botonIcon}>
+                    <AddAPhotoIcon fontSize="medium" style={{color:"#757575"}} />
                   </label>
                   <Input style={{ display: "none"}} onChange={handlePhotoChange} accept=".jpg,.jpeg,.png" type="file" id="screamPhoto1"></Input>
                   </div>

@@ -56,7 +56,8 @@ const useStyles = makeStyles((theme) => ({
     //wordBreak:"break-all",
   },
   containerContent: {
-    paddingTop: "0px",
+    paddingTop:"10px",
+    paddingBottom:"8px", 
     widht: "100%",
   },
   comentarioSContainer: {
@@ -84,12 +85,17 @@ const useStyles = makeStyles((theme) => ({
   },
 
   CardHeader: {
-    paddingTop: "15px",
+    paddingTop: "10px",
     paddingLeft: "15px",
+    paddingBottom:"5px",
+    width:"100%",
+    "&:hover": {
+      backgroundColor: "#F5F5F5",
+      cursor:"pointer",
+    },
   },
 
   header: {
-    paddingRight: "15px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -176,6 +182,8 @@ export default function RecipeReviewCard(props) {
 
   const [profesor, setProfesor] = useState(null);
   const [screams, setScreams] = useState(["2"]);
+  const [error, setError] = useState("");
+
 
   const traerPerfil = useCallback(() => {
     if (usuarioActual) {
@@ -232,6 +240,15 @@ export default function RecipeReviewCard(props) {
     }
   };
 
+  async function goProfile() {
+    setError("");
+    try {
+      history.push(`/perfil/${props.idPerfil}`);
+    } catch {
+      setError("Ocurrió un error al salir de la cuenta");
+    }
+  }
+
   const handleClickHeart = () => {};
 
   // const handleClick = async e => {
@@ -273,6 +290,7 @@ export default function RecipeReviewCard(props) {
           // }
           title={props.name}
           subheader={props.date}
+          onClick={goProfile}
         />
 
         {/* {props.tag} */}
@@ -290,7 +308,9 @@ export default function RecipeReviewCard(props) {
       </CardContent>
 
       {/*<CardMedia className={classes.media} image={props.imagen} title="image" /> */}
-      <img src={props?.imagen} className={classes.media} alt="" />
+      {(props.imagen != "") && (
+        <img src={props?.imagen} className={classes.media} alt="" />
+      )}
 
       {/*
       <Grid

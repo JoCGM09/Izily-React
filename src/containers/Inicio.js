@@ -278,6 +278,7 @@ function Home() {
                     imagen={scream.photoUrl}
                     date={scream.date}
                     content={scream.content}
+                    idPerfil={scream.idPerfil}
                     interesados={scream.interesados}
                     comentarios={scream.comentarios}
                     numeroDeComentarios={scream.numeroDeComentarios}

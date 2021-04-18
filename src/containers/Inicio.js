@@ -190,20 +190,13 @@ function Home() {
     const screamRef = db
       .collection("publicaciones")
       .orderBy("dateNumber", "desc");
-    screamRef
-      .get()
-      .then((querySnapshot) => {
-        const docs = [];
-        querySnapshot.forEach((doc) => {
-          docs.push({ ...doc.data(), id: doc.id });
-          //console.log(doc.id, " => ", doc.data());
-        });
-        //error
-        setScreams(docs);
-      })
-      .catch((error) => {
-        console.error(error);
+    screamRef.onSnapshot((querySnapshot) => {
+      const docs = [];
+      querySnapshot.forEach((doc) => {
+        docs.push({ ...doc.data(), id: doc.id });
       });
+      setScreams(docs);
+    });
   };
 
   // const [open, setOpen] = React.useState(false);

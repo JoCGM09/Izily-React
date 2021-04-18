@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import { db } from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,56 +75,83 @@ const useStyles = makeStyles((theme) => ({
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
 
+  const [comments, setComments] = useState([]);
+  const getComments = () => {
+    db.collection("publicaciones")
+      .doc(`${props.screamID}`)
+      .collection("coments")
+      .orderBy("dateNumber", "desc")
+      .onSnapshot((querySnapshot) => {
+        const comments = [];
+        querySnapshot.forEach((doc) => {
+          comments.push(doc.data());
+        });
+        setComments(comments);
+      });
+  };
+
+  useEffect(() => {
+    getComments();
+  }, []);
+
   return (
     <div>
-      <div style={{ padding: "0px 10px" }}>
-        <Divider />
-      </div>
+      {comments && (
+        <div>
+          {comments.map((comment) => (
+            <div>
+              <div style={{ padding: "0px 10px" }}>
+                <Divider />
+              </div>
 
-      <Card className={classes.root} variant="outlined">
-        <CardHeader
-          avatar={
-            <Avatar
-              aria-label="recipe"
-              className={classes.avatar}
-              style={{
-                margin: "0px 0px 0px 10px",
-              }}
-              alt={props.nameComent}
-              src={props.imageURLComent}
-            />
-          }
-          className={classes.avatarContainer}
-        />
-        <CardContent className={classes.containerContent}>
-          <Typography
-            className={classes.nombre}
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
-            {props.nameComent}
-          </Typography>
-          <div style={{ padding: "0px 10px" }}>
-            <Divider />
-          </div>
-          <div style={{ width: "100%" }}>
-            <Typography
-              className={classes.comentario}
-              variant="body2"
-              color="textSecondary"
-              component="p"
-            >
-              {props.contentComent}
-            </Typography>
-          </div>
-        </CardContent>
-        {/* <CardMedia
+              <Card className={classes.root} variant="outlined">
+                <CardHeader
+                  avatar={
+                    <Avatar
+                      aria-label="recipe"
+                      className={classes.avatar}
+                      style={{
+                        margin: "0px 0px 0px 10px",
+                      }}
+                      alt={comment.name}
+                      src={comment.imageURL}
+                    />
+                  }
+                  className={classes.avatarContainer}
+                />
+                <CardContent className={classes.containerContent}>
+                  <Typography
+                    className={classes.nombre}
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {comment.name}
+                  </Typography>
+                  <div style={{ padding: "0px 10px" }}>
+                    <Divider />
+                  </div>
+                  <div style={{ width: "100%" }}>
+                    <Typography
+                      className={classes.comentario}
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                    >
+                      {comment.content}
+                    </Typography>
+                  </div>
+                </CardContent>
+                {/* <CardMedia
           className={classes.media}
           src={props.image}
           title="image"
         /> */}
-      </Card>
+              </Card>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

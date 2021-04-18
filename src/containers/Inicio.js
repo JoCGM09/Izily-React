@@ -10,10 +10,10 @@ import CrearPublicacion from "../components/CrearPublicacion";
 import Publicacion from "../components/Publicacion";
 import Comentario from "../components/Comentario";
 import Chip from "@material-ui/core/Chip";
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import EstamosTrabajando from "../assets/images/EstamosTrabajando.png";
 import Divider from "@material-ui/core/Divider";
 
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   gridTotal: {
     paddingTop: "15px",
     display: "flex",
-    justifyContent:"center",
+    justifyContent: "center",
     alignContent: "center",
     flexDirection: "row",
     flexGrow: 1,
@@ -117,47 +117,47 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    paddingTop:"50px",
+    paddingTop: "50px",
   },
   drawerPaper: {
     width: drawerWidth,
-    padding:"50px 20px 10px 20px",
+    padding: "50px 20px 10px 20px",
   },
   main: {
     flexGrow: 1,
   },
   divMain: {
-    display:"flex",
+    display: "flex",
   },
   FB: {
-    color:"#3b5998",
-    fontSize:"50px"
+    color: "#3b5998",
+    fontSize: "50px",
   },
   Li: {
-    color:"#0e76a8",
-    fontSize:"50px"
+    color: "#0e76a8",
+    fontSize: "50px",
   },
   buttonLogo: {
-    width:"400px",
-    height:"40px",
+    width: "400px",
+    height: "40px",
     "&:hover": {
       // backgroundColor: "rgba(255, 255, 255, 0)",
     },
   },
   correo: {
-    color:"#3493C2",
-    marginBottom:"10px",
-    fontWeight:"bold",
-    "&:hover":{
-      fontWeight:"bold",
-      color:"#3493C2",
-      textDecoration:"underline",
-      cursor:"pointer",
+    color: "#3493C2",
+    marginBottom: "10px",
+    fontWeight: "bold",
+    "&:hover": {
+      fontWeight: "bold",
+      color: "#3493C2",
+      textDecoration: "underline",
+      cursor: "pointer",
     },
   },
   EstamosTrabajandoImg: {
-    width:"300px",
-    height:"auto",
+    width: "300px",
+    height: "auto",
   },
 }));
 
@@ -187,7 +187,9 @@ function Home() {
   };
 
   const getScreams = () => {
-    const screamRef = db.collection("publicaciones").orderBy("dateNumber", "desc");
+    const screamRef = db
+      .collection("publicaciones")
+      .orderBy("dateNumber", "desc");
     screamRef
       .get()
       .then((querySnapshot) => {
@@ -217,96 +219,113 @@ function Home() {
   return (
     <div className={classes.divMain}>
       <CssBaseline />
-      
+
       <main className={classes.main}>
-      <Grid className={classes.gridTotal} spacing={0}>
-        {/* <Grid xs></Grid> */}
+        <Grid className={classes.gridTotal} spacing={0}>
+          {/* <Grid xs></Grid> */}
 
-        <Grid>
-          <Grid className={classes.gridArriba}>
-            <Grid>
-              <Button
-                component={Link}
-                to={"/buscar"}
-                className={classes.botones}
-                variant="outlined"
-                size="small"
-                disabled
-              >
-                Buscar personas
-              </Button>
-            </Grid>
-            <Grid xs className={classes.gridMedio}></Grid>
+          <Grid>
+            <Grid className={classes.gridArriba}>
+              <Grid>
+                <Button
+                  component={Link}
+                  to={"/buscar"}
+                  className={classes.botones}
+                  variant="outlined"
+                  size="small"
+                  disabled
+                >
+                  Buscar personas
+                </Button>
+              </Grid>
+              <Grid xs className={classes.gridMedio}></Grid>
 
-            <Grid>
-              <Button
-                component={Link}
-                to={"/buscar-un-mentor"}
-                className={classes.botones}
-                variant="outlined"
-                size="small"
-              >
-                Buscar un mentor
-              </Button>
+              <Grid>
+                <Button
+                  component={Link}
+                  to={"/buscar-un-mentor"}
+                  className={classes.botones}
+                  variant="outlined"
+                  size="small"
+                >
+                  Buscar un mentor
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid align="start" className={classes.publicacionesContainer}>
-            <CrearPublicacion />
-            <Grid style={{display:"flex", justifyContent:"space-between", alignItems:"center", width:"100%", padding:"10px 20px 10px 20px"}}>
-              <img
+            <Grid align="start" className={classes.publicacionesContainer}>
+              <CrearPublicacion />
+              <Grid
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  width: "100%",
+                  padding: "10px 20px 10px 20px",
+                }}
+              >
+                <img
                   src={EstamosTrabajando}
                   className={classes.EstamosTrabajandoImg}
                   alt="Logo"
-              />
-              <div>
-              <p style={{marginBottom:"0px", width:"150px", textAlign:"right", fontSize:"20px", fontWeight:"bold"}}>
-                Estamos trabajando para que este sea un mejor lugar para
-              </p>
-              <p style={{margin:"0px", width:"150px", textAlign:"right", fontSize:"20px", fontWeight:"bold", color:"#3493C2"}}>aprender</p>
-              </div> 
-              
+                />
+                <div>
+                  <p
+                    style={{
+                      marginBottom: "0px",
+                      width: "150px",
+                      textAlign: "right",
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Estamos trabajando para que este sea un mejor lugar para
+                  </p>
+                  <p
+                    style={{
+                      margin: "0px",
+                      width: "150px",
+                      textAlign: "right",
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                      color: "#3493C2",
+                    }}
+                  >
+                    aprender
+                  </p>
+                </div>
+              </Grid>
+
+              {screams && (
+                <div>
+                  {screams.map((scream) => (
+                    <Publicacion
+                      screamId={scream.id}
+                      imageURL={scream.imageURL}
+                      name={scream.name}
+                      // imagen="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/publicacionImages%2Fproblema1.jpeg?alt=media&token=f4e69610-db14-4e2d-a5fa-b97bae16daec"
+                      imagen={scream.photoUrl}
+                      date={scream.date}
+                      content={scream.content}
+                      idPerfil={scream.idPerfil}
+                      interesados={scream.interesados}
+                      comentarios={scream.comentarios}
+                      numeroDeComentarios={scream.numeroDeComentarios}
+                      tag={
+                        <Chip
+                          //Soy Jhomar
+                          className={classes.etiqueta2}
+                          label={scream.label}
+                        />
+                      }
+                      children={<Comentario screamID={scream.id} />}
+                    />
+                  ))}
+                </div>
+              )}
             </Grid>
-            
-            {screams && (
-              <div>
-                {screams.map((scream) => (
-                  <Publicacion
-                    screamId={scream.id}
-                    imageURL={scream.imageURL}
-                    name={scream.name}
-                    // imagen="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/publicacionImages%2Fproblema1.jpeg?alt=media&token=f4e69610-db14-4e2d-a5fa-b97bae16daec"
-                    imagen={scream.photoUrl}
-                    date={scream.date}
-                    content={scream.content}
-                    idPerfil={scream.idPerfil}
-                    interesados={scream.interesados}
-                    comentarios={scream.comentarios}
-                    numeroDeComentarios={scream.numeroDeComentarios}
-                    tag={
-                      <Chip
-                        //Soy Jhomar
-                        className={classes.etiqueta2}
-                        label={scream.label}
-                      />
-                    }
-                    children={screams.comentarios && screams.comentarios.map((comentarios) => (
-                      <Comentario
-                        nameComent={comentarios.name}
-                        contentComent={comentarios.bodyComent}
-                        dateComent={comentarios.date}
-                        imageURLComent={comentarios.imageURL}
-                        loginidComent={comentarios.loginid}
-                        idPerfilComent={comentarios.idPerfil}
-                      />
-                    ))}
-                  />
-                ))}
-              </div>
-            )}
           </Grid>
+          {/* <Grid xs></Grid> */}
         </Grid>
-        {/* <Grid xs></Grid> */}
-      </Grid>
       </main>
       <Drawer
         className={classes.drawer}
@@ -316,13 +335,14 @@ function Home() {
         }}
         anchor="right"
       >
-        <h1 style={{color:"#3493C2", textAlign:"center"}}>
+        <h1 style={{ color: "#3493C2", textAlign: "center" }}>
           Gracias por apoyar el proyecto Izily :D
         </h1>
         <p>
-          Síguenos en Facebook y LinkedIn para enterarte de los avances de Izily.
+          Síguenos en Facebook y LinkedIn para enterarte de los avances de
+          Izily.
         </p>
-        <div style={{display:"flex", alignItems:"center", gap:"10px"}}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <Button
             target="_blank"
             href={"https://www.facebook.com/Izily-102740731946306/"}
@@ -337,15 +357,19 @@ function Home() {
           >
             <LinkedInIcon className={classes.Li} />
           </Button>
-          
         </div>
-        <p>También puedes contactarnos a nuestro correo institucional dando click aquí:</p>
-        <a target="_blank" className={classes.correo} href="https://mail.google.com/mail/u/0/?fs=1&to=aprendeizily@gmail.com%20&su=CONTACTAR%20A%20IZILY&body=&tf=cm">
+        <p>
+          También puedes contactarnos a nuestro correo institucional dando click
+          aquí:
+        </p>
+        <a
+          target="_blank"
+          className={classes.correo}
+          href="https://mail.google.com/mail/u/0/?fs=1&to=aprendeizily@gmail.com%20&su=CONTACTAR%20A%20IZILY&body=&tf=cm"
+        >
           aprendeizily@gmail.com
         </a>
-        <Divider/>
-        
-        
+        <Divider />
       </Drawer>
     </div>
   );

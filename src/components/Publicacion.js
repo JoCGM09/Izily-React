@@ -13,7 +13,7 @@ import Favorite from "@material-ui/icons/Favorite";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import CardMedia from "@material-ui/core/CardMedia"
+import CardMedia from "@material-ui/core/CardMedia";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { IconButton } from "@material-ui/core";
@@ -22,7 +22,6 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,8 +57,8 @@ const useStyles = makeStyles((theme) => ({
     //wordBreak:"break-all",
   },
   containerContent: {
-    paddingTop:"10px",
-    paddingBottom:"8px", 
+    paddingTop: "10px",
+    paddingBottom: "8px",
     widht: "100%",
   },
   comentarioSContainer: {
@@ -89,11 +88,11 @@ const useStyles = makeStyles((theme) => ({
   CardHeader: {
     paddingTop: "10px",
     paddingLeft: "15px",
-    paddingBottom:"5px",
-    width:"100%",
+    paddingBottom: "5px",
+    width: "100%",
     "&:hover": {
       backgroundColor: "#F5F5F5",
-      cursor:"pointer",
+      cursor: "pointer",
     },
   },
 
@@ -186,7 +185,6 @@ export default function RecipeReviewCard(props) {
   const [screams, setScreams] = useState(["2"]);
   const [error, setError] = useState("");
 
-
   const traerPerfil = useCallback(() => {
     if (usuarioActual) {
       const idd = usuarioActual.uid;
@@ -236,6 +234,7 @@ export default function RecipeReviewCard(props) {
         date: new Date().toLocaleDateString(),
         imageURL: profesor.imageURL,
         idPerfil: profesor.id,
+        dateNumber: new Date(),
       });
     } else {
       console.log("error");
@@ -253,19 +252,21 @@ export default function RecipeReviewCard(props) {
 
   const handleClickHeart = () => {};
 
-  // const handleClick = async e => {
-  //   db.collection('publicaciones').doc(`${props.screamId}`).collection('coments').doc(`${props.comentId}`)
-  //   .add(bodyComent)
-  //   .then(()=>{
-  //     setBodyComent({...initialBody})
-  //   }).then(()=>{
-  //     history.push('/inicio');
-  //     window.location.reload();
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-  // }
+  const handleClick = async (e) => {
+    db.collection("publicaciones")
+      .doc(`${props.screamId}`)
+      .collection("coments")
+      .add(bodyComent)
+      .then(() => {
+        setBodyComent({ ...initialBody });
+      })
+      .then(() => {
+        history.push("/inicio");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     traerPerfil();
@@ -310,7 +311,7 @@ export default function RecipeReviewCard(props) {
       </CardContent>
 
       {/*<CardMedia className={classes.media} image={props.imagen} title="image" /> */}
-      {(props.imagen != "") && (
+      {props.imagen != "" && (
         <img src={props?.imagen} className={classes.media} alt="" />
       )}
 
@@ -334,8 +335,7 @@ export default function RecipeReviewCard(props) {
       */}
       <div style={{ padding: "0px 10px" }}>
         <Divider />
-      </div>      
-      
+      </div>
 
       <CardActions
         style={{
@@ -363,7 +363,6 @@ export default function RecipeReviewCard(props) {
           />
         </Button>
         <Button
-          disabled
           onClick={handleExpandClick}
           aria-label="share"
           style={{ height: "35px" }}
@@ -391,7 +390,6 @@ export default function RecipeReviewCard(props) {
           className={classes.containerContentCrearComentario}
         >
           <input
-            disabled
             className={classes.inputText}
             variant="outline"
             type="text"
@@ -406,10 +404,9 @@ export default function RecipeReviewCard(props) {
         <Grid container className={classes.IconosContainer}>
           <Grid item style={{ display: "flex", alignItems: "center" }}>
             <Button
-              disabled
               className={classes.PublicarButton}
               size="small"
-              // onClick={handleClick}
+              onClick={handleClick}
             >
               Enviar
             </Button>

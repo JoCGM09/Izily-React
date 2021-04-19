@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     widht: "100%",
     display: "flex",
     justifyContent: "center",
-    marginBottom: "10px",
+    // marginBottom: "10px",
   },
   IconosContainer: {
     paddingLeft: "5px",

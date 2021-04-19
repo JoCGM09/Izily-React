@@ -227,21 +227,25 @@ export default function RecipeReviewCard(props) {
     }
   }, [setProfesor]);
 
-  // const getScreams = () => {
-  //   const screamRef = db.collection("publicaciones");
-  //   screamRef
-  //     .get()
-  //     .then((querySnapshot) => {
-  //       const docs = [];
-  //       querySnapshot.forEach((doc) => {
-  //         docs.push({ ...doc.data(), id: doc.id });
-  //       });
-  //       setScreams(docs);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
+  const [comments, setComments] = useState([]);
+
+  const getComments = () => {
+    db.collection("publicaciones")
+      .doc(`${props.screamId}`)
+      .collection("coments")
+      .orderBy("dateNumber")
+      .onSnapshot((querySnapshot) => {
+        const comments = [];
+        querySnapshot.forEach((doc) => {
+          // comments.push(doc.data());
+          comments.push({ ...doc.data(), id: doc.id });
+        });
+        // console.log("comments", comments);
+        setComments(comments);
+      });
+  };
+
+
 
   const handleInputChange = (text) => {
     if (text && profesor) {
@@ -291,8 +295,12 @@ export default function RecipeReviewCard(props) {
 
   useEffect(() => {
     traerPerfil();
-    // getScreams();
   }, []);
+
+  useEffect(() => {
+    getComments();
+  }, [props]);
+
 
   return (
     <Card className={classes.root}>
@@ -348,7 +356,7 @@ export default function RecipeReviewCard(props) {
 
         <Grid item>
           <p className={classes.comentariosP} onClick={handleExpandClick}>
-            {props.numeroDeComentarios} comentarios
+            {comments.length} { comments.length === 1 ? ("comentario"):("comentarios") }
           </p>
         </Grid>
       </Grid>

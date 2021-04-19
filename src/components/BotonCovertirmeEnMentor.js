@@ -214,7 +214,7 @@ export default function RecipeReviewCard() {
             <p>
               Para convertirte en un mentor de Izily contáctanos a nuestro correo institucional haciendo click aquí:
             </p>
-            <a target="_blank" className={classes.correo} href="https://mail.google.com/mail/u/0/?fs=1&to=aprendeizily@gmail.com%20&su=QUIERO%20CONVERTIRME%20EN%20MENTOR&body=(Ingrese%20aqu%C3%AD%20sus%20nombres%20y%20apellidos,%20n%C3%BAmero%20de%20celular(WhatsApp)%20y%20el%20link%20de%20su%20perfil%20en%20Izily.%20Este%20%C3%BAltimo%20puede%20obtenerlo%20yendo%20a%20su%20perfil%20dentro%20de%20la%20plataforma%20de%20Izily%20y%20copiando%20el%20URL)&tf=cm">
+            <a target="_blank" className={classes.correo} href="https://mail.google.com/mail/u/0/?fs=1&to=aprendeizily@gmail.com%20&su=QUIERO%20CONVERTIRME%20EN%20MENTOR&body=(Ingrese%20aqu%C3%AD%20sus%20nombres%20y%20apellidos,%20n%C3%BAmero%20de%20celular(WhatsApp),%20cursos%20que%20desea%20enseñar%20y%20el%20respectivo%20nivel%20(escolar,%20preuniversitario%20y%20universitario),%20y%20el%20link%20de%20su%20perfil%20en%20Izily.%20Este%20%C3%BAltimo%20puede%20obtenerlo%20yendo%20a%20su%20perfil%20dentro%20de%20la%20plataforma%20de%20Izily%20y%20copiando%20el%20URL)&tf=cm">
               aprendeizily@gmail.com
             </a>
           </CardContent>

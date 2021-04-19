@@ -23,6 +23,8 @@ import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import Comentario from "../components/Comentario";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -204,7 +206,7 @@ export default function RecipeReviewCard(props) {
   const history = useHistory();
 
   const [profesor, setProfesor] = useState(null);
-  const [screams, setScreams] = useState(["2"]);
+  // const [screams, setScreams] = useState(["2"]);
   const [error, setError] = useState("");
 
   const traerPerfil = useCallback(() => {
@@ -229,21 +231,21 @@ export default function RecipeReviewCard(props) {
     }
   }, [setProfesor]);
 
-  const getScreams = () => {
-    const screamRef = db.collection("publicaciones");
-    screamRef
-      .get()
-      .then((querySnapshot) => {
-        const docs = [];
-        querySnapshot.forEach((doc) => {
-          docs.push({ ...doc.data(), id: doc.id });
-        });
-        setScreams(docs);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  // const getScreams = () => {
+  //   const screamRef = db.collection("publicaciones");
+  //   screamRef
+  //     .get()
+  //     .then((querySnapshot) => {
+  //       const docs = [];
+  //       querySnapshot.forEach((doc) => {
+  //         docs.push({ ...doc.data(), id: doc.id });
+  //       });
+  //       setScreams(docs);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // };
 
   const handleInputChange = (text) => {
     if (text && profesor) {
@@ -293,7 +295,7 @@ export default function RecipeReviewCard(props) {
 
   useEffect(() => {
     traerPerfil();
-    getScreams();
+    // getScreams();
   }, []);
 
   return (
@@ -471,6 +473,7 @@ export default function RecipeReviewCard(props) {
       >
         <div className={classes.comentarioSContainer}>
           {props.children}
+          {/* <Comentario screamID={props.screamId} /> */}
           {/* hacer aqui el mapeo de los comentarios */}
         </div>
       </Collapse>

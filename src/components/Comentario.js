@@ -87,23 +87,25 @@ export default function RecipeReviewCard(props) {
   const history = useHistory();
 
   const [comments, setComments] = useState([]);
-  const getComments = () => {
-    db.collection("publicaciones")
+  const getComments = async () => {
+  await db.collection("publicaciones")
       .doc(`${props.screamID}`)
       .collection("coments")
-      .orderBy("dateNumber", "desc")
+      .orderBy("dateNumber")
       .onSnapshot((querySnapshot) => {
         const comments = [];
         querySnapshot.forEach((doc) => {
-          comments.push(doc.data());
+          // comments.push(doc.data());
+          comments.push({ ...doc.data(), id: doc.id });
         });
+        // console.log("comments", comments);
         setComments(comments);
       });
   };
 
   useEffect(() => {
     getComments();
-  }, []);
+  }, [props]);
 
 
 

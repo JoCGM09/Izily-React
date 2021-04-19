@@ -204,7 +204,7 @@ function Home() {
       .catch((error) => {
         console.error(error);
       });
-    };
+  };
 
   // const [open, setOpen] = React.useState(false);
   // const handleClose = () => {
@@ -309,7 +309,7 @@ function Home() {
                       idPerfil={scream.idPerfil}
                       interesados={scream.interesados}
                       comentarios={scream.comentarios}
-                      numeroDeComentarios={scream.numeroDeComentarios}
+                      numeroDeComentarios={scream.comments}
                       tag={
                         <Chip
                           //Soy Jhomar

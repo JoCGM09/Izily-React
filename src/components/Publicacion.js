@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -22,6 +22,8 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,15 +36,16 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
   },
   expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
+    transform: 'rotate(0deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: "red",
+    transform: 'rotate(180deg)',
   },
+
   // avatar: {
   //   backgroundColor: red[500],
   // },
@@ -161,6 +164,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
   const initialBody = {
@@ -177,6 +182,24 @@ export default function RecipeReviewCard(props) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  const handleExpandClick2 = () => {
+    if (expanded == false){
+      setExpanded(!expanded);
+    }
+    else {
+      setExpanded(expanded);
+    }
+    
+  };
+
+  
+  const useFocus = () => {
+    const htmlElRef = useRef(null)
+    const setFocus = () => {htmlElRef.current &&  htmlElRef.current.focus()};
+  
+    return [ htmlElRef, setFocus ] 
+  };
+  const [inputRef, setInputFocus] = useFocus();
 
   const { usuarioActual } = useAuth();
   const history = useHistory();
@@ -262,6 +285,7 @@ export default function RecipeReviewCard(props) {
       })
       .then(() => {
         history.push("/inicio");
+        handleExpandClick2();
       })
       .catch((error) => {
         console.log(error);
@@ -315,14 +339,14 @@ export default function RecipeReviewCard(props) {
         <img src={props?.imagen} className={classes.media} alt="" />
       )}
 
-      {/*
+      
       <Grid
         container
         style={{ display: "flex", justifyContent: "space-between" }}
       >
         <Grid style={{ "&:hover": { cursor: "default" } }} item>
           <p className={classes.interesadosP}>
-            A {props.interesados} personas les interesa esto.
+            {/* A {props.interesados} personas les interesa esto. */}
           </p>
         </Grid>
 
@@ -332,7 +356,7 @@ export default function RecipeReviewCard(props) {
           </p>
         </Grid>
       </Grid>
-      */}
+     
       <div style={{ padding: "0px 10px" }}>
         <Divider />
       </div>
@@ -363,7 +387,7 @@ export default function RecipeReviewCard(props) {
           />
         </Button>
         <Button
-          onClick={handleExpandClick}
+          onClick={setInputFocus}
           aria-label="share"
           style={{ height: "35px" }}
         >
@@ -389,7 +413,7 @@ export default function RecipeReviewCard(props) {
           align="center"
           className={classes.containerContentCrearComentario}
         >
-          <input
+          <TextareaAutosize
             className={classes.inputText}
             variant="outline"
             type="text"
@@ -398,7 +422,19 @@ export default function RecipeReviewCard(props) {
             placeholder="Comentar..."
             rowsMin={1}
             onChange={handleInputChange}
+            onKeyDown={(event) => {
+              if (event.which === 13 && !event.shiftKey) {
+                event.preventDefault();
+                handleClick();
+                console.log('prevented');
+                return false;
+              }
+              // if (event.key === 'Enter') {
+              //   handleClick();
+              // }
+            }}
             value={bodyComent.content}
+            ref={inputRef}
           />
         </CardContent>
         <Grid container className={classes.IconosContainer}>
@@ -407,6 +443,7 @@ export default function RecipeReviewCard(props) {
               className={classes.PublicarButton}
               size="small"
               onClick={handleClick}
+              disabled={!(bodyComent.content)}
             >
               Enviar
             </Button>
@@ -433,10 +470,10 @@ export default function RecipeReviewCard(props) {
         timeout="auto"
         unmountOnExit
       >
-        <CardContent className={classes.comentarioSContainer}>
+        <div className={classes.comentarioSContainer}>
           {props.children}
           {/* hacer aqui el mapeo de los comentarios */}
-        </CardContent>
+        </div>
       </Collapse>
     </Card>
   );

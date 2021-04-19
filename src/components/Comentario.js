@@ -8,6 +8,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import { db } from "../firebase";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px",
     display: "flex",
     paddingBottom: "0px",
+    height:"auto",
   },
   media: {
     width: "100%",
@@ -42,21 +44,25 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "10px",
     paddingBottom: "0px",
     paddingRight: "0px",
-    alignContent: "start",
-    justifyItems: "end",
-    alignItems: "end",
+    // alignContent: "start",
+    // justifyItems: "end",
+    // alignItems: "end",
+    height:"50px",
   },
 
   nombre: {
     color: "black",
-    paddingLeft: "10px",
     fontSize: "14px",
-    paddingBottom: "10px",
+    fontWeight:600,
+    "&:hover": {
+      textDecoration: "underline",
+      cursor:"pointer",
+    },
   },
   containerContent: {
-    paddingTop: "20px",
-    paddingBottom: "0px",
-    paddingLeft: "0px",
+    paddingTop: "15px",
+    paddingBottom: "10px",
+    paddingRight: "10px",
     widht: "100%",
   },
   comentarioSContainer: {
@@ -64,16 +70,21 @@ const useStyles = makeStyles((theme) => ({
     margin: "0px",
   },
   comentario: {
-    padding: "5px 10px",
-    borderRadius: "15px",
     color: "black",
-    border: "1px solid #C7C6C6",
     widht: "100%",
+  },
+  avatar: {
+    "&:hover": {
+      cursor:"pointer",
+      
+    },
   },
 }));
 
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
+  const [error, setError] = useState("");
+  const history = useHistory();
 
   const [comments, setComments] = useState([]);
   const getComments = () => {
@@ -94,12 +105,13 @@ export default function RecipeReviewCard(props) {
     getComments();
   }, []);
 
+
   return (
     <div>
       {comments && (
         <div>
           {comments.map((comment) => (
-            <div>
+            <div style={{margin:"0px", padding:"0px",}}>
               <div style={{ padding: "0px 10px" }}>
                 <Divider />
               </div>
@@ -115,23 +127,39 @@ export default function RecipeReviewCard(props) {
                       }}
                       alt={comment.name}
                       src={comment.imageURL}
+                      onClick={
+                        async function goProfile() {
+                          setError("");
+                          try {
+                            history.push(`/perfil/${comment.idPerfil}`);
+                          } catch {
+                            setError("Ocurrió un error al salir de la cuenta");
+                          }
+                        }
+                      }
                     />
                   }
                   className={classes.avatarContainer}
                 />
-                <CardContent className={classes.containerContent}>
+                <div className={classes.containerContent}>
                   <Typography
                     className={classes.nombre}
                     variant="body2"
                     color="textSecondary"
                     component="p"
+                    onClick={
+                      async function goProfile() {
+                        setError("");
+                        try {
+                          history.push(`/perfil/${comment.idPerfil}`);
+                        } catch {
+                          setError("Ocurrió un error al salir de la cuenta");
+                        }
+                      }
+                    }
                   >
                     {comment.name}
                   </Typography>
-                  <div style={{ padding: "0px 10px" }}>
-                    <Divider />
-                  </div>
-                  <div style={{ width: "100%" }}>
                     <Typography
                       className={classes.comentario}
                       variant="body2"
@@ -140,8 +168,7 @@ export default function RecipeReviewCard(props) {
                     >
                       {comment.content}
                     </Typography>
-                  </div>
-                </CardContent>
+                </div>
                 {/* <CardMedia
           className={classes.media}
           src={props.image}

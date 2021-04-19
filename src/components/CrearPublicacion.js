@@ -13,6 +13,8 @@ import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
 import { storage } from "../firebase";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,13 +70,16 @@ const useStyles = makeStyles((theme) => ({
   },
 
   inputText: {
+    rowsMin:"1",
     outline: "none",
+    wrap:"hard",
     resize: "inherit",
     fontSize: "14px",
     fontFamily: "arial",
     border: "1px solid #C7C6C6",
     borderRadius: "10px",
     width: "100%",
+    height:"40px",
     padding: "10px",
     boxShadow: "rgba(0, 0, 0, 1)",
   },
@@ -211,7 +216,7 @@ export default function RecipeReviewCard() {
       </p>
 
       <CardContent align="center" className={classes.containerContent}>
-        <input
+        <TextareaAutosize
           className={classes.inputText}
           type="text"
           name="content"
@@ -221,6 +226,11 @@ export default function RecipeReviewCard() {
           rowsMin={1}
           onChange={handleInputChange}
           value={body.content}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              handleClick(event);
+            }
+          }}
           
         />
       </CardContent>

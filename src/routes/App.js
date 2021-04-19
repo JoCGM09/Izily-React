@@ -17,6 +17,8 @@ import CalificaAIzily from "../containers/CalificaAIzily";
 import MisCursos from "../containers/MisCursos";
 import ConvertirmeEnMentor from "../containers/ConvertirmeEnMentor";
 import BuscarUsuarios from "../containers/BuscarUsuarios";
+// import Chat from "../containers/Chat";
+
 
 // probando rama login
 
@@ -37,6 +39,7 @@ const App = () => (
           /> */}
           <PrivateRoute exact path="/buscar-un-mentor" component={Profesores} />
           {/* <PrivateRoute exact path="/buscar" component={BuscarUsuarios} /> */}
+          {/* <PrivateRoute exact path="/chat" component={Chat} /> */}
           <PrivateRoute exact path="/inicio" component={Inicio} />
           <PrivateRoute path="/perfil/:profesorId" component={Perfil} />
           <PrivateRoute

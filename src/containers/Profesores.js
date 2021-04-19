@@ -10,31 +10,30 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Checkbox from "@material-ui/core/Checkbox";
 import { useHistory } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
+//import { useAuth } from "../contexts/AuthContext";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
-import { withStyles } from '@material-ui/core/styles';
-import MuiAccordion from '@material-ui/core/Accordion';
-import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
-import MuiAccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-
+import { withStyles } from "@material-ui/core/styles";
+import MuiAccordion from "@material-ui/core/Accordion";
+import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
+import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
+import Typography from "@material-ui/core/Typography";
 
 const drawerWidth = 240;
 
 const Accordion = withStyles({
   root: {
-    border: '1px solid rgba(0, 0, 0, .125)',
-    boxShadow: 'none',
-    '&:not(:last-child)': {
+    border: "1px solid rgba(0, 0, 0, .125)",
+    boxShadow: "none",
+    "&:not(:last-child)": {
       borderBottom: 0,
     },
-    '&:before': {
-      display: 'none',
+    "&:before": {
+      display: "none",
     },
-    '&$expanded': {
-      margin: 'auto',
+    "&$expanded": {
+      margin: "auto",
     },
   },
   expanded: {},
@@ -42,17 +41,17 @@ const Accordion = withStyles({
 
 const AccordionSummary = withStyles({
   root: {
-    backgroundColor: 'rgba(0, 0, 0, .03)',
-    borderBottom: '1px solid rgba(0, 0, 0, .125)',
+    backgroundColor: "rgba(0, 0, 0, .03)",
+    borderBottom: "1px solid rgba(0, 0, 0, .125)",
     marginBottom: -1,
     minHeight: 56,
-    '&$expanded': {
+    "&$expanded": {
       minHeight: 56,
     },
   },
   content: {
-    '&$expanded': {
-      margin: '12px 0',
+    "&$expanded": {
+      margin: "12px 0",
     },
   },
   expanded: {},
@@ -61,14 +60,10 @@ const AccordionSummary = withStyles({
 const AccordionDetails = withStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
-    display:"flex",
-    flexDirection:"column",
-    padding: 0,
+    display: "flex",
+    flexDirection: "column",
   },
-
 }))(MuiAccordionDetails);
-
-
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -124,7 +119,7 @@ export default function Profesores() {
   // const { logout } = useAuth();
   const history = useHistory();
 
-  const [expanded, setExpanded] = React.useState('panel');
+  const [expanded, setExpanded] = React.useState("panel");
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -240,93 +235,117 @@ export default function Profesores() {
           </FormControl>
           <Divider />
 
-          <Accordion square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <AccordionSummary style={{background:"rgba(81, 184, 82, 0.2)",}} aria-controls="panel1d-content" id="panel1d-header">
-          <Typography style={{ color:"rgba(81, 184, 82, 1)", fontWeight:"bold",}}>Escolar</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-
-
-        {especialidades
-          .filter((especialidad) => especialidad.numberNivel == "0")
-          .map((especialidad) => (
-              <ListItem
-                button
-                key={especialidad.id}
-                onClick={seleccionarEtiquetas(especialidad.id)}
+          <Accordion
+            square
+            expanded={expanded === "panel1"}
+            onChange={handleChange("panel1")}
+          >
+            <AccordionSummary
+              style={{ background: "rgba(81, 184, 82, 0.2)" }}
+              aria-controls="panel1d-content"
+              id="panel1d-header"
+            >
+              <Typography
+                style={{ color: "rgba(81, 184, 82, 1)", fontWeight: "bold" }}
               >
-                <Checkbox
-                  edge="start"
-                  checked={etiquetas.indexOf(especialidad.id) !== -1}
-                  style={{ color: "rgba(81, 184, 82, 1)" }}
-                  tabIndex={-1}
-                  disableRipple
-                />
-                <ListItemText primary={especialidad.nombre} />
-              </ListItem>
-        ))}
-          
-  
-
-        </AccordionDetails>
-      </Accordion>
-      <Accordion square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <AccordionSummary style={{background:"rgba(52, 147, 194, 0.2)",}} aria-controls="panel2d-content" id="panel2d-header">
-          <Typography style={{ color:"rgba(52, 147, 194, 1)", fontWeight:"bold",}}>Preuniversitario</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          
-        {especialidades
-          .filter((especialidad) => especialidad.numberNivel == "1")
-          .map((especialidad) => (
-              <ListItem
-                button
-                key={especialidad.id}
-                onClick={seleccionarEtiquetas(especialidad.id)}
+                Escolar
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {especialidades
+                .filter((especialidad) => especialidad.numberNivel === "0")
+                .map((especialidad) => (
+                  <ListItem
+                    button
+                    key={especialidad.id}
+                    onClick={seleccionarEtiquetas(especialidad.id)}
+                  >
+                    <Checkbox
+                      edge="start"
+                      checked={etiquetas.indexOf(especialidad.id) !== -1}
+                      style={{ color: "rgba(81, 184, 82, 1)" }}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                    <ListItemText primary={especialidad.nombre} />
+                  </ListItem>
+                ))}
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            square
+            expanded={expanded === "panel2"}
+            onChange={handleChange("panel2")}
+          >
+            <AccordionSummary
+              style={{ background: "rgba(52, 147, 194, 0.2)" }}
+              aria-controls="panel2d-content"
+              id="panel2d-header"
+            >
+              <Typography
+                style={{ color: "rgba(52, 147, 194, 1)", fontWeight: "bold" }}
               >
-                <Checkbox
-                  edge="start"
-                  checked={etiquetas.indexOf(especialidad.id) !== -1}
-                  style={{ color: "rgba(52, 147, 194, 1)" }}
-                  tabIndex={-1}
-                  disableRipple
-                />
-                <ListItemText primary={especialidad.nombre} />
-              </ListItem>
-        ))}
-
-        </AccordionDetails>
-      </Accordion>
-      <Accordion square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <AccordionSummary style={{background:"rgba(143, 85, 160, 0.2)",}} aria-controls="panel3d-content" id="panel3d-header">
-          <Typography style={{ color:"rgba(143, 85, 160, 1)", fontWeight:"bold",}} >Universitario</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          
-        {especialidades
-          .filter((especialidad) => especialidad.numberNivel == "2")
-          .map((especialidad) => (
-              <ListItem
-                button
-                key={especialidad.id}
-                onClick={seleccionarEtiquetas(especialidad.id)}
+                Preuniversitario
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {especialidades
+                .filter((especialidad) => especialidad.numberNivel === "1")
+                .map((especialidad) => (
+                  <ListItem
+                    button
+                    key={especialidad.id}
+                    onClick={seleccionarEtiquetas(especialidad.id)}
+                  >
+                    <Checkbox
+                      edge="start"
+                      checked={etiquetas.indexOf(especialidad.id) !== -1}
+                      style={{ color: "rgba(52, 147, 194, 1)" }}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                    <ListItemText primary={especialidad.nombre} />
+                  </ListItem>
+                ))}
+            </AccordionDetails>
+          </Accordion>
+          <Accordion
+            square
+            expanded={expanded === "panel3"}
+            onChange={handleChange("panel3")}
+          >
+            <AccordionSummary
+              style={{ background: "rgba(143, 85, 160, 0.2)" }}
+              aria-controls="panel3d-content"
+              id="panel3d-header"
+            >
+              <Typography
+                style={{ color: "rgba(143, 85, 160, 1)", fontWeight: "bold" }}
               >
-                <Checkbox
-                  
-                  edge="start"
-                  checked={etiquetas.indexOf(especialidad.id) !== -1}
-                  style={{ color: "rgba(143, 85, 160, 1)" }}
-                  tabIndex={-1}
-                  disableRipple
-                />
-                <ListItemText primary={especialidad.nombre} />
-              </ListItem>
-        ))
-        
-        }
-
-        </AccordionDetails>
-      </Accordion>
+                Universitario
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              {especialidades
+                .filter((especialidad) => especialidad.numberNivel === "2")
+                .map((especialidad) => (
+                  <ListItem
+                    button
+                    key={especialidad.id}
+                    onClick={seleccionarEtiquetas(especialidad.id)}
+                  >
+                    <Checkbox
+                      edge="start"
+                      checked={etiquetas.indexOf(especialidad.id) !== -1}
+                      style={{ color: "rgba(143, 85, 160, 1)" }}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                    <ListItemText primary={especialidad.nombre} />
+                  </ListItem>
+                ))}
+            </AccordionDetails>
+          </Accordion>
           {/* <List>
             {especialidades.map((especialidad, index) => (
               <ListItem

@@ -22,9 +22,8 @@ import { useAuth } from "../contexts/AuthContext";
 import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Comentario from "../components/Comentario";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,14 +36,14 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
   },
   expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: "rotate(180deg)",
   },
 
   // avatar: {
@@ -165,8 +164,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
   const initialBody = {
@@ -184,21 +181,20 @@ export default function RecipeReviewCard(props) {
     setExpanded(!expanded);
   };
   const handleExpandClick2 = () => {
-    if (expanded == false){
+    if (expanded == false) {
       setExpanded(!expanded);
-    }
-    else {
+    } else {
       setExpanded(expanded);
     }
-    
   };
 
-  
   const useFocus = () => {
-    const htmlElRef = useRef(null)
-    const setFocus = () => {htmlElRef.current &&  htmlElRef.current.focus()};
-  
-    return [ htmlElRef, setFocus ] 
+    const htmlElRef = useRef(null);
+    const setFocus = () => {
+      htmlElRef.current && htmlElRef.current.focus();
+    };
+
+    return [htmlElRef, setFocus];
   };
   const [inputRef, setInputFocus] = useFocus();
 
@@ -340,7 +336,6 @@ export default function RecipeReviewCard(props) {
         <img src={props?.imagen} className={classes.media} alt="" />
       )}
 
-      
       <Grid
         container
         style={{ display: "flex", justifyContent: "space-between" }}
@@ -357,7 +352,7 @@ export default function RecipeReviewCard(props) {
           </p>
         </Grid>
       </Grid>
-     
+
       <div style={{ padding: "0px 10px" }}>
         <Divider />
       </div>
@@ -427,7 +422,7 @@ export default function RecipeReviewCard(props) {
               if (event.which === 13 && !event.shiftKey) {
                 event.preventDefault();
                 handleClick();
-                console.log('prevented');
+
                 return false;
               }
               // if (event.key === 'Enter') {
@@ -444,7 +439,7 @@ export default function RecipeReviewCard(props) {
               className={classes.PublicarButton}
               size="small"
               onClick={handleClick}
-              disabled={!(bodyComent.content)}
+              disabled={!bodyComent.content}
             >
               Enviar
             </Button>

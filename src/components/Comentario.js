@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0px",
     display: "flex",
     paddingBottom: "0px",
-    height:"auto",
+    height: "auto",
   },
   media: {
     width: "100%",
@@ -47,16 +47,16 @@ const useStyles = makeStyles((theme) => ({
     // alignContent: "start",
     // justifyItems: "end",
     // alignItems: "end",
-    height:"50px",
+    height: "50px",
   },
 
   nombre: {
     color: "black",
     fontSize: "14px",
-    fontWeight:600,
+    fontWeight: 600,
     "&:hover": {
       textDecoration: "underline",
-      cursor:"pointer",
+      cursor: "pointer",
     },
   },
   containerContent: {
@@ -75,8 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     "&:hover": {
-      cursor:"pointer",
-      
+      cursor: "pointer",
     },
   },
 }));
@@ -87,8 +86,9 @@ export default function RecipeReviewCard(props) {
   const history = useHistory();
 
   const [comments, setComments] = useState([]);
-  const getComments = async () => {
-  await db.collection("publicaciones")
+
+  const getComments = () => {
+    db.collection("publicaciones")
       .doc(`${props.screamID}`)
       .collection("coments")
       .orderBy("dateNumber")
@@ -107,14 +107,12 @@ export default function RecipeReviewCard(props) {
     getComments();
   }, [props]);
 
-
-
   return (
     <div>
       {comments && (
         <div>
           {comments.map((comment) => (
-            <div style={{margin:"0px", padding:"0px",}}>
+            <div style={{ margin: "0px", padding: "0px" }}>
               <div style={{ padding: "0px 10px" }}>
                 <Divider />
               </div>
@@ -130,16 +128,14 @@ export default function RecipeReviewCard(props) {
                       }}
                       alt={comment.name}
                       src={comment.imageURL}
-                      onClick={
-                        async function goProfile() {
-                          setError("");
-                          try {
-                            history.push(`/perfil/${comment.idPerfil}`);
-                          } catch {
-                            setError("Ocurrió un error al salir de la cuenta");
-                          }
+                      onClick={async function goProfile() {
+                        setError("");
+                        try {
+                          history.push(`/perfil/${comment.idPerfil}`);
+                        } catch {
+                          setError("Ocurrió un error al salir de la cuenta");
                         }
-                      }
+                      }}
                     />
                   }
                   className={classes.avatarContainer}
@@ -150,27 +146,25 @@ export default function RecipeReviewCard(props) {
                     variant="body2"
                     color="textSecondary"
                     component="p"
-                    onClick={
-                      async function goProfile() {
-                        setError("");
-                        try {
-                          history.push(`/perfil/${comment.idPerfil}`);
-                        } catch {
-                          setError("Ocurrió un error al salir de la cuenta");
-                        }
+                    onClick={async function goProfile() {
+                      setError("");
+                      try {
+                        history.push(`/perfil/${comment.idPerfil}`);
+                      } catch {
+                        setError("Ocurrió un error al salir de la cuenta");
                       }
-                    }
+                    }}
                   >
                     {comment.name}
                   </Typography>
-                    <Typography
-                      className={classes.comentario}
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      {comment.content}
-                    </Typography>
+                  <Typography
+                    className={classes.comentario}
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {comment.content}
+                  </Typography>
                 </div>
                 {/* <CardMedia
           className={classes.media}

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Home from "../components/Home";
+//import Home from "../components/Home";
 import Perfil from "../containers/Perfil";
 import NotFound from "../containers/NotFound";
 import Layout from "../containers/Layout";
@@ -14,11 +14,10 @@ import Inicio from "../containers/Inicio";
 import Profesores from "../containers/Profesores";
 import Landing from "../containers/Landing";
 import CalificaAIzily from "../containers/CalificaAIzily";
-import MisCursos from "../containers/MisCursos";
-import ConvertirmeEnMentor from "../containers/ConvertirmeEnMentor";
-import BuscarUsuarios from "../containers/BuscarUsuarios";
+//import MisCursos from "../containers/MisCursos";
+//import ConvertirmeEnMentor from "../containers/ConvertirmeEnMentor";
+//import BuscarUsuarios from "../containers/BuscarUsuarios";
 // import Chat from "../containers/Chat";
-
 
 // probando rama login
 

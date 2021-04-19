@@ -189,21 +189,29 @@ function Home() {
   const getScreams = () => {
     const screamRef = db
       .collection("publicaciones")
-      .orderBy("dateNumber", "desc");
-    screamRef
-      .get()
-      .then((querySnapshot) => {
-        const docs = [];
+      .orderBy("dateNumber", "desc")
+      .onSnapshot((querySnapshot) => {
+        const screams = [];
         querySnapshot.forEach((doc) => {
-          docs.push({ ...doc.data(), id: doc.id });
-          //console.log(doc.id, " => ", doc.data());
+          // screams.push(doc.data());
+          screams.push({ ...doc.data(), id: doc.id });
         });
-        //error
-        setScreams(docs);
-      })
-      .catch((error) => {
-        console.error(error);
+        setScreams(screams);
       });
+    // screamRef
+    //   .get()
+    //   .then((querySnapshot) => {
+    //     const docs = [];
+    //     querySnapshot.forEach((doc) => {
+    //       docs.push({ ...doc.data(), id: doc.id });
+    //       //console.log(doc.id, " => ", doc.data());
+    //     });
+    //     //error
+    //     setScreams(docs);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   };
 
   // const [open, setOpen] = React.useState(false);
@@ -297,8 +305,9 @@ function Home() {
 
               {screams && (
                 <div>
-                  {screams.map((scream) => (
+                  {screams.map((scream, index) => (
                     <Publicacion
+                      key={index}
                       screamId={scream.id}
                       imageURL={scream.imageURL}
                       name={scream.name}

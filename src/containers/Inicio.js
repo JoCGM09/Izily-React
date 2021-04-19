@@ -204,7 +204,7 @@ function Home() {
       .catch((error) => {
         console.error(error);
       });
-  };
+    };
 
   // const [open, setOpen] = React.useState(false);
   // const handleClose = () => {

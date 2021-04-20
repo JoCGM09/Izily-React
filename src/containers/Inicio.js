@@ -198,26 +198,7 @@ function Home() {
         });
         setScreams(screams);
       });
-    // screamRef
-    //   .get()
-    //   .then((querySnapshot) => {
-    //     const docs = [];
-    //     querySnapshot.forEach((doc) => {
-    //       docs.push({ ...doc.data(), id: doc.id });
-    //       //console.log(doc.id, " => ", doc.data());
-    //     });
-    //     //error
-    //     setScreams(docs);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
   };
-
-  // const [open, setOpen] = React.useState(false);
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
 
   useEffect(() => {
     traerProfesor();
@@ -314,6 +295,7 @@ function Home() {
                       // imagen="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/publicacionImages%2Fproblema1.jpeg?alt=media&token=f4e69610-db14-4e2d-a5fa-b97bae16daec"
                       imagen={scream.photoUrl}
                       date={scream.date}
+                      dateNumber={scream.dateNumber}
                       content={scream.content}
                       idPerfil={scream.idPerfil}
                       interesados={scream.interesados}

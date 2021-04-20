@@ -155,7 +155,7 @@ export default function Profesor({ profesor }) {
               justifyContent: "center",
             }}
           >
-            <Box
+            {/* <Box
               aria-owns={open ? "mouse-over-popover" : undefined}
               aria-haspopup="true"
               onMouseEnter={handlePopoverOpen}
@@ -175,8 +175,8 @@ export default function Profesor({ profesor }) {
                 icon={<StarIcon fontSize="large" />}
                 readOnly
               />
-            </Box>
-            <Popper
+            </Box> */}
+            {/* <Popper
               variant="outlined"
               id="mouse-over-popover"
               className={classes.popover}
@@ -191,7 +191,7 @@ export default function Profesor({ profesor }) {
               disableRestoreFocus
             >
               <span className={classes.numero}>{profesor.puntuacion}</span>
-            </Popper>
+            </Popper> */}
           </div>
           <Typography
             className={classes.nombre}
@@ -208,16 +208,16 @@ export default function Profesor({ profesor }) {
             elevation={0}
             children={profesor.descripcion}
           />
-          <Typography
+          {/* <Typography
             className={classes.datos}
             gutterBottom
             variant="body2"
             component="p"
           >
-            {/* X calificaciones*/}
-            {profesor.calificaciones} calificaciones | {/* X horas dictadas*/}{" "}
+            {profesor.calificaciones} calificaciones | 
             {profesor.horas} horas dictadas
-          </Typography>
+          </Typography> */}
+
           <Button
             component={Link}
             to={`/perfil/${profesor.id}`}

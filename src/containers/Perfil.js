@@ -264,6 +264,10 @@ function Perfil() {
   const [profesor, setProfesor] = useState(null);
   const [events, setEvents] = useState([]);
 
+
+  
+
+
   const traerProfesor = async () => {
     const profesorInfo = db.collection("usuarios").doc(profesorId);
     const doc = await profesorInfo.get();
@@ -271,6 +275,8 @@ function Perfil() {
       setProfesor({ ...doc.data(), id: doc.id });
     }
   };
+
+
 
   const calendly = () => {
     window.Calendly.initPopupWidget({ url: `${profesor.calendly}` });
@@ -651,6 +657,7 @@ function Perfil() {
                         variant="contained"
                         color="inherit"
                         size="small"
+                        style={{marginTop:"10px"}}
                         className={classes.buttonPerfil}
                         startIcon={<QuestionAnswerIcon />}
                         disableElevation="true"

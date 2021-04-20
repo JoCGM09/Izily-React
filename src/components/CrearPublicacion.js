@@ -184,6 +184,7 @@ export default function RecipeReviewCard() {
       })
       .then(() => {
         history.push("/inicio");
+        setIsReady((isReady) => !isReady);
       })
       .catch((error) => {
         console.log(error);
@@ -235,13 +236,13 @@ export default function RecipeReviewCard() {
       </CardContent>
       {loading && (
         <div
-          style={{ display: "flex", justifyContent: "center", width: "100%" }}
+          style={{ display: "flex", justifyContent: "center", width: "100%", marginTop:"5px",}}
         >
           <CircularProgress color="none" style={{ color: "#3493C2" }} />
         </div>
       )}
       {isReady && (
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", flexDirection: "column", marginTop:"5px", }}>
           <img style={{ width: "100%", height: "auto" }} src={photoUrl} />
         </div>
       )}
@@ -277,6 +278,7 @@ export default function RecipeReviewCard() {
                 accept=".jpg,.jpeg,.png"
                 type="file"
                 id="screamPhoto1"
+                disabled={isReady === true || loading === true}
               ></Input>
             </div>
           </Grid>

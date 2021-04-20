@@ -23,7 +23,6 @@ import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import Comentario from "../components/Comentario";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -259,6 +258,7 @@ export default function RecipeReviewCard(props) {
         imageURL: profesor.imageURL,
         idPerfil: profesor.id,
         dateNumber: new Date(),
+        photoUrl: " ",
       });
     } else {
       console.log("error");
@@ -292,6 +292,10 @@ export default function RecipeReviewCard(props) {
         console.log(error);
       });
   };
+  
+  const [isReady, setIsReady] = useState(false);
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     traerPerfil();
@@ -322,6 +326,7 @@ export default function RecipeReviewCard(props) {
           // }
           title={props.name}
           subheader={props.date}
+          // subheader={ props.dateNumber && ( moment(props.dateNumber.toISOString()).format('LL'))}
           onClick={goProfile}
         />
 

@@ -165,6 +165,9 @@ export default function RecipeReviewCard(props) {
                   >
                     {comment.content}
                   </Typography>
+                  {comment.photoUrl != "" && (
+                    <img src={comment?.photoUrl} className={classes.media} alt="" />
+                  )}
                 </div>
                 {/* <CardMedia
           className={classes.media}

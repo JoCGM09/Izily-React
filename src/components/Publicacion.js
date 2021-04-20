@@ -23,6 +23,12 @@ import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
 import Divider from "@material-ui/core/Divider";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import { storage } from "../firebase";
+import Input from "@material-ui/core/Input";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -161,6 +167,17 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px 10px 10px 10px",
     boxShadow: "rgba(0, 0, 0, 1)",
   },
+  botonIcon: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "10px",
+    borderRadius: "50px",
+    "&:hover": {
+      backgroundColor: "#F5F5F5",
+      cursor: "pointer",
+    },
+  },
 }));
 
 export default function RecipeReviewCard(props) {
@@ -172,6 +189,7 @@ export default function RecipeReviewCard(props) {
     loginid: "",
     imageURL: "",
     idPerfil: "",
+    photoUrl: "",
   };
 
   const [expanded, setExpanded] = React.useState(false);
@@ -203,6 +221,9 @@ export default function RecipeReviewCard(props) {
   const [profesor, setProfesor] = useState(null);
   // const [screams, setScreams] = useState(["2"]);
   const [error, setError] = useState("");
+  const [isReady, setIsReady] = useState(false);
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const traerPerfil = useCallback(() => {
     if (usuarioActual) {
@@ -258,7 +279,6 @@ export default function RecipeReviewCard(props) {
         imageURL: profesor.imageURL,
         idPerfil: profesor.id,
         dateNumber: new Date(),
-        photoUrl: " ",
       });
     } else {
       console.log("error");
@@ -276,26 +296,41 @@ export default function RecipeReviewCard(props) {
 
   const handleClickHeart = () => {};
 
-  const handleClick = async (e) => {
-    db.collection("publicaciones")
+  const handlePhotoChange = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = storage.ref();
+    const fileRef = storageRef.child(`comments/${profesor.id}/${new Date()}`);
+    setLoading((loading) => !loading);
+    await fileRef.put(file);
+    setPhotoUrl(await fileRef.getDownloadURL());
+    setLoading((loading) => !loading);
+    setIsReady((isReady) => !isReady);
+  };
+
+  const handleClick = () => {
+    const commentRef = db.collection("publicaciones")
       .doc(`${props.screamId}`)
-      .collection("coments")
+      .collection("coments");
+      commentRef
       .add(bodyComent)
       .then(() => {
         setBodyComent({ ...initialBody });
       })
       .then(() => {
+        console.log(commentRef);
+        commentRef.update({ photoUrl: photoUrl });
+      })
+      .then(() => {
         history.push("/inicio");
-        handleExpandClick2();
+        setIsReady((isReady) => !isReady);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
   
-  const [isReady, setIsReady] = useState(false);
-  const [photoUrl, setPhotoUrl] = useState("");
-  const [loading, setLoading] = useState(false);
+  
 
   useEffect(() => {
     traerPerfil();
@@ -446,6 +481,18 @@ export default function RecipeReviewCard(props) {
             ref={inputRef}
           />
         </CardContent>
+        {loading && (
+          <div
+            style={{ display: "flex", justifyContent: "center", width: "100%", marginTop:"5px",}}
+          >
+            <CircularProgress color="none" style={{ color: "#3493C2" }} />
+          </div>
+        )}
+        {isReady && (
+          <div style={{ display: "flex", flexDirection: "column", marginTop:"5px", }}>
+            <img style={{ width: "100%", height: "auto" }} src={photoUrl} />
+          </div>
+        )}
         <Grid container className={classes.IconosContainer}>
           <Grid item style={{ display: "flex", alignItems: "center" }}>
             <Button
@@ -460,9 +507,19 @@ export default function RecipeReviewCard(props) {
 
           <Grid item style={{ display: "flex", flexDirection: "row" }}>
             <Grid item>
-              <IconButton disabled style={{ padding: "10px 10px 10px 10px" }}>
-                <AddAPhotoIcon fontSize="medium" />
-              </IconButton>
+            <div className={classes.inputFileContent}>
+              <label htmlFor="commentPhoto1" className={classes.botonIcon}>
+                <AddAPhotoIcon fontSize="medium" style={{ color: "#757575" }} />
+              </label>
+              <Input
+                style={{ display: "none" }}
+                onChange={handlePhotoChange}
+                accept=".jpg,.jpeg,.png"
+                type="file"
+                id="commentPhoto1"
+                disabled={isReady === true || loading === true}
+              ></Input>
+            </div>
             </Grid>
             <Grid item>
               <IconButton disabled style={{ padding: "10px 10px 10px 10px" }}>

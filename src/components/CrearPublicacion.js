@@ -106,7 +106,7 @@ export default function RecipeReviewCard() {
     name: "",
     interesados: 0,
     comentarios: 0,
-    label: "",
+    photoUrl: "",
   };
 
   const [body, setBody] = useState(initialBody);
@@ -160,7 +160,6 @@ export default function RecipeReviewCard() {
         comentarios: [],
         numeroDeComentarios: 0,
         dateNumber: new Date(),
-        photoUrl: " ",
       });
     } else {
       console.log("error");

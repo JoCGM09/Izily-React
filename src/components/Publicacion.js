@@ -306,15 +306,16 @@ export default function RecipeReviewCard(props) {
     setIsReady((isReady) => !isReady);
   };
 
-  const handleClick = async (e) => {
+  const handleClick = (e) => {
     e.preventDefault();
-    const commentRef = await db
+    const commentRef = db
       .collection("publicaciones")
       .doc(`${props.screamId}`)
-      .collection("coments");
+      .collection("coments")
+      .doc();
     console.log(commentRef);
     commentRef
-      .add(bodyComent)
+      .set(bodyComent)
       .then(() => {
         setBodyComent({ ...initialBody });
       })

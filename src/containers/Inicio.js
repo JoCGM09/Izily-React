@@ -17,6 +17,7 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import EstamosTrabajando from "../assets/images/EstamosTrabajando.png";
 import Divider from "@material-ui/core/Divider";
 import Skeleton from "@material-ui/lab/Skeleton";
+import Actualizacion from "../assets/images/actualizacionv05.png";
 
 const drawerWidth = 300;
 const useStyles = makeStyles((theme) => ({
@@ -244,7 +245,7 @@ function Home() {
             </Grid>
             <Grid align="start" className={classes.publicacionesContainer}>
               <CrearPublicacion />
-              <Grid
+              {/* <Grid
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -283,12 +284,12 @@ function Home() {
                     aprender
                   </p>
                 </div>
-              </Grid>
+              </Grid> */}
               {screams && (
                 <div>
                   {screams.map((scream, key) => (
                     <Publicacion
-                      key={scream.id}
+                      // key={scream.id}
                       screamId={scream.id}
                       imageURL={scream.imageURL}
                       name={scream.name}
@@ -361,6 +362,7 @@ function Home() {
           aprendeizily@gmail.com
         </a>
         <Divider />
+        {/* <img src={Actualizacion} /> */}
       </Drawer>
     </div>
   );

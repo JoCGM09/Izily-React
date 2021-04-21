@@ -535,8 +535,8 @@ export default function RecipeReviewCard(props) {
 
           <Grid item style={{ display: "flex", flexDirection: "row" }}>
             <Grid item>
-              {/* <div className={classes.inputFileContent}>
-                <label htmlFor="commentPhoto1" className={classes.botonIcon}>
+              <div className={classes.inputFileContent}>
+                <label htmlFor={props.screamId} className={classes.botonIcon}>
                   <AddAPhotoIcon
                     fontSize="medium"
                     style={{ color: "#757575" }}
@@ -547,10 +547,10 @@ export default function RecipeReviewCard(props) {
                   onChange={handlePhotoChange}
                   accept=".jpg,.jpeg,.png"
                   type="file"
-                  id="commentPhoto1"
+                  id={props.screamId}
                   disabled={isReady === true || loading === true}
                 ></Input>
-              </div> */}
+              </div>
             </Grid>
             <Grid item>
               <IconButton disabled style={{ padding: "10px 10px 10px 10px" }}>

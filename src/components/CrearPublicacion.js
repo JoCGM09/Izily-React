@@ -177,7 +177,6 @@ export default function RecipeReviewCard() {
         setBody({ ...initialBody });
       })
       .then(() => {
-        console.log(publicationRef);
         publicationRef.update({
           photoUrl: photoUrl,
         });

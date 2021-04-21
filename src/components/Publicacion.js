@@ -326,6 +326,7 @@ export default function RecipeReviewCard(props) {
       .then(() => {
         history.push("/inicio");
         setIsReady((isReady) => !isReady);
+        handleExpandClick2();
       })
       .catch((error) => {
         console.log(error);

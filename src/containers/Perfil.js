@@ -264,19 +264,21 @@ function Perfil() {
   const [profesor, setProfesor] = useState(null);
   const [events, setEvents] = useState([]);
 
-
-  
-
+  // const traerProfesor = async () => {
+  //   const profesorInfo = db.collection("usuarios").doc(profesorId);
+  //   const doc = await profesorInfo.get();
+  //   if (doc.exists) {
+  //     setProfesor({ ...doc.data(), id: doc.id });
+  //   }
+  // };
 
   const traerProfesor = async () => {
-    const profesorInfo = db.collection("usuarios").doc(profesorId);
-    const doc = await profesorInfo.get();
-    if (doc.exists) {
-      setProfesor({ ...doc.data(), id: doc.id });
-    }
+    db.collection("usuarios")
+      .doc(profesorId)
+      .onSnapshot((doc) => {
+        setProfesor({ ...doc.data(), id: doc.id });
+      });
   };
-
-
 
   const calendly = () => {
     window.Calendly.initPopupWidget({ url: `${profesor.calendly}` });
@@ -331,7 +333,6 @@ function Perfil() {
       disponible: value,
     });
   }
-
 
   const handleChangeSwitch = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -611,7 +612,7 @@ function Perfil() {
                         >
                           Convertirme en Mentor
                         </Button> */}
-                        <ConvertirmeEnMentor/>
+                        <ConvertirmeEnMentor />
                       </>
                     )}
                   </div>
@@ -657,7 +658,7 @@ function Perfil() {
                         variant="contained"
                         color="inherit"
                         size="small"
-                        style={{marginTop:"10px"}}
+                        style={{ marginTop: "10px" }}
                         className={classes.buttonPerfil}
                         startIcon={<QuestionAnswerIcon />}
                         disableElevation="true"

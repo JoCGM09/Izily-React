@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
+import BotonImagen from "../components/BotonImagen";
 import moment from "moment";
 import "moment/locale/es";
 moment.locale("es");
@@ -23,8 +24,10 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
   },
   media: {
-    width: "100%",
-    height: "auto",
+    // width: "auto",
+    // height: "200px",
+    maxWidth: "80%",
+    maxHeight: "200px",
   },
   expand: {
     transform: "rotate(0deg)",
@@ -195,11 +198,12 @@ export default function RecipeReviewCard(props) {
                     {comment.content}
                   </Typography>
                   {comment.photoUrl != "" && (
-                    <img
-                      src={comment?.photoUrl}
-                      className={classes.media}
-                      alt=""
-                    />
+                    // <img
+                    //   src={comment?.photoUrl}
+                    //   className={classes.media}
+                    //   alt=""
+                    // />
+                    <BotonImagen photoUrl={comment.photoUrl} />
                   )}
                 </div>
                 {/* <CardMedia

@@ -16,7 +16,6 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Divider from "@material-ui/core/Divider";
 
-
 const labels = {
   0.5: "Useless",
   1: "Muy Mala",
@@ -51,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: "550px",
     marginRight: "20px",
-    padding:"15px",
+    padding: "15px",
   },
   root2: {
     maxWidth: "550px",
@@ -140,13 +139,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   correo: {
-    color:"#3493C2",
-    fontWeight:"bold",
-    "&:hover":{
-      fontWeight:"bold",
-      color:"#3493C2",
-      textDecoration:"underline",
-      cursor:"pointer",
+    color: "#3493C2",
+    fontWeight: "bold",
+    "&:hover": {
+      fontWeight: "bold",
+      color: "#3493C2",
+      textDecoration: "underline",
+      cursor: "pointer",
     },
   },
 }));
@@ -176,19 +175,19 @@ export default function RecipeReviewCard() {
         size="small"
         className={classes.buttonConvertirmeMentor}
         startIcon={
-            <img
+          <img
             style={{
-            marginLeft: "5px",
-            height: "45px",
-            width: "auto",
+              marginLeft: "5px",
+              height: "45px",
+              width: "auto",
             }}
             src="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/icons%2FConvertirmeEnProfesor.png?alt=media&token=a45096cb-1a3b-4134-811c-aaba4103528f"
-            />
-            }
-            disableElevation="true"
-        >
+          />
+        }
+        disableElevation="true"
+      >
         Convertirme en Mentor
-    </Button>
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -209,12 +208,17 @@ export default function RecipeReviewCard() {
             // }
             title="Gracias por formar parte de Izily"
           />
-          <Divider/>
+          <Divider />
           <CardContent className={classes.containerContent}>
             <p>
-              Para convertirte en un mentor de Izily contáctanos a nuestro correo institucional haciendo click aquí:
+              Para convertirte en un mentor de Izily contáctanos a nuestro
+              correo institucional haciendo click aquí:
             </p>
-            <a target="_blank" className={classes.correo} href="https://mail.google.com/mail/u/0/?fs=1&to=aprendeizily@gmail.com%20&su=QUIERO%20CONVERTIRME%20EN%20MENTOR&body=(Ingrese%20aqu%C3%AD%20sus%20nombres%20y%20apellidos,%20n%C3%BAmero%20de%20celular(WhatsApp),%20cursos%20que%20desea%20enseñar%20y%20el%20respectivo%20nivel%20(escolar,%20preuniversitario%20y%20universitario),%20y%20el%20link%20de%20su%20perfil%20en%20Izily.%20Este%20%C3%BAltimo%20puede%20obtenerlo%20yendo%20a%20su%20perfil%20dentro%20de%20la%20plataforma%20de%20Izily%20y%20copiando%20el%20URL)&tf=cm">
+            <a
+              target="_blank"
+              className={classes.correo}
+              href="https://mail.google.com/mail/u/0/?fs=1&to=aprendeizily@gmail.com%20&su=QUIERO%20CONVERTIRME%20EN%20MENTOR&body=(Ingrese%20aqu%C3%AD%20sus%20nombres%20y%20apellidos,%20n%C3%BAmero%20de%20celular(WhatsApp),%20cursos%20que%20desea%20enseñar%20y%20el%20respectivo%20nivel%20(escolar,%20preuniversitario%20y%20universitario),%20y%20el%20link%20de%20su%20perfil%20en%20Izily.%20Este%20%C3%BAltimo%20puede%20obtenerlo%20yendo%20a%20su%20perfil%20dentro%20de%20la%20plataforma%20de%20Izily%20y%20copiando%20el%20URL)&tf=cm"
+            >
               aprendeizily@gmail.com
             </a>
           </CardContent>
@@ -232,7 +236,6 @@ export default function RecipeReviewCard() {
           </Grid>
         </Card>
       </Modal>
-
     </div>
   );
 }

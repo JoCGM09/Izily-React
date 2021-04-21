@@ -8,13 +8,15 @@ import comunidad from "../assets/images/comunidad.png";
 import videollamada from "../assets/images/videollamada.png";
 import CarouselLanding from "../components/CarouselLanding";
 
-
 const useStyles = makeStyles((theme) => ({
+  root: {
+    fontFamily: "Roboto",
+  },
   Div1: {
-    display:"flex",
-    flexDirection:"row",
-    justifyContent:"space-between",
-    background:"white",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    background: "white",
     // backgroundImage: `url(${backgroundgrid1})`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "right center",
@@ -22,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     margin: "0px",
     padding: "50px 0px 65px 0px",
-    borderBottom:"1px solid #EBECEC",
+    borderBottom: "1px solid #EBECEC",
   },
   titulo: {
     paddingLeft: "50px",
@@ -32,18 +34,18 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     fontSize: "35px",
   },
-  tituloimageContainer:{
-    margin:"30px 60px",
-    display:"flex",
-    justifyContent:"center",
-    padding:"40px",
-    alignItems:"center",
+  tituloimageContainer: {
+    margin: "30px 60px",
+    display: "flex",
+    justifyContent: "center",
+    padding: "40px",
+    alignItems: "center",
     backgroundImage: `url(${videollamada})`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "right center",
     backgroundSize: "contain",
-    width:"600px",
-    height:"400px",
+    width: "600px",
+    height: "400px",
   },
   renglon: {
     display: "flex",
@@ -70,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "0px 0px 15px 0px",
   },
   Div2: {
-    background:"white",
+    background: "white",
     // backgroundImage: `url(${backgroundgrid2})`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "right bottom",
@@ -97,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     padding: "10px",
     //borderTop:"1px solid #EBECEC",
-    borderBottom:"1px solid #EBECEC",
+    borderBottom: "1px solid #EBECEC",
   },
   textgrid2: {
     width: "80%",
@@ -107,7 +109,7 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
   },
   imggrid2: {
-    paddingTop:"20px",
+    paddingTop: "20px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -125,7 +127,7 @@ const useStyles = makeStyles((theme) => ({
 function Landing() {
   const classes = useStyles();
   return (
-    <>
+    <div className={classes.root}>
       <Grid container className={classes.Div1}>
         <Grid item className={classes.titulo}>
           <h1 className={classes.tituloblanco}>Aprende para</h1>
@@ -136,8 +138,7 @@ function Landing() {
           <h1 className={classes.tituloblanco}>enseña para</h1>
           <h1 className={classes.tituloazulbajo}>aprender</h1>
         </Grid>
-        <Grid item className={classes.tituloimageContainer}>
-        </Grid>
+        <Grid item className={classes.tituloimageContainer}></Grid>
       </Grid>
       <div className={classes.Div2}>
         <p className={classes.TituloGrid2}>¿Quiénes somos?</p>
@@ -155,8 +156,7 @@ function Landing() {
             <Grid className={classes.textgrid2}>
               <p className={classes.titulogrid2}>Red Social Educativa</p>
               <p className={classes.subtitulogrid2}>
-                Orientada a ayudar tanto a escolares como a
-                universitarios.
+                Orientada a ayudar tanto a escolares como a universitarios.
               </p>
             </Grid>
           </Grid>
@@ -192,18 +192,24 @@ function Landing() {
             <Grid className={classes.textgrid2}>
               <p className={classes.titulogrid2}>Mentores</p>
               <p className={classes.subtitulogrid2}>
-                Con experiencia dispuestos a ayudarte a resolver todas tus dudas.
+                Con experiencia dispuestos a ayudarte a resolver todas tus
+                dudas.
               </p>
             </Grid>
           </Grid>
         </Grid>
       </div>
-      <Grid style={{display:"flex", padding:"10px 0px 50px 0px", background:"white"}}>
-      <CarouselLanding/>
-      {/* <Carousel2/> */}
+      <Grid
+        style={{
+          display: "flex",
+          padding: "10px 0px 50px 0px",
+          background: "white",
+        }}
+      >
+        <CarouselLanding />
+        {/* <Carousel2/> */}
       </Grid>
-      
-    </>
+    </div>
   );
 }
 

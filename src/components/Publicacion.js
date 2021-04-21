@@ -403,8 +403,12 @@ export default function RecipeReviewCard(props) {
 
         <Grid item>
           <p className={classes.comentariosP} onClick={handleExpandClick}>
-            {comments.length}{" "}
-            {comments.length === 1 ? "comentario" : "comentarios"}
+            {comments.length > 0 && (
+              <>
+                {comments.length}{" "}
+                {comments.length === 1 ? "comentario" : "comentarios"}
+              </>
+            )}
           </p>
         </Grid>
       </Grid>

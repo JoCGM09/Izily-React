@@ -16,6 +16,7 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import EstamosTrabajando from "../assets/images/EstamosTrabajando.png";
 import Divider from "@material-ui/core/Divider";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const drawerWidth = 300;
 const useStyles = makeStyles((theme) => ({
@@ -283,7 +284,6 @@ function Home() {
                   </p>
                 </div>
               </Grid>
-
               {screams && (
                 <div>
                   {screams.map((scream, index) => (

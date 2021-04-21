@@ -313,7 +313,6 @@ export default function RecipeReviewCard(props) {
       .doc(`${props.screamId}`)
       .collection("coments")
       .doc();
-    console.log(commentRef);
     commentRef
       .set(bodyComent)
       .then(() => {
@@ -536,7 +535,7 @@ export default function RecipeReviewCard(props) {
 
           <Grid item style={{ display: "flex", flexDirection: "row" }}>
             <Grid item>
-              <div className={classes.inputFileContent}>
+              {/* <div className={classes.inputFileContent}>
                 <label htmlFor="commentPhoto1" className={classes.botonIcon}>
                   <AddAPhotoIcon
                     fontSize="medium"
@@ -551,7 +550,7 @@ export default function RecipeReviewCard(props) {
                   id="commentPhoto1"
                   disabled={isReady === true || loading === true}
                 ></Input>
-              </div>
+              </div> */}
             </Grid>
             <Grid item>
               <IconButton disabled style={{ padding: "10px 10px 10px 10px" }}>

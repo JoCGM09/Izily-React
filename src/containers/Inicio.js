@@ -286,9 +286,9 @@ function Home() {
               </Grid>
               {screams && (
                 <div>
-                  {screams.map((scream, index) => (
+                  {screams.map((scream, key) => (
                     <Publicacion
-                      key={index}
+                      key={scream.id}
                       screamId={scream.id}
                       imageURL={scream.imageURL}
                       name={scream.name}

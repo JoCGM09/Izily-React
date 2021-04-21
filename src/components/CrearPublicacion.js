@@ -177,6 +177,7 @@ export default function RecipeReviewCard() {
         setBody({ ...initialBody });
       })
       .then(() => {
+        console.log(publicationRef);
         publicationRef.update({
           photoUrl: photoUrl,
         });
@@ -227,21 +228,31 @@ export default function RecipeReviewCard() {
           onChange={handleInputChange}
           value={body.content}
           onKeyDown={(event) => {
-            if (event.key === "Enter") {
+            if (event.which === 13 && !event.shiftKey) {
+              event.preventDefault();
               handleClick(event);
+
+              return false;
             }
           }}
         />
       </CardContent>
       {loading && (
         <div
-          style={{ display: "flex", justifyContent: "center", width: "100%", marginTop:"5px",}}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            marginTop: "5px",
+          }}
         >
           <CircularProgress color="none" style={{ color: "#3493C2" }} />
         </div>
       )}
       {isReady && (
-        <div style={{ display: "flex", flexDirection: "column", marginTop:"5px", }}>
+        <div
+          style={{ display: "flex", flexDirection: "column", marginTop: "5px" }}
+        >
           <img style={{ width: "100%", height: "auto" }} src={photoUrl} />
         </div>
       )}

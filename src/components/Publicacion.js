@@ -26,9 +26,9 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { storage } from "../firebase";
 import Input from "@material-ui/core/Input";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
-
-
+import moment from "moment";
+import "moment/locale/es";
+moment.locale("es");
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -181,6 +181,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function RecipeReviewCard(props) {
+  moment.locale("es");
   const classes = useStyles();
   const initialBody = {
     content: "",
@@ -265,8 +266,6 @@ export default function RecipeReviewCard(props) {
       });
   };
 
-
-
   const handleInputChange = (text) => {
     if (text && profesor) {
       const { name, value } = text.target;
@@ -307,17 +306,20 @@ export default function RecipeReviewCard(props) {
     setIsReady((isReady) => !isReady);
   };
 
-  const handleClick = () => {
-    const commentRef = db.collection("publicaciones")
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const commentRef = await db
+      .collection("publicaciones")
       .doc(`${props.screamId}`)
       .collection("coments");
-      commentRef
+    console.log(commentRef);
+    commentRef
       .add(bodyComent)
       .then(() => {
         setBodyComent({ ...initialBody });
       })
       .then(() => {
-        console.log(commentRef);
+        // console.log(commentRef);
         commentRef.update({ photoUrl: photoUrl });
       })
       .then(() => {
@@ -329,9 +331,6 @@ export default function RecipeReviewCard(props) {
       });
   };
 
-  
-  
-
   useEffect(() => {
     traerPerfil();
   }, []);
@@ -339,7 +338,6 @@ export default function RecipeReviewCard(props) {
   useEffect(() => {
     getComments();
   }, [props]);
-
 
   return (
     <Card className={classes.root}>
@@ -360,8 +358,15 @@ export default function RecipeReviewCard(props) {
           //   </IconButton>
           // }
           title={props.name}
-          subheader={props.date}
-          // subheader={ props.dateNumber && ( moment(props.dateNumber.toISOString()).format('LL'))}
+          // subheader={props.date}
+          subheader={
+            props.dateNumber &&
+            moment(props.dateNumber.toDate()).locale("es").format("D") +
+              " de " +
+              moment(props.dateNumber.toDate()).locale("es").format("MMMM") +
+              " a las " +
+              moment(props.dateNumber.toDate()).locale("es").format("h:mm a")
+          }
           onClick={goProfile}
         />
 
@@ -396,7 +401,8 @@ export default function RecipeReviewCard(props) {
 
         <Grid item>
           <p className={classes.comentariosP} onClick={handleExpandClick}>
-            {comments.length} { comments.length === 1 ? ("comentario"):("comentarios") }
+            {comments.length}{" "}
+            {comments.length === 1 ? "comentario" : "comentarios"}
           </p>
         </Grid>
       </Grid>
@@ -469,7 +475,7 @@ export default function RecipeReviewCard(props) {
             onKeyDown={(event) => {
               if (event.which === 13 && !event.shiftKey) {
                 event.preventDefault();
-                handleClick();
+                handleClick(event);
 
                 return false;
               }
@@ -483,14 +489,31 @@ export default function RecipeReviewCard(props) {
         </CardContent>
         {loading && (
           <div
-            style={{ display: "flex", justifyContent: "center", width: "100%", marginTop:"5px",}}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+              marginTop: "5px",
+            }}
           >
             <CircularProgress color="none" style={{ color: "#3493C2" }} />
           </div>
         )}
         {isReady && (
-          <div style={{ display: "flex", flexDirection: "column", marginTop:"5px", }}>
-            <img style={{ width: "100%", height: "auto" }} src={photoUrl} />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginTop: "5px",
+            }}
+          >
+            <img
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              src={photoUrl}
+            />
           </div>
         )}
         <Grid container className={classes.IconosContainer}>
@@ -507,19 +530,22 @@ export default function RecipeReviewCard(props) {
 
           <Grid item style={{ display: "flex", flexDirection: "row" }}>
             <Grid item>
-            <div className={classes.inputFileContent}>
-              <label htmlFor="commentPhoto1" className={classes.botonIcon}>
-                <AddAPhotoIcon fontSize="medium" style={{ color: "#757575" }} />
-              </label>
-              <Input
-                style={{ display: "none" }}
-                onChange={handlePhotoChange}
-                accept=".jpg,.jpeg,.png"
-                type="file"
-                id="commentPhoto1"
-                disabled={isReady === true || loading === true}
-              ></Input>
-            </div>
+              <div className={classes.inputFileContent}>
+                <label htmlFor="commentPhoto1" className={classes.botonIcon}>
+                  <AddAPhotoIcon
+                    fontSize="medium"
+                    style={{ color: "#757575" }}
+                  />
+                </label>
+                <Input
+                  style={{ display: "none" }}
+                  onChange={handlePhotoChange}
+                  accept=".jpg,.jpeg,.png"
+                  type="file"
+                  id="commentPhoto1"
+                  disabled={isReady === true || loading === true}
+                ></Input>
+              </div>
             </Grid>
             <Grid item>
               <IconButton disabled style={{ padding: "10px 10px 10px 10px" }}>

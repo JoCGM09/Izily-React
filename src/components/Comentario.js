@@ -9,6 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import { db } from "../firebase";
 import { useHistory } from "react-router-dom";
+import moment from "moment";
+import "moment/locale/es";
+moment.locale("es");
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -141,22 +144,48 @@ export default function RecipeReviewCard(props) {
                   className={classes.avatarContainer}
                 />
                 <div className={classes.containerContent}>
-                  <Typography
-                    className={classes.nombre}
-                    variant="body2"
-                    color="textSecondary"
-                    component="p"
-                    onClick={async function goProfile() {
-                      setError("");
-                      try {
-                        history.push(`/perfil/${comment.idPerfil}`);
-                      } catch {
-                        setError("Ocurrió un error al salir de la cuenta");
-                      }
-                    }}
-                  >
-                    {comment.name}
-                  </Typography>
+                  <div style={{ display: "flex" }}>
+                    <Typography
+                      className={classes.nombre}
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                      onClick={async function goProfile() {
+                        setError("");
+                        try {
+                          history.push(`/perfil/${comment.idPerfil}`);
+                        } catch {
+                          setError("Ocurrió un error al salir de la cuenta");
+                        }
+                      }}
+                    >
+                      {comment.name}
+                    </Typography>
+                    <p
+                      style={{
+                        margin: "1px 0px 0px 5px",
+                        fontSize: "11.5px",
+                        display: "flex",
+                        alignItems: "center",
+                        fontWeight: "300",
+                      }}
+                    >
+                      -
+                      {comment.dateNumber &&
+                        " " +
+                          moment(comment.dateNumber.toDate())
+                            .locale("es")
+                            .format("D") +
+                          " " +
+                          moment(comment.dateNumber.toDate())
+                            .locale("es")
+                            .format("MMMM") +
+                          ", " +
+                          moment(comment.dateNumber.toDate())
+                            .locale("es")
+                            .format("h:mm a")}
+                    </p>
+                  </div>
                   <Typography
                     className={classes.comentario}
                     variant="body2"
@@ -166,7 +195,11 @@ export default function RecipeReviewCard(props) {
                     {comment.content}
                   </Typography>
                   {comment.photoUrl != "" && (
-                    <img src={comment?.photoUrl} className={classes.media} alt="" />
+                    <img
+                      src={comment?.photoUrl}
+                      className={classes.media}
+                      alt=""
+                    />
                   )}
                 </div>
                 {/* <CardMedia

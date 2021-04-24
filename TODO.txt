@@ -26,3 +26,18 @@ $ Editar los datos de las personas
 $ Crear un perfil vacío cuando creas un perfil con auth
 - Crear publicaciones directamente
     - Condicionar la publicación a no vacía
+
+
+--------------------------------------------------------
+Izily Beta V0.6
+
+Fronted:
+$ popup de publicaciones
+$ likes
+
+Backend:
+$ chat
+$ Notificaciones
+$ editar y borrar comentarios y publicaciones
+$ renderizar de a pocos los comentarios y publicaciones
+

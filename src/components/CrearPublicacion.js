@@ -107,6 +107,7 @@ export default function RecipeReviewCard() {
     interesados: 0,
     comentarios: 0,
     photoUrl: "",
+    likes: [],
   };
 
   const [body, setBody] = useState(initialBody);

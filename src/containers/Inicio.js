@@ -168,7 +168,7 @@ function Home() {
 
   const { usuarioActual } = useAuth();
   const [profesor, setProfesor] = useState(null);
-  const [screams, setScreams] = useState(["2"]);
+  const [screams, setScreams] = useState([]);
 
   const traerProfesor = () => {
     const idd = usuarioActual.uid;
@@ -245,46 +245,6 @@ function Home() {
             </Grid>
             <Grid align="start" className={classes.publicacionesContainer}>
               <CrearPublicacion />
-              {/* <Grid
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "100%",
-                  padding: "10px 20px 10px 20px",
-                }}
-              >
-                <img
-                  src={EstamosTrabajando}
-                  className={classes.EstamosTrabajandoImg}
-                  alt="Logo"
-                />
-                <div>
-                  <p
-                    style={{
-                      marginBottom: "0px",
-                      width: "150px",
-                      textAlign: "right",
-                      fontSize: "20px",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Estamos trabajando para que este sea un mejor lugar para
-                  </p>
-                  <p
-                    style={{
-                      margin: "0px",
-                      width: "150px",
-                      textAlign: "right",
-                      fontSize: "20px",
-                      fontWeight: "bold",
-                      color: "#3493C2",
-                    }}
-                  >
-                    aprender
-                  </p>
-                </div>
-              </Grid> */}
               {screams && (
                 <div>
                   {screams.map((scream, key) => (

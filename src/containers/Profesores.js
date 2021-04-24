@@ -253,7 +253,7 @@ export default function Profesores() {
             </AccordionSummary>
             <AccordionDetails>
               {especialidades
-                .filter((especialidad) => especialidad.numberNivel === "0")
+                .filter((especialidad) => especialidad.numberNivel == "0")
                 .map((especialidad) => (
                   <ListItem
                     button
@@ -290,7 +290,7 @@ export default function Profesores() {
             </AccordionSummary>
             <AccordionDetails>
               {especialidades
-                .filter((especialidad) => especialidad.numberNivel === "1")
+                .filter((especialidad) => especialidad.numberNivel == "1")
                 .map((especialidad) => (
                   <ListItem
                     button
@@ -327,7 +327,7 @@ export default function Profesores() {
             </AccordionSummary>
             <AccordionDetails>
               {especialidades
-                .filter((especialidad) => especialidad.numberNivel === "2")
+                .filter((especialidad) => especialidad.numberNivel == "2")
                 .map((especialidad) => (
                   <ListItem
                     button

@@ -28,6 +28,8 @@ import Switch from "@material-ui/core/Switch";
 import { useHistory } from "react-router-dom";
 import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import ConvertirmeEnMentor from "../components/BotonCovertirmeEnMentor";
+import PublicacionEnPerfil from "../components/PublicacionEnPerfil";
+import Comentario from "../components/Comentario";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -197,6 +199,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "column",
   },
+
+  publicacionesContainer: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    minWidth: "100%",
+    marginTop: "30px",
+  },
 }));
 
 function TabPanel(props) {
@@ -249,12 +260,18 @@ function Perfil() {
     track: {},
   })(Switch);
 
+  const initialChat = {
+    user1: "",
+    user2: "",
+  };
+
   const classes = useStyles();
   const theme = useTheme();
   const history = useHistory();
   const { usuarioActual } = useAuth();
   const [error, setError] = useState();
   const [value, setValue] = React.useState(0);
+  const [chat, setChat] = useState(initialChat);
   const [carga, guardarCarga] = useState(false);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -262,21 +279,40 @@ function Perfil() {
 
   const { profesorId } = useParams();
   const [profesor, setProfesor] = useState(null);
+  const [user, setUser] = useState(null);
   const [events, setEvents] = useState([]);
+  const [screams, setScreams] = useState([]);
 
-  // const traerProfesor = async () => {
-  //   const profesorInfo = db.collection("usuarios").doc(profesorId);
-  //   const doc = await profesorInfo.get();
-  //   if (doc.exists) {
-  //     setProfesor({ ...doc.data(), id: doc.id });
-  //   }
-  // };
+  const getUser = async () => {
+    const userInfo = db.collection("usuarios").doc(profesorId);
+    const doc = await userInfo.get();
+    if (doc.exists) {
+      setUser({ ...doc.data(), id: doc.id });
+      // console.log(user);
+    }
+  };
 
   const traerProfesor = async () => {
     db.collection("usuarios")
       .doc(profesorId)
       .onSnapshot((doc) => {
         setProfesor({ ...doc.data(), id: doc.id });
+        // console.log(user.nombre);
+      });
+  };
+
+  const getScreams = () => {
+    const screamRef = db
+      .collection("publicaciones")
+      .where("idPerfil", "==", `${profesorId}`)
+      .orderBy("dateNumber", "desc")
+      .onSnapshot((querySnapshot) => {
+        const screams = [];
+        querySnapshot.forEach((doc) => {
+          // screams.push(doc.data());
+          screams.push({ ...doc.data(), id: doc.id });
+        });
+        setScreams(screams);
       });
   };
 
@@ -291,7 +327,9 @@ function Perfil() {
   };
 
   useEffect(() => {
+    getUser();
     traerProfesor();
+    getScreams();
   }, []);
 
   // useEffect(() => {
@@ -687,14 +725,40 @@ function Perfil() {
         // <div>
         //   <h1>Cargando...</h1>
         // </div>
-        <Backdrop
-          className={classes.backdrop}
-          open={open}
-          onClick={handleClose}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
+        <CircularProgress color="inherit" />
       )}
+
+      {/* <Grid align="start" className={classes.publicacionesContainer}>
+        {screams && (
+          <div>
+            {screams.map((scream, key) => (
+              <PublicacionEnPerfil
+                // key={scream.id}
+                screamId={scream.id}
+                imageURL={scream.imageURL}
+                name={scream.name}
+                // imagen="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/publicacionImages%2Fproblema1.jpeg?alt=media&token=f4e69610-db14-4e2d-a5fa-b97bae16daec"
+                imagen={scream.photoUrl}
+                date={scream.date}
+                dateNumber={scream.dateNumber}
+                content={scream.content}
+                idPerfil={scream.idPerfil}
+                interesados={scream.interesados}
+                comentarios={scream.comentarios}
+                numeroDeComentarios={scream.comments}
+                tag={
+                  <Chip
+                    //Soy Jhomar
+                    className={classes.etiqueta2}
+                    label={scream.label}
+                  />
+                }
+                children={<Comentario screamID={scream.id} />}
+              />
+            ))}
+          </div>
+        )}
+      </Grid> */}
     </>
   );
 }

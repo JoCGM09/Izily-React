@@ -151,7 +151,7 @@ export default function RecipeReviewCard() {
   const [hover, setHover] = React.useState(-1);
 
   return (
-    <div>
+    <div style={{ fontFamily: "Roboto" }}>
       <Button
         disabled
         type="button"

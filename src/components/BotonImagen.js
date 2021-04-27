@@ -90,7 +90,7 @@ export default function RecipeReviewCard(props) {
   const [hover, setHover] = React.useState(-1);
 
   return (
-    <div>
+    <div style={{ fontFamily: "Roboto" }}>
       <div
         onClick={handleOpen}
         variant="contained"

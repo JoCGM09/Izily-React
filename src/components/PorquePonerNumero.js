@@ -15,6 +15,7 @@ import StarIcon from "@material-ui/icons/Star";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Divider from "@material-ui/core/Divider";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 
 const labels = {
   0.5: "Useless",
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   root: {
-    minWidth: "550px",
+    maxWidth: "650px",
     marginRight: "20px",
     padding: "15px",
   },
@@ -75,8 +76,11 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
   },
   containerContent: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     paddingTop: "0px",
-    paddingBottom: "0px",
+    paddingBottom: "10px",
     widht: "100%",
   },
   containerContent2: {
@@ -125,17 +129,13 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
-  buttonConvertirmeMentor: {
-    background: "white",
-    color: "#3493C2",
-    marginTop: "10px",
-    border: "1px solid #3493C2",
-    fontSize: "15px",
-    height: "70px",
-    width: "220px",
-    fontWeight: "bold",
+  buttonWhy: {
+    color: "black",
+    fontSize: "14px",
+    margin: "0px",
     "&:hover": {
-      backgroundColor: "#DAF1FC",
+      cursor: "pointer",
+      textDecoration: "underline",
     },
   },
   correo: {
@@ -148,9 +148,20 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer",
     },
   },
+  buttonWhatsApp: {
+    background: "white",
+    color: "#757575",
+    border: "1px solid #25D366",
+    fontSize: "11px",
+    height: "25px",
+    fontWeight: "bold",
+    "&:hover": {
+      // backgroundColor: "#DAF1FC",
+    },
+  },
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
@@ -168,26 +179,9 @@ export default function RecipeReviewCard() {
 
   return (
     <div style={{ fontFamily: "Roboto" }}>
-      <Button
-        onClick={handleOpen}
-        variant="contained"
-        color="inherit"
-        size="small"
-        className={classes.buttonConvertirmeMentor}
-        startIcon={
-          <img
-            style={{
-              marginLeft: "5px",
-              height: "45px",
-              width: "auto",
-            }}
-            src="https://firebasestorage.googleapis.com/v0/b/izily-test.appspot.com/o/icons%2FConvertirmeEnProfesor.png?alt=media&token=a45096cb-1a3b-4134-811c-aaba4103528f"
-          />
-        }
-        disableElevation="true"
-      >
-        Convertirme en Mentor
-      </Button>
+      <p onClick={handleOpen} className={classes.buttonWhy}>
+        ¿Por qué debo brindar mi número de WhatsApp?
+      </p>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -206,24 +200,36 @@ export default function RecipeReviewCard() {
             //     <MoreVertIcon />
             //   </IconButton>
             // }
-            title="Gracias por formar parte de Izily"
+            title="¿Por qué debo brindar mi número de WhatsApp?"
           />
           <Divider />
           <CardContent className={classes.containerContent}>
             <p>
-              Para convertirte en un mentor de Izily contáctanos a nuestro
-              correo institucional haciendo click aquí:
+              Tu número de WhatsApp es necesario para que tus futuros alumnos
+              puedan contactarte con un solo click. Recuerda escribir tu número
+              de teléfono en formato internacional. No incluyas los ceros,
+              espacios, paréntesis ni guiones cuando añadas el número de
+              teléfono en este formato.
+              <br />
+              Puedes verificar si pusiste correctamente tu número dando click
+              aquí:
             </p>
-            <a
+            <Button
+              variant="contained"
+              size="medium"
               target="_blank"
-              className={classes.correo}
-              href="https://mail.google.com/mail/u/0/?fs=1&to=aprendeizily@gmail.com%20&su=QUIERO%20CONVERTIRME%20EN%20MENTOR&body=(Ingrese%20aqu%C3%AD%20sus%20nombres%20y%20apellidos,%20n%C3%BAmero%20de%20celular(WhatsApp),%20cursos%20que%20desea%20enseñar%20y%20el%20respectivo%20nivel%20(escolar,%20preuniversitario%20y%20universitario),%20y%20el%20link%20de%20su%20perfil%20en%20Izily.%20Este%20%C3%BAltimo%20puede%20obtenerlo%20yendo%20a%20su%20perfil%20dentro%20de%20la%20plataforma%20de%20Izily%20y%20copiando%20el%20URL)&tf=cm"
+              href={"https://wa.me/" + `${props.numero}`}
+              color="inherit"
+              className={classes.buttonWhatsApp}
+              startIcon={<WhatsAppIcon style={{ color: "#25D366" }} />}
+              disableElevation="true"
             >
-              aprendeizily@gmail.com
-            </a>
+              Verificar mi número de WhatsApp
+            </Button>
           </CardContent>
+          <Divider />
           <Grid className={classes.IconosContainer}>
-            <Grid item style={{ display: "flex", justifyContent: "center" }}>
+            <Grid item style={{ display: "flex", justifyContent: "flex-end" }}>
               <Button
                 className={classes.PublicarButton}
                 onClick={handleClose}

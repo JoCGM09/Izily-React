@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import { useHistory } from "react-router-dom";
-import Input from '@material-ui/core/Input';
+import Input from "@material-ui/core/Input";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
@@ -15,9 +15,11 @@ import Divider from "@material-ui/core/Divider";
 import Snackbar from "@material-ui/core/Snackbar";
 import { storage } from "../firebase";
 import Avatar from "@material-ui/core/Avatar";
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
+import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Popper from "@material-ui/core/Popper";
+import Box from "@material-ui/core/Box";
+import Why from "../components/PorquePonerNumero";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -74,45 +76,59 @@ const useStyles = makeStyles((theme) => ({
     AlignItems: "center",
     marginTop: 10,
     marginBottom: 15,
-    fontSize:"110px",
+    fontSize: "110px",
   },
   changePhotoContainer: {
-    display:"flex",
-    flexDirection:"column",
-    alignItems:"center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
 
   inputFile: {
-    display: "none"
+    display: "none",
   },
-  
+
   inputFileContent: {
-    display:"flex",
-    justifyItems:"center",
-    alignItems:"center",
-    borderRadius:"50px",
-    padding:"12px",
-    marginTop:"-8px",
-    marginBottom:"5px",
-    gap:"8px",
+    display: "flex",
+    justifyItems: "center",
+    alignItems: "center",
+    borderRadius: "50px",
+    padding: "12px",
+    marginTop: "-8px",
+    marginBottom: "5px",
+    gap: "8px",
     "&:hover": {
       backgroundColor: "#F0F0F0",
-      cursor:"pointer",
+      cursor: "pointer",
     },
   },
   boton: {
-    marginBottom:"10px",
-    marginTop:"5px",
-    height:"30px",
+    marginBottom: "10px",
+    marginTop: "5px",
+    height: "30px",
     border: "1px solid grey",
     "&:hover": {
       backgroundColor: "none",
     },
   },
   photoIcon: {
-    marginTop:"-2px",
-    marginLeft:"-1px",
-    color:"#757575",
+    marginTop: "-2px",
+    marginLeft: "-1px",
+    color: "#757575",
+  },
+  popover: {
+    pointerEvents: "none",
+    boxShadow: "0px",
+    textShadow: "0px",
+  },
+  paper2: {
+    padding: "5px",
+    boxShadow: "0px",
+    textShadow: "0px",
+    width: "30px",
+    display: "flex",
+    justifyContent: "center",
+    background: "#A8A8A8",
   },
 }));
 
@@ -125,7 +141,7 @@ export default function EditProfile() {
   const aboutMeRef = useRef();
   const descriptionRef = useRef();
   const calendlyRef = useRef();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
 
   const { usuarioActual, updatePassword, updateEmail } = useAuth();
@@ -134,7 +150,6 @@ export default function EditProfile() {
   const [profesor, setProfesor] = useState(null);
   const history = useHistory();
   const [fileUrl, setFileUrl] = useState("-");
-
 
   // Get current user with database values and set on useState
 
@@ -261,15 +276,14 @@ export default function EditProfile() {
     setOpen(false);
   };
 
-
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     const storageRef = storage.ref();
     const fileRef = storageRef.child(`users/${profesor.loginid}/${file.name}`);
-    setLoading(loading => !loading);
+    setLoading((loading) => !loading);
     await fileRef.put(file);
     setFileUrl(await fileRef.getDownloadURL());
-    setLoading(loading => !loading);
+    setLoading((loading) => !loading);
   };
 
   const handleUpdateClick = async (e) => {
@@ -284,8 +298,20 @@ export default function EditProfile() {
       .catch((error) => console.log(error));
   };
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  // const open = Boolean(anchorEl);
+
   return (
-    <Container className={classes.container}>
+    <Container style={{ fontFamily: "Roboto" }} className={classes.container}>
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
@@ -299,24 +325,56 @@ export default function EditProfile() {
         <Divider />
         {usuarioActual?.uid == profesor?.loginid && (
           <div className={classes.changePhotoContainer}>
-            <Avatar className={classes.avatar} alt={profesor.nombre} src={profesor.imageURL} /> 
+            <Avatar
+              className={classes.avatar}
+              alt={profesor.nombre}
+              src={profesor.imageURL}
+            />
             {fileUrl == "-" ? (
-              <div style={{
-                display:"flex", justifyContent:"center", alignItems:"center"
-                }}>
-              <label className={classes.inputFileContent} htmlFor="profile123">
-                <AddAPhotoIcon className={classes.photoIcon} fontSize="medium" /> Cambiar foto
-              </label>
-              <Input className={classes.inputFile} accept=".jpg,.jpeg,.png" type="file" id="profile123" onChange={handleFileChange}></Input>
-              {loading && (
-                <CircularProgress color="none" size="25px" style={{position:"absolute", marginLeft:"180px", marginTop:"-13px", color:"#3493C2"}} />
-              )}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <label
+                  className={classes.inputFileContent}
+                  htmlFor="profile123"
+                >
+                  <AddAPhotoIcon
+                    className={classes.photoIcon}
+                    fontSize="medium"
+                  />{" "}
+                  Cambiar foto
+                </label>
+                <Input
+                  className={classes.inputFile}
+                  accept=".jpg,.jpeg,.png"
+                  type="file"
+                  id="profile123"
+                  onChange={handleFileChange}
+                ></Input>
+                {loading && (
+                  <CircularProgress
+                    color="none"
+                    size="25px"
+                    style={{
+                      position: "absolute",
+                      marginLeft: "180px",
+                      marginTop: "-13px",
+                      color: "#3493C2",
+                    }}
+                  />
+                )}
               </div>
-            ):(
-              <div style={{display:"flex", flexDirection:"column"}}>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column" }}>
                 Tu foto esta lista para subir.
-                <Button className={classes.boton} onClick={handleUpdateClick}>Subir foto</Button>
-              </div> 
+                <Button className={classes.boton} onClick={handleUpdateClick}>
+                  Subir foto
+                </Button>
+              </div>
             )}
           </div>
         )}
@@ -412,21 +470,21 @@ export default function EditProfile() {
                 />
                 // </Grid>
               )}
-              {profesor && (
-                // <Grid >
-                <TextField
-                  disabled
-                  variant="outlined"
-                  className={classes.Input}
-                  name="calendly"
-                  label="Link de Calendly"
-                  defaultValue={profesor.calendly}
-                  inputRef={calendlyRef}
-                  id="calendly"
-                  autoComplete="current-calendly"
-                  multiline
-                />
-                // </Grid>
+              {profesor && profesor.esProfesor === true && (
+                <>
+                  <TextField
+                    variant="outlined"
+                    className={classes.Input}
+                    name="calendly"
+                    label="Número de WhatsApp, ejemplo: +51925790508"
+                    defaultValue={profesor.calendly}
+                    inputRef={calendlyRef}
+                    id="calendly"
+                    autoComplete="current-calendly"
+                    multiline
+                  />
+                  <Why numero={profesor.calendly} />
+                </>
               )}
             </Grid>
           </Grid>

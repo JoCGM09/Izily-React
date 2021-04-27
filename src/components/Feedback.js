@@ -22,35 +22,35 @@ const useStyles = makeStyles((theme) => ({
     border: "0px",
     boxShadow: "0px",
     display: "flex",
-    flexDirection:"column",
+    flexDirection: "column",
     paddingBottom: "0px",
-    margin:"20px 0px"
+    margin: "20px 0px",
   },
-  header:{
-    paddingRight:"15px",
-    display:"flex",
-    justifyContent:"space-between",
-    alignItems:"center",
-    textAlign:"left",
+  header: {
+    paddingRight: "15px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    textAlign: "left",
   },
-  CardHeader:{
+  CardHeader: {
     paddingTop: "15px",
-    paddingLeft:"15px",
+    paddingLeft: "15px",
   },
   containerContent: {
-    paddingTop:"0px",
-    widht:"100%",
+    paddingTop: "0px",
+    widht: "100%",
   },
   Content: {
-    widht:"100px",
-    color:"black",
-    fontSize:"14px",
-    display:"flex",
-    justifyContent:"left",
-    padding:"0px 10px 5px 0px",
+    widht: "100px",
+    color: "black",
+    fontSize: "14px",
+    display: "flex",
+    justifyContent: "left",
+    padding: "0px 10px 5px 0px",
     // borderRadius:"10px",
     // background:"white",
-    textAlign:"left",
+    textAlign: "left",
     // border: "1px solid #C7C6C6",
   },
 }));
@@ -84,36 +84,46 @@ function Feedback() {
   }, []);
 
   return (
-    <Grid align="center" className={classes.gridTotal}>
+    <Grid
+      style={{ fontFamily: "Roboto" }}
+      align="center"
+      className={classes.gridTotal}
+    >
       <Grid xs></Grid>
-      <Grid >
-      <FeedbackForm addFeedback={addFeedback} />
+      <Grid>
+        <FeedbackForm addFeedback={addFeedback} />
         {feedback && (
           <div>
-            {feedback.map((feedbackElement) => 
+            {feedback.map((feedbackElement) => (
               <Card className={classes.root}>
                 <div className={classes.header}>
-                <CardHeader
-                  className={classes.CardHeader}
-                  avatar={
-                    <Avatar aria-label="recipe" alt={feedbackElement.name} src={feedbackElement.imageURL} />
-                  }
-                  title={feedbackElement.name}
-                  subheader={feedbackElement.date}
-                />
+                  <CardHeader
+                    className={classes.CardHeader}
+                    avatar={
+                      <Avatar
+                        aria-label="recipe"
+                        alt={feedbackElement.name}
+                        src={feedbackElement.imageURL}
+                      />
+                    }
+                    title={feedbackElement.name}
+                    subheader={feedbackElement.date}
+                  />
                 </div>
-                
+
                 <CardContent className={classes.containerContent}>
-                  <Typography className={classes.Content} 
-                    variant="body2" color="textSecondary" component="p"
+                  <Typography
+                    className={classes.Content}
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
                   >
                     {feedbackElement.content}
                   </Typography>
                 </CardContent>
-                
               </Card>
-              )}
-            </div>
+            ))}
+          </div>
         )}
       </Grid>
       <Grid xs></Grid>

@@ -41,11 +41,11 @@ export default function ForgotPassword() {
     e.preventDefault();
 
     try {
-      guardarMensaje("") ; 
+      guardarMensaje("");
       guardarError("");
       guardarCarga(true);
-      await resetPassword(emailRef.current.value)
-      guardarMensaje('Revisa tu correo para próximas instrucciones')
+      await resetPassword(emailRef.current.value);
+      guardarMensaje("Revisa tu correo para próximas instrucciones");
     } catch {
       guardarError("Ocurrió un error al reiciar la contraseña");
     }
@@ -54,7 +54,7 @@ export default function ForgotPassword() {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container style={{ fontFamily: "Roboto" }} component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">

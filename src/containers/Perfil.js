@@ -30,6 +30,7 @@ import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
 import ConvertirmeEnMentor from "../components/BotonCovertirmeEnMentor";
 import PublicacionEnPerfil from "../components/PublicacionEnPerfil";
 import Comentario from "../components/Comentario";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -156,6 +157,18 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     "&:hover": {
       backgroundColor: "#DAF1FC",
+    },
+  },
+
+  buttonWhatsApp: {
+    background: "white",
+    color: "#757575",
+    border: "1px solid #25D366",
+    fontSize: "11px",
+    height: "25px",
+    fontWeight: "bold",
+    "&:hover": {
+      // backgroundColor: "#DAF1FC",
     },
   },
 
@@ -449,38 +462,53 @@ function Perfil() {
                   <>
                     {profesor?.esProfesor === true &&
                     profesor?.disponible === true ? (
+                      // <Button
+                      //   disabled
+                      //   variant="contained"
+                      //   size="small"
+                      //   target="_blank"
+                      //   // href={profesor.calendly}
+                      //   color="inherit"
+                      //   className={classes.buttonPerfil}
+                      //   onClick={calendly}
+                      //   startIcon={<EventAvailableIcon />}
+                      //   disableElevation="true"
+                      // >
+                      //   Agendar Mentoría
+                      // </Button>
                       <Button
-                        disabled
                         variant="contained"
-                        size="small"
+                        size="medium"
                         target="_blank"
-                        // href={profesor.calendly}
+                        href={"https://wa.me/" + `${profesor.calendly}`}
                         color="inherit"
-                        className={classes.buttonPerfil}
-                        onClick={calendly}
-                        startIcon={<EventAvailableIcon />}
+                        className={classes.buttonWhatsApp}
+                        startIcon={
+                          <WhatsAppIcon style={{ color: "#25D366" }} />
+                        }
                         disableElevation="true"
                       >
-                        Agendar Mentoría
+                        Contactar por WhatsApp
                       </Button>
                     ) : (
-                      <p></p>
+                      <p style={{ margin: "0px" }}></p>
                     )}
                   </>
                 ) : (
-                  <Button
-                    variant="contained"
-                    size="small"
-                    target="_blank"
-                    href="https://calendar.google.com/calendar/"
-                    color="inherit"
-                    className={classes.buttonPerfil}
-                    // onClick={calendly}
-                    startIcon={<EventAvailableIcon />}
-                    disableElevation="true"
-                  >
-                    Mi Google Calendar
-                  </Button>
+                  // <Button
+                  //   variant="contained"
+                  //   size="small"
+                  //   target="_blank"
+                  //   href="https://calendar.google.com/calendar/"
+                  //   color="inherit"
+                  //   className={classes.buttonPerfil}
+                  //   // onClick={calendly}
+                  //   startIcon={<EventAvailableIcon />}
+                  //   disableElevation="true"
+                  // >
+                  //   Mi Google Calendar
+                  // </Button>
+                  <p style={{ margin: "0px" }}></p>
                 )}
               </div>
 

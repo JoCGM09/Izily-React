@@ -114,7 +114,7 @@ export default function RecipeReviewCard(props) {
   }, [props]);
 
   return (
-    <div>
+    <div style={{ fontFamily: "Roboto" }}>
       {comments && (
         <div>
           {comments.map((comment) => (

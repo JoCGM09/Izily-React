@@ -9,6 +9,7 @@ body {
   font-size: 2rem;
 }
 .container {
+  font-family: "Roboto";
   margin: 0 auto 0 auto;
   max-width: 1200px;
   background-color: rgb(160, 160, 160);

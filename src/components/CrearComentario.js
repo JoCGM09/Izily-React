@@ -81,7 +81,7 @@ export default function RecipeReviewCard(props) {
   // const initialComment = {
   //   content: '',
   //   loginid: '',
-  //   name: '', 
+  //   name: '',
   //   image: '',
   // }
 
@@ -142,7 +142,11 @@ export default function RecipeReviewCard(props) {
   // }, []);
 
   return (
-    <Card variant="outlined" className={classes.root}>
+    <Card
+      variant="outlined"
+      style={{ fontFamily: "Roboto" }}
+      className={classes.root}
+    >
       <CardContent align="center" className={classes.containerContent}>
         <input
           className={classes.inputText}
@@ -157,10 +161,10 @@ export default function RecipeReviewCard(props) {
       </CardContent>
       <Grid container className={classes.IconosContainer}>
         <Grid item style={{ display: "flex", alignItems: "center" }}>
-          <Button 
-          className={classes.PublicarButton} 
-          size="small" 
-          // onClick={handleClick}
+          <Button
+            className={classes.PublicarButton}
+            size="small"
+            // onClick={handleClick}
           >
             Enviar
           </Button>

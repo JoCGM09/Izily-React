@@ -211,7 +211,7 @@ export default function RecipeReviewCard() {
   }, []);
 
   return (
-    <Card className={classes.root}>
+    <Card style={{ fontFamily: "Roboto" }} className={classes.root}>
       <p style={{ paddingLeft: "12px", fontSize: "18px", margin: "10px 0px" }}>
         Crear Publicación
       </p>

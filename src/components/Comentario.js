@@ -166,7 +166,7 @@ export default function RecipeReviewCard(props) {
                     </Typography>
                     <p
                       style={{
-                        margin: "1px 0px 0px 5px",
+                        margin: "0px 0px 0px 5px",
                         fontSize: "11.5px",
                         display: "flex",
                         alignItems: "center",

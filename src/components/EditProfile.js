@@ -476,7 +476,7 @@ export default function EditProfile() {
                     variant="outlined"
                     className={classes.Input}
                     name="calendly"
-                    label="Número de WhatsApp, ejemplo: +51925790508"
+                    label="Número de WhatsApp, ejemplo: +51987654321"
                     defaultValue={profesor.calendly}
                     inputRef={calendlyRef}
                     id="calendly"

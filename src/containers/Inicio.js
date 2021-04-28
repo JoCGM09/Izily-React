@@ -322,6 +322,25 @@ function Home() {
           aprendeizily@gmail.com
         </a>
         <Divider />
+        <h3 style={{ color: "#3493C2", textAlign: "center" }}>
+          ¡Ya puedes agendar una clase con nuestros mentores!
+        </h3>
+        <p>
+          Busca tu mentor ideal en la seccion:{" "}
+          <a
+            style={{
+              color: "black",
+              marginBottom: "0px",
+            }}
+            href={"/buscar-un-mentor"}
+          >
+            Buscar un mentor
+          </a>
+        </p>
+        <p style={{ marginTop: "0px" }}>
+          Recuerda actualizar tu nombre y foto para generar mayor confianza en
+          los demás usuarios.
+        </p>
         {/* <img src={Actualizacion} /> */}
       </Drawer>
     </div>

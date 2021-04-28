@@ -477,6 +477,9 @@ function Perfil() {
                       //   Agendar Mentoría
                       // </Button>
                       <Button
+                        disabled={
+                          profesor.calendly === "" || profesor.calendly === " "
+                        }
                         variant="contained"
                         size="medium"
                         target="_blank"

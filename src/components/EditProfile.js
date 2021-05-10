@@ -470,7 +470,7 @@ export default function EditProfile() {
                 />
                 // </Grid>
               )}
-              {profesor && profesor.esProfesor === true && (
+              {/* {profesor && profesor.esProfesor === true && (
                 <>
                   <TextField
                     variant="outlined"
@@ -485,7 +485,7 @@ export default function EditProfile() {
                   />
                   <Why numero={profesor.calendly} />
                 </>
-              )}
+              )} */}
             </Grid>
           </Grid>
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>

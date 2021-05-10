@@ -266,6 +266,7 @@ function Home() {
                         <Chip
                           //Soy Jhomar
                           className={classes.etiqueta2}
+                          style={{ display: "none" }}
                           label={scream.label}
                         />
                       }

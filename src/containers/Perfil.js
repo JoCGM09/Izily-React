@@ -477,13 +477,11 @@ function Perfil() {
                       //   Agendar Mentoría
                       // </Button>
                       <Button
-                        disabled={
-                          profesor.calendly === "" || profesor.calendly === " "
-                        }
                         variant="contained"
                         size="medium"
                         target="_blank"
-                        href={"https://wa.me/" + `${profesor.calendly}`}
+                        // href={"https://wa.me/" + `${profesor.calendly}`}
+                        href={"https://wa.me/+51992917266"}
                         color="inherit"
                         className={classes.buttonWhatsApp}
                         startIcon={

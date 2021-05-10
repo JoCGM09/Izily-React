@@ -371,7 +371,7 @@ export default function RecipeReviewCard(props) {
           onClick={goProfile}
         />
 
-        {/* {props.tag} */}
+        {props.tag}
       </div>
 
       <CardContent className={classes.containerContent}>
